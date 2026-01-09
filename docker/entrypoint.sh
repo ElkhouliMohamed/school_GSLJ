@@ -14,6 +14,11 @@ if [ ! -f .env ]; then
     fi
 fi
 
+# Install composer dependencies if missing
+if [ ! -f "vendor/autoload.php" ]; then
+    echo "Installing composer dependencies..."
+    composer install --no-interaction --optimize-autoloader
+fi
 # Generate APP_KEY if it's missing or default
 if grep -q "APP_KEY=$" .env || grep -q "APP_KEY=base64:..." .env; then
     echo "Generating APP_KEY..."
