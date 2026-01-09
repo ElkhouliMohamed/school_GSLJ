@@ -9,6 +9,8 @@ services:
     container_name: school-app
     restart: unless-stopped
     working_dir: /var/www
+    env_file:
+      - .env.docker
     volumes:
       - .:/var/www
     networks:
@@ -34,6 +36,8 @@ services:
     image: mysql:8.0
     container_name: school-db
     restart: unless-stopped
+    env_file:
+      - .env.docker
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-laravel}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
