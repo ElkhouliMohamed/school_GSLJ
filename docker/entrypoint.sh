@@ -43,9 +43,24 @@ php artisan migrate --seed --force
 echo "Clearing cache..."
 php artisan optimize:clear
 
+
+# Build frontend assets
+echo "Building frontend assets..."
+if [ -f "package.json" ]; then
+    npm install
+    npm run build
+fi
+
 # Fix permissions for storage
 echo "Fixing permissions..."
 chmod -R 777 storage bootstrap/cache
+
+# Fix permissions for Pages (resolves potential "Page not found" in Docker)
+if [ -d "resources/js/Pages" ]; then
+    echo "Fixing permissions for Pages..."
+    find resources/js/Pages -type d -exec chmod 755 {} \;
+    find resources/js/Pages -type f -exec chmod 644 {} \;
+fi
 
 # Start the main process
 echo "Starting PHP-FPM..."
