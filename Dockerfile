@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    netcat-openbsd
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -30,14 +31,20 @@ RUN apt-get install -y nodejs
 COPY . /var/www
 
 # Install composer dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
 
-# Install NPM dependencies and build assets
+
 RUN npm install && npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www
 
-# Expose port 9000 and start php-fpm server
+# Expose port 9000
 EXPOSE 9000
+
+# Copy entrypoint script
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
