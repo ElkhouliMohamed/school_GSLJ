@@ -39,15 +39,15 @@ export default function HeroSection() {
 
                     {/* Badge */}
                     <div className="mt-24 sm:mt-32 lg:mt-16">
-                        <a href="#" className="inline-flex space-x-6">
+                        <Link href={route('admissions')} className="inline-flex space-x-6">
                             <span className="rounded-full bg-blue-600/10 px-3 py-1 text-sm font-semibold leading-6 text-blue-400 ring-1 ring-inset ring-blue-600/20">
-                                Rentrée 2024
+                                Rentrée {new Date().getFullYear()}
                             </span>
                             <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-300">
                                 <span>Inscriptions ouvertes</span>
                                 <ChevronRightIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
                             </span>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Title */}

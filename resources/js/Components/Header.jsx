@@ -35,7 +35,7 @@ export default function Header() {
         <header className="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100 transition-all duration-300">
             <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8" aria-label="Global">
                 <div className="flex xl:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2 sm:gap-3 group">
+                    <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2 sm:gap-3 group" data-track-click="header-logo">
                         <span className="sr-only">{siteName}</span>
                         {/* Check if logo exists, otherwise use placeholder or text.
                              The user wants to 'add logo or any image not change' - assume now it works.

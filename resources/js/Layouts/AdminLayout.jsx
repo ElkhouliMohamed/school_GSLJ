@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { HomeIcon, UsersIcon, DocumentTextIcon, PhotoIcon, Cog6ToothIcon, ArrowLeftOnRectangleIcon, NewspaperIcon, CalendarIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, UsersIcon, DocumentTextIcon, PhotoIcon, Cog6ToothIcon, ArrowLeftOnRectangleIcon, NewspaperIcon, CalendarIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon, current: true },
+    { name: 'Statistiques', href: '/admin/kpi', icon: ChartBarIcon, current: false },
     { name: 'Actualités', href: '/admin/news', icon: NewspaperIcon, current: false },
     { name: 'Événements', href: '/admin/events', icon: CalendarIcon, current: false },
     { name: 'Galerie', href: '/admin/galleries', icon: PhotoIcon, current: false },

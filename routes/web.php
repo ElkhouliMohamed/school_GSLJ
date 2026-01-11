@@ -25,11 +25,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Pre-registrations
     Route::get('pre-registrations', [\App\Http\Controllers\PreRegistrationController::class, 'index'])->name('pre-registrations.index');
+    Route::get('pre-registrations', [\App\Http\Controllers\PreRegistrationController::class, 'index'])->name('pre-registrations.index');
     Route::patch('pre-registrations/{id}/status', [\App\Http\Controllers\PreRegistrationController::class, 'updateStatus'])->name('pre-registrations.updateStatus');
+
+    // KPIs
+    Route::get('kpi', [\App\Http\Controllers\KpiController::class, 'index'])->name('kpi.index');
 });
 
 // Public pre-registration form submission
 Route::post('/pre-registration', [\App\Http\Controllers\PreRegistrationController::class, 'store'])->name('pre-registration.store');
+
+// KPI Click Tracking
+Route::post('/kpi/click', [\App\Http\Controllers\KpiController::class, 'store'])->name('kpi.click');
 
 Route::get('/news', [\App\Http\Controllers\Public\BlogController::class, 'index'])->name('news');
 Route::get('/news/{slug}', [\App\Http\Controllers\Public\BlogController::class, 'show'])->name('news.show');
