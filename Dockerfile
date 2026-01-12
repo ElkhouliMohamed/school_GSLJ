@@ -87,6 +87,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+RUN php artisan key:generate
 # Expose port
 EXPOSE 9000
 
