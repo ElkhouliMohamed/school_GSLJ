@@ -89,10 +89,10 @@ export default function Header() {
                 </div>
                 <div className="hidden xl:flex xl:flex-1 xl:justify-end gap-3 items-center">
                     <div className="flex items-center gap-2 border-r border-gray-200 pr-4 mr-2">
-                        <a href={route('language.switch', 'fr')} className={`text-xs font-bold px-2 py-1 rounded transition-colors ${locale === 'fr' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:text-gray-900'}`}>
+                        <a href="/language/fr" className={`text-xs font-bold px-2 py-1 rounded transition-colors ${locale === 'fr' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:text-gray-900'}`}>
                             FR
                         </a>
-                        <a href={route('language.switch', 'en')} className={`text-xs font-bold px-2 py-1 rounded transition-colors ${locale === 'en' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:text-gray-900'}`}>
+                        <a href="/language/en" className={`text-xs font-bold px-2 py-1 rounded transition-colors ${locale === 'en' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:text-gray-900'}`}>
                             EN
                         </a>
                     </div>
@@ -152,8 +152,8 @@ export default function Header() {
                             </div>
                             <div className="py-6 border-t border-gray-100">
                                 <div className="flex gap-4 mb-6 justify-center bg-gray-50 p-2 rounded-lg">
-                                    <a href={route('language.switch', 'fr')} className="text-sm font-bold text-blue-600 bg-white shadow-sm px-4 py-1 rounded">FR</a>
-                                    <a href={route('language.switch', 'en')} className="text-sm font-bold text-gray-500 px-4 py-1 rounded">EN</a>
+                                    <a href="/language/fr" className="text-sm font-bold text-blue-600 bg-white shadow-sm px-4 py-1 rounded">FR</a>
+                                    <a href="/language/en" className="text-sm font-bold text-gray-500 px-4 py-1 rounded">EN</a>
                                 </div>
                                 <Link
                                     href="/login"
