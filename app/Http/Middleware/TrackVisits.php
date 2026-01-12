@@ -16,11 +16,23 @@ class TrackVisits
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->isMethod('get') && !$request->is('admin*') && !$request->is('api*') && !$request->is('sanctum*') && !$request->is('build*') && !$request->ajax()) {
+            // Get country information from IP
+            try {
+                $location = geoip($request->ip());
+                $countryCode = $location->iso_code ?? null;
+                $countryName = $location->country ?? null;
+            } catch (\Exception $e) {
+                $countryCode = null;
+                $countryName = null;
+            }
+
             \App\Models\Kpi::create([
                 'type' => 'visit',
                 'path' => $request->path(),
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
+                'country_code' => $countryCode,
+                'country_name' => $countryName,
             ]);
         }
 

@@ -12,5 +12,7 @@ class Kpi extends Model
         'element_id',
         'ip_address',
         'user_agent',
+        'country_code',
+        'country_name',
     ];
 }

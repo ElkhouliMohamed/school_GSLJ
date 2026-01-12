@@ -50,7 +50,7 @@ export default function Header() {
                             <a href="/language/fr" className={`font-bold transition-colors ${locale === 'fr' ? 'text-yellow-400' : 'text-gray-400 hover:text-white'}`}>FR</a>
                             <a href="/language/en" className={`font-bold transition-colors ${locale === 'en' ? 'text-yellow-400' : 'text-gray-400 hover:text-white'}`}>EN</a>
                         </div>
-                        <Link href="/admin/login" className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
+                        <Link href="/login" className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
                             <UserCircleIcon className="h-5 w-5" />
                             <span className="hidden sm:inline">Espace Enseignant</span>
                         </Link>

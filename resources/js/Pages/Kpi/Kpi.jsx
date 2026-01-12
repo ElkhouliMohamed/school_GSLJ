@@ -107,6 +107,7 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                 <tr>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Type</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Chemin / Page</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Pays</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Détail (ID)</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">IP / Date</th>
                                 </tr>
@@ -123,6 +124,16 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">
                                             {activity.path}
                                         </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                                            {activity.country_name ? (
+                                                <div className="flex items-center gap-1.5">
+                                                    <span className="text-base">{activity.country_code ? String.fromCodePoint(...[...activity.country_code.toUpperCase()].map(c => 127397 + c.charCodeAt())) : '🌍'}</span>
+                                                    <span>{activity.country_name}</span>
+                                                </div>
+                                            ) : (
+                                                <span className="text-slate-400">-</span>
+                                            )}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                                             {activity.element_id || '-'}
                                         </td>
@@ -138,7 +149,7 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                 ))}
                                 {recentActivity.length === 0 && (
                                     <tr>
-                                        <td colSpan="4" className="px-6 py-8 text-center text-slate-400">
+                                        <td colSpan="5" className="px-6 py-8 text-center text-slate-400">
                                             Aucune activité récente.
                                         </td>
                                     </tr>
