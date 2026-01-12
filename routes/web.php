@@ -18,7 +18,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
     Route::resource('events', \App\Http\Controllers\Admin\EventController::class);
-    Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
+    Route::resource('gallery-items', \App\Http\Controllers\Admin\GalleryController::class)->names('galleries');
     Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class);
     Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
