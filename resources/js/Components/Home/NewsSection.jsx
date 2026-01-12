@@ -54,7 +54,7 @@ export default function NewsSection({ news }) {
                                     </span>
                                 </div>
                                 <h3 className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-blue-600 mb-3 line-clamp-2">
-                                    <Link href={`/news/${post.id}`}>
+                                    <Link href={`/news/${post.slug || post.id}`}>
                                         <span className="absolute inset-0" />
                                         {getLocalized(post.title)}
                                     </Link>
@@ -63,7 +63,7 @@ export default function NewsSection({ news }) {
                                     {getLocalized(post.summary || post.content)}
                                 </p>
                                 <div className="mt-auto pt-4 border-t border-gray-100 w-full">
-                                    <Link href={`/news/${post.id}`} className="text-sm font-semibold leading-6 text-blue-600 flex items-center gap-1 hover:text-blue-500">
+                                    <Link href={`/news/${post.slug || post.id}`} className="text-sm font-semibold leading-6 text-blue-600 flex items-center gap-1 hover:text-blue-500">
                                         Lire l'article <ArrowLongRightIcon className="h-4 w-4" />
                                     </Link>
                                 </div>

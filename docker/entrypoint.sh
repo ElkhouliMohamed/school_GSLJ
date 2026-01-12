@@ -3,9 +3,12 @@
 # Exit on fail
 set -e
 
-# Check if .env exists, if not copy from .env.docker or .env.example
+# Check if .env exists, if not copy from .env.production, .env.docker or .env.example
 if [ ! -f .env ]; then
-    if [ -f .env.docker ]; then
+    if [ -f .env.production ]; then
+        echo "Creating .env from .env.production..."
+        cp .env.production .env
+    elif [ -f .env.docker ]; then
         echo "Creating .env from .env.docker..."
         cp .env.docker .env
     elif [ -f .env.example ]; then
@@ -14,11 +17,16 @@ if [ ! -f .env ]; then
     fi
 fi
 
-# Install composer dependencies if missing
+# Install composer dependencies if missing (dev mode only)
 if [ ! -f "vendor/autoload.php" ]; then
     echo "Installing composer dependencies..."
-    composer install --no-interaction --optimize-autoloader
+    if [ "$APP_ENV" = "production" ]; then
+        composer install --no-interaction --optimize-autoloader --no-dev
+    else
+        composer install --no-interaction --optimize-autoloader
+    fi
 fi
+
 # Generate APP_KEY if it's missing or default
 if grep -q "APP_KEY=$" .env || grep -q "APP_KEY=base64:..." .env; then
     echo "Generating APP_KEY..."
@@ -39,32 +47,51 @@ do
   sleep 5
 done
 
-# Run migrations
-echo "Running migrations..."
-php artisan migrate --seed --force
- 
+# Run migrations only if DB_AUTO_MIGRATE is set to true
+if [ "${DB_AUTO_MIGRATE:-false}" = "true" ]; then
+    echo "Running migrations..."
+    php artisan migrate --force
 
-# Clear cache
-echo "Clearing cache..."
-php artisan optimize:clear
-
-
-# Build frontend assets
-echo "Building frontend assets..."
-if [ -f "package.json" ]; then
-    npm install
-    npm run build
+    # Run seeders only in development or if explicitly enabled
+    if [ "$APP_ENV" != "production" ] || [ "${DB_AUTO_SEED:-false}" = "true" ]; then
+        echo "Running seeders..."
+        php artisan db:seed --force
+    fi
+else
+    echo "Skipping migrations (set DB_AUTO_MIGRATE=true to enable)"
 fi
 
-# Fix permissions for storage
-echo "Fixing permissions..."
-chmod -R 777 storage bootstrap/cache
+# Clear and optimize cache for production
+if [ "$APP_ENV" = "production" ]; then
+    echo "Optimizing for production..."
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+else
+    echo "Clearing cache for development..."
+    php artisan optimize:clear
+fi
 
-# Fix permissions for Pages (resolves potential "Page not found" in Docker)
-if [ -d "resources/js/Pages" ]; then
-    echo "Fixing permissions for Pages..."
-    find resources/js/Pages -type d -exec chmod 755 {} \;
-    find resources/js/Pages -type f -exec chmod 644 {} \;
+# Build frontend assets (only in development mode)
+if [ "$APP_ENV" != "production" ]; then
+    echo "Building frontend assets..."
+    if [ -f "package.json" ]; then
+        if [ ! -d "node_modules" ]; then
+            npm install
+        fi
+        npm run build
+    fi
+fi
+
+# Set proper permissions
+echo "Setting proper permissions..."
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# Fix permissions for public storage
+if [ -d "public/storage" ]; then
+    chown -R www-data:www-data /var/www/public/storage
+    chmod -R 775 /var/www/public/storage
 fi
 
 # Start the main process

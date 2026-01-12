@@ -1,4 +1,5 @@
-FROM php:8.2-fpm
+# Base stage - shared dependencies
+FROM php:8.2-fpm AS base
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -9,42 +10,85 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    netcat-openbsd
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    netcat-openbsd \
+    wget \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Get latest Composer
+# Configure PHP for production
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 20M/' "$PHP_INI_DIR/php.ini" \
+    && sed -i 's/post_max_size = 8M/post_max_size = 25M/' "$PHP_INI_DIR/php.ini" \
+    && sed -i 's/memory_limit = 128M/memory_limit = 512M/' "$PHP_INI_DIR/php.ini"
+
+# Get Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www
 
+# Builder stage - install Node.js and build assets
+FROM base AS builder
+
 # Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy existing application directory contents
-COPY . /var/www
+# Copy package files
+COPY package*.json ./
 
-# Install composer dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
+# Install Node dependencies
+RUN npm ci --only=production
 
+# Copy application files
+COPY . .
 
-RUN npm install && npm run build
+# Install Composer dependencies
+RUN composer install --no-interaction --optimize-autoloader --no-dev --prefer-dist
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www
+# Build frontend assets
+RUN npm run build
 
-# Expose port 9000
-EXPOSE 9000
+# Production stage
+FROM base AS production
+
+# Copy application files from builder
+COPY --from=builder --chown=www-data:www-data /var/www /var/www
+
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Copy entrypoint script
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Expose port
+EXPOSE 9000
+
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["php-fpm"]
+
+# Development stage (for local development)
+FROM base AS development
+
+# Install Node.js for dev
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy entrypoint script
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Expose port
+EXPOSE 9000
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]

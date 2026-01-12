@@ -14,8 +14,8 @@ export default function Show({ post }) {
 
             <div className="bg-white px-6 py-32 lg:px-8">
                 <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
-                    <Link href={route('blog.index')} className="text-blue-600 hover:text-blue-500 mb-6 inline-flex items-center text-sm font-semibold">
-                        <ArrowLeftIcon className="h-4 w-4 mr-2" /> Back to Blog
+                    <Link href={route('news')} className="text-blue-600 hover:text-blue-500 mb-6 inline-flex items-center text-sm font-semibold">
+                        <ArrowLeftIcon className="h-4 w-4 mr-2" /> Back to News
                     </Link>
 
                     <p className="text-base font-semibold leading-7 text-blue-600">News</p>

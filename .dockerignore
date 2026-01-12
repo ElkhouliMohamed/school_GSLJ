@@ -1,10 +1,15 @@
 .git
 .env
+.env.docker
 node_modules
 vendor
 public/storage
 storage/*.key
-docker-compose.yml
-Dockerfile
 .idea
 .vscode
+tests
+*.md
+phpunit.xml
+.editorconfig
+.gitattributes
+.gitignore
