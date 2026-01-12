@@ -25,7 +25,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Pre-registrations
     Route::get('pre-registrations', [\App\Http\Controllers\PreRegistrationController::class, 'index'])->name('pre-registrations.index');
-    Route::get('pre-registrations', [\App\Http\Controllers\PreRegistrationController::class, 'index'])->name('pre-registrations.index');
+
     Route::patch('pre-registrations/{id}/status', [\App\Http\Controllers\PreRegistrationController::class, 'updateStatus'])->name('pre-registrations.updateStatus');
 
     // KPIs
@@ -43,20 +43,7 @@ Route::get('/news/{slug}', [\App\Http\Controllers\Public\BlogController::class, 
 
 Route::get('/gallery', [\App\Http\Controllers\Public\GalleryController::class, 'index'])->name('gallery.index');
 
-// Debug route to check settings
-Route::get('/debug-about', function () {
-    $settings = \App\Models\Setting::all()->mapWithKeys(function ($setting) {
-        return [$setting->key => $setting->getTranslations('value')];
-    })->toArray();
 
-    return response()->json([
-        'locale' => app()->getLocale(),
-        'about_title' => $settings['about_title'] ?? 'NOT FOUND',
-        'about_content' => $settings['about_content'] ?? 'NOT FOUND',
-        'about_image' => $settings['about_image'] ?? 'NOT FOUND',
-        'all_settings_keys' => array_keys($settings),
-    ]);
-});
 
 Route::get('/about', function () {
     return Inertia::render('About');
@@ -74,3 +61,4 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);

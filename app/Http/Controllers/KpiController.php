@@ -43,12 +43,25 @@ class KpiController extends Controller
             'element_id' => 'nullable|string',
         ]);
 
+        // Get country information from IP
+        try {
+            $location = geoip($request->ip());
+            $countryCode = $location->iso_code ?? null;
+            $countryName = $location->country ?? null;
+        } catch (\Exception $e) {
+            $default = config('geoip.default_location');
+            $countryCode = $default['iso_code'] ?? null;
+            $countryName = $default['country'] ?? null;
+        }
+
         Kpi::create([
             'type' => 'click',
             'path' => $validated['path'] ?? null,
             'element_id' => $validated['element_id'] ?? null,
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
+            'country_code' => $countryCode,
+            'country_name' => $countryName,
         ]);
 
         return response()->json(['success' => true]);

@@ -22,8 +22,9 @@ class TrackVisits
                 $countryCode = $location->iso_code ?? null;
                 $countryName = $location->country ?? null;
             } catch (\Exception $e) {
-                $countryCode = null;
-                $countryName = null;
+                $default = config('geoip.default_location');
+                $countryCode = $default['iso_code'] ?? null;
+                $countryName = $default['country'] ?? null;
             }
 
             \App\Models\Kpi::create([
