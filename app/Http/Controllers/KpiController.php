@@ -17,8 +17,8 @@ class KpiController extends Controller
         $totalVisits = Kpi::where('type', 'visit')->count();
         $totalClicks = Kpi::where('type', 'click')->count();
 
-        // Recent Activity
-        $recentActivity = Kpi::latest()->take(20)->get();
+        // Recent Activity with pagination
+        $recentActivity = Kpi::latest()->paginate(20);
 
         // Daily Visits (Last 30 days)
         $dailyVisits = Kpi::where('type', 'visit')

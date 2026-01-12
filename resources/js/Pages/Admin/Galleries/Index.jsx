@@ -70,6 +70,37 @@ export default function Index({ galleries }) {
                     </div>
                 ))}
             </div>
+
+            {/* Pagination */}
+            {galleries.last_page > 1 && (
+                <div className="mt-6 flex items-center justify-between">
+                    <div className="text-sm text-gray-600">
+                        Affichage de <span className="font-medium">{galleries.from}</span> à <span className="font-medium">{galleries.to}</span> sur <span className="font-medium">{galleries.total}</span> éléments
+                    </div>
+                    <div className="flex gap-1">
+                        {galleries.links.map((link, index) => (
+                            link.url ? (
+                                <Link
+                                    key={index}
+                                    href={link.url}
+                                    className={`px-3 py-1.5 text-sm rounded-md transition-colors ${link.active
+                                            ? 'bg-blue-600 text-white font-medium'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                        }`}
+                                    dangerouslySetInnerHTML={{ __html: link.label }}
+                                />
+                            ) : (
+                                <span
+                                    key={index}
+                                    className="px-3 py-1.5 text-sm rounded-md bg-gray-50 text-gray-400 cursor-not-allowed"
+                                    dangerouslySetInnerHTML={{ __html: link.label }}
+                                />
+                            )
+                        ))}
+                    </div>
+                </div>
+            )}
+
             {galleries.data.length === 0 && (
                 <div className="text-center py-12 text-gray-500">
                     No items in gallery.

@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVisits }) {
     // Calculate max value for bar chart scaling
@@ -113,7 +113,7 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-slate-200">
-                                {recentActivity.map((activity) => (
+                                {recentActivity.data.map((activity) => (
                                     <tr key={activity.id} className="hover:bg-slate-50">
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${activity.type === 'visit' ? 'bg-blue-100 text-blue-800' : 'bg-violet-100 text-violet-800'
@@ -147,7 +147,7 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                         </td>
                                     </tr>
                                 ))}
-                                {recentActivity.length === 0 && (
+                                {recentActivity.data.length === 0 && (
                                     <tr>
                                         <td colSpan="5" className="px-6 py-8 text-center text-slate-400">
                                             Aucune activité récente.
@@ -157,6 +157,36 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                             </tbody>
                         </table>
                     </div>
+
+                    {/* Pagination */}
+                    {recentActivity.last_page > 1 && (
+                        <div className="px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+                            <div className="text-sm text-slate-600">
+                                Affichage de <span className="font-medium">{recentActivity.from}</span> à <span className="font-medium">{recentActivity.to}</span> sur <span className="font-medium">{recentActivity.total}</span> résultats
+                            </div>
+                            <div className="flex gap-1">
+                                {recentActivity.links.map((link, index) => (
+                                    link.url ? (
+                                        <Link
+                                            key={index}
+                                            href={link.url}
+                                            className={`px-3 py-1.5 text-sm rounded-md transition-colors ${link.active
+                                                    ? 'bg-violet-600 text-white font-medium'
+                                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                                }`}
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                        />
+                                    ) : (
+                                        <span
+                                            key={index}
+                                            className="px-3 py-1.5 text-sm rounded-md bg-slate-50 text-slate-400 cursor-not-allowed"
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                        />
+                                    )
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </AdminLayout>
