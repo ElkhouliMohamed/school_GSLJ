@@ -2,16 +2,19 @@ import React from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import { CalendarDaysIcon } from '@heroicons/react/24/outline';
+import { getTranslation } from '../../translations';
 
 export default function Index({ posts }) {
     const { locale } = usePage().props;
 
-    // Helper for localized content
+    // Helper for localized content - keeping this for the dynamic post content
     const getLocalized = (content, fallback = '') => {
         if (!content) return fallback;
         if (typeof content === 'string') return content;
         return content[locale] || content['en'] || Object.values(content)[0] || fallback;
     };
+
+    const t = (key) => getTranslation(key, locale);
 
     return (
         <MainLayout>
@@ -20,9 +23,9 @@ export default function Index({ posts }) {
             <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Latest News & Events</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{t('latest_news_title')}</h2>
                         <p className="mt-2 text-lg leading-8 text-gray-600">
-                            Stay updated with what's happening at our school.
+                            {t('latest_news_desc')}
                         </p>
                     </div>
                     <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">

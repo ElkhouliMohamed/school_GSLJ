@@ -39,10 +39,10 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                 <div className="flex min-h-0 flex-1 flex-col bg-slate-900 border-r border-slate-800">
                     <div className="flex h-16 flex-shrink-0 items-center px-6 bg-slate-950 border-b border-slate-800">
                         <div className="flex items-center gap-2">
-                            <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                            <div className="h-8 w-8 rounded-lg bg-violet-600 flex items-center justify-center">
                                 <span className="text-white font-bold text-lg">A</span>
                             </div>
-                            <span className="text-xl font-bold text-white tracking-tight">Admin<span className="text-blue-500">Portal</span></span>
+                            <span className="text-xl font-bold text-white tracking-tight">Admin<span className="text-violet-500">Portal</span></span>
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4 px-3">
@@ -55,7 +55,7 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                                         href={item.href}
                                         className={classNames(
                                             isActive
-                                                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                                                ? 'bg-violet-600 text-white shadow-md shadow-violet-500/20'
                                                 : 'text-slate-400 hover:bg-slate-800 hover:text-white',
                                             'group flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200'
                                         )}
@@ -88,12 +88,12 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                         <div className="group block w-full flex-shrink-0">
                             <div className="flex items-center">
                                 <div>
-                                    <div className="inline-block h-10 w-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">
+                                    <div className="inline-block h-10 w-10 rounded-full bg-gradient-to-tr from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">
                                         {userInitial}
                                     </div>
                                 </div>
                                 <div className="ml-3">
-                                    <p className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">
+                                    <p className="text-sm font-medium text-white group-hover:text-violet-400 transition-colors">
                                         {userName}
                                     </p>
                                     <Link href="/logout" method="post" as="button" className="text-xs font-medium text-slate-400 group-hover:text-white flex items-center mt-1 transition-colors">

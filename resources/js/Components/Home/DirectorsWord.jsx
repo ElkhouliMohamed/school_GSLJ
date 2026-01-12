@@ -19,7 +19,7 @@ export default function DirectorsWord() {
     return (
         <section className="bg-white py-24 sm:py-32 relative overflow-hidden">
             {/* Decoration */}
-            <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+            <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
             <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center">
@@ -28,7 +28,7 @@ export default function DirectorsWord() {
                     <div className="lg:order-2">
                         <div className="relative pl-6 lg:pl-0">
                             {/* Decorative line */}
-                            <div className="absolute left-0 top-2 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-transparent lg:hidden"></div>
+                            <div className="absolute left-0 top-2 bottom-0 w-1 bg-gradient-to-b from-violet-600 to-transparent lg:hidden"></div>
 
                             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                                 {title}
@@ -37,13 +37,13 @@ export default function DirectorsWord() {
                                 {content}
                             </p>
 
-                            <div className="mt-8 border-l-4 border-blue-600 pl-4 py-1">
+                            <div className="mt-8 border-l-4 border-violet-600 pl-4 py-1">
                                 <p className="font-semibold text-gray-900">{directorName}</p>
                                 <p className="text-sm text-gray-500">Directrice de l'établissement</p>
                             </div>
 
                             <div className="mt-10">
-                                <Link href={route('about', undefined, false)} className="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 inline-flex items-center gap-1 group">
+                                <Link href={route('about', undefined, false)} className="text-sm font-semibold leading-6 text-violet-700 hover:text-violet-600 inline-flex items-center gap-1 group">
                                     En savoir plus sur notre mission
                                     <span aria-hidden="true" className="block transition-transform group-hover:translate-x-1">→</span>
                                 </Link>

@@ -56,7 +56,7 @@ export default function Index({ preRegistrations }) {
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => setFilter('all')}
-                                        className={`px-4 py-2 rounded-md text-sm font-medium ${filter === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                                        className={`px-4 py-2 rounded-md text-sm font-medium ${filter === 'all' ? 'bg-violet-600 text-white' : 'bg-gray-200 text-gray-700'}`}
                                     >
                                         Tous ({preRegistrations.length})
                                     </button>
@@ -148,7 +148,7 @@ export default function Index({ preRegistrations }) {
                                                         <select
                                                             value={registration.status}
                                                             onChange={(e) => updateStatus(registration.id, e.target.value)}
-                                                            className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                                            className="rounded-md border-gray-300 shadow-sm focus:border-violet-500 focus:ring-violet-500 text-sm"
                                                         >
                                                             <option value="pending">En attente</option>
                                                             <option value="contacted">Contacté</option>

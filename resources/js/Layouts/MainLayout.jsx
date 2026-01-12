@@ -24,7 +24,7 @@ export default function MainLayout({ children }) {
         return () => document.removeEventListener('click', handleClick);
     }, []);
     return (
-        <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-white">
+        <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-neutral-50">
             <Header />
             <main className="flex-grow">
                 {children}

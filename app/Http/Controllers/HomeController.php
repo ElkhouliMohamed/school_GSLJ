@@ -34,10 +34,16 @@ class HomeController extends Controller
 
         $partners = Partner::active()->ordered()->get();
 
+        $gallery = \App\Models\Gallery::where('type', 'photo')
+            ->latest()
+            ->take(8)
+            ->get();
+
         return Inertia::render('Home', [
             'news' => $news,
             'events' => $events,
-            'partners' => $partners
+            'partners' => $partners,
+            'gallery' => $gallery
         ]);
     }
 }

@@ -17,11 +17,17 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::has('locale')) {
-            $locale = Session::get('locale');
-            App::setLocale($locale);
-            \Illuminate\Support\Facades\Log::info('SetLocale Middleware: App locale set to ' . $locale);
+        // Get locale from session, or default to French
+        $locale = Session::get('locale', config('app.locale', 'fr'));
+
+        // Set the session locale if it doesn't exist
+        if (!Session::has('locale')) {
+            Session::put('locale', $locale);
         }
+
+        // Set the application locale
+        App::setLocale($locale);
+        \Illuminate\Support\Facades\Log::info('SetLocale Middleware: App locale set to ' . $locale);
 
         return $next($request);
     }

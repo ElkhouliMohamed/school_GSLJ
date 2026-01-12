@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
+import { compressImage } from '@/Utils/imageCompression';
 
 export default function Index({ settings }) {
     // Transform settings object into form data structure
@@ -13,7 +14,7 @@ export default function Index({ settings }) {
         }
     });
 
-    const { data, setData, post, processing, errors, wasSuccessful } = useForm({
+    const { data, setData, post, processing, progress, errors, wasSuccessful } = useForm({
         ...initialData,
         _method: 'put',
     });
@@ -23,11 +24,32 @@ export default function Index({ settings }) {
         post(route('admin.settings.update', undefined, false), {
             forceFormData: true,
             preserveScroll: true,
+            onProgress: (progress) => {
+                // Determine if we are uploading
+                // Note: Inertia's progress object has { loaded, total, percentage }
+                console.log('Upload progress:', progress.percentage);
+            },
         });
     };
 
-    const handleFileChange = (key, e) => {
-        setData(key, e.target.files[0]);
+    const handleFileChange = async (key, e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (file.type.startsWith('image/')) {
+            setIsCompressing(true);
+            try {
+                const compressed = await compressImage(file);
+                setData(key, compressed);
+            } catch (error) {
+                console.error("Compression failed:", error);
+                setData(key, file);
+            } finally {
+                setIsCompressing(false);
+            }
+        } else {
+            setData(key, file);
+        }
     };
 
     // Helper to render a single field
@@ -52,7 +74,7 @@ export default function Index({ settings }) {
                                     const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
                                     setData(setting.key, { ...oldVal, en: e.target.value })
                                 }}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                         <div>
@@ -64,7 +86,7 @@ export default function Index({ settings }) {
                                     const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
                                     setData(setting.key, { ...oldVal, fr: e.target.value })
                                 }}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -81,7 +103,7 @@ export default function Index({ settings }) {
                                     const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
                                     setData(setting.key, { ...oldVal, en: e.target.value })
                                 }}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                         <div>
@@ -93,7 +115,7 @@ export default function Index({ settings }) {
                                     const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
                                     setData(setting.key, { ...oldVal, fr: e.target.value })
                                 }}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -122,8 +144,8 @@ export default function Index({ settings }) {
                                     file:mr-4 file:py-2 file:px-4
                                     file:rounded-full file:border-0
                                     file:text-sm file:font-semibold
-                                    file:bg-blue-50 file:text-blue-700
-                                    hover:file:bg-blue-100
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100
                                 "
                             />
                             <p className="mt-2 text-xs text-gray-500">Max size: 50MB. Formats: MP4, WebM. Note: Uploading a file will override the YouTube URL.</p>
@@ -156,11 +178,30 @@ export default function Index({ settings }) {
                                     file:mr-4 file:py-2 file:px-4
                                     file:rounded-full file:border-0
                                     file:text-sm file:font-semibold
-                                    file:bg-blue-50 file:text-blue-700
-                                    hover:file:bg-blue-100
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100
                                 "
                             />
                             <p className="mt-2 text-xs text-gray-500">Upload to replace. Recommended size depends on section.</p>
+                        </div>
+                    </div>
+                )}
+
+                {setting.type === 'color' && (
+                    <div className="flex items-center gap-x-6">
+                        <div className="flex items-center gap-4">
+                            <input
+                                type="color"
+                                value={typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
+                                onChange={(e) => setData(setting.key, e.target.value)}
+                                className="h-12 w-24 rounded-lg border-2 border-gray-300 cursor-pointer"
+                            />
+                            <div>
+                                <p className="text-sm font-medium text-gray-900">
+                                    {typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
+                                </p>
+                                <p className="text-xs text-gray-500">Click to change the primary theme color</p>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -178,7 +219,7 @@ export default function Index({ settings }) {
         {
             title: "Home: Hero Section",
             description: "The main top section of the home page.",
-            keys: ['hero_title', 'hero_description', 'hero_image']
+            keys: ['hero_title', 'hero_description', 'hero_image_1', 'hero_image_2', 'hero_image_3']
         },
         {
             title: "Home: Director's Word",
@@ -215,9 +256,15 @@ export default function Index({ settings }) {
             description: "Content for the About page.",
             keys: ['about_title', 'about_content', 'about_image']
         },
+        {
+            title: "Theme",
+            description: "Customize the website's appearance.",
+            keys: ['theme_color']
+        },
     ];
 
     const [activeTab, setActiveTab] = useState(0);
+    const [isCompressing, setIsCompressing] = useState(false);
 
     return (
         <AdminLayout title="Site Settings">
@@ -235,7 +282,7 @@ export default function Index({ settings }) {
                                     className={`
                                         group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium
                                         ${activeTab === idx
-                                            ? 'bg-blue-50 text-blue-700'
+                                            ? 'bg-violet-50 text-violet-700'
                                             : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
                                         }
                                     `}
@@ -258,11 +305,29 @@ export default function Index({ settings }) {
 
                             <button
                                 onClick={submit}
-                                disabled={processing}
-                                className="w-full rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50"
+                                disabled={processing || isCompressing}
+                                className="w-full rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:opacity-50"
                             >
-                                {processing ? 'Saving Changes...' : 'Save All Changes'}
+                                {isCompressing ? 'Compressing Image...' : (processing ? 'Saving Changes...' : 'Save All Changes')}
                             </button>
+
+                            {/* Upload Progress Bar - Only valid if using useForm's logic, but useForm `progress` is for the overall form. 
+                                Actually, useForm from @inertiajs/react exposes a `progress` property which is an object { percentage } if uploading. 
+                            */}
+                            {progress && (
+                                <div className="mt-4">
+                                    <div className="flex justify-between text-sm font-medium text-gray-900 mb-1">
+                                        <span>Uploading...</span>
+                                        <span>{progress.percentage}%</span>
+                                    </div>
+                                    <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div
+                                            className="bg-violet-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                                            style={{ width: `${progress.percentage}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -287,10 +352,10 @@ export default function Index({ settings }) {
                                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 sm:rounded-b-lg">
                                     <button
                                         type="submit"
-                                        disabled={processing}
-                                        className="inline-flex justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                                        disabled={processing || isCompressing}
+                                        className="inline-flex justify-center rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:opacity-50"
                                     >
-                                        Save
+                                        {isCompressing ? 'Compressing...' : 'Save'}
                                     </button>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
 
                     <div className="bg-white overflow-hidden shadow-sm rounded-xl border border-slate-200 p-6">
                         <div className="flex items-center">
-                            <div className="p-3 rounded-full bg-green-100 text-green-600">
+                            <div className="p-3 rounded-full bg-violet-100 text-violet-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
                                 </svg>
@@ -115,7 +115,7 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                 {recentActivity.map((activity) => (
                                     <tr key={activity.id} className="hover:bg-slate-50">
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${activity.type === 'visit' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${activity.type === 'visit' ? 'bg-blue-100 text-blue-800' : 'bg-violet-100 text-violet-800'
                                                 }`}>
                                                 {activity.type === 'visit' ? 'Visite' : 'Clic'}
                                             </span>

@@ -25,17 +25,18 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'title.en' => 'nullable|string',
-            'title.fr' => 'nullable|string',
             'type' => 'required|in:photo,video',
             'video_source' => 'nullable|in:url,upload',
+            'title.en' => 'nullable|string',
+            'title.fr' => 'nullable|string',
         ];
 
         if ($request->type === 'photo') {
-            $rules['file'] = 'required|image|max:8192'; // 8MB Max for photos
+            $rules['files'] = 'required|array|min:1';
+            $rules['files.*'] = 'image|max:8192'; // 8MB Max per photo
         } elseif ($request->type === 'video') {
             if ($request->video_source === 'upload') {
-                $rules['file'] = 'required|mimetypes:video/mp4,video/quicktime,video/x-msvideo,video/x-matroska|max:102400'; // 100MB Max for videos
+                $rules['file'] = 'required|mimetypes:video/mp4,video/quicktime,video/x-msvideo,video/x-matroska|max:102400';
             } else {
                 $rules['video_url'] = 'required|url';
             }
@@ -43,24 +44,29 @@ class GalleryController extends Controller
 
         $request->validate($rules);
 
-        $data = $request->only(['title', 'type']);
+        $baseData = $request->only(['title', 'type']);
 
-        if ($request->hasFile('file')) {
-            $folder = $request->type === 'photo' ? 'gallery/photos' : 'gallery/videos';
-            $path = $request->file('file')->store($folder, 'public');
-            $data['path'] = '/storage/' . $path;
-
-            if ($request->type === 'photo') {
-                $data['thumbnail'] = $data['path'];
+        if ($request->type === 'photo' && $request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $path = $file->store('gallery/photos', 'public');
+                $galleryData = $baseData;
+                $galleryData['path'] = '/storage/' . $path;
+                $galleryData['thumbnail'] = $galleryData['path'];
+                Gallery::create($galleryData);
             }
-            // For video uploads, we don't automatically generate thumbnails yet
-        } elseif ($request->type === 'video' && $request->video_source !== 'upload') {
-            $data['path'] = $request->video_url;
+        } elseif ($request->type === 'video') {
+            // Video handling remains single upload for now as complex mass video upload wasn't requested explicitly/is heavy
+            $data = $baseData;
+            if ($request->video_source === 'upload' && $request->hasFile('file')) {
+                $path = $request->file('file')->store('gallery/videos', 'public');
+                $data['path'] = '/storage/' . $path;
+            } elseif ($request->video_source !== 'upload') {
+                $data['path'] = $request->video_url;
+            }
+            Gallery::create($data);
         }
 
-        Gallery::create($data);
-
-        return redirect()->route('admin.galleries.index')->with('success', 'Gallery item added successfully.');
+        return redirect()->route('admin.galleries.index')->with('success', 'Gallery item(s) added successfully.');
     }
 
     public function edit(Gallery $gallery)

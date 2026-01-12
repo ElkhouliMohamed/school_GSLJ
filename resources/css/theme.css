@@ -1,0 +1,145 @@
+/* Dynamic Theme Color Overrides */
+/* This file overrides Tailwind's violet colors with the admin-selected theme color */
+
+:root {
+    /* Default theme color (violet-600) */
+    --theme-color: #7c3aed;
+    --theme-color-rgb: 124, 58, 237;
+}
+
+/* Background Colors */
+.bg-violet-50 {
+    background-color: rgba(var(--theme-color-rgb), 0.05) !important;
+}
+
+.bg-violet-100 {
+    background-color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+.bg-violet-600 {
+    background-color: var(--theme-color) !important;
+}
+
+.bg-violet-700 {
+    background-color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+.bg-violet-800 {
+    background-color: rgba(var(--theme-color-rgb), 0.95) !important;
+}
+
+.bg-violet-950 {
+    background-color: rgba(var(--theme-color-rgb), 0.98) !important;
+}
+
+/* Hover Background Colors */
+.hover\:bg-violet-50:hover {
+    background-color: rgba(var(--theme-color-rgb), 0.05) !important;
+}
+
+.hover\:bg-violet-100:hover {
+    background-color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+.hover\:bg-violet-500:hover {
+    background-color: rgba(var(--theme-color-rgb), 0.85) !important;
+}
+
+.hover\:bg-violet-600:hover {
+    background-color: var(--theme-color) !important;
+}
+
+.hover\:bg-violet-700:hover {
+    background-color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+/* Text Colors */
+.text-violet-50 {
+    color: rgba(var(--theme-color-rgb), 0.05) !important;
+}
+
+.text-violet-100 {
+    color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+.text-violet-400 {
+    color: rgba(var(--theme-color-rgb), 0.7) !important;
+}
+
+.text-violet-600 {
+    color: var(--theme-color) !important;
+}
+
+.text-violet-700 {
+    color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+.text-violet-800 {
+    color: rgba(var(--theme-color-rgb), 0.95) !important;
+}
+
+/* Hover Text Colors */
+.hover\:text-violet-400:hover {
+    color: rgba(var(--theme-color-rgb), 0.7) !important;
+}
+
+.hover\:text-violet-500:hover {
+    color: rgba(var(--theme-color-rgb), 0.85) !important;
+}
+
+.hover\:text-violet-700:hover {
+    color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+/* Border Colors */
+.border-violet-100 {
+    border-color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+.border-violet-200 {
+    border-color: rgba(var(--theme-color-rgb), 0.2) !important;
+}
+
+.border-violet-600 {
+    border-color: var(--theme-color) !important;
+}
+
+/* Ring Colors (Focus States) */
+.ring-violet-600 {
+    --tw-ring-color: var(--theme-color) !important;
+}
+
+.focus\:ring-violet-600:focus {
+    --tw-ring-color: var(--theme-color) !important;
+}
+
+.focus-visible\:outline-violet-600:focus-visible {
+    outline-color: var(--theme-color) !important;
+}
+
+/* Gradient Colors */
+.from-violet-600 {
+    --tw-gradient-from: var(--theme-color) !important;
+}
+
+.to-violet-600 {
+    --tw-gradient-to: var(--theme-color) !important;
+}
+
+/* File Input Styles */
+.file\:bg-violet-50::file-selector-button {
+    background-color: rgba(var(--theme-color-rgb), 0.05) !important;
+}
+
+.file\:text-violet-700::file-selector-button {
+    color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+.hover\:file\:bg-violet-100:hover::file-selector-button {
+    background-color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+/* Shadow Colors */
+.shadow-violet-500\/20 {
+    --tw-shadow-color: rgba(var(--theme-color-rgb), 0.2) !important;
+}

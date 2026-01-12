@@ -1,23 +1,30 @@
 import React from 'react';
 import { Head, usePage } from '@inertiajs/react';
-import MainLayout from '@/Layouts/MainLayout';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import { CheckCircleIcon } from '@heroicons/react/20/solid';
 
 export default function About() {
     const { settings, locale } = usePage().props;
-    const siteName = settings?.site_name?.[locale] || 'Notre École';
 
-    // Get About page settings with fallbacks
-    const aboutTitle = settings?.about_title?.[locale] || (locale === 'fr' ? 'À Propos de ' : 'About ') + siteName;
-    const aboutContent = settings?.about_content?.[locale] || (locale === 'fr'
-        ? 'Fondée avec une vision d\'excellence, notre école est un pilier de la communauté depuis des années. Nous croyons en une approche holistique de l\'éducation, équilibrant rigueur académique et développement du caractère.'
-        : 'Founded with a vision of excellence, our school has been a pillar of the community for years. We believe in a holistic approach to education, balancing academic rigor with character development.');
-    const aboutImage = settings?.about_image?.[locale] || settings?.about_image?.en || settings?.about_image?.fr || 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1670&q=80';
+    // Helper for localized content
+    const getLocalized = (content, fallback = '') => {
+        if (!content) return fallback;
+        if (typeof content === 'string') return content;
+        return content[locale] || content['en'] || Object.values(content)[0] || fallback;
+    };
+
+    const title = getLocalized(settings?.about_title, 'Une Tradition d\'Excellence');
+    const content = getLocalized(settings?.about_content, 'Depuis sa fondation, le Groupe Scolaire GSLJ s\'engage à offrir une éducation de qualité supérieure, formant des esprits critiques et des citoyens responsables.');
+    const image = getLocalized(settings?.about_image, 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
 
     return (
-        <MainLayout>
-            <Head title={locale === 'fr' ? 'À Propos' : 'About Us'} />
+        <div className="bg-white min-h-screen flex flex-col font-sans">
+            <Head title="À Propos - Groupe Scolaire GSLJ" />
+            <Header />
 
-            <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+            <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0 flex-grow">
+                {/* Background Pattern */}
                 <div className="absolute inset-0 -z-10 overflow-hidden">
                     <svg
                         className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
@@ -44,31 +51,51 @@ export default function About() {
                         <rect width="100%" height="100%" strokeWidth={0} fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" />
                     </svg>
                 </div>
+
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
                     <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                         <div className="lg:pr-4">
                             <div className="lg:max-w-lg">
-                                <p className="text-base font-semibold leading-7 text-blue-600">
-                                    {locale === 'fr' ? 'Notre Histoire' : 'Our Story'}
+                                <p className="text-base font-semibold leading-7 text-violet-600">À Propos</p>
+                                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-serif">{title}</h1>
+                                <p className="mt-6 text-xl leading-8 text-gray-700">
+                                    Un établissement d'enseignement de premier plan au service de la réussite de chaque élève.
                                 </p>
-                                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                    {aboutTitle}
-                                </h1>
-                                <div className="mt-6 text-xl leading-8 text-gray-700 whitespace-pre-line">
-                                    {aboutContent}
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
                         <img
                             className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
-                            src={aboutImage}
-                            alt={aboutTitle}
+                            src={image}
+                            alt="Campus Life"
                         />
+                    </div>
+                    <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+                        <div className="lg:pr-4">
+                            <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
+                                <p className="mb-8">{content}</p>
+                                <ul role="list" className="mt-8 space-y-8 text-gray-600">
+                                    <li className="flex gap-x-3">
+                                        <CheckCircleIcon className="mt-1 h-5 w-5 flex-none text-violet-600" aria-hidden="true" />
+                                        <span><strong className="font-semibold text-gray-900">Excellence Académique.</strong> Programme rigoureux conforme aux standards internationaux.</span>
+                                    </li>
+                                    <li className="flex gap-x-3">
+                                        <CheckCircleIcon className="mt-1 h-5 w-5 flex-none text-violet-600" aria-hidden="true" />
+                                        <span><strong className="font-semibold text-gray-900">Épanouissement Personnel.</strong> Un cadre de vie favorisant le développement de la confiance en soi.</span>
+                                    </li>
+                                    <li className="flex gap-x-3">
+                                        <CheckCircleIcon className="mt-1 h-5 w-5 flex-none text-violet-600" aria-hidden="true" />
+                                        <span><strong className="font-semibold text-gray-900">Innovation Pédagogique.</strong> Utilisation des technologies modernes au service de l'apprentissage.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </MainLayout>
+
+            <Footer />
+        </div>
     );
 }

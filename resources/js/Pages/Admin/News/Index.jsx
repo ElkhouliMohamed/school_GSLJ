@@ -37,7 +37,7 @@ export default function Index({ news }) {
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     <Link
                         href={route('admin.news.create', {}, false)}
-                        className="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                        className="block rounded-md bg-violet-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
                     >
                         <PlusIcon className="h-5 w-5 inline-block mr-1" />
                         Add News
@@ -74,7 +74,7 @@ export default function Index({ news }) {
                                             </td>
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{new Date(item.created_at).toLocaleDateString()}</td>
                                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <Link href={route('admin.news.edit', item.id, false)} className="text-blue-600 hover:text-blue-900 mr-4">
+                                                <Link href={route('admin.news.edit', item.id, false)} className="text-violet-600 hover:text-violet-900 mr-4">
                                                     <PencilSquareIcon className="h-5 w-5 inline" />
                                                 </Link>
                                                 <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900">

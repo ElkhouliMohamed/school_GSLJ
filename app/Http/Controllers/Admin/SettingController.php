@@ -26,7 +26,10 @@ class SettingController extends Controller
             // Home - Hero
             'hero_title' => ['type' => 'text', 'label' => 'Hero Title'],
             'hero_description' => ['type' => 'textarea', 'label' => 'Hero Description'],
-            'hero_image' => ['type' => 'image', 'label' => 'Hero Image'],
+            // 'hero_image' => ['type' => 'image', 'label' => 'Hero Image'], // Deprecated for slider
+            'hero_image_1' => ['type' => 'image', 'label' => 'Slider Image 1'],
+            'hero_image_2' => ['type' => 'image', 'label' => 'Slider Image 2'],
+            'hero_image_3' => ['type' => 'image', 'label' => 'Slider Image 3'],
 
             // Home - Directors Word
             'director_title' => ['type' => 'text', 'label' => 'Director\'s Title'],
@@ -61,6 +64,9 @@ class SettingController extends Controller
             'about_title' => ['type' => 'text', 'label' => 'About Page Title'],
             'about_content' => ['type' => 'textarea', 'label' => 'About Page Content'],
             'about_image' => ['type' => 'image', 'label' => 'About Page Image'],
+
+            // Theme
+            'theme_color' => ['type' => 'color', 'label' => 'Primary Theme Color'],
         ];
 
         // Fetch existing settings
@@ -117,6 +123,17 @@ class SettingController extends Controller
                     $type = 'text'; // Default
                     if (str_contains($key, 'description'))
                         $type = 'textarea';
+                    if ($key === 'theme_color') {
+                        $type = 'color';
+                        // Validate hex color format
+                        if (is_string($value) && !preg_match('/^#[0-9A-Fa-f]{6}$/', $value)) {
+                            continue; // Skip invalid color
+                        }
+                        // Color should be same for both languages
+                        if (is_string($value)) {
+                            $value = ['en' => $value, 'fr' => $value];
+                        }
+                    }
 
                     Setting::updateOrCreate(
                         ['key' => $key],
