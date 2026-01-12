@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Head, useForm, Link } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { PhotoIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
-import imageCompression from 'browser-image-compression';
 
 export default function CreateEdit({ gallery = null }) {
     const isEditing = !!gallery;
@@ -21,47 +20,22 @@ export default function CreateEdit({ gallery = null }) {
     });
 
     const [previews, setPreviews] = useState(gallery?.thumbnail ? [gallery.thumbnail] : []);
-    const [compressionProgress, setCompressionProgress] = useState(0);
 
-    const handleFileChange = async (e) => {
+    const handleFileChange = (e) => {
         if (data.type === 'photo' && !isEditing) {
             // Multi-upload handling
             const FileList = e.target.files;
             const newFiles = [];
             const newPreviews = [];
 
-            setCompressionProgress(10); // Start progress
-
-            const options = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 1920,
-                useWebWorker: true,
-                onProgress: (p) => setCompressionProgress(p)
-            };
-
             for (let i = 0; i < FileList.length; i++) {
                 const file = FileList[i];
-                try {
-                    // Compress image
-                    const compressedFile = await imageCompression(file, options);
-                    newFiles.push(compressedFile);
-
-                    // Generate preview
-                    const objectUrl = URL.createObjectURL(compressedFile);
-                    newPreviews.push(objectUrl);
-                } catch (error) {
-                    console.error("Compression error:", error);
-                    // Fallback to original if compression fails? 
-                    // Better to just push original to arrays:
-                    newFiles.push(file);
-                    newPreviews.push(URL.createObjectURL(file));
-                }
+                newFiles.push(file);
+                newPreviews.push(URL.createObjectURL(file));
             }
 
             setData('files', newFiles);
             setPreviews(newPreviews);
-            setCompressionProgress(0); // Reset
-
         } else {
             // Single file handling (Edit or Video)
             const file = e.target.files[0];
@@ -211,33 +185,24 @@ export default function CreateEdit({ gallery = null }) {
                                         </div>
                                     ) : (
                                         <div className="text-center">
-                                            {compressionProgress > 0 ? (
-                                                <div className="animate-pulse">
-                                                    <PhotoIcon className="mx-auto h-12 w-12 text-violet-400" />
-                                                    <p className="mt-2 text-sm text-gray-600">Compressing... {Math.round(compressionProgress)}%</p>
-                                                </div>
-                                            ) : (
-                                                <>
-                                                    <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                                                    <div className="mt-4 flex text-sm leading-6 text-gray-600 justify-center">
-                                                        <label
-                                                            htmlFor="file-upload"
-                                                            className="relative cursor-pointer rounded-md bg-white font-semibold text-violet-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-violet-600 focus-within:ring-offset-2 hover:text-violet-500"
-                                                        >
-                                                            <span>{isEditing ? "Upload a file" : "Upload files"}</span>
-                                                            <input
-                                                                id="file-upload"
-                                                                name="file-upload"
-                                                                type="file"
-                                                                className="sr-only"
-                                                                onChange={handleFileChange}
-                                                                accept="image/*"
-                                                                multiple={!isEditing}
-                                                            />
-                                                        </label>
-                                                    </div>
-                                                </>
-                                            )}
+                                            <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                                            <div className="mt-4 flex text-sm leading-6 text-gray-600 justify-center">
+                                                <label
+                                                    htmlFor="file-upload"
+                                                    className="relative cursor-pointer rounded-md bg-white font-semibold text-violet-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-violet-600 focus-within:ring-offset-2 hover:text-violet-500"
+                                                >
+                                                    <span>{isEditing ? "Upload a file" : "Upload files"}</span>
+                                                    <input
+                                                        id="file-upload"
+                                                        name="file-upload"
+                                                        type="file"
+                                                        className="sr-only"
+                                                        onChange={handleFileChange}
+                                                        accept="image/*"
+                                                        multiple={!isEditing}
+                                                    />
+                                                </label>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -300,10 +265,10 @@ export default function CreateEdit({ gallery = null }) {
                     <Link href={route('admin.galleries.index')} className="text-sm font-semibold leading-6 text-gray-900">Cancel</Link>
                     <button
                         type="submit"
-                        disabled={processing || compressionProgress > 0}
+                        disabled={processing}
                         className="rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:bg-violet-400"
                     >
-                        {processing || compressionProgress > 0 ? 'Processing...' : 'Save'}
+                        {processing ? 'Processing...' : 'Save'}
                     </button>
                 </div>
             </form>
