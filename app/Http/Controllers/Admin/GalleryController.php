@@ -69,14 +69,14 @@ class GalleryController extends Controller
         return redirect()->route('admin.galleries.index')->with('success', 'Gallery item(s) added successfully.');
     }
 
-    public function edit(Gallery $gallery)
+    public function edit(Gallery $album)
     {
         return Inertia::render('Admin/Galleries/CreateEdit', [
-            'gallery' => $gallery,
+            'gallery' => $album,
         ]);
     }
 
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, Gallery $album)
     {
         $rules = [
             'title.en' => 'nullable|string',
@@ -111,14 +111,14 @@ class GalleryController extends Controller
             $data['path'] = $request->video_url;
         }
 
-        $gallery->update($data);
+        $album->update($data);
 
         return redirect()->route('admin.galleries.index')->with('success', 'Gallery item updated successfully.');
     }
 
-    public function destroy(Gallery $gallery)
+    public function destroy(Gallery $album)
     {
-        $gallery->delete();
+        $album->delete();
         return redirect()->back()->with('success', 'Gallery item deleted successfully.');
     }
 }

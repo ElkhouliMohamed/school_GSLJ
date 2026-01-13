@@ -98,7 +98,8 @@ export default function CreateEdit({ gallery = null }) {
         
         let routeName;
         if (isEditing) {
-            routeName = route('admin.galleries.update', gallery.id, false);
+            // Note: Route parameter must be 'album' because Route::resource('albums', ...)
+            routeName = route('admin.galleries.update', { album: gallery.id }, false);
         } else {
             routeName = route('admin.galleries.store', undefined, false);
         }

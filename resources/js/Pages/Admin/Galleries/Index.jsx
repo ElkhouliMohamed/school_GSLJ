@@ -11,13 +11,31 @@ export default function Index({ galleries }) {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#7c3aed',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 router.delete(route('admin.galleries.destroy', { album: id }), {
                     preserveScroll: true,
+                    onSuccess: () => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'Gallery item has been deleted successfully.',
+                            confirmButtonColor: '#7c3aed',
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                    },
+                    onError: (errors) => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Failed to delete gallery item.',
+                            confirmButtonColor: '#7c3aed',
+                        });
+                    }
                 });
             }
         });
