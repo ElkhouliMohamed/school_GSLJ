@@ -149,13 +149,29 @@ export default function CreateEdit({ news = null }) {
                                 {preview ? (
                                     <div className="text-center">
                                         <img src={preview} alt="Preview" className="mx-auto h-48 object-cover rounded-md" />
-                                        <button
-                                            type="button"
-                                            onClick={() => { setPreview(null); setData('image', null); }}
-                                            className="mt-2 text-sm text-red-600 hover:text-red-500"
-                                        >
-                                            Remove Image
-                                        </button>
+                                        <div className="mt-4 flex gap-4 justify-center">
+                                            <label
+                                                htmlFor="file-upload-change"
+                                                className="cursor-pointer text-sm text-blue-600 hover:text-blue-500 font-medium"
+                                            >
+                                                Change Image
+                                                <input 
+                                                    id="file-upload-change" 
+                                                    name="file-upload" 
+                                                    type="file" 
+                                                    className="sr-only" 
+                                                    onChange={handleImageChange} 
+                                                    accept="image/*" 
+                                                />
+                                            </label>
+                                            <button
+                                                type="button"
+                                                onClick={() => { setPreview(null); setData('image', null); }}
+                                                className="text-sm text-red-600 hover:text-red-500 font-medium"
+                                            >
+                                                Remove Image
+                                            </button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div className="text-center">
@@ -170,7 +186,7 @@ export default function CreateEdit({ news = null }) {
                                             </label>
                                             <p className="pl-1">or drag and drop</p>
                                         </div>
-                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 2MB</p>
+                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 8MB</p>
                                     </div>
                                 )}
                             </div>

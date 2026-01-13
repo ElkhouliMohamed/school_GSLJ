@@ -108,13 +108,29 @@ export default function CreateEdit({ partner = null }) {
                                 {preview ? (
                                     <div className="text-center">
                                         <img src={preview} alt="Preview" className="mx-auto h-24 object-contain rounded-md bg-gray-100 p-2" />
-                                        <button
-                                            type="button"
-                                            onClick={() => { setPreview(null); setData('logo', null); }}
-                                            className="mt-2 text-sm text-red-600 hover:text-red-500"
-                                        >
-                                            Changer le logo
-                                        </button>
+                                        <div className="mt-4 flex gap-4 justify-center">
+                                            <label
+                                                htmlFor="file-upload-change"
+                                                className="cursor-pointer text-sm text-blue-600 hover:text-blue-500 font-medium"
+                                            >
+                                                Changer le logo
+                                                <input
+                                                    id="file-upload-change"
+                                                    name="file-upload"
+                                                    type="file"
+                                                    className="sr-only"
+                                                    onChange={handleFileChange}
+                                                    accept="image/*"
+                                                />
+                                            </label>
+                                            <button
+                                                type="button"
+                                                onClick={() => { setPreview(null); setData('logo', null); }}
+                                                className="text-sm text-red-600 hover:text-red-500 font-medium"
+                                            >
+                                                Supprimer le logo
+                                            </button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div className="text-center">
@@ -136,7 +152,7 @@ export default function CreateEdit({ partner = null }) {
                                                 />
                                             </label>
                                         </div>
-                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF, SVG jusqu'à 2MB</p>
+                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF, SVG jusqu'à 8MB</p>
                                     </div>
                                 )}
                             </div>
