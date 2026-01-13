@@ -16,7 +16,7 @@ export default function Index({ galleries }) {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route('admin.galleries.destroy', id), {
+                router.delete(route('admin.galleries.destroy', { album: id }), {
                     preserveScroll: true,
                 });
             }
@@ -54,7 +54,7 @@ export default function Index({ galleries }) {
                         )}
 
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <Link href={route('admin.galleries.edit', item.id)} className="p-2 bg-white rounded-full text-blue-600 hover:bg-blue-50">
+                            <Link href={route('admin.galleries.edit', { album: item.id })} className="p-2 bg-white rounded-full text-blue-600 hover:bg-blue-50">
                                 <PencilSquareIcon className="h-5 w-5" />
                             </Link>
                             <button onClick={() => handleDelete(item.id)} className="p-2 bg-white rounded-full text-red-600 hover:bg-red-50">
@@ -84,8 +84,8 @@ export default function Index({ galleries }) {
                                     key={index}
                                     href={link.url}
                                     className={`px-3 py-1.5 text-sm rounded-md transition-colors ${link.active
-                                            ? 'bg-blue-600 text-white font-medium'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                        ? 'bg-blue-600 text-white font-medium'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                         }`}
                                     dangerouslySetInnerHTML={{ __html: link.label }}
                                 />

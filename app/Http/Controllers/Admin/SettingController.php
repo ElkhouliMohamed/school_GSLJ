@@ -110,6 +110,22 @@ class SettingController extends Controller
                 // For now, simpler: check if key is video_file
                 $type = $key === 'video_file' ? 'file' : 'image';
 
+                // Add Validation for Video File
+                if ($key === 'video_file') {
+                    $validator = \Illuminate\Support\Facades\Validator::make(
+                        [$key => $file],
+                        [$key => 'mimes:mp4,webm,ogg|max:51200'], // 50MB Max
+                        [
+                            $key . '.mimes' => 'The video must be a file of type: mp4, webm, ogg.',
+                            $key . '.max' => 'The video size must not exceed 50 MB.',
+                        ]
+                    );
+
+                    if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator)->withInput();
+                    }
+                }
+
                 // Save for both English and French as media is usually language-agnostic in this context
                 Setting::updateOrCreate(
                     ['key' => $key],

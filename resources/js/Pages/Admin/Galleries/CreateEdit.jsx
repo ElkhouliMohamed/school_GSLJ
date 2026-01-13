@@ -54,7 +54,7 @@ export default function CreateEdit({ gallery = null }) {
 
     const submit = (e) => {
         e.preventDefault();
-        const routeName = isEditing ? route('admin.galleries.update', gallery.id) : route('admin.galleries.store');
+        const routeName = isEditing ? route('admin.galleries.update', { album: gallery.id }) : route('admin.galleries.store');
 
         submitPost(routeName, {
             forceFormData: true,

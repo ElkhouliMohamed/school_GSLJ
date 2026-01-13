@@ -149,6 +149,7 @@ export default function Index({ settings }) {
                                 "
                             />
                             <p className="mt-2 text-xs text-gray-500">Max size: 50MB. Formats: MP4, WebM. Note: Uploading a file will override the YouTube URL.</p>
+                            {errors[setting.key] && <p className="mt-2 text-sm text-red-600">{errors[setting.key]}</p>}
                         </div>
                     </div>
                 )}
