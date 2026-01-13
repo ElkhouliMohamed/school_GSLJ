@@ -95,7 +95,13 @@ export default function CreateEdit({ gallery = null }) {
 
     const submit = (e) => {
         e.preventDefault();
-        const routeName = isEditing ? route('admin.galleries.update', { album: gallery.id }) : route('admin.galleries.store');
+        
+        let routeName;
+        if (isEditing) {
+            routeName = route('admin.galleries.update', gallery.id, false);
+        } else {
+            routeName = route('admin.galleries.store', undefined, false);
+        }
 
         // Reset progress
         setUploadProgress(0);
@@ -260,13 +266,30 @@ export default function CreateEdit({ gallery = null }) {
                                                     <img key={index} src={src} alt={`Preview ${index}`} className="h-32 w-32 object-cover rounded-md shadow-sm" />
                                                 ))}
                                             </div>
-                                            <button
-                                                type="button"
-                                                onClick={() => { setPreviews([]); setData(isEditing ? 'file' : 'files', isEditing ? null : []); }}
-                                                className="mt-4 text-sm text-red-600 hover:text-red-500 font-medium"
-                                            >
-                                                Clear Selection
-                                            </button>
+                                            <div className="mt-4 flex gap-4 justify-center">
+                                                <label
+                                                    htmlFor="file-upload-change"
+                                                    className="cursor-pointer text-sm text-violet-600 hover:text-violet-500 font-medium"
+                                                >
+                                                    {isEditing ? 'Change Image' : 'Change Images'}
+                                                    <input
+                                                        id="file-upload-change"
+                                                        name="file-upload"
+                                                        type="file"
+                                                        className="sr-only"
+                                                        onChange={handleFileChange}
+                                                        accept="image/*"
+                                                        multiple={!isEditing}
+                                                    />
+                                                </label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => { setPreviews([]); setData(isEditing ? 'file' : 'files', isEditing ? null : []); }}
+                                                    className="text-sm text-red-600 hover:text-red-500 font-medium"
+                                                >
+                                                    Clear Selection
+                                                </button>
+                                            </div>
                                         </div>
                                     ) : (
                                         <div className="text-center">
