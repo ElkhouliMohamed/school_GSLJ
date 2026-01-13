@@ -4,7 +4,6 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 
 import { route } from 'ziggy-js';
-import { Ziggy } from './ziggy.js';
 
 // Helper function to convert hex to RGB
 function hexToRgb(hex) {
@@ -52,7 +51,7 @@ createInertiaApp({
         const root = createRoot(el);
 
         // Make route globally available with config
-        window.route = (name, params, absolute, config = window.Ziggy || Ziggy) => route(name, params, absolute, config);
+        window.route = (name, params, absolute, config = window.Ziggy) => route(name, params, absolute, config);
 
         // Inject theme color on initial load
         if (props.initialPage.props.settings) {
