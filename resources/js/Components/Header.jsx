@@ -4,7 +4,7 @@ import { Bars3Icon, XMarkIcon, PhoneIcon, EnvelopeIcon, UserCircleIcon } from '@
 import { getTranslation } from '../translations';
 
 export default function Header() {
-    const { settings, locale } = usePage().props;
+    const { settings, locale, auth } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const t = (key) => getTranslation(key, locale);
@@ -50,7 +50,7 @@ export default function Header() {
                             <a href="/language/fr" className={`font-bold transition-colors ${locale === 'fr' ? 'text-yellow-400' : 'text-gray-400 hover:text-white'}`}>FR</a>
                             <a href="/language/en" className={`font-bold transition-colors ${locale === 'en' ? 'text-yellow-400' : 'text-gray-400 hover:text-white'}`}>EN</a>
                         </div>
-                        <Link href="/login" className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
+                        <Link href={auth?.user ? "/admin/dashboard" : "/login"} className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
                             <UserCircleIcon className="h-5 w-5" />
                             <span className="hidden sm:inline">Espace Enseignant</span>
                         </Link>

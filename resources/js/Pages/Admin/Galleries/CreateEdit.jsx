@@ -24,6 +24,7 @@ export default function CreateEdit({ gallery = null }) {
     const [previews, setPreviews] = useState(gallery?.thumbnail ? [gallery.thumbnail] : []);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isCompressing, setIsCompressing] = useState(false);
+    const [compressionProgress, setCompressionProgress] = useState({ current: 0, total: 0 });
 
     const handleFileChange = async (e) => {
         if (data.type === 'photo' && !isEditing) {
@@ -34,9 +35,11 @@ export default function CreateEdit({ gallery = null }) {
 
             try {
                 setIsCompressing(true);
+                setCompressionProgress({ current: 0, total: FileList.length });
                 
                 for (let i = 0; i < FileList.length; i++) {
                     const file = FileList[i];
+                    setCompressionProgress({ current: i + 1, total: FileList.length });
                     const compressedFile = await compressImage(file, { maxSizeMB: 7, maxWidthOrHeight: 1920 });
                     newFiles.push(compressedFile);
                     newPreviews.push(URL.createObjectURL(compressedFile));
@@ -58,6 +61,7 @@ export default function CreateEdit({ gallery = null }) {
                 setPreviews(fallbackPreviews);
             } finally {
                 setIsCompressing(false);
+                setCompressionProgress({ current: 0, total: 0 });
             }
         } else {
             // Single file handling (Edit or Video) with compression
@@ -143,7 +147,22 @@ export default function CreateEdit({ gallery = null }) {
             <Head title={isEditing ? 'Edit Gallery Item' : 'Add Gallery Item'} />
 
             <form onSubmit={submit} className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                {/* Progress Bar */}
+                {/* Compression Progress Bar */}
+                {isCompressing && compressionProgress.total > 0 && (
+                    <div className="px-4 pt-6 sm:px-8">
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                            <div
+                                className="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out"
+                                style={{ width: `${(compressionProgress.current / compressionProgress.total) * 100}%` }}
+                            ></div>
+                        </div>
+                        <p className="text-sm text-gray-600 text-center mb-4">
+                            Compressing images... {compressionProgress.current} of {compressionProgress.total}
+                        </p>
+                    </div>
+                )}
+
+                {/* Upload Progress Bar */}
                 {processing && uploadProgress > 0 && (
                     <div className="px-4 pt-6 sm:px-8">
                         <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">

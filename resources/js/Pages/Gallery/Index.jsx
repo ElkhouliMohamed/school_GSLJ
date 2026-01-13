@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
-import { VideoCameraIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { getTranslation } from '../../translations';
 
 export default function Index({ galleries, currentType }) {
@@ -25,6 +25,42 @@ export default function Index({ galleries, currentType }) {
         setSelectedItem(null);
         document.body.style.overflow = 'auto';
     };
+
+    const getCurrentIndex = () => {
+        if (!selectedItem) return -1;
+        return galleries.data.findIndex(item => item.id === selectedItem.id);
+    };
+
+    const goToNext = () => {
+        const currentIndex = getCurrentIndex();
+        if (currentIndex < galleries.data.length - 1) {
+            setSelectedItem(galleries.data[currentIndex + 1]);
+        }
+    };
+
+    const goToPrevious = () => {
+        const currentIndex = getCurrentIndex();
+        if (currentIndex > 0) {
+            setSelectedItem(galleries.data[currentIndex - 1]);
+        }
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!selectedItem) return;
+            
+            if (e.key === 'ArrowRight') {
+                goToNext();
+            } else if (e.key === 'ArrowLeft') {
+                goToPrevious();
+            } else if (e.key === 'Escape') {
+                closeModal();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedItem, galleries.data]);
 
     return (
         <MainLayout>
@@ -161,6 +197,32 @@ export default function Index({ galleries, currentType }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
+
+                        {/* Previous Arrow */}
+                        {getCurrentIndex() > 0 && (
+                            <button
+                                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-200"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    goToPrevious();
+                                }}
+                            >
+                                <ChevronLeftIcon className="h-8 w-8" />
+                            </button>
+                        )}
+
+                        {/* Next Arrow */}
+                        {getCurrentIndex() < galleries.data.length - 1 && (
+                            <button
+                                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-200"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    goToNext();
+                                }}
+                            >
+                                <ChevronRightIcon className="h-8 w-8" />
+                            </button>
+                        )}
 
                         <div className="relative max-w-5xl w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
                             {selectedItem.type === 'photo' ? (

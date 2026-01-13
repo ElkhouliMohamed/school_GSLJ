@@ -9,11 +9,31 @@ use Inertia\Inertia;
 
 class GalleryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $galleries = Gallery::latest()->paginate(12);
+        $query = Gallery::query();
+
+        // Filter by type
+        if ($request->filled('type') && in_array($request->type, ['photo', 'video'])) {
+            $query->where('type', $request->type);
+        }
+
+        // Sort by date
+        $sortBy = $request->get('sort', 'newest');
+        if ($sortBy === 'oldest') {
+            $query->oldest();
+        } else {
+            $query->latest();
+        }
+
+        $galleries = $query->paginate(12)->withQueryString();
+        
         return Inertia::render('Admin/Galleries/Index', [
             'galleries' => $galleries,
+            'filters' => [
+                'type' => $request->get('type', 'all'),
+                'sort' => $sortBy,
+            ],
         ]);
     }
 

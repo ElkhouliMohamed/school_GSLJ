@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { PencilSquareIcon, TrashIcon, PlusIcon, VideoCameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, TrashIcon, PlusIcon, VideoCameraIcon, PhotoIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import Swal from 'sweetalert2';
 
-export default function Index({ galleries }) {
+export default function Index({ galleries, filters }) {
+    const [typeFilter, setTypeFilter] = useState(filters.type);
+    const [sortBy, setSortBy] = useState(filters.sort);
+
+    const applyFilters = (newType = typeFilter, newSort = sortBy) => {
+        const params = {};
+        if (newType !== 'all') {
+            params.type = newType;
+        }
+        if (newSort !== 'newest') {
+            params.sort = newSort;
+        }
+        router.get(route('admin.galleries.index'), params, {
+            preserveState: true,
+            preserveScroll: true,
+        });
+    };
+
+    const handleTypeChange = (type) => {
+        setTypeFilter(type);
+        applyFilters(type, sortBy);
+    };
+
+    const handleSortChange = (sort) => {
+        setSortBy(sort);
+        applyFilters(typeFilter, sort);
+    };
     const handleDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -57,6 +83,65 @@ export default function Index({ galleries }) {
                         <PlusIcon className="h-5 w-5 inline-block mr-1" />
                         Add Item
                     </Link>
+                </div>
+            </div>
+
+            {/* Filters and Sort */}
+            <div className="mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <div className="flex items-center gap-2">
+                        <FunnelIcon className="h-5 w-5 text-gray-500" />
+                        <span className="text-sm font-medium text-gray-700">Filters:</span>
+                    </div>
+                    
+                    {/* Type Filter */}
+                    <div className="flex gap-2">
+                        <button
+                            onClick={() => handleTypeChange('all')}
+                            className={`px-4 py-2 text-sm rounded-md transition-colors ${
+                                typeFilter === 'all'
+                                    ? 'bg-blue-600 text-white font-medium'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                        >
+                            All
+                        </button>
+                        <button
+                            onClick={() => handleTypeChange('photo')}
+                            className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-1 ${
+                                typeFilter === 'photo'
+                                    ? 'bg-blue-600 text-white font-medium'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                        >
+                            <PhotoIcon className="h-4 w-4" />
+                            Images
+                        </button>
+                        <button
+                            onClick={() => handleTypeChange('video')}
+                            className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-1 ${
+                                typeFilter === 'video'
+                                    ? 'bg-blue-600 text-white font-medium'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                        >
+                            <VideoCameraIcon className="h-4 w-4" />
+                            Videos
+                        </button>
+                    </div>
+
+                    {/* Sort */}
+                    <div className="flex items-center gap-2 sm:ml-auto">
+                        <span className="text-sm font-medium text-gray-700">Sort:</span>
+                        <select
+                            value={sortBy}
+                            onChange={(e) => handleSortChange(e.target.value)}
+                            className="px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 

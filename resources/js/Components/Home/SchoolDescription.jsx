@@ -9,7 +9,10 @@ export default function SchoolDescription() {
                         Le Groupe Scolaire Les Jumelles (GSLJ)
                     </h2>
                     <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Le Groupe Scolaire Les Jumelles (GSLJ) à , Sénégal, est un établissement privé bilingue dédié à l'excellence éducative du cycle collège au lycée. Situé dans un environnement sûr et stimulant, il offre un encadrement de qualité pour préparer les élèves à réussir dans un monde plurilingue et compétitif.
+                        Bienvenue au Groupe Scolaire Privé Bilingue Les Jumelles
+                        Nous vous souhaitons la bienvenue sur le site officiel de notre établissement. Ici, chaque enfant est au cœur de notre mission : lui offrir une éducation de qualité, alliant rigueur académique, bilinguisme et épanouissement personnel.
+                        Notre équipe pédagogique engagée et passionnée œuvre chaque jour pour former des citoyens responsables, autonomes et ouverts sur le monde.
+                        Découvrez nos programmes, nos valeurs et rejoignez-nous pour bâtir ensemble l'avenir de vos enfants.
                     </p>
                 </div>
 
