@@ -130,8 +130,10 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                                     <span className="text-base">{activity.country_code ? String.fromCodePoint(...[...activity.country_code.toUpperCase()].map(c => 127397 + c.charCodeAt())) : '🌍'}</span>
                                                     <span>{activity.country_name}</span>
                                                 </div>
+                                            ) : activity.ip_address === '127.0.0.1' || activity.ip_address?.startsWith('192.168.') || activity.ip_address?.startsWith('10.') ? (
+                                                <span className="text-slate-400 italic">🏠 Local</span>
                                             ) : (
-                                                <span className="text-slate-400">-</span>
+                                                <span className="text-slate-400 italic">🌐 Unknown</span>
                                             )}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">

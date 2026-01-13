@@ -23,6 +23,7 @@ const navigation = [
     { name: 'Partenaires', href: '/admin/partners', icon: UsersIcon },
     { name: 'Nouveau Partenaire', href: '/admin/partners/create', icon: PlusCircleIcon },
     { name: 'Galerie', href: '/admin/albums', icon: PhotoIcon },
+    { name: 'Utilisateurs', href: '/admin/users', icon: UsersIcon },
     { name: 'Paramètres', href: '/admin/settings', icon: Cog6ToothIcon },
 ];
 

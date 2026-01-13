@@ -25,7 +25,8 @@ class AdminController extends Controller
 
         $totalPreRegistrations = PreRegistration::count();
         $pendingPreRegistrations = PreRegistration::where('status', 'pending')->count();
-        $approvedPreRegistrations = PreRegistration::where('status', 'approved')->count();
+        $contactedPreRegistrations = PreRegistration::where('status', 'contacted')->count();
+        $enrolledPreRegistrations = PreRegistration::where('status', 'enrolled')->count();
         $rejectedPreRegistrations = PreRegistration::where('status', 'rejected')->count();
 
         $totalUsers = User::count();
@@ -34,12 +35,25 @@ class AdminController extends Controller
 
         // Get KPI data for last 30 days
         $thirtyDaysAgo = Carbon::now()->subDays(30);
-        $kpiData = Kpi::where('type', 'visit')
+        
+        // Get actual visit data
+        $visitData = Kpi::where('type', 'visit')
             ->where('created_at', '>=', $thirtyDaysAgo)
             ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
             ->groupBy('date')
             ->orderBy('date', 'asc')
-            ->get();
+            ->get()
+            ->keyBy('date');
+
+        // Fill in missing dates with 0 counts for last 30 days
+        $kpiData = collect();
+        for ($i = 29; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->format('Y-m-d');
+            $kpiData->push([
+                'date' => $date,
+                'count' => $visitData->has($date) ? $visitData[$date]->count : 0,
+            ]);
+        }
 
         $totalVisits = Kpi::where('type', 'visit')
             ->where('created_at', '>=', $thirtyDaysAgo)
@@ -56,7 +70,8 @@ class AdminController extends Controller
                 'preRegistrations' => [
                     'total' => $totalPreRegistrations,
                     'pending' => $pendingPreRegistrations,
-                    'approved' => $approvedPreRegistrations,
+                    'contacted' => $contactedPreRegistrations,
+                    'enrolled' => $enrolledPreRegistrations,
                     'rejected' => $rejectedPreRegistrations,
                 ],
                 'users' => $totalUsers,

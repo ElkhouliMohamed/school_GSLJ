@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'service' => null,
+    'service' => env('GEOIP_SERVICE', 'ip_api'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,6 +84,13 @@ return [
             'locales' => ['en'],
         ],
 
+        'ip_api' => [
+            'class' => \Torann\GeoIP\Services\IPApi::class,
+            'secure' => env('GEOIP_IPAPI_SECURE', true),
+            'lang' => env('GEOIP_IPAPI_LANG', 'en'),
+            'key' => env('GEOIP_IPAPI_KEY', ''),
+        ],
+
     ],
 
     /*
@@ -114,7 +121,7 @@ return [
     |
     */
 
-    'cache_tags' => ['torann-geoip-location'],
+    'cache_tags' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -138,18 +145,18 @@ return [
 
     'default_location' => [
         'ip' => '127.0.0.0',
-        'iso_code' => 'US',
-        'country' => 'United States',
-        'city' => 'New Haven',
-        'state' => 'CT',
-        'state_name' => 'Connecticut',
-        'postal_code' => '06510',
-        'lat' => 41.31,
-        'lon' => -72.92,
-        'timezone' => 'America/New_York',
-        'continent' => 'NA',
+        'iso_code' => null,
+        'country' => null,
+        'city' => null,
+        'state' => null,
+        'state_name' => null,
+        'postal_code' => null,
+        'lat' => 0,
+        'lon' => 0,
+        'timezone' => 'UTC',
+        'continent' => null,
         'default' => true,
-        'currency' => 'USD',
+        'currency' => null,
     ],
 
 ];

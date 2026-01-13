@@ -20,6 +20,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('events', \App\Http\Controllers\Admin\EventController::class);
     Route::resource('albums', \App\Http\Controllers\Admin\GalleryController::class)->names('galleries');
     Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 
