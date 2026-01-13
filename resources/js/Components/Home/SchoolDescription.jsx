@@ -8,12 +8,20 @@ export default function SchoolDescription() {
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                         Le Groupe Scolaire Les Jumelles (GSLJ)
                     </h2>
-                    <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Bienvenue au Groupe Scolaire Privé Bilingue Les Jumelles
-                        Nous vous souhaitons la bienvenue sur le site officiel de notre établissement. Ici, chaque enfant est au cœur de notre mission : lui offrir une éducation de qualité, alliant rigueur académique, bilinguisme et épanouissement personnel.
-                        Notre équipe pédagogique engagée et passionnée œuvre chaque jour pour former des citoyens responsables, autonomes et ouverts sur le monde.
-                        Découvrez nos programmes, nos valeurs et rejoignez-nous pour bâtir ensemble l'avenir de vos enfants.
-                    </p>
+                    <div className="mt-8 text-lg leading-8 text-gray-600 space-y-4">
+                        <p className="font-semibold text-xl text-violet-700">
+                            Bienvenue au Groupe Scolaire Privé Bilingue Les Jumelles
+                        </p>
+                        <p>
+                            Nous vous souhaitons la bienvenue sur le site officiel de notre établissement. Ici, chaque enfant est au cœur de notre mission : lui offrir une éducation de qualité, alliant rigueur académique, bilinguisme et épanouissement personnel.
+                        </p>
+                        <p>
+                            Notre équipe pédagogique engagée et passionnée œuvre chaque jour pour former des citoyens responsables, autonomes et ouverts sur le monde.
+                        </p>
+                        <p className="font-medium text-gray-700">
+                            Découvrez nos programmes, nos valeurs et rejoignez-nous pour bâtir ensemble l'avenir de vos enfants.
+                        </p>
+                    </div>
                 </div>
 
                 <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
