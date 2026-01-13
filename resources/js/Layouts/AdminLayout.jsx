@@ -22,7 +22,7 @@ const navigation = [
     { name: 'Événements', href: '/admin/events', icon: CalendarIcon },
     { name: 'Partenaires', href: '/admin/partners', icon: UsersIcon },
     { name: 'Nouveau Partenaire', href: '/admin/partners/create', icon: PlusCircleIcon },
-    { name: 'Galerie', href: '/admin/gallery-items', icon: PhotoIcon },
+    { name: 'Galerie', href: '/admin/albums', icon: PhotoIcon },
     { name: 'Paramètres', href: '/admin/settings', icon: Cog6ToothIcon },
 ];
 
