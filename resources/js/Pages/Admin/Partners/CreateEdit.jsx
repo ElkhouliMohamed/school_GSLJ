@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Head, useForm, Link } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { PhotoIcon } from '@heroicons/react/24/solid';
+import { compressImage } from '@/Utils/imageCompression';
 
 export default function CreateEdit({ partner = null }) {
     const isEditing = !!partner;
@@ -21,18 +22,27 @@ export default function CreateEdit({ partner = null }) {
     const [preview, setPreview] = useState(
         partner?.logo ? (partner.logo.startsWith('http') ? partner.logo : `/storage/${partner.logo}`) : null
     );
+    const [isCompressing, setIsCompressing] = useState(false);
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
-        setData('logo', file);
-        if (file) {
+        if (!file) return;
+
+        try {
+            setIsCompressing(true);
+            const compressedFile = await compressImage(file, { maxSizeMB: 7, maxWidthOrHeight: 1920 });
+            setData('logo', compressedFile);
+            
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreview(reader.result);
             };
-            reader.readAsDataURL(file);
-        } else {
-            setPreview(null);
+            reader.readAsDataURL(compressedFile);
+        } catch (error) {
+            console.error('Error compressing image:', error);
+            setData('logo', file);
+        } finally {
+            setIsCompressing(false);
         }
     };
 
@@ -196,10 +206,10 @@ export default function CreateEdit({ partner = null }) {
                     </Link>
                     <button
                         type="submit"
-                        disabled={processing}
+                        disabled={processing || isCompressing}
                         className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50"
                     >
-                        {processing ? 'Enregistrement...' : 'Enregistrer'}
+                        {isCompressing ? 'Compression...' : (processing ? 'Enregistrement...' : 'Enregistrer')}
                     </button>
                 </div>
             </form>

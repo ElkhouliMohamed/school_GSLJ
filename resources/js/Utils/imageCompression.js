@@ -9,7 +9,7 @@ import imageCompression from 'browser-image-compression';
  */
 export const compressImage = async (file, options = {}) => {
     const defaultOptions = {
-        maxSizeMB: 1,          // Max size in MB
+        maxSizeMB: 7,           // Max size in MB (less than 8MB limit)
         maxWidthOrHeight: 1920, // Max width/height
         useWebWorker: true,
         fileType: file.type,    // Preserve original file type

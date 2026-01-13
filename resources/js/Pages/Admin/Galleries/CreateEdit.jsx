@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Head, useForm, Link } from '@inertiajs/react';
+import { Head, useForm, Link, router } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { PhotoIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+import Swal from 'sweetalert2';
+import { compressImage } from '@/Utils/imageCompression';
 
 export default function CreateEdit({ gallery = null }) {
     const isEditing = !!gallery;
@@ -20,34 +22,73 @@ export default function CreateEdit({ gallery = null }) {
     });
 
     const [previews, setPreviews] = useState(gallery?.thumbnail ? [gallery.thumbnail] : []);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [isCompressing, setIsCompressing] = useState(false);
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         if (data.type === 'photo' && !isEditing) {
-            // Multi-upload handling
+            // Multi-upload handling with compression
             const FileList = e.target.files;
             const newFiles = [];
             const newPreviews = [];
 
-            for (let i = 0; i < FileList.length; i++) {
-                const file = FileList[i];
-                newFiles.push(file);
-                newPreviews.push(URL.createObjectURL(file));
-            }
+            try {
+                setIsCompressing(true);
+                
+                for (let i = 0; i < FileList.length; i++) {
+                    const file = FileList[i];
+                    const compressedFile = await compressImage(file, { maxSizeMB: 7, maxWidthOrHeight: 1920 });
+                    newFiles.push(compressedFile);
+                    newPreviews.push(URL.createObjectURL(compressedFile));
+                }
 
-            setData('files', newFiles);
-            setPreviews(newPreviews);
+                setData('files', newFiles);
+                setPreviews(newPreviews);
+            } catch (error) {
+                console.error('Error compressing images:', error);
+                // Fallback to original files
+                const fallbackFiles = [];
+                const fallbackPreviews = [];
+                for (let i = 0; i < FileList.length; i++) {
+                    const file = FileList[i];
+                    fallbackFiles.push(file);
+                    fallbackPreviews.push(URL.createObjectURL(file));
+                }
+                setData('files', fallbackFiles);
+                setPreviews(fallbackPreviews);
+            } finally {
+                setIsCompressing(false);
+            }
         } else {
-            // Single file handling (Edit or Video)
+            // Single file handling (Edit or Video) with compression
             const file = e.target.files[0];
-            setData('file', file);
-            if (file) {
+            if (!file) return;
+
+            if (data.type === 'photo') {
+                try {
+                    setIsCompressing(true);
+                    const compressedFile = await compressImage(file, { maxSizeMB: 7, maxWidthOrHeight: 1920 });
+                    setData('file', compressedFile);
+                    
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setPreviews([reader.result]);
+                    };
+                    reader.readAsDataURL(compressedFile);
+                } catch (error) {
+                    console.error('Error compressing image:', error);
+                    setData('file', file);
+                } finally {
+                    setIsCompressing(false);
+                }
+            } else {
+                // Video file - no compression
+                setData('file', file);
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setPreviews([reader.result]);
                 };
                 reader.readAsDataURL(file);
-            } else {
-                setPreviews([]);
             }
         }
     };
@@ -56,8 +97,37 @@ export default function CreateEdit({ gallery = null }) {
         e.preventDefault();
         const routeName = isEditing ? route('admin.galleries.update', { album: gallery.id }) : route('admin.galleries.store');
 
+        // Reset progress
+        setUploadProgress(0);
+
         submitPost(routeName, {
             forceFormData: true,
+            onProgress: (progress) => {
+                // Update progress bar
+                const percentage = Math.round((progress.loaded / progress.total) * 100);
+                setUploadProgress(percentage);
+            },
+            onSuccess: () => {
+                setUploadProgress(100);
+                Swal.fire({
+                    icon: 'success',
+                    title: isEditing ? 'Updated!' : 'Created!',
+                    text: isEditing ? 'Gallery item has been updated successfully.' : 'Gallery item has been created successfully.',
+                    confirmButtonColor: '#7c3aed',
+                    timer: 2000,
+                    timerProgressBar: true,
+                });
+            },
+            onError: (errors) => {
+                setUploadProgress(0);
+                const errorMessages = Object.values(errors).flat().join('\n');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: errorMessages || 'Something went wrong. Please try again.',
+                    confirmButtonColor: '#7c3aed',
+                });
+            },
         });
     };
 
@@ -66,6 +136,21 @@ export default function CreateEdit({ gallery = null }) {
             <Head title={isEditing ? 'Edit Gallery Item' : 'Add Gallery Item'} />
 
             <form onSubmit={submit} className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                {/* Progress Bar */}
+                {processing && uploadProgress > 0 && (
+                    <div className="px-4 pt-6 sm:px-8">
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                            <div
+                                className="bg-violet-600 h-2.5 rounded-full transition-all duration-300 ease-out"
+                                style={{ width: `${uploadProgress}%` }}
+                            ></div>
+                        </div>
+                        <p className="text-sm text-gray-600 text-center mb-4">
+                            Uploading... {uploadProgress}%
+                        </p>
+                    </div>
+                )}
+
                 <div className="px-4 py-6 sm:p-8">
                     <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -265,10 +350,10 @@ export default function CreateEdit({ gallery = null }) {
                     <Link href={route('admin.galleries.index')} className="text-sm font-semibold leading-6 text-gray-900">Cancel</Link>
                     <button
                         type="submit"
-                        disabled={processing}
+                        disabled={processing || isCompressing}
                         className="rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:bg-violet-400"
                     >
-                        {processing ? 'Processing...' : 'Save'}
+                        {isCompressing ? 'Compressing Images...' : (processing ? 'Processing...' : 'Save')}
                     </button>
                 </div>
             </form>
