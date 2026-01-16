@@ -15,12 +15,12 @@ export default function NewsSection({ news }) {
         return content[locale] || content['en'] || Object.values(content)[0] || fallback;
     };
 
-    // Improved dummy data or use actual news
-    const posts = news && news.length > 0 ? news : [
-        { id: 1, title: 'Inscriptions ouvertes pour 2024', summary: 'Les inscriptions pour la prochaine année scolaire sont désormais ouvertes. Places limitées.', image: 'https://images.unsplash.com/photo-1577896332028-eb8729598858?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80', created_at: '2024-03-01' },
-        { id: 2, title: 'Victoire au concours de sciences', summary: 'Nos élèves ont remporté le premier prix au concours régional de robotique.', image: 'https://images.unsplash.com/photo-1581092921461-e3924f05cd79?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80', created_at: '2024-02-20' },
-        { id: 3, title: 'Sortie culturelle au musée', summary: 'Les classes de CM2 ont visité le musée des Beaux-Arts.', image: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80', created_at: '2024-02-15' },
-    ];
+    // Only show the section if there are actual news posts
+    if (!news || news.length === 0) {
+        return null;
+    }
+
+    const posts = news;
 
     return (
         <section className="bg-gray-50 py-24 sm:py-32">
@@ -36,7 +36,7 @@ export default function NewsSection({ news }) {
 
                 <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                     {posts.map((post) => (
-                        <article key={post.id} className="flex flex-col items-start bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <article key={post.id} className="relative flex flex-col items-start bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                             <div className="relative w-full h-48 overflow-hidden">
                                 <img
                                     src={post.image}
@@ -53,7 +53,7 @@ export default function NewsSection({ news }) {
                                         News
                                     </span>
                                 </div>
-                                <h3 className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-violet-700 mb-3 line-clamp-2">
+                                <h3 className="relative text-lg font-semibold leading-6 text-gray-900 group-hover:text-violet-700 mb-3 line-clamp-2">
                                     <Link href={`/news/${post.slug || post.id}`}>
                                         <span className="absolute inset-0" />
                                         {getLocalized(post.title)}

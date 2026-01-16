@@ -22,8 +22,14 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)
-            ->where('is_published', true)
+        // Try to find by slug first, then by id if it's numeric
+        $post = Post::where('is_published', true)
+            ->where(function ($query) use ($slug) {
+                $query->where('slug', $slug);
+                if (is_numeric($slug)) {
+                    $query->orWhere('id', $slug);
+                }
+            })
             ->firstOrFail();
 
         return Inertia::render('Blog/Show', [
