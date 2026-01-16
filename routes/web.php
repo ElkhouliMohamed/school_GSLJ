@@ -76,5 +76,6 @@ Route::get('/campus-life', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
