@@ -30,9 +30,7 @@ export default function HeroSection() {
         return () => clearInterval(timer);
     }, [imagesToDisplay.length]);
 
-
-
-    // Fallback content - specifically for GSLJ now
+    // Fallback content
     const title = getSetting('hero_title', "L'Excellence Éducative au Sénégal");
     const subtitle = getSetting('hero_description', "Bienvenue au Groupe Scolaire GSLJ. Nous formons les leaders de demain à travers un programme rigoureux alliant tradition académique et ouverture sur le monde.");
 
@@ -57,7 +55,7 @@ export default function HeroSection() {
                 <rect width="100%" height="100%" strokeWidth={0} fill="url(#0787a7c5-9781-4f66-8381-0d604234624d)" />
             </svg>
 
-            <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+            <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:items-center lg:gap-x-10 xl:gap-x-32 lg:px-8 lg:py-40">
                 <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
                     <div className="mt-24 sm:mt-32 lg:mt-16">
                         <Link href={route('admissions')} className="inline-flex space-x-6">
@@ -96,10 +94,12 @@ export default function HeroSection() {
                 </div>
 
                 {/* Image Slider Side */}
-                <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mt-0 lg:mr-0 lg:max-w-none lg:flex-none xl:ml-32">
-                    <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+                <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:max-w-none lg:flex-1">
+                    <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none w-full">
                         <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                            <div className="relative w-[48rem] h-[30rem] rounded-md shadow-2xl ring-1 ring-gray-900/10 overflow-hidden">
+
+                            {/* UPDATED CONTAINER BELOW */}
+                            <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] lg:aspect-[3/2] lg:w-full lg:h-auto xl:aspect-auto xl:w-[48rem] xl:h-[30rem] rounded-md shadow-2xl ring-1 ring-gray-900/10 overflow-hidden">
                                 {imagesToDisplay.map((img, index) => (
                                     <img
                                         key={index}
@@ -122,6 +122,7 @@ export default function HeroSection() {
                                     ))}
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
