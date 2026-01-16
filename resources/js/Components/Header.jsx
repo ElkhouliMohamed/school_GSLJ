@@ -2,31 +2,58 @@ import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Bars3Icon, XMarkIcon, PhoneIcon, EnvelopeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { getTranslation } from '../translations';
+import useSettings from '@/Hooks/useSettings';
 
 export default function Header() {
     const { settings, locale, auth } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { getSetting } = useSettings();
 
     const t = (key) => getTranslation(key, locale);
 
-    // Fallback logo processing removed for brevity, assuming logo URL is valid or valid fallback
-    const logo = settings?.site_logo?.[locale] || settings?.site_logo || "https://tailwindui.com/img/logos/mark.svg?color=violet&shade=600";
-    // Force specific name for this task
-    const siteName = "Groupe Scolaire GSLJ";
+    const logo = getSetting('site_logo') || "https://tailwindui.com/img/logos/mark.svg?color=violet&shade=600";
+    const siteName = getSetting('site_name', "Groupe Scolaire GSLJ");
+    const contactPhone = getSetting('contact_phone', "+221 33 000 00 00");
+    const contactEmail = getSetting('contact_email', "info@gslj.sn");
 
     const navigation = [
         { name: 'Accueil', href: '/' },
-        { name: 'À propos', href: '/about' },
-        { name: 'Admissions', href: '/admissions' },
-        { name: 'Vie étudiante', href: '/campus-life' },
         {
-            name: 'Galerie',
+            name: "L'École",
             children: [
+                { name: 'À propos', href: '/about' },
+                { name: 'Équipe', href: '/team' },
+                { name: t('facilities'), href: '/facilities' },
+            ]
+        },
+        {
+            name: 'Programmes',
+            children: [
+                { name: 'Préscolaire', href: '/programs/preschool-program' },
+                { name: 'Élémentaire', href: '/programs/elementary-school-program' },
+                { name: 'Moyen', href: '/programs/middle-school-program' },
+                { name: 'Secondaire', href: '/programs/high-school-program' },
+            ]
+        },
+        { name: 'Admissions', href: '/admissions' },
+        {
+            name: 'Vie Scolaire',
+            children: [
+                { name: locale === 'fr' ? 'Transport' : 'Transport', href: '/facilities/school-transportation' },
+                { name: locale === 'fr' ? 'Restauration' : 'Catering', href: '/facilities/school-catering' },
+                { name: locale === 'fr' ? 'Uniforme' : 'School Uniform', href: '/facilities/school-uniform' },
+                { name: locale === 'fr' ? 'Laboratoires' : 'Laboratory', href: '/facilities/computer-laboratory' },
+                { name: 'Vie étudiante', href: '/campus-life' },
+            ]
+        },
+        {
+            name: 'Médiathèque',
+            children: [
+                { name: 'Actualités', href: '/news' },
                 { name: t('tab_photos'), href: route('gallery.index', { type: 'photo' }) },
                 { name: t('tab_videos'), href: route('gallery.index', { type: 'video' }) },
             ]
         },
-        { name: 'Actualités', href: '/news' },
         { name: 'Contact', href: '/contact' },
     ];
 
@@ -36,13 +63,13 @@ export default function Header() {
             <div className="bg-violet-950 text-white py-2 text-xs sm:text-sm">
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
                     <div className="flex items-center gap-6">
-                        <a href="tel:+221330000000" className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
+                        <a href={`tel:${contactPhone.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
                             <PhoneIcon className="h-4 w-4" />
-                            <span className="hidden sm:inline">+221 33 000 00 00</span>
+                            <span className="hidden sm:inline">{contactPhone}</span>
                         </a>
-                        <a href="mailto:info@gslj.sn" className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
+                        <a href={`mailto:${contactEmail}`} className="flex items-center gap-2 hover:text-yellow-400 transition-colors">
                             <EnvelopeIcon className="h-4 w-4" />
-                            <span className="hidden sm:inline">info@gslj.sn</span>
+                            <span className="hidden sm:inline">{contactEmail}</span>
                         </a>
                     </div>
                     <div className="flex items-center gap-4">
@@ -62,7 +89,7 @@ export default function Header() {
             <nav className="bg-white shadow-sm border-b border-gray-100 mx-auto w-full sticky top-0" aria-label="Global">
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
 
-                    {/* Logo Section */}
+                    {/* Logo Section - Left Side */}
                     <div className="flex lg:flex-1">
                         <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3 group" data-track-click="header-logo">
                             <img className="h-8 sm:h-12 w-auto transition-transform group-hover:scale-105" src={logo} alt={siteName} />
@@ -119,12 +146,6 @@ export default function Header() {
                         ))}
                     </div>
 
-                    {/* CTA Button */}
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <Link href="/admissions" className="rounded-md bg-violet-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-violet-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 transition-all hover:shadow-lg transform active:scale-95">
-                            Portail Parents <span aria-hidden="true" className="ml-1">&rarr;</span>
-                        </Link>
-                    </div>
                 </div>
             </nav>
 

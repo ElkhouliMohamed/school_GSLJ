@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage, Link } from '@inertiajs/react';
 import { ChevronRightIcon, AcademicCapIcon, UserGroupIcon, StarIcon } from '@heroicons/react/20/solid';
+import useSettings from '@/Hooks/useSettings';
 
 const FALLBACK_IMAGES = [
     "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
@@ -9,21 +10,14 @@ const FALLBACK_IMAGES = [
 ];
 
 export default function HeroSection() {
-    const { settings, locale } = usePage().props;
+    const { getSetting } = useSettings();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-    // Helper for localized content (moved up for use in logic)
-    const getLocalized = (content, fallback = '') => {
-        if (!content) return fallback;
-        if (typeof content === 'string') return content;
-        return content[locale] || content['en'] || Object.values(content)[0] || fallback;
-    };
 
     // Construct images array from settings or fallback
     const sliderImages = [
-        getLocalized(settings?.hero_image_1, null),
-        getLocalized(settings?.hero_image_2, null),
-        getLocalized(settings?.hero_image_3, null)
+        getSetting('hero_image_1', null),
+        getSetting('hero_image_2', null),
+        getSetting('hero_image_3', null)
     ].filter(Boolean); // Remove nulls
 
     const imagesToDisplay = sliderImages.length > 0 ? sliderImages : FALLBACK_IMAGES;
@@ -39,8 +33,8 @@ export default function HeroSection() {
 
 
     // Fallback content - specifically for GSLJ now
-    const title = getLocalized(settings?.hero_title, "L'Excellence Éducative au Sénégal");
-    const subtitle = getLocalized(settings?.hero_description, "Bienvenue au Groupe Scolaire GSLJ. Nous formons les leaders de demain à travers un programme rigoureux alliant tradition académique et ouverture sur le monde.");
+    const title = getSetting('hero_title', "L'Excellence Éducative au Sénégal");
+    const subtitle = getSetting('hero_description', "Bienvenue au Groupe Scolaire GSLJ. Nous formons les leaders de demain à travers un programme rigoureux alliant tradition académique et ouverture sur le monde.");
 
     return (
         <div className="relative isolate overflow-hidden bg-white">

@@ -21,6 +21,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('albums', \App\Http\Controllers\Admin\GalleryController::class)->names('galleries');
     Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class);
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::resource('programs', \App\Http\Controllers\Admin\ProgramController::class);
+    Route::resource('facilities', \App\Http\Controllers\Admin\FacilityController::class);
+    Route::resource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class);
     Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 
@@ -43,6 +46,18 @@ Route::get('/news', [\App\Http\Controllers\Public\BlogController::class, 'index'
 Route::get('/news/{slug}', [\App\Http\Controllers\Public\BlogController::class, 'show'])->name('news.show');
 
 Route::get('/gallery', [\App\Http\Controllers\Public\GalleryController::class, 'index'])->name('gallery.index');
+
+// Programs (Educational Cycles)
+Route::get('/programs', [\App\Http\Controllers\ProgramController::class, 'index'])->name('programs.index');
+Route::get('/programs/{slug}', [\App\Http\Controllers\ProgramController::class, 'show'])->name('programs.show');
+
+// Facilities & Services
+Route::get('/facilities', [\App\Http\Controllers\FacilityController::class, 'index'])->name('facilities.index');
+Route::get('/facilities/{slug}', [\App\Http\Controllers\FacilityController::class, 'show'])->name('facilities.show');
+
+// Team & Staff
+Route::get('/team', [\App\Http\Controllers\TeamController::class, 'index'])->name('team.index');
+Route::get('/team/{slug}', [\App\Http\Controllers\TeamController::class, 'show'])->name('team.show');
 
 
 

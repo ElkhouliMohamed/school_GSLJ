@@ -14,6 +14,22 @@ export const translations = {
         'watch_video': 'Watch Video',
         'external_video': 'External Video Link',
         'watch_provider': 'Watch on Provider',
+
+        // Common
+        'home': 'Home',
+        'about': 'About',
+        'admissions': 'Admissions',
+        'campus_life': 'Campus Life',
+        'contact': 'Contact',
+        'programs': 'Programs',
+        'facilities': 'Facilities',
+        'services': 'Services',
+        'team': 'Team',
+        'gallery': 'Gallery',
+        'news': 'News',
+        'events': 'Events',
+        'partners': 'Partners',
+        'view_all': 'View All',
     },
     fr: {
         // Blog
@@ -30,6 +46,22 @@ export const translations = {
         'watch_video': 'Regarder la vidéo',
         'external_video': 'Lien vidéo externe',
         'watch_provider': 'Regarder sur le fournisseur',
+
+        // Common
+        'home': 'Accueil',
+        'about': 'À propos',
+        'admissions': 'Admissions',
+        'campus_life': 'Vie du Campus',
+        'contact': 'Contact',
+        'programs': 'Programmes',
+        'facilities': 'Installations',
+        'services': 'Services',
+        'team': 'Équipe',
+        'gallery': 'Galerie',
+        'news': 'Actualités',
+        'events': 'Événements',
+        'partners': 'Partenaires',
+        'view_all': 'Voir tout',
     }
 };
 

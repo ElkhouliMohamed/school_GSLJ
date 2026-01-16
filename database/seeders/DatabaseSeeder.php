@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             SettingSeeder::class,
             SettingsSeeder::class,
+            ProgramSeeder::class,
+            FacilitySeeder::class,
+            TeamMemberSeeder::class,
         ]);
     }
 }

@@ -1,21 +1,16 @@
 import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import useSettings from '@/Hooks/useSettings';
 
 export default function Footer() {
-    const { settings, locale } = usePage().props;
+    const { getSetting } = useSettings();
 
-    const getLocalizedSetting = (setting, fallback) => {
-        if (!setting) return fallback;
-        if (typeof setting === 'string') return setting;
-        return setting[locale] || setting['fr'] || setting['en'] || Object.values(setting)[0] || fallback;
-    };
-
-    const siteName = getLocalizedSetting(settings?.site_name, 'École Excellence');
-    const contactEmail = getLocalizedSetting(settings?.contact_email, 'contact@ecole-excellence.com');
-    const contactPhone = getLocalizedSetting(settings?.contact_phone, '+212 5 22 00 00 00');
-    const fbUrl = getLocalizedSetting(settings?.facebook_url, null);
-    const twitterUrl = getLocalizedSetting(settings?.twitter_url, null);
-    const instaUrl = getLocalizedSetting(settings?.instagram_url, null);
+    const siteName = getSetting('site_name', 'École Excellence');
+    const contactEmail = getSetting('contact_email', 'contact@ecole-excellence.com');
+    const contactPhone = getSetting('contact_phone', '+212 5 22 00 00 00');
+    const fbUrl = getSetting('facebook_url', null);
+    const twitterUrl = getSetting('twitter_url', null);
+    const instaUrl = getSetting('instagram_url', null);
 
     return (
         <footer className="bg-violet-950" aria-labelledby="footer-heading">

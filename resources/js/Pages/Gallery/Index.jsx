@@ -48,7 +48,7 @@ export default function Index({ galleries, currentType }) {
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (!selectedItem) return;
-            
+
             if (e.key === 'ArrowRight') {
                 goToNext();
             } else if (e.key === 'ArrowLeft') {
@@ -153,7 +153,7 @@ export default function Index({ galleries, currentType }) {
                     </div>
                 ) : (
                     <div className="text-center py-20">
-                        <p className="text-gray-500 text-lg">{t('no_items', 'Aucun élément trouvé.')}</p>
+                        <p className="text-gray-500 text-lg">{t('Aucun élément trouvé.', 'Aucun élément trouvé.')}</p>
                     </div>
                 )}
 

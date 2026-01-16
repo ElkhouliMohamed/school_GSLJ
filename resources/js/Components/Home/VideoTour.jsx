@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { PlayCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { usePage } from '@inertiajs/react';
+import useSettings from '@/Hooks/useSettings';
 
 export default function VideoTour() {
-    const { settings, locale } = usePage().props;
+    const { getSetting } = useSettings();
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const title = settings?.video_title?.[locale] || "Watch Campus Life Video Tour";
-    const description = settings?.video_description?.[locale] || "Discover our facilities and vibrant student community.";
-    const videoUrl = settings?.video_url?.[locale] || "https://www.youtube.com/embed/dQw4w9WgXcQ";
-    const videoFile = settings?.video_file?.[locale];
+    const title = getSetting('video_title', "Watch Campus Life Video Tour");
+    const description = getSetting('video_description', "Discover our facilities and vibrant student community.");
+    const videoUrl = getSetting('video_url', "https://www.youtube.com/embed/dQw4w9WgXcQ");
+    const videoFile = getSetting('video_file');
 
     const handlePlay = () => {
         setIsPlaying(true);

@@ -1,20 +1,14 @@
 import React from 'react';
 import { usePage, Link } from '@inertiajs/react';
+import useSettings from '@/Hooks/useSettings';
 
 export default function DirectorsWord() {
-    const { settings, locale } = usePage().props;
+    const { getSetting } = useSettings();
 
-    // Helper for localized content
-    const getLocalized = (content, fallback = '') => {
-        if (!content) return fallback;
-        if (typeof content === 'string') return content;
-        return content[locale] || content['en'] || Object.values(content)[0] || fallback;
-    };
-
-    const title = getLocalized(settings?.director_title, "Mot de la Direction");
-    const content = getLocalized(settings?.director_content, "Bienvenue à l'École Excellence. Notre mission est de fournir un environnement éducatif stimulant et bienveillant où chaque enfant peut s'épanouir académiquement et personnellement. Nous croyons en l'excellence, l'innovation et l'ouverture sur le monde.");
-    const image = getLocalized(settings?.director_image, "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80");
-    const directorName = getLocalized(settings?.director_name, "Mme. Directrice");
+    const title = getSetting('director_title', "Mot de la Direction");
+    const content = getSetting('director_content', "Bienvenue à l'École Excellence. Notre mission est de fournir un environnement éducatif stimulant et bienveillant où chaque enfant peut s'épanouir académiquement et personnellement. Nous croyons en l'excellence, l'innovation et l'ouverture sur le monde.");
+    const image = getSetting('director_image', "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80");
+    const directorName = getSetting('director_name', "Mme. Directrice");
 
     return (
         <section className="bg-white py-24 sm:py-32 relative overflow-hidden">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Head, usePage } from '@inertiajs/react';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
 
 export default function About() {

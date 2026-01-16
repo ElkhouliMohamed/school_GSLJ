@@ -11,7 +11,7 @@ class SettingSeeder extends Seeder
     {
         $settings = [
             // General
-            'site_name' => ['en' => 'My School', 'fr' => 'Mon École'],
+            'site_name' => ['en' => 'GSLJ', 'fr' => 'GSLJ'],
             'contact_email' => ['en' => 'info@myschool.com', 'fr' => 'info@monecole.com'],
             'contact_phone' => ['en' => '+1234567890', 'fr' => '+1234567890'],
             'facebook_url' => ['en' => 'https://facebook.com', 'fr' => 'https://facebook.com'],
