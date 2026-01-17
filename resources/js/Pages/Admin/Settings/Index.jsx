@@ -275,25 +275,37 @@ export default function Index({ settings }) {
                 <div className="md:grid md:grid-cols-4 md:gap-6">
                     {/* Sidebar Navigation */}
                     <div className="md:col-span-1">
-                        <nav className="space-y-1" aria-label="Sidebar">
-                            {sections.map((section, idx) => (
-                                <button
-                                    key={section.title}
-                                    onClick={() => setActiveTab(idx)}
-                                    className={`
-                                        group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium
+                        <div className="sticky top-6 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-violet-50 to-purple-50">
+                                <h3 className="text-sm font-semibold text-gray-900">Settings Sections</h3>
+                            </div>
+                            <nav
+                                className="max-h-[calc(100vh-12rem)] overflow-y-auto p-2 space-y-1 scrollbar-thin scrollbar-thumb-violet-200 scrollbar-track-gray-100 hover:scrollbar-thumb-violet-300"
+                                aria-label="Sidebar"
+                                style={{
+                                    scrollbarWidth: 'thin',
+                                    scrollbarColor: '#ddd6fe #f3f4f6'
+                                }}
+                            >
+                                {sections.map((section, idx) => (
+                                    <button
+                                        key={section.title}
+                                        onClick={() => setActiveTab(idx)}
+                                        className={`
+                                        group flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200
                                         ${activeTab === idx
-                                            ? 'bg-violet-50 text-violet-700'
-                                            : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
-                                        }
+                                                ? 'bg-violet-600 text-white shadow-md shadow-violet-200'
+                                                : 'text-gray-700 hover:bg-violet-50 hover:text-violet-700'
+                                            }
                                     `}
-                                >
-                                    <span className="truncate">{section.title}</span>
-                                </button>
-                            ))}
-                        </nav>
+                                    >
+                                        <span className="truncate">{section.title}</span>
+                                    </button>
+                                ))}
+                            </nav>
+                        </div>
 
-                        <div className="mt-8 px-3">
+                        <div className="mt-4 px-3">
                             {wasSuccessful && (
                                 <div className="rounded-md bg-green-50 p-4 mb-4">
                                     <div className="flex">

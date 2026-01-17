@@ -55,8 +55,8 @@ export default function HeroSection() {
                 <rect width="100%" height="100%" strokeWidth={0} fill="url(#0787a7c5-9781-4f66-8381-0d604234624d)" />
             </svg>
 
-            <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:items-center lg:gap-x-10 xl:gap-x-32 lg:px-8 lg:py-40">
-                <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
+            <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:items-center lg:gap-x-10 xl:gap-x-32 lg:px-8 lg:py-40 ">
+                <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8 ">
                     <div className="mt-24 sm:mt-32 lg:mt-16">
                         <Link href={route('admissions')} className="inline-flex space-x-6">
                             <span className="rounded-full bg-violet-600/10 px-3 py-1 text-sm font-semibold leading-6 text-violet-600 ring-1 ring-inset ring-violet-600/10">
