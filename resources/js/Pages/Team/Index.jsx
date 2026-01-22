@@ -38,13 +38,13 @@ export default function Index({ teamMembers }) {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="bg-gradient-to-br from-violet-900 via-violet-800 to-indigo-900">
+                <div className="bg-violet-600">
                     <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
                         <div className="text-center">
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                                 Découvrez notre équipe
                             </h1>
-                            <p className="mt-6 text-xl leading-8 text-violet-200">
+                            <p className="mt-6 text-xl leading-8 text-violet-100">
                                 Des professionnels dévoués, engagés pour l’excellence dans l’éducation
                             </p>
                         </div>
@@ -63,15 +63,15 @@ export default function Index({ teamMembers }) {
                                         {departmentLabels[department] || department}
                                     </h2>
                                 </div>
-                                
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {members.map((member) => (
                                         <div key={member.id} className="bg-white overflow-hidden shadow-lg rounded-2xl border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                                             <div className="p-6 text-center">
                                                 <div className="flex justify-center mb-6">
                                                     {member.photo ? (
-                                                        <img 
-                                                            src={member.photo} 
+                                                        <img
+                                                            src={member.photo}
                                                             alt={getLocalized(member.name)}
                                                             className="h-32 w-32 rounded-full object-cover"
                                                         />
@@ -95,7 +95,7 @@ export default function Index({ teamMembers }) {
                                                     </p>
                                                 )}
                                                 <div className="mt-4">
-                                                    <a 
+                                                    <a
                                                         href={`/team/${member.slug}`}
                                                         className="inline-flex justify-center rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
                                                     >

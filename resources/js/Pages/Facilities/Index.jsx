@@ -80,13 +80,13 @@ export default function Index({ facilities }) {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="bg-gradient-to-br from-violet-900 via-violet-800 to-indigo-900">
+                <div className="bg-violet-600">
                     <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
                         <div className="text-center">
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                                 {pageTitle}
                             </h1>
-                            <p className="mt-6 text-xl leading-8 text-violet-200">
+                            <p className="mt-6 text-xl leading-8 text-violet-100">
                                 {typeFilter
                                     ? (locale === 'en'
                                         ? `Comprehensive ${typeName.toLowerCase()} services to support our students and their families`
@@ -138,9 +138,17 @@ export default function Index({ facilities }) {
                                     <div key={facility.id} className="bg-white overflow-hidden shadow-lg rounded-2xl border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                                         <div className="p-8">
                                             <div className="flex justify-center mb-6">
-                                                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-violet-600">
-                                                    <IconComponent className="h-8 w-8" />
-                                                </div>
+                                                {facility.images && facility.images.length > 0 ? (
+                                                    <img
+                                                        src={facility.images[0]}
+                                                        alt={getLocalized(facility.name)}
+                                                        className="h-16 w-16 rounded-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-violet-600">
+                                                        <IconComponent className="h-8 w-8" />
+                                                    </div>
+                                                )}
                                             </div>
                                             <h3 className="text-xl font-bold text-gray-900 text-center mb-2">
                                                 {getLocalized(facility.name)}

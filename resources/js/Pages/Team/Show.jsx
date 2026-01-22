@@ -26,13 +26,13 @@ export default function Show({ teamMember }) {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="bg-gradient-to-br from-violet-900 via-violet-800 to-indigo-900">
+                <div className="bg-violet-600">
                     <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
                         <div className="text-center">
                             <div className="flex justify-center mb-6">
                                 {teamMember.photo ? (
-                                    <img 
-                                        src={teamMember.photo} 
+                                    <img
+                                        src={teamMember.photo}
                                         alt={getLocalized(teamMember.name)}
                                         className="h-32 w-32 rounded-full object-cover border-4 border-white"
                                     />
@@ -46,11 +46,11 @@ export default function Show({ teamMember }) {
                                 {getLocalized(teamMember.name)}
                             </h1>
                             {teamMember.position && (
-                                <p className="mt-4 text-xl text-violet-200">
+                                <p className="mt-4 text-xl text-violet-100">
                                     {getLocalized(teamMember.position)}
                                 </p>
                             )}
-                            <p className="mt-2 text-lg text-violet-200 capitalize">
+                            <p className="mt-2 text-lg text-violet-100 capitalize">
                                 {departmentLabels[teamMember.department] || teamMember.department}
                             </p>
                         </div>
@@ -136,7 +136,7 @@ export default function Show({ teamMember }) {
                                 <p className="text-gray-600 mb-6">
                                     Reach out to our team member for more information.
                                 </p>
-                                <a 
+                                <a
                                     href="/contact"
                                     className="inline-flex justify-center rounded-md bg-violet-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
                                 >
