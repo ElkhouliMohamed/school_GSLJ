@@ -29,7 +29,7 @@ export default function Show({ program }) {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="bg-gradient-to-br from-violet-900 via-violet-800 to-indigo-900">
+                <div className="bg-violet-600">
                     <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
                         <div className="text-center">
                             <div className="flex justify-center mb-6">
@@ -40,7 +40,7 @@ export default function Show({ program }) {
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                                 {getLocalized(program.name)}
                             </h1>
-                            <p className="mt-4 text-xl text-violet-200 capitalize">
+                            <p className="mt-4 text-xl text-violet-100 capitalize">
                                 {program.level.replace('_', ' ')}
                             </p>
                         </div>
