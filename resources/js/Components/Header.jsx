@@ -26,6 +26,7 @@ export default function Header() {
             ]
         },
         { name: 'ACTUALITÉS', href: '/news' },
+        { name: 'GALERIE', href: '/gallery' },
         { name: 'NOTRE ÉQUIPE', href: '/team' },
         { name: 'CONTACTS', href: '/contact' },
     ];

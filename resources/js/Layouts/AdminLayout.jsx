@@ -68,17 +68,24 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
             {/* Sidebar */}
             <div className={classNames(
                 sidebarOpen ? 'translate-x-0' : '-translate-x-full',
-                "fixed inset-y-0 z-50 flex w-72 flex-col bg-slate-900 transition-transform duration-300 ease-in-out md:static md:translate-x-0 md:flex"
+                "fixed inset-y-0 z-50 flex w-72 flex-col bg-[#111827] transition-transform duration-300 ease-in-out md:static md:translate-x-0 md:flex border-r border-gray-800"
             )}>
                 {/* Logo & Close Button */}
-                <div className="flex h-16 shrink-0 items-center justify-between bg-slate-950 px-6 shadow-sm">
+                <div className="flex h-20 shrink-0 items-center justify-between bg-[#111827] px-6 shadow-sm border-b border-gray-800">
                     <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 shadow-lg shadow-violet-900/20">
-                            <span className="text-lg font-bold text-white">A</span>
+                        <img
+                            src="/images/gslj/logo.jpg"
+                            alt="GSLJ Logo"
+                            className="h-10 w-10 rounded-full object-cover shadow-lg border-2 border-violet-500/30"
+                        />
+                        <div className="flex flex-col">
+                            <span className="text-lg font-bold tracking-tight text-white leading-tight">
+                                GSLJ
+                            </span>
+                            <span className="text-[10px] font-medium text-violet-400 uppercase tracking-widest">
+                                Admin Portal
+                            </span>
                         </div>
-                        <span className="text-xl font-bold tracking-tight text-white">
-                            Admin<span className="text-violet-500">Portal</span>
-                        </span>
                     </div>
                     <button
                         onClick={() => setSidebarOpen(false)}
@@ -89,7 +96,7 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                 </div>
 
                 {/* Navigation */}
-                <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
+                <div className="flex flex-1 flex-col overflow-y-auto px-3 py-6 custom-scrollbar">
                     <nav className="flex-1 space-y-1">
                         {navigation.map((item) => {
                             const isActive = window.location.pathname === item.href || window.location.pathname.startsWith(item.href + '/');
@@ -99,14 +106,14 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                                     href={item.href}
                                     className={classNames(
                                         isActive
-                                            ? 'bg-violet-600/10 text-violet-400 shadow-[2px_0_0_0_#7c3aed_inset]'
+                                            ? 'bg-gradient-to-r from-violet-600 to-violet-900 text-white shadow-lg shadow-violet-900/20'
                                             : 'text-slate-400 hover:bg-slate-800/50 hover:text-white',
-                                        'group flex items-center rounded-r-lg px-3 py-3 text-sm font-medium transition-all duration-200'
+                                        'group flex items-center rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200'
                                     )}
                                 >
                                     <item.icon
                                         className={classNames(
-                                            isActive ? 'text-violet-400' : 'text-slate-500 group-hover:text-white',
+                                            isActive ? 'text-white' : 'text-slate-500 group-hover:text-white',
                                             'mr-3 h-5 w-5 shrink-0 transition-colors'
                                         )}
                                         aria-hidden="true"
@@ -118,7 +125,7 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                     </nav>
 
                     {/* System Status */}
-                    <div className="mt-8 rounded-xl bg-slate-800/50 p-4 border border-slate-700/30">
+                    <div className="mt-8 rounded-xl bg-slate-800/30 p-4 border border-slate-700/30 backdrop-blur-sm">
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">System Status</span>
                             <div className="flex items-center gap-1.5">
@@ -136,9 +143,11 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                 </div>
 
                 {/* User Section (Neam Section) */}
-                <div className="border-t border-slate-800 bg-slate-900/50 p-4">
-                    <div className="flex items-center gap-3 rounded-xl bg-slate-800 p-3 transition-colors hover:bg-slate-700/80">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 font-bold text-white shadow-lg">
+                <div className="border-t border-slate-800 bg-[#0b111e] p-4">
+                    <div className="flex items-center gap-3 rounded-xl bg-slate-800/50 p-3 transition-colors hover:bg-slate-800 border border-slate-700/50">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 font-bold text-white shadow-lg overflow-hidden">
+                            {/* Try to use the user avatar if available, else show initial */}
+                            {/* Assuming we might want to use the director image here dynamically if it was the authenticated user, but for now stick to initial or placeholder */}
                             {userInitial}
                         </div>
                         <div className="min-w-0 flex-1">

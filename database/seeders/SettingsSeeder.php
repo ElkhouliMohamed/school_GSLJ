@@ -58,7 +58,7 @@ class SettingsSeeder extends Seeder
             ],
             [
                 'key' => 'hero_image',
-                'value' => ['en' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80', 'fr' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'],
+                'value' => ['en' => '/images/gslj/hero.jpg', 'fr' => '/images/gslj/hero.jpg'],
                 'type' => 'image',
             ],
 
@@ -88,7 +88,7 @@ class SettingsSeeder extends Seeder
             ],
             [
                 'key' => 'director_image',
-                'value' => ['en' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'fr' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+                'value' => ['en' => '/images/gslj/director.jpg', 'fr' => '/images/gslj/director.jpg'],
                 'type' => 'image',
             ],
 
@@ -172,8 +172,8 @@ class SettingsSeeder extends Seeder
             [
                 'key' => 'about_image',
                 'value' => [
-                    'en' => 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1670&q=80',
-                    'fr' => 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1670&q=80'
+                    'en' => '/images/gslj/about.jpg',
+                    'fr' => '/images/gslj/about.jpg'
                 ],
                 'type' => 'image',
             ],
