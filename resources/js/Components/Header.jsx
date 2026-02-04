@@ -26,6 +26,7 @@ export default function Header() {
             ]
         },
         { name: 'ACTUALITÉS', href: '/news' },
+        { name: 'NOTRE ÉQUIPE', href: '/team' },
         { name: 'CONTACTS', href: '/contact' },
     ];
 
@@ -45,9 +46,8 @@ export default function Header() {
                         </a>
                     </div>
                     <div className="flex items-center gap-4">
-                        <Link href="/pronote" className="hover:underline">ESPACE ÉLÈVE</Link>
                         <span className="text-white/50">|</span>
-                        <Link href="/webmail" className="hover:underline">WEBMAIL</Link>
+                        <Link href="/login" className="hover:underline">espace enseignant</Link>
                         <span className="text-white/50">|</span>
                         {/* Language Switcher */}
                         <div className="flex items-center gap-2">

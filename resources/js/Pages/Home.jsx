@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import HeroSection from '@/Components/Home/HeroSection';
 import NewsSection from '@/Components/Home/NewsSection';
+import EventsSection from '@/Components/Home/EventsSection';
 import InfoSection from '@/Components/Home/InfoSection';
 import CursusSection from '@/Components/Home/CursusSection';
 import WhyChooseUsSection from '@/Components/Home/WhyChooseUsSection';
@@ -16,6 +17,7 @@ export default function Home({ news, events, partners, gallery }) {
             <main>
                 <HeroSection />
                 <NewsSection news={news} />
+                <EventsSection events={events} />
                 <InfoSection />
                 <CursusSection />
                 <WhyChooseUsSection />

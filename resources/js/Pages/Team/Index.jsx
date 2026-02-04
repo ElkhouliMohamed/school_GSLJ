@@ -20,9 +20,9 @@ export default function Index({ teamMembers }) {
     };
 
     const departmentLabels = {
-        teaching: 'Teaching Staff',
-        administration: 'Administration',
-        support: 'Support Staff'
+        teaching: locale === 'fr' ? 'Corps Enseignant' : 'Teaching Staff',
+        administration: locale === 'fr' ? 'Administration' : 'Administration',
+        support: locale === 'fr' ? 'Personnel de Soutien' : 'Support Staff'
     };
 
     // Group team members by department
@@ -38,13 +38,13 @@ export default function Index({ teamMembers }) {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="bg-violet-600">
+                <div className="bg-gradient-to-br from-primary via-violet-700 to-secondary">
                     <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
                         <div className="text-center">
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                                 Découvrez notre équipe
                             </h1>
-                            <p className="mt-6 text-xl leading-8 text-violet-100">
+                            <p className="mt-6 text-xl leading-8 text-white/90">
                                 Des professionnels dévoués, engagés pour l’excellence dans l’éducation
                             </p>
                         </div>
@@ -58,7 +58,7 @@ export default function Index({ teamMembers }) {
                         return (
                             <div key={department} className="mb-20">
                                 <div className="flex items-center mb-12">
-                                    <IconComponent className="h-8 w-8 text-violet-600 mr-4" />
+                                    <IconComponent className="h-8 w-8 text-primary mr-4" />
                                     <h2 className="text-3xl font-bold text-gray-900">
                                         {departmentLabels[department] || department}
                                     </h2>
@@ -85,7 +85,7 @@ export default function Index({ teamMembers }) {
                                                     {getLocalized(member.name)}
                                                 </h3>
                                                 {member.position && (
-                                                    <p className="text-violet-600 font-medium mb-2">
+                                                    <p className="text-primary font-medium mb-2">
                                                         {getLocalized(member.position)}
                                                     </p>
                                                 )}
@@ -97,9 +97,9 @@ export default function Index({ teamMembers }) {
                                                 <div className="mt-4">
                                                     <a
                                                         href={`/team/${member.slug}`}
-                                                        className="inline-flex justify-center rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+                                                        className="inline-flex justify-center rounded-md bg-gradient-to-r from-primary to-secondary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 transition-opacity"
                                                     >
-                                                        View Profile
+                                                        {locale === 'fr' ? 'Voir le profil' : 'View Profile'}
                                                     </a>
                                                 </div>
                                             </div>

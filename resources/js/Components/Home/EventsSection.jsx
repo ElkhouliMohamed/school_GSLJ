@@ -4,8 +4,8 @@ import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 
 export default function EventsSection({ events }) {
     const { settings, locale } = usePage().props;
-    const title = settings?.events_title?.[locale] || "Événements à venir";
-    const description = settings?.events_description?.[locale] || "Ne manquez pas nos prochains rendez-vous.";
+    const title = settings?.events_title?.[locale] || "Dernières Actualités & Événements";
+    const description = settings?.events_description?.[locale] || "Restez informés de ce qui se passe dans notre établissement.";
 
     // Helper for localized content
     const getLocalized = (content, fallback = '') => {
@@ -51,13 +51,13 @@ export default function EventsSection({ events }) {
                             </div>
 
                             <div className="p-6 flex flex-col flex-1">
-                                <div className="flex items-center gap-2 text-xs text-blue-600 font-medium mb-3">
+                                <div className="flex items-center gap-2 text-xs text-primary font-medium mb-3">
                                     <CalendarDaysIcon className="h-4 w-4" />
-                                    <span className="relative z-10 rounded-full bg-blue-50 px-3 py-1.5 font-medium text-blue-600">
+                                    <span className="relative z-10 rounded-full bg-primary/10 px-3 py-1.5 font-medium text-primary">
                                         Événement
                                     </span>
                                 </div>
-                                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
                                     {getLocalized(event.title)}
                                 </h3>
                                 {event.content && (
@@ -67,7 +67,7 @@ export default function EventsSection({ events }) {
                                 )}
 
                                 <div className="mt-auto pt-4">
-                                    <button className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 flex items-center gap-1 transition-colors">
+                                    <button className="text-sm font-semibold text-gray-900 group-hover:text-primary flex items-center gap-1 transition-colors">
                                         Détails <span aria-hidden="true">&rarr;</span>
                                     </button>
                                 </div>

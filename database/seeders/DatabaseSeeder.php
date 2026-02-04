@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             ProgramSeeder::class,
             FacilitySeeder::class,
             TeamMemberSeeder::class,
+            NewsSeeder::class,
+            EventSeeder::class,
+            PartnerSeeder::class,
         ]);
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import useSettings from '@/Hooks/useSettings';
-import { Facebook, Instagram, Linkedin, Phone, MessageCircle, MapPin } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 export default function Footer() {
     const { getSetting } = useSettings();
@@ -147,66 +147,12 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
-
-                        {/* Social Media Icons - Positioned on the right */}
-                        <div className="absolute right-0 top-0 hidden lg:flex flex-col gap-3">
-                            <a
-                                href="tel:+221338604533"
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                                aria-label="Téléphone"
-                            >
-                                <Phone className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="#"
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                                aria-label="Actions"
-                            >
-                                <MapPin className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://facebook.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                                aria-label="Facebook"
-                            >
-                                <Facebook className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                                aria-label="Instagram"
-                            >
-                                <Instagram className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://linkedin.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                                aria-label="LinkedIn"
-                            >
-                                <Linkedin className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://wa.me/221338604533"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                                aria-label="WhatsApp"
-                            >
-                                <MessageCircle className="w-5 h-5" />
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Bottom Section - Orange/Coral Background */}
-            <div className="bg-gradient-to-r from-orange-400 to-orange-500 py-6 px-6">
+            {/* Bottom Section - School Colors Gradient */}
+            <div className="bg-linear-to-r from-primary via-violet-700 to-secondary py-6 px-6">
                 <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white">
                     <p className="text-center md:text-left">© {new Date().getFullYear()} – Groupe Scolaire Les Jumelles </p>
                     <div className="flex flex-wrap gap-4 md:gap-6 justify-center md:justify-end">
