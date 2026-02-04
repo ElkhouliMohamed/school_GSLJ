@@ -19,7 +19,6 @@ class PartnerSeeder extends Seeder
             ],
             'logo' => '/images/gslj/partners/APE.jpg',
             'url' => null,
-            'is_featured' => true,
             'order' => 1,
             'is_active' => true,
         ]);
@@ -31,7 +30,6 @@ class PartnerSeeder extends Seeder
             ],
             'logo' => '/images/gslj/partners/Ministry.jpg',
             'url' => 'https://education.sn',
-            'is_featured' => true,
             'order' => 2,
             'is_active' => true,
         ]);
