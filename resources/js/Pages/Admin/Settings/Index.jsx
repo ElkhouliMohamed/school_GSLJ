@@ -245,7 +245,7 @@ export default function Index({ settings }) {
         {
             title: "Home: Events Section",
             description: "Headings for the upcoming events area.",
-            keys: ['events_title', 'events_description']
+            keys: ['events_title', 'events_description', 'events_section_image']
         },
         {
             title: "Home: Stats Section",

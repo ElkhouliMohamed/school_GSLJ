@@ -131,6 +131,11 @@ class SettingsSeeder extends Seeder
                 'type' => 'textarea',
             ],
             [
+                'key' => 'events_section_image',
+                'value' => ['en' => '/images/gslj/events/bg-events.jpg', 'fr' => '/images/gslj/events/bg-events.jpg'],
+                'type' => 'image',
+            ],
+            [
                 'key' => 'stats_title',
                 'value' => ['en' => 'Our Impact', 'fr' => 'Notre Impact'],
                 'type' => 'text',

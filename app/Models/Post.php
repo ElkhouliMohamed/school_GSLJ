@@ -10,12 +10,26 @@ class Post extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['type', 'title', 'content', 'slug', 'image', 'is_published', 'published_at'];
+    protected $fillable = [
+        'type',
+        'title',
+        'content',
+        'slug',
+        'image',
+        'is_published',
+        'published_at',
+        'start_date',
+        'end_date',
+        'location',
+        'organizer'
+    ];
 
     public $translatable = ['title', 'content'];
 
     protected $casts = [
         'is_published' => 'boolean',
         'published_at' => 'datetime',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
     ];
 }

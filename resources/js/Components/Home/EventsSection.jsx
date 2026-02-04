@@ -6,6 +6,7 @@ export default function EventsSection({ events }) {
     const { settings, locale } = usePage().props;
     const title = settings?.events_title?.[locale] || "Dernières Actualités & Événements";
     const description = settings?.events_description?.[locale] || "Restez informés de ce qui se passe dans notre établissement.";
+    const sectionImage = settings?.events_section_image?.[locale];
 
     // Helper for localized content
     const getLocalized = (content, fallback = '') => {
@@ -23,57 +24,79 @@ export default function EventsSection({ events }) {
     ];
 
     return (
-        <section className="bg-white py-24 sm:py-32">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <section className={`relative py-24 sm:py-32 ${sectionImage ? 'bg-gray-900' : 'bg-white'}`}>
+            {/* Dynamic Background Image */}
+            {sectionImage && (
+                <div className="absolute inset-0 overflow-hidden">
+                    <img
+                        src={sectionImage}
+                        alt=""
+                        className="h-full w-full object-cover object-center opacity-20"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40" />
+                </div>
+            )}
+
+            <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center mb-16">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{title}</h2>
-                    <p className="mt-4 text-gray-600">{description}</p>
+                    <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${sectionImage ? 'text-white' : 'text-gray-900'}`}>
+                        {title}
+                    </h2>
+                    <p className={`mt-4 ${sectionImage ? 'text-gray-300' : 'text-gray-600'}`}>
+                        {description}
+                    </p>
                 </div>
 
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
-                    {eventsList.map((event) => (
-                        <div key={event.id} className="group relative flex flex-col bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            {/* Image Header */}
-                            <div className="relative h-48 overflow-hidden bg-gray-200">
-                                <img
-                                    src={event.image}
-                                    alt={getLocalized(event.title)}
-                                    className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 text-center shadow-sm">
-                                    <span className="block text-xs font-bold text-gray-500 uppercase">
-                                        {new Date(event.published_at || event.date).toLocaleDateString(locale, { month: 'short' })}
-                                    </span>
-                                    <span className="block text-xl font-bold text-gray-900">
-                                        {new Date(event.published_at || event.date).getDate()}
-                                    </span>
+                    {eventsList.map((event) => {
+                        const eventDate = new Date(event.start_date || event.date || event.published_at);
+                        const day = !isNaN(eventDate) ? eventDate.getDate() : '--';
+                        const month = !isNaN(eventDate) ? eventDate.toLocaleDateString(locale, { month: 'short' }) : '---';
+
+                        return (
+                            <div key={event.id} className="group relative flex flex-col bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                {/* Image Header */}
+                                <div className="relative h-48 overflow-hidden bg-gray-200">
+                                    <img
+                                        src={event.image}
+                                        alt={getLocalized(event.title)}
+                                        className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 text-center shadow-sm">
+                                        <span className="block text-xs font-bold text-gray-500 uppercase">
+                                            {month}
+                                        </span>
+                                        <span className="block text-xl font-bold text-gray-900">
+                                            {day}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="p-6 flex flex-col flex-1">
+                                    <div className="flex items-center gap-2 text-xs text-primary font-medium mb-3">
+                                        <CalendarDaysIcon className="h-4 w-4" />
+                                        <span className="relative z-10 rounded-full bg-primary/10 px-3 py-1.5 font-medium text-primary">
+                                            {getLocalized(event.type, 'Événement')}
+                                        </span>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                        {getLocalized(event.title)}
+                                    </h3>
+                                    {event.content && (
+                                        <p className="text-sm leading-6 text-gray-600 line-clamp-2 mb-4 flex-1">
+                                            {getLocalized(event.content).replace(/<\/?[^>]+(>|$)/g, "")}
+                                        </p>
+                                    )}
+
+                                    <div className="mt-auto pt-4">
+                                        <button className="text-sm font-semibold text-gray-900 group-hover:text-primary flex items-center gap-1 transition-colors">
+                                            Détails <span aria-hidden="true">&rarr;</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div className="p-6 flex flex-col flex-1">
-                                <div className="flex items-center gap-2 text-xs text-primary font-medium mb-3">
-                                    <CalendarDaysIcon className="h-4 w-4" />
-                                    <span className="relative z-10 rounded-full bg-primary/10 px-3 py-1.5 font-medium text-primary">
-                                        Événement
-                                    </span>
-                                </div>
-                                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                                    {getLocalized(event.title)}
-                                </h3>
-                                {event.content && (
-                                    <p className="text-sm leading-6 text-gray-600 line-clamp-2 mb-4 flex-1">
-                                        {getLocalized(event.content)}
-                                    </p>
-                                )}
-
-                                <div className="mt-auto pt-4">
-                                    <button className="text-sm font-semibold text-gray-900 group-hover:text-primary flex items-center gap-1 transition-colors">
-                                        Détails <span aria-hidden="true">&rarr;</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>
