@@ -126,14 +126,27 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
                                             {activity.country_name ? (
-                                                <div className="flex items-center gap-1.5">
-                                                    <span className="text-base">{activity.country_code ? String.fromCodePoint(...[...activity.country_code.toUpperCase()].map(c => 127397 + c.charCodeAt())) : '🌍'}</span>
-                                                    <span>{activity.country_name}</span>
+                                                <div className="flex items-center gap-2 group/country">
+                                                    <span className="text-2xl transition-transform group-hover/country:scale-110 drop-shadow-sm">
+                                                        {activity.country_code ? String.fromCodePoint(...[...activity.country_code.toUpperCase()].map(c => 127397 + c.charCodeAt())) : '🌍'}
+                                                    </span>
+                                                    <div className="flex flex-col">
+                                                        <span className="font-medium text-slate-700">{activity.country_name}</span>
+                                                        {activity.country_code && (
+                                                            <span className="text-xs text-slate-400 uppercase">{activity.country_code}</span>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             ) : activity.ip_address === '127.0.0.1' || activity.ip_address?.startsWith('192.168.') || activity.ip_address?.startsWith('10.') ? (
-                                                <span className="text-slate-400 italic">🏠 Local</span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-2xl">🏠</span>
+                                                    <span className="text-slate-500 font-medium">Local</span>
+                                                </div>
                                             ) : (
-                                                <span className="text-slate-400 italic">🌐 Unknown</span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-2xl opacity-50">🌐</span>
+                                                    <span className="text-slate-400 italic">Unknown</span>
+                                                </div>
                                             )}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
@@ -173,8 +186,8 @@ export default function Kpi({ totalVisits, totalClicks, recentActivity, dailyVis
                                             key={index}
                                             href={link.url}
                                             className={`px-3 py-1.5 text-sm rounded-md transition-colors ${link.active
-                                                    ? 'bg-violet-600 text-white font-medium'
-                                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                                ? 'bg-violet-600 text-white font-medium'
+                                                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                                                 }`}
                                             dangerouslySetInnerHTML={{ __html: link.label }}
                                         />
