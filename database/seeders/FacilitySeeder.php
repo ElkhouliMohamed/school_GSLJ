@@ -78,23 +78,23 @@ class FacilitySeeder extends Seeder
                 'slug' => 'school-uniform',
                 'type' => 'uniform',
                 'description' => [
-                    'en' => 'School uniform policy promoting equality, discipline, and a sense of belonging while reducing distractions and fostering a focused learning environment.',
-                    'fr' => 'Politique d\'uniforme scolaire favorisant l\'égalité, la discipline et un sentiment d\'appartenance tout en réduisant les distractions et en favorisant un environnement d\'apprentissage concentré.'
+                    'en' => 'To ensure equality, discipline, and a common identity within the establishment, wearing the school uniform is mandatory for all students. Respect for the uniform is required throughout the school year and contributes to establishing a harmonious school climate conducive to learning.',
+                    'fr' => 'Afin de garantir l’égalité, la discipline et une identité commune au sein de l’établissement, le port de l’uniforme scolaire est obligatoire pour tous les élèves. Le respect de l’uniforme est exigé durant toute l’année scolaire et contribue à instaurer un climat scolaire harmonieux et propice aux apprentissages.'
                 ],
                 'details' => [
                     'en' => [
-                        'Standardized dress code for all students',
-                        'Quality materials and comfortable fit',
-                        'Seasonal uniform variations',
-                        'Affordable pricing options',
-                        'Easy access to uniform suppliers'
+                        'Two polo shirts in school colors',
+                        'A sports outfit adapted for physical and sports activities',
+                        'A jacket for cooler periods',
+                        'A fabric coupon intended for making the regulation trousers',
+                        'Mandatory throughout the school year'
                     ],
                     'fr' => [
-                        'Code vestimentaire standardisé pour tous les élèves',
-                        'Matériaux de qualité et ajustement confortable',
-                        'Variations d\'uniforme saisonnières',
-                        'Options de prix abordables',
-                        'Accès facile aux fournisseurs d\'uniformes'
+                        'Deux polos aux couleurs de l’école',
+                        'Une tenue de sport adaptée aux activités physiques et sportives',
+                        'Une jacket (veste) pour les périodes plus fraîches',
+                        'Un coupon de tissu destiné à la confection du pantalon réglementaire',
+                        'Obligatoire durant toute l’année scolaire'
                     ]
                 ],
                 'order' => 3,
@@ -108,23 +108,23 @@ class FacilitySeeder extends Seeder
                 'slug' => 'computer-laboratory',
                 'type' => 'lab',
                 'description' => [
-                    'en' => 'State-of-the-art computer lab equipped with modern technology, high-speed internet, and educational software to enhance digital literacy and programming skills.',
-                    'fr' => 'Laboratoire informatique de pointe équipé de technologies modernes, d\'internet haut débit et de logiciels éducatifs pour améliorer l\'alphabétisation numérique et les compétences en programmation.'
+                    'en' => 'The computer laboratory of GSPB Les Jumelles is a modern and functional space dedicated to learning digital technologies. It is equipped with high-performance computers allowing students to learn about computing, office automation, online research, and digital educational tools.',
+                    'fr' => 'Le laboratoire informatique du Groupe Scolaire Privé Bilingue Les Jumelles est un espace moderne et fonctionnel, dédié à l’apprentissage des technologies numériques. Il est équipé d’ordinateurs performants permettant aux élèves de s’initier à l’informatique, à la bureautique, à la recherche en ligne et aux outils numériques éducatifs.'
                 ],
                 'details' => [
                     'en' => [
-                        'Latest computer hardware and software',
-                        'High-speed internet connectivity',
-                        'Educational programming tools',
-                        'Digital creativity applications',
-                        'Regular technology updates'
+                        'High-performance computers',
+                        'Office automation and online research',
+                        'Digital educational tools',
+                        'Supervised by qualified teachers',
+                        'Secure and disciplined environment'
                     ],
                     'fr' => [
-                        'Dernier matériel et logiciel informatique',
-                        'Connectivité Internet haut débit',
-                        'Outils de programmation éducatifs',
-                        'Applications de créativité numérique',
-                        'Mises à jour technologiques régulières'
+                        'Ordinateurs performants',
+                        'Bureautique et recherche en ligne',
+                        'Outils numériques éducatifs',
+                        'Encadrement par des enseignants qualifiés',
+                        'Environnement sécurisé et discipliné'
                     ]
                 ],
                 'order' => 4,

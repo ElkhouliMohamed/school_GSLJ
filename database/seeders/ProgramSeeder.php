@@ -116,23 +116,23 @@ class ProgramSeeder extends Seeder
                 'slug' => 'middle-school-program',
                 'level' => 'middle',
                 'description' => [
-                    'en' => 'Our middle school program bridges elementary and secondary education, preparing students for advanced academic challenges while developing independence.',
-                    'fr' => 'Notre programme de collège fait le lien entre l\'école élémentaire et le lycée, préparant les élèves à des défis académiques avancés tout en développant leur autonomie.'
+                    'en' => 'At GSPB Les Jumelles, the middle school cycle corresponds to the 6th, 5th, 4th, and 3rd grades. It is a pivotal stage where students consolidate their elementary cycle achievements and prepare for orientation towards high school or vocational training. At the end of the cycle, students take the BFEM exam.',
+                    'fr' => 'Au Groupe Scolaire Privé Bilingue Les Jumelles, le cycle moyen correspond aux classes de 6ᵉ, 5ᵉ, 4ᵉ et 3ᵉ. C’est une étape charnière où les élèves consolident leurs acquis du cycle élémentaire et se préparent à l’orientation vers le lycée ou la formation professionnelle. À la fin du cycle, les élèves se présentent au BFEM.'
                 ],
                 'objectives' => [
                     'en' => [
-                        'Strengthen academic rigor',
-                        'Develop study and organizational skills',
-                        'Prepare for advanced coursework',
-                        'Build leadership qualities',
-                        'Encourage personal growth'
+                        'Deepen knowledge in mathematics, sciences, letters, and languages',
+                        'Develop autonomy, critical thinking, and working methods',
+                        'Initiate students to ICT (Information and Communication Technologies)',
+                        'Foster cultural, artistic, and sporting awakening',
+                        'Prepare for the BFEM exam'
                     ],
                     'fr' => [
-                        'Renforcer la rigueur académique',
-                        'Développer les compétences d\'étude et d\'organisation',
-                        'Se préparer aux cours avancés',
-                        'Développer les qualités de leadership',
-                        'Encourager le développement personnel'
+                        'Approfondir les connaissances en mathématiques, sciences, lettres et langues',
+                        'Développer l’autonomie, l’esprit critique et les méthodes de travail',
+                        'Initier les élèves aux TIC (Technologies de l’Information et de la Communication)',
+                        'Favoriser l’éveil culturel, artistique et sportif',
+                        'Préparer au Brevet de fin d\'études Moyennes (BFEM)'
                     ]
                 ],
                 'curriculum' => [

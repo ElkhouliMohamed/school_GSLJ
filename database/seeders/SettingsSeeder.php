@@ -13,31 +13,31 @@ class SettingsSeeder extends Seeder
             // General
             [
                 'key' => 'site_name',
-                'value' => ['en' => 'Excellence Academy', 'fr' => 'Académie Excellence'],
+                'value' => ['en' => 'GSPB Les Jumelles', 'fr' => 'GSPB Les Jumelles'],
                 'type' => 'text',
             ],
             [
                 'key' => 'contact_email',
-                'value' => ['en' => 'info@excellence.edu', 'fr' => 'info@excellence.edu'],
+                'value' => ['en' => 'lesjumelles221@gmail.com', 'fr' => 'lesjumelles221@gmail.com'],
                 'type' => 'text',
             ],
             [
                 'key' => 'contact_phone',
-                'value' => ['en' => '+1 234 567 890', 'fr' => '+1 234 567 890'],
+                'value' => ['en' => '338378017 / 777677775 / 765598979', 'fr' => '338378017 / 777677775 / 765598979'],
                 'type' => 'text',
+            ],
+            [
+                'key' => 'contact_address',
+                'value' => ['en' => 'COMICO 4, YEUMBEUL NEAR MILITARY CAMP WALL', 'fr' => 'COMICO 4, YEUMBEUL PRÈS DU MUR DU CAMP MILITAIRE'],
+                'type' => 'textarea', // Changed to textarea for potential multiline
             ],
             [
                 'key' => 'facebook_url',
-                'value' => ['en' => '#', 'fr' => '#'], // Default empty link
-                'type' => 'text',
-            ],
-            [
-                'key' => 'twitter_url',
                 'value' => ['en' => '#', 'fr' => '#'],
                 'type' => 'text',
             ],
             [
-                'key' => 'instagram_url',
+                'key' => 'youtube_url', // Added based on context
                 'value' => ['en' => '#', 'fr' => '#'],
                 'type' => 'text',
             ],
@@ -45,14 +45,14 @@ class SettingsSeeder extends Seeder
             // Home - Hero
             [
                 'key' => 'hero_title',
-                'value' => ['en' => 'Shaping Future Leaders', 'fr' => 'Former les Leaders de Demain'],
+                'value' => ['en' => 'Excellence in Education', 'fr' => 'L\'Excellence Éducative'],
                 'type' => 'text',
             ],
             [
                 'key' => 'hero_description',
                 'value' => [
-                    'en' => 'We provide a world-class education that empowers students to achieve their full potential.',
-                    'fr' => 'Nous offrons une éducation de classe mondiale qui permet aux étudiants d\'atteindre leur plein potentiel.'
+                    'en' => 'Forming competent, responsible, and open-minded students.',
+                    'fr' => 'Former des élèves compétents, responsables et ouverts sur le monde.'
                 ],
                 'type' => 'textarea',
             ],
@@ -65,24 +65,24 @@ class SettingsSeeder extends Seeder
             // Home - Directors Word
             [
                 'key' => 'director_title',
-                'value' => ['en' => 'A World From The Director', 'fr' => 'Le Mot du Directeur'],
+                'value' => ['en' => 'Word from the Director', 'fr' => 'Le Mot du Directeur'],
                 'type' => 'text',
             ],
             [
                 'key' => 'director_name',
-                'value' => ['en' => 'Mr. Ahmadou', 'fr' => 'M. Ahmadou'],
+                'value' => ['en' => 'M. Ahmadou', 'fr' => 'M. Ahmadou'],
                 'type' => 'text',
             ],
             [
                 'key' => 'director_role',
-                'value' => ['en' => 'School Principal', 'fr' => 'Directeur de l\'école'],
+                'value' => ['en' => 'School Director', 'fr' => 'Directeur de l\'école'],
                 'type' => 'text',
             ],
             [
                 'key' => 'director_content',
                 'value' => [
-                    'en' => 'Education is not just about filling a bucket, but lighting a fire. At our academy, we strive to ignite the passion for learning in every student.',
-                    'fr' => 'L\'éducation ne consiste pas seulement à remplir un seau, mais à allumer un feu. À notre académie, nous nous efforçons d\'allumer la passion d\'apprendre chez chaque élève.'
+                    'en' => 'Our educational action is based on fundamental values: Discipline, Respect, Work well done, Responsibility, Solidarity, Excellence, Integrity.',
+                    'fr' => 'Notre action éducative repose sur des valeurs fondamentales : Discipline, Respect, Travail bien fait, Responsabilité, Solidarité, Excellence, Intégrité.'
                 ],
                 'type' => 'textarea',
             ],
@@ -92,15 +92,15 @@ class SettingsSeeder extends Seeder
                 'type' => 'image',
             ],
 
-            // Home - Video Tour
+            // Home - Video
             [
                 'key' => 'video_title',
-                'value' => ['en' => 'Campus Tour', 'fr' => 'Visite du Campus'],
+                'value' => ['en' => 'Discover GSPB Les Jumelles', 'fr' => 'Découvrez GSPB Les Jumelles'],
                 'type' => 'text',
             ],
             [
                 'key' => 'video_description',
-                'value' => ['en' => 'Discover our state-of-the-art facilities.', 'fr' => 'Découvrez nos installations de pointe.'],
+                'value' => ['en' => 'A modern and functional space dedicated to learning.', 'fr' => 'Un espace moderne et fonctionnel, dédié à l\'apprentissage.'],
                 'type' => 'textarea',
             ],
             [
@@ -108,13 +108,8 @@ class SettingsSeeder extends Seeder
                 'value' => ['en' => 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'fr' => 'https://www.youtube.com/embed/dQw4w9WgXcQ'],
                 'type' => 'text',
             ],
-            [
-                'key' => 'video_file',
-                'value' => ['en' => null, 'fr' => null],
-                'type' => 'file',
-            ],
 
-            // Home - News
+            // Home - News & Events & Stats Titles
             [
                 'key' => 'news_title',
                 'value' => ['en' => 'Latest News', 'fr' => 'Dernières Actualités'],
@@ -122,11 +117,9 @@ class SettingsSeeder extends Seeder
             ],
             [
                 'key' => 'news_description',
-                'value' => ['en' => 'Keep up with the latest happenings at our school.', 'fr' => 'Restez au courant des derniers événements de notre école.'],
+                'value' => ['en' => 'Follow our latest updates and activities.', 'fr' => 'Suivez nos dernières mises à jour et activités.'],
                 'type' => 'textarea',
             ],
-
-            // Home - Events
             [
                 'key' => 'events_title',
                 'value' => ['en' => 'Upcoming Events', 'fr' => 'Événements à Venir'],
@@ -134,23 +127,19 @@ class SettingsSeeder extends Seeder
             ],
             [
                 'key' => 'events_description',
-                'value' => ['en' => 'Join us for these exciting events.', 'fr' => 'Rejoignez-nous pour ces événements passionnants.'],
+                'value' => ['en' => 'Don\'t miss our upcoming school events.', 'fr' => 'Ne manquez pas nos prochains événements scolaires.'],
                 'type' => 'textarea',
             ],
-
-            // Home - Stats
             [
                 'key' => 'stats_title',
-                'value' => ['en' => 'Our Achievements', 'fr' => 'Nos Réalisations'],
+                'value' => ['en' => 'Our Impact', 'fr' => 'Notre Impact'],
                 'type' => 'text',
             ],
             [
                 'key' => 'stats_description',
-                'value' => ['en' => 'We take pride in our numbers.', 'fr' => 'Nous sommes fiers de nos chiffres.'],
+                'value' => ['en' => 'Years of excellence in education.', 'fr' => 'Des années d\'excellence dans l\'éducation.'],
                 'type' => 'textarea',
             ],
-
-            // Home - Partners
             [
                 'key' => 'partners_title',
                 'value' => ['en' => 'Our Partners', 'fr' => 'Nos Partenaires'],
@@ -158,32 +147,25 @@ class SettingsSeeder extends Seeder
             ],
             [
                 'key' => 'partners_description',
-                'value' => ['en' => 'Collaborating for a better future.', 'fr' => 'Collaborer pour un avenir meilleur.'],
+                'value' => ['en' => 'Working together for success.', 'fr' => 'Travailler ensemble pour la réussite.'],
                 'type' => 'textarea',
             ],
+
 
             // About Page
             [
                 'key' => 'about_title',
                 'value' => [
-                    'en' => 'About Excellence Academy',
-                    'fr' => 'À Propos de l\'Académie Excellence'
+                    'en' => 'History & Values',
+                    'fr' => 'Historique & Valeurs'
                 ],
                 'type' => 'text',
             ],
             [
                 'key' => 'about_content',
                 'value' => [
-                    'en' => 'Founded with a vision of excellence, our school has been a pillar of the community for years. We believe in a holistic approach to education, balancing academic rigor with character development.
-
-Our mission is to provide a nurturing environment where every student can discover their unique talents and develop the skills needed to thrive in an ever-changing world. We are committed to fostering critical thinking, creativity, and a lifelong love of learning.
-
-With state-of-the-art facilities, dedicated teachers, and a diverse community of learners, we prepare our students not just for academic success, but for meaningful lives as engaged global citizens.',
-                    'fr' => 'Fondée avec une vision d\'excellence, notre école est un pilier de la communauté depuis des années. Nous croyons en une approche holistique de l\'éducation, équilibrant rigueur académique et développement du caractère.
-
-Notre mission est de fournir un environnement bienveillant où chaque élève peut découvrir ses talents uniques et développer les compétences nécessaires pour s\'épanouir dans un monde en constante évolution. Nous nous engageons à favoriser la pensée critique, la créativité et l\'amour de l\'apprentissage tout au long de la vie.
-
-Avec des installations de pointe, des enseignants dévoués et une communauté diversifiée d\'apprenants, nous préparons nos élèves non seulement à la réussite scolaire, mais aussi à des vies significatives en tant que citoyens du monde engagés.'
+                    'en' => "Founded with the aim of offering quality education, our school was born from the desire to train competent, responsible, and open-minded students. Since its creation, the establishment has been committed to accompanying children at every stage of their school journey, focusing on academic rigor, discipline, and human values. Over the years, our school has earned the trust of parents thanks to satisfactory results and serious pedagogical supervision.\n\nOur Mission:\nOur mission is to ensure a solid academic training compliant with official programs, foster the intellectual, moral, and social fulfillment of each student, develop autonomy, creativity, and a sense of responsibility, and offer a healthy, secure, and disciplined learning environment.\n\nOur Vision:\nWe aspire to be a reference school in training responsible citizens, an establishment recognized for the excellence of its teaching, and an educational framework that prepares students for tomorrow's school, social, and professional challenges. Our vision is to train learners capable of succeeding locally and internationally.\n\nOur Values:\nOur educational action is based on fundamental values: Discipline, Respect, Work well done, Responsibility, Solidarity, Excellence, Integrity. These values guide the behavior of students, teachers, and the entire educational community.",
+                    'fr' => "Historique\nFondée dans le but d’offrir une éducation de qualité, notre école est née de la volonté de former des élèves compétents, responsables et ouverts sur le monde.\nDepuis sa création, l’établissement s’est engagé à accompagner les enfants à chaque étape de leur parcours scolaire, en mettant l’accent sur la rigueur académique, la discipline et les valeurs humaines.\nAu fil des années, notre école a su gagner la confiance des parents grâce à des résultats satisfaisants et un encadrement pédagogique sérieux.\n\nNotre Mission\nNotre mission est de :\nAssurer une formation académique solide conforme aux programmes officiels\nFavoriser l’épanouissement intellectuel, moral et social de chaque élève\nDévelopper l’autonomie, la créativité et le sens des responsabilités\nOffrir un cadre d’apprentissage sain, sécurisé et discipliné\n\nNotre Vision\nNous aspirons à être :\nUne école de référence dans la formation de citoyens responsables\nUn établissement reconnu pour l’excellence de son enseignement\nUn cadre éducatif qui prépare les élèves aux défis scolaires, sociaux et professionnels de demain\nNotre vision est de former des apprenants capables de réussir localement et internationalement.\n\n🤝 Nos Valeurs\nNotre action éducative repose sur des valeurs fondamentales :\nDiscipline\nRespect\nTravail bien fait\nResponsabilité\nSolidarité\nExcellence\nIntégrité\nCes valeurs guident le comportement des élèves, des enseignants et de toute la communauté éducative."
                 ],
                 'type' => 'textarea',
             ],
@@ -198,7 +180,7 @@ Avec des installations de pointe, des enseignants dévoués et une communauté d
         ];
 
         foreach ($settings as $setting) {
-            Setting::firstOrCreate(['key' => $setting['key']], $setting);
+            Setting::updateOrCreate(['key' => $setting['key']], $setting);
         }
     }
 }
