@@ -23,10 +23,7 @@ class EventSeeder extends Seeder
                 'fr' => 'Rejoignez-nous pour notre journée portes ouvertes annuelle pour rencontrer les enseignants et visiter nos installations.',
             ],
             'image' => '/images/gslj/events/event1.jpg',
-            'start_date' => Carbon::now()->addDays(10),
-            'end_date' => Carbon::now()->addDays(10)->addHours(4),
-            'location' => 'School Campus / Campus Scolaire',
-            'organizer' => 'Administration',
+
             'is_published' => true,
         ]);
 
@@ -42,10 +39,6 @@ class EventSeeder extends Seeder
                 'fr' => 'Célébration de la réussite de nos élèves avec des remises de prix et des spectacles.',
             ],
             'image' => '/images/gslj/events/event2.jpg',
-            'start_date' => Carbon::now()->addMonths(1),
-            'end_date' => Carbon::now()->addMonths(1)->addHours(3),
-            'location' => 'Main Hall / Hall Principal',
-            'organizer' => 'School Board',
             'is_published' => true,
         ]);
     }
