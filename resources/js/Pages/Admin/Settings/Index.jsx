@@ -220,7 +220,7 @@ export default function Index({ settings }) {
         {
             title: "Home: Hero Section",
             description: "The main top section of the home page.",
-            keys: ['hero_title', 'hero_description', 'hero_image_1', 'hero_image_2', 'hero_image_3']
+            keys: ['hero_title', 'hero_highlight', 'hero_location', 'hero_motto', 'hero_bottom_bar_text', 'hero_image_1', 'hero_image_2', 'hero_image_3']
         },
         {
             title: "Home: Director's Word",
@@ -235,7 +235,12 @@ export default function Index({ settings }) {
         {
             title: "Home: News Section",
             description: "Headings for the news area.",
-            keys: ['news_title', 'news_description']
+            keys: ['news_title', 'news_description', 'news_cta_text']
+        },
+        {
+            title: "Home: Why Choose Us",
+            description: "Content for the 'Pourquoi Choisir' section.",
+            keys: ['why_us_title', 'why_us_description', 'why_us_point_1', 'why_us_point_2', 'why_us_point_3', 'why_us_point_4', 'why_us_cta_text', 'why_us_floating_text']
         },
         {
             title: "Home: Events Section",
@@ -259,8 +264,8 @@ export default function Index({ settings }) {
         },
         {
             title: "Theme",
-            description: "Customize the website's appearance.",
-            keys: ['theme_color']
+            description: "Customize the website's appearance. These colors will override the default theme.",
+            keys: ['theme_color', 'theme_color_primary', 'theme_color_secondary', 'theme_color_accent']
         },
     ];
 

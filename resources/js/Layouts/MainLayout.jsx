@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 
+import { usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
@@ -23,10 +24,34 @@ export default function MainLayout({ children }) {
         document.addEventListener('click', handleClick);
         return () => document.removeEventListener('click', handleClick);
     }, []);
+    const { settings } = usePage().props;
+
+    // Helper to safely get nested setting values
+    const getSettingValue = (key, fallback) => {
+        if (!settings || !settings[key]) return fallback;
+        const val = settings[key].value;
+        // If it's an object (localized), return 'en' or first value, else return string
+        if (typeof val === 'object' && val !== null) {
+            return val.en || Object.values(val)[0] || fallback;
+        }
+        return val || fallback;
+    };
+
+    const primaryColor = getSettingValue('theme_color_primary', '#8A2BE2');
+    const secondaryColor = getSettingValue('theme_color_secondary', '#DC2626');
+    const accentColor = getSettingValue('theme_color_accent', '#2563EB');
+
     return (
-        <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-neutral-50">
+        <div
+            className="min-h-screen flex flex-col font-sans text-gray-900 bg-neutral-50"
+            style={{
+                '--color-primary': primaryColor,
+                '--color-secondary': secondaryColor,
+                '--color-accent': accentColor,
+            }}
+        >
             <Header />
-            <main className="flex-grow">
+            <main className="grow">
                 {children}
             </main>
             <Footer />

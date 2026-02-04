@@ -14,8 +14,8 @@ export default function About() {
         return content[locale] || content['en'] || Object.values(content)[0] || fallback;
     };
 
-    const title = getLocalized(settings?.about_title, 'Une Tradition d\'Excellence');
-    const content = getLocalized(settings?.about_content, 'Depuis sa fondation, le Groupe Scolaire GSLJ s\'engage à offrir une éducation de qualité supérieure, formant des esprits critiques et des citoyens responsables.');
+    const title = getLocalized(settings?.about_title, 'À Propos de l\'Excellence Academy');
+    const content = getLocalized(settings?.about_content, 'Fondée avec une vision d\'excellence, notre école est un pilier de la communauté depuis de nombreuses années. Nous croyons en une approche holistique de l\'éducation, équilibrant la rigueur académique avec le développement du caractère. Notre mission est de fournir un environnement stimulant où chaque élève peut découvrir ses talents uniques et développer les compétences nécessaires pour s\'épanouir dans un monde en constante évolution. Nous nous engageons à favoriser la pensée critique, la créativité et l\'amour de l\'apprentissage tout au long de la vie. Avec des installations de pointe, des enseignants dévoués et une communauté diversifiée d\'apprenants, nous préparons nos élèves non seulement à la réussite académique, mais aussi à des vies significatives en tant que citoyens du monde engagés.');
     const image = getLocalized(settings?.about_image, 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
 
     return (

@@ -9,309 +9,170 @@ class TeamMemberSeeder extends Seeder
 {
     public function run()
     {
+        // Truncate existing records to remove old data
+        TeamMember::query()->delete();
+
         $teamMembers = [
             [
                 'name' => [
-                    'en' => 'Dr. Amadou Diop',
-                    'fr' => 'Dr. Amadou Diop'
+                    'en' => 'Papa Malang SANÉ',
+                    'fr' => 'Papa Malang SANÉ'
                 ],
-                'slug' => 'dr-amadou-diop',
+                'slug' => 'papa-malang-sane',
                 'position' => [
-                    'en' => 'School Principal',
-                    'fr' => 'Directeur de l\'École'
+                    'en' => 'Director and Accounting Manager',
+                    'fr' => 'Directeur et Gestionnaire de la comptabilité'
                 ],
                 'department' => 'administration',
                 'bio' => [
-                    'en' => 'Experienced educator with over 15 years in educational leadership, dedicated to academic excellence and student success.',
-                    'fr' => 'Éducateur expérimenté avec plus de 15 ans dans le leadership éducatif, dédié à l\'excellence académique et au succès des élèves.'
+                    'en' => 'Ensures the smooth running of the school through effective coordination. Manages student payments with rigor and transparency, contributing to financial stability. Promotes cohesion and a healthy professional climate among colleagues. His leadership contributes to excellent exam results.',
+                    'fr' => 'M. SANÉ veille à la bonne marche de l\'établissement à travers une coordination efficace de ses collaborateurs. Il assure avec rigueur et transparence la gestion des paiements des élèves, contribuant ainsi à la stabilité administrative et financière de l\'école. Attaché aux valeurs de cohésion, d’entente entre collègues et de rigueur dans le travail, il encourage un climat professionnel sain et motivant. Son leadership et son sens de l’organisation favorisent l’atteinte d’excellents résultats aux examens.'
                 ],
-                'email' => 'principal@gslj.sn',
+                'email' => 'direction@gslj.sn',
                 'phone' => '+221330000001',
                 'qualifications' => [
                     'en' => [
-                        'PhD in Educational Leadership',
-                        'Masters in Curriculum Development',
-                        'Bachelor of Education',
-                        'Certified School Administrator'
+                        'Licence in English (UCAD)',
+                        'Licence in Accounting and Management (ESP)'
                     ],
                     'fr' => [
-                        'Doctorat en Leadership Éducatif',
-                        'Master en Développement de Programme',
-                        'Licence en Éducation',
-                        'Administrateur Scolaire Certifié'
+                        'Licence en Anglais (UCAD)',
+                        'Licence en Comptabilité et Gestion (ESP)'
                     ]
                 ],
                 'specialties' => [
-                    'en' => ['Educational Leadership', 'Curriculum Development', 'School Management'],
-                    'fr' => ['Leadership Éducatif', 'Développement de Programme', 'Gestion Scolaire']
+                    'en' => ['School Administration', 'Accounting', 'Management'],
+                    'fr' => ['Administration Scolaire', 'Comptabilité', 'Gestion']
                 ],
                 'order' => 1,
                 'is_active' => true
             ],
             [
                 'name' => [
-                    'en' => 'Fatou Ndiaye',
-                    'fr' => 'Fatou Ndiaye'
+                    'en' => 'Waly FAYE',
+                    'fr' => 'Waly FAYE'
                 ],
-                'slug' => 'fatou-ndiaye',
+                'slug' => 'waly-faye',
                 'position' => [
-                    'en' => 'Deputy Principal',
-                    'fr' => 'Adjointe du Directeur'
+                    'en' => 'Head of Elementary Cycle & CM2 Teacher',
+                    'fr' => 'Responsable du cycle élémentaire et enseignant de la classe de CM2'
                 ],
-                'department' => 'administration',
+                'department' => 'teaching',
                 'bio' => [
-                    'en' => 'Passionate administrator with expertise in student affairs and academic planning, focusing on holistic student development.',
-                    'fr' => 'Administratrice passionnée avec expertise en affaires étudiantes et en planification académique, axée sur le développement holistique des élèves.'
+                    'en' => 'Plays a decisive role in the pedagogical supervision of students and teachers. Has been congratulated by the IEF of Keur Massar for excellent results at the CFEE exams. He is invested in monitoring learning and the general functioning of the elementary cycle. Described as a pillar of the school\'s success due to his leadership and dedication.',
+                    'fr' => 'Très engagé et toujours disponible, il joue un rôle déterminant dans l’encadrement pédagogique des élèves et l’accompagnement des enseignants du cycle élémentaire. Son implication constante a largement contribué aux excellents résultats obtenus au CFEE, résultats pour lesquels il a été à plusieurs reprises félicité par l’IEF de Keur Massar. Veillant rigoureusement à la bonne marche du cycle élémentaire, il s’investit pleinement dans le suivi des apprentissages et le bon fonctionnement général du cycle.'
                 ],
-                'email' => 'deputy@gslj.sn',
+                'email' => 'elementaire@gslj.sn',
                 'phone' => '+221330000002',
                 'qualifications' => [
                     'en' => [
-                        'Master in Educational Administration',
-                        'Bachelor of Science in Education',
-                        'Certified Teacher',
-                        'Leadership Development Certificate'
+                        'CAP (Certificat d\'Aptitude Pédagogique)'
                     ],
                     'fr' => [
-                        'Master en Administration Éducative',
-                        'Licence en Sciences de l\'Éducation',
-                        'Professeur Certifié',
-                        'Certificat en Développement du Leadership'
+                        'CAP (Certificat d’Aptitude Pédagogique)'
                     ]
                 ],
                 'specialties' => [
-                    'en' => ['Student Affairs', 'Academic Planning', 'Educational Policy'],
-                    'fr' => ['Affaires Étudiantes', 'Planification Académique', 'Politique Éducative']
+                    'en' => ['Elementary Education', 'Pedagogical Supervision'],
+                    'fr' => ['Éducation Élémentaire', 'Encadrement Pédagogique']
                 ],
                 'order' => 2,
                 'is_active' => true
             ],
             [
                 'name' => [
-                    'en' => 'Mamadou Diallo',
-                    'fr' => 'Mamadou Diallo'
+                    'en' => 'Monsieur Diarra',
+                    'fr' => 'Monsieur Diarra'
                 ],
-                'slug' => 'mamadou-diallo',
+                'slug' => 'monsieur-diarra',
                 'position' => [
-                    'en' => 'Head of Preschool Department',
-                    'fr' => 'Chef du Département Préscolaire'
+                    'en' => 'General Supervisor & Physics-Chemistry Professor',
+                    'fr' => 'Surveillant général et Professeur de Physique-Chimie'
                 ],
                 'department' => 'teaching',
                 'bio' => [
-                    'en' => 'Specialized early childhood educator with extensive experience in play-based learning and child development.',
-                    'fr' => 'Éducateur spécialisé de la petite enfance avec une vaste expérience dans l\'apprentissage par le jeu et le développement de l\'enfant.'
+                    'en' => 'Recognized for his rigor, discipline, and commitment to work. Actively participates in the preparation of BFEM candidates, achieving satisfactory and constant results. His professionalism is a major asset for the quality of teaching.',
+                    'fr' => 'M. Diarra est reconnu pour sa grande rigueur, son sens élevé de la discipline et son attachement au travail bien fait. Très engagé dans l’accompagnement pédagogique des élèves, il participe activement à la préparation et à la réussite des candidats au BFEM, avec des résultats satisfaisants et constants. Son professionnalisme et son sérieux constituent un atout majeur pour la qualité de l’enseignement.'
                 ],
-                'email' => 'preschool-head@gslj.sn',
+                'email' => 'surveillant@gslj.sn',
                 'phone' => '+221330000003',
                 'qualifications' => [
                     'en' => [
-                        'Master in Early Childhood Education',
-                        'Bachelor of Education',
-                        'Child Development Specialist Certification',
-                        'Play Therapy Training'
+                        'Master 1 in Physical Sciences Education (UCAD)'
                     ],
                     'fr' => [
-                        'Master en Éducation de la Petite Enfance',
-                        'Licence en Éducation',
-                        'Certificat de Spécialiste en Développement de l\'Enfant',
-                        'Formation en Thérapie par le Jeu'
+                        'Master 1 en enseignement des Sciences Physiques (UCAD)'
                     ]
                 ],
                 'specialties' => [
-                    'en' => ['Early Childhood Development', 'Play-Based Learning', 'Child Psychology'],
-                    'fr' => ['Développement de la Petite Enfance', 'Apprentissage par le Jeu', 'Psychologie de l\'Enfant']
+                    'en' => ['Physics', 'Chemistry', 'Discipline Management'],
+                    'fr' => ['Physique', 'Chimie', 'Gestion de la Discipline']
                 ],
                 'order' => 3,
                 'is_active' => true
             ],
             [
                 'name' => [
-                    'en' => 'Aminata Fall',
-                    'fr' => 'Aminata Fall'
+                    'en' => 'Mme PREIRA (Anna Basse)',
+                    'fr' => 'Mme PREIRA (Anna Basse)'
                 ],
-                'slug' => 'aminata-fall',
+                'slug' => 'mme-preira-anna-basse',
                 'position' => [
-                    'en' => 'Head of Elementary Department',
-                    'fr' => 'Chef du Département Élémentaire'
+                    'en' => 'CI Teacher',
+                    'fr' => 'Enseignante de la classe de CI'
                 ],
                 'department' => 'teaching',
                 'bio' => [
-                    'en' => 'Experienced elementary educator specializing in foundational literacy and numeracy, passionate about nurturing young learners.',
-                    'fr' => 'Éducatrice primaire expérimentée spécialisée dans la lecture et les mathématiques de base, passionnée par l\'éducation des jeunes apprenants.'
+                    'en' => 'Dedicated to the education of toddlers, guiding them into reading and writing. Described as punctual, devoted, professional, and gentle. Creates a reassuring and stimulating climate that fosters curiosity and a love for school.',
+                    'fr' => 'Depuis de nombreuses années, elle se consacre avec passion à l’éducation des tout-petits, les accompagnant patiemment dans leurs premiers pas vers la lecture et l’écriture. Ponctuelle, dévouée et très professionnelle, Mme Pereira fait preuve d’une grande douceur et d’un sens pédagogique remarquable. Elle sait instaurer un climat rassurant et stimulant, favorisant l’éveil, la curiosité et l’amour de l’école chez ses élèves.'
                 ],
-                'email' => 'elementary-head@gslj.sn',
+                'email' => 'ci@gslj.sn',
                 'phone' => '+221330000004',
                 'qualifications' => [
                     'en' => [
-                        'Master in Elementary Education',
-                        'Bachelor of Arts in Education',
-                        'Certified Elementary Teacher',
-                        'Reading Specialist Certificate'
+                        'CEAP (Certificat Élémentaire d\'Aptitude Pédagogique)'
                     ],
                     'fr' => [
-                        'Master en Éducation Élémentaire',
-                        'Licence en Arts Éducatifs',
-                        'Professeur Élémentaire Certifié',
-                        'Certificat de Spécialiste en Lecture'
+                        'CEAP (Certificat Élémentaire d’Aptitude Pédagogique)'
                     ]
                 ],
                 'specialties' => [
-                    'en' => ['Elementary Education', 'Literacy Development', 'Mathematics Instruction'],
-                    'fr' => ['Éducation Élémentaire', 'Développement de la Lecture', 'Instruction en Mathématiques']
+                    'en' => ['Early Childhood Education', 'Reading and Writing Initiation'],
+                    'fr' => ['Éducation de la Petite Enfance', 'Initiation à la Lecture et l\'Écriture']
                 ],
                 'order' => 4,
                 'is_active' => true
             ],
             [
                 'name' => [
-                    'en' => 'Cheikh Sow',
-                    'fr' => 'Cheikh Sow'
+                    'en' => 'Seynabou Sarr',
+                    'fr' => 'Seynabou Sarr'
                 ],
-                'slug' => 'cheikh-sow',
+                'slug' => 'seynabou-sarr',
                 'position' => [
-                    'en' => 'Head of Middle School Department',
-                    'fr' => 'Chef du Département du Collège'
+                    'en' => 'Head of Preschool & Grande Section Teacher',
+                    'fr' => 'Responsable du préscolaire et maîtresse de la Grande Section'
                 ],
                 'department' => 'teaching',
                 'bio' => [
-                    'en' => 'Middle school specialist with expertise in adolescent development and transition management between elementary and secondary education.',
-                    'fr' => 'Spécialiste du collège avec expertise en développement des adolescents et gestion de la transition entre l\'école élémentaire et le lycée.'
+                    'en' => 'An experienced and serious teacher committed to the awakening and supervision of toddlers. Ensures the smooth running of preschool learning with rigor and benevolence. Contributes to building a solid foundation for the students\' future schooling.',
+                    'fr' => 'Enseignante expérimentée, sérieuse et engagée, Madame Sarr met son savoir-faire pédagogique au service de l’éveil, de l’encadrement et de la réussite des tout-petits. Elle veille avec rigueur et bienveillance au bon déroulement des apprentissages au préscolaire, contribuant ainsi à une base solide pour la scolarité des élèves.'
                 ],
-                'email' => 'middle-head@gslj.sn',
+                'email' => 'prescolaire@gslj.sn',
                 'phone' => '+221330000005',
                 'qualifications' => [
                     'en' => [
-                        'Master in Middle Grades Education',
-                        'Bachelor of Science in Education',
-                        'Adolescent Development Certificate',
-                        'Transition Planning Specialist'
+                        'Holder of a CAP'
                     ],
                     'fr' => [
-                        'Master en Éducation des Cycles Moyens',
-                        'Licence en Sciences de l\'Éducation',
-                        'Certificat en Développement des Adolescents',
-                        'Spécialiste en Planification de Transition'
+                        'Titulaire du CAP'
                     ]
                 ],
                 'specialties' => [
-                    'en' => ['Middle School Education', 'Adolescent Development', 'Transition Management'],
-                    'fr' => ['Éducation du Collège', 'Développement des Adolescents', 'Gestion de Transition']
+                    'en' => ['Preschool Education', 'Child Development'],
+                    'fr' => ['Éducation Préscolaire', 'Développement de l\'Enfant']
                 ],
                 'order' => 5,
-                'is_active' => true
-            ],
-            [
-                'name' => [
-                    'en' => 'Mariama Gueye',
-                    'fr' => 'Mariama Gueye'
-                ],
-                'slug' => 'mariama-gueye',
-                'position' => [
-                    'en' => 'Head of High School Department',
-                    'fr' => 'Chef du Département du Lycée'
-                ],
-                'department' => 'teaching',
-                'bio' => [
-                    'en' => 'High school expert focused on college preparation and career readiness, with extensive experience in AP courses and university counseling.',
-                    'fr' => 'Expert du lycée axé sur la préparation universitaire et l\'orientation professionnelle, avec une vaste expérience dans les cours AP et l\'orientation universitaire.'
-                ],
-                'email' => 'highschool-head@gslj.sn',
-                'phone' => '+221330000006',
-                'qualifications' => [
-                    'en' => [
-                        'Master in Secondary Education',
-                        'Bachelor of Arts in Education',
-                        'University Counseling Certificate',
-                        'Advanced Placement Teacher Training'
-                    ],
-                    'fr' => [
-                        'Master en Éducation Secondaire',
-                        'Licence en Arts Éducatifs',
-                        'Certificat en Orientation Universitaire',
-                        'Formation des Professeurs des Cours Avancés'
-                    ]
-                ],
-                'specialties' => [
-                    'en' => ['Secondary Education', 'College Preparation', 'Career Guidance'],
-                    'fr' => ['Éducation Secondaire', 'Préparation Universitaire', 'Orientation Professionnelle']
-                ],
-                'order' => 6,
-                'is_active' => true
-            ],
-            [
-                'name' => [
-                    'en' => 'Abdoulaye Mbengue',
-                    'fr' => 'Abdoulaye Mbengue'
-                ],
-                'slug' => 'abdoulaye-mbengue',
-                'position' => [
-                    'en' => 'Transportation Coordinator',
-                    'fr' => 'Coordinateur du Transport'
-                ],
-                'department' => 'support',
-                'bio' => [
-                    'en' => 'Transportation specialist ensuring safe and efficient student transportation with focus on security and punctuality.',
-                    'fr' => 'Spécialiste du transport assurant un transport d\'élèves sûr et efficace avec un accent sur la sécurité et la ponctualité.'
-                ],
-                'email' => 'transport-coordinator@gslj.sn',
-                'phone' => '+221330000007',
-                'qualifications' => [
-                    'en' => [
-                        'Bachelor in Logistics Management',
-                        'Commercial Driver License',
-                        'Safety Management Certificate',
-                        'Transportation Security Training'
-                    ],
-                    'fr' => [
-                        'Licence en Gestion Logistique',
-                        'Permis de Conduire Commercial',
-                        'Certificat en Gestion de la Sécurité',
-                        'Formation en Sécurité du Transport'
-                    ]
-                ],
-                'specialties' => [
-                    'en' => ['Student Transportation', 'Safety Management', 'Logistics Coordination'],
-                    'fr' => ['Transport des Élèves', 'Gestion de la Sécurité', 'Coordination Logistique']
-                ],
-                'order' => 7,
-                'is_active' => true
-            ],
-            [
-                'name' => [
-                    'en' => 'Khady Diallo',
-                    'fr' => 'Khady Diallo'
-                ],
-                'slug' => 'khady-diallo',
-                'position' => [
-                    'en' => 'Catering Manager',
-                    'fr' => 'Gestionnaire de la Restauration'
-                ],
-                'department' => 'support',
-                'bio' => [
-                    'en' => 'Nutrition and catering expert dedicated to providing healthy and nutritious meals for students with diverse dietary needs.',
-                    'fr' => 'Expert en nutrition et restauration dédié à la fourniture de repas sains et nutritifs pour les élèves avec divers besoins diététiques.'
-                ],
-                'email' => 'catering-manager@gslj.sn',
-                'phone' => '+221330000008',
-                'qualifications' => [
-                    'en' => [
-                        'Degree in Nutrition Science',
-                        'Food Safety and Hygiene Certificate',
-                        'Catering Management Diploma',
-                        'Dietary Planning Certification'
-                    ],
-                    'fr' => [
-                        'Diplôme en Sciences de la Nutrition',
-                        'Certificat en Sécurité et Hygiène Alimentaires',
-                        'Diplôme en Gestion de la Restauration',
-                        'Certification en Planification Diététique'
-                    ]
-                ],
-                'specialties' => [
-                    'en' => ['Nutrition Planning', 'Food Safety', 'Dietary Management'],
-                    'fr' => ['Planification Nutritionnelle', 'Sécurité Alimentaire', 'Gestion Diététique']
-                ],
-                'order' => 8,
                 'is_active' => true
             ]
         ];

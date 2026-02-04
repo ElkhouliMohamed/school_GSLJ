@@ -13,11 +13,11 @@ class ProgramController extends Controller
         $preschoolProgram = Program::where('level', 'preschool')
             ->where('is_active', true)
             ->first();
-            
+
         if ($preschoolProgram) {
             return redirect()->route('programs.show', $preschoolProgram->slug);
         }
-        
+
         // Fallback: show all programs if no preschool program exists
         $programs = Program::where('is_active', true)
             ->orderBy('order')
@@ -34,8 +34,15 @@ class ProgramController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
+        // Get team members for this program level
+        $teamMembers = \App\Models\TeamMember::where('is_active', true)
+            ->where('department', $program->level)
+            ->orderBy('order')
+            ->get();
+
         return Inertia::render('Programs/Show', [
             'program' => $program,
+            'teamMembers' => $teamMembers,
         ]);
     }
 }

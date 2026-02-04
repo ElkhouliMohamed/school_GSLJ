@@ -10,5 +10,12 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-violet-600: #4D2FB2;
+    --color-primary: #8A2BE2;
+    /* Mauve/Violet */
+    --color-secondary: #DC2626;
+    /* Red */
+    --color-accent: #2563EB;
+    /* Blue */
+    --color-violet-600: #8A2BE2;
+    /* Backwards compatibility */
 }
