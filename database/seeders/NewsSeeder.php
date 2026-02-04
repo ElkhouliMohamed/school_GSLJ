@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Post;
-use App\Models\User;
+
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -12,15 +12,6 @@ class NewsSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::first();
-        if (!$admin) {
-            $admin = User::factory()->create([
-                'name' => 'Admin User',
-                'email' => 'admin@example.com',
-                'password' => bcrypt('password'),
-            ]);
-        }
-
         Post::create([
             'type' => 'news',
             'title' => [
@@ -34,7 +25,6 @@ class NewsSeeder extends Seeder
             ],
             'image' => '/images/gslj/news/news1.jpg',
             'published_at' => Carbon::now()->subDays(2),
-            'author_id' => $admin->id,
             'is_published' => true,
         ]);
 
@@ -51,7 +41,6 @@ class NewsSeeder extends Seeder
             ],
             'image' => '/images/gslj/news/news2.jpg',
             'published_at' => Carbon::now()->subDays(5),
-            'author_id' => $admin->id,
             'is_published' => true,
         ]);
     }
