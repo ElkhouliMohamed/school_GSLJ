@@ -9,7 +9,7 @@ export default function SchoolDescription() {
                         Le Groupe Scolaire Les Jumelles (GSLJ)
                     </h2>
                     <div className="mt-8 text-lg leading-8 text-gray-600 space-y-4">
-                        <p className="font-semibold text-xl text-violet-700">
+                        <p className="font-semibold text-xl text-primary">
                             Bienvenue au Groupe Scolaire Privé Bilingue Les Jumelles
                         </p>
                         <p>
@@ -25,9 +25,9 @@ export default function SchoolDescription() {
                 </div>
 
                 <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-                    <article className="flex flex-col items-start justify-between bg-blue-50 p-8 rounded-2xl">
+                    <article className="flex flex-col items-start justify-between bg-violet-50 p-8 rounded-2xl">
                         <div className="group relative">
-                            <h3 className="mt-3 text-lg font-semibold leading-6 text-blue-900 group-hover:text-gray-600">
+                            <h3 className="mt-3 text-lg font-semibold leading-6 text-violet-900 group-hover:text-primary">
                                 Collège
                             </h3>
                             <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
@@ -35,9 +35,9 @@ export default function SchoolDescription() {
                             </p>
                         </div>
                     </article>
-                    <article className="flex flex-col items-start justify-between bg-blue-50 p-8 rounded-2xl">
+                    <article className="flex flex-col items-start justify-between bg-violet-50 p-8 rounded-2xl">
                         <div className="group relative">
-                            <h3 className="mt-3 text-lg font-semibold leading-6 text-blue-900 group-hover:text-gray-600">
+                            <h3 className="mt-3 text-lg font-semibold leading-6 text-violet-900 group-hover:text-primary">
                                 Lycée
                             </h3>
                             <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">

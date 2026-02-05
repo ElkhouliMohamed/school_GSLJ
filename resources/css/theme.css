@@ -78,6 +78,10 @@
     color: rgba(var(--theme-color-rgb), 0.95) !important;
 }
 
+.text-violet-900 {
+    color: rgba(var(--theme-color-rgb), 0.98) !important;
+}
+
 /* Hover Text Colors */
 .hover\:text-violet-400:hover {
     color: rgba(var(--theme-color-rgb), 0.7) !important;
@@ -142,4 +146,111 @@
 /* Shadow Colors */
 .shadow-violet-500\/20 {
     --tw-shadow-color: rgba(var(--theme-color-rgb), 0.2) !important;
+}
+
+/* ============================================ */
+/* PRIMARY COLOR OVERRIDES (Maps to theme color) */
+/* ============================================ */
+
+/* Background Colors - Primary */
+.bg-primary {
+    background-color: var(--theme-color) !important;
+}
+
+.bg-primary\/90 {
+    background-color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+.bg-primary\/10 {
+    background-color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+.bg-primary\/5 {
+    background-color: rgba(var(--theme-color-rgb), 0.05) !important;
+}
+
+/* Hover Background Colors - Primary */
+.hover\:bg-primary:hover {
+    background-color: var(--theme-color) !important;
+}
+
+/* Text Colors - Primary */
+.text-primary {
+    color: var(--theme-color) !important;
+}
+
+/* Hover Text Colors - Primary */
+.hover\:text-primary:hover {
+    color: var(--theme-color) !important;
+}
+
+.group:hover .group-hover\:text-primary {
+    color: var(--theme-color) !important;
+}
+
+/* Border Colors - Primary */
+.border-primary {
+    border-color: var(--theme-color) !important;
+}
+
+/* Gradient Colors - Primary */
+.from-primary {
+    --tw-gradient-from: var(--theme-color) !important;
+}
+
+.to-primary {
+    --tw-gradient-to: var(--theme-color) !important;
+}
+
+/* ============================================ */
+/* SECONDARY COLOR OVERRIDES */
+/* ============================================ */
+/* Updated to use theme color for better consistency */
+
+.bg-secondary {
+    background-color: var(--theme-color) !important;
+}
+
+.bg-secondary\/90 {
+    background-color: rgba(var(--theme-color-rgb), 0.9) !important;
+}
+
+.bg-secondary\/10 {
+    background-color: rgba(var(--theme-color-rgb), 0.1) !important;
+}
+
+.bg-secondary\/80 {
+    background-color: rgba(var(--theme-color-rgb), 0.8) !important;
+}
+
+.text-secondary {
+    color: var(--theme-color) !important;
+}
+
+.hover\:bg-secondary:hover {
+    background-color: var(--theme-color) !important;
+}
+
+.hover\:bg-secondary\/80:hover {
+    background-color: rgba(var(--theme-color-rgb), 0.8) !important;
+}
+
+.from-secondary {
+    --tw-gradient-from: var(--theme-color) !important;
+}
+
+.to-secondary {
+    --tw-gradient-to: var(--theme-color) !important;
+}
+
+/* ============================================ */
+/* ACCENT COLOR OVERRIDES */
+/* ============================================ */
+
+.bg-accent {
+    background-color: #2563EB !important;
+}
+
+.text-accent {
+    color: #2563EB !important;
 }
