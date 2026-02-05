@@ -95,6 +95,60 @@ export default function Index({ settings }) {
                 theme_color_secondary: '#e0e7ff', // Indigo 100
                 theme_color_accent: '#6366f1',  // Indigo 500
             }
+        },
+        {
+            name: 'Sky Blue',
+            colors: {
+                theme_color: '#0ea5e9',         // Sky 500
+                theme_color_primary: '#0c4a6e', // Sky 900
+                theme_color_secondary: '#e0f2fe', // Sky 100
+                theme_color_accent: '#38bdf8',  // Sky 400
+            }
+        },
+        {
+            name: 'Hot Pink',
+            colors: {
+                theme_color: '#db2777',         // Pink 600
+                theme_color_primary: '#831843', // Pink 900
+                theme_color_secondary: '#fce7f3', // Pink 100
+                theme_color_accent: '#ec4899',  // Pink 500
+            }
+        },
+        {
+            name: 'Lime Zest',
+            colors: {
+                theme_color: '#65a30d',         // Lime 600
+                theme_color_primary: '#365314', // Lime 900
+                theme_color_secondary: '#ecfccb', // Lime 100
+                theme_color_accent: '#84cc16',  // Lime 500
+            }
+        },
+        {
+            name: 'Fuchsia Fun',
+            colors: {
+                theme_color: '#c026d3',         // Fuchsia 600
+                theme_color_primary: '#701a75', // Fuchsia 900
+                theme_color_secondary: '#fae8ff', // Fuchsia 100
+                theme_color_accent: '#d946ef',  // Fuchsia 500
+            }
+        },
+        {
+            name: 'Cyan Future',
+            colors: {
+                theme_color: '#0891b2',         // Cyan 600
+                theme_color_primary: '#164e63', // Cyan 900
+                theme_color_secondary: '#cffafe', // Cyan 100
+                theme_color_accent: '#06b6d4',  // Cyan 500
+            }
+        },
+        {
+            name: 'Elegant Gray',
+            colors: {
+                theme_color: '#52525b',         // Zinc 600
+                theme_color_primary: '#18181b', // Zinc 900
+                theme_color_secondary: '#f4f4f5', // Zinc 100
+                theme_color_accent: '#71717a',  // Zinc 500
+            }
         }
     ];
 
@@ -491,27 +545,25 @@ export default function Index({ settings }) {
                                         {sections[activeTab].title === 'Theme' && (
                                             <div className="mb-8">
                                                 <label className="block text-sm font-medium text-gray-700 mb-4">Select a Theme Preset</label>
-                                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                                <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
                                                     {THEME_PRESETS.map((preset) => (
                                                         <button
                                                             key={preset.name}
                                                             type="button"
+                                                            title={preset.name}
                                                             onClick={() => applyThemePreset(preset)}
-                                                            className="group relative flex flex-col overflow-hidden rounded-xl border-2 border-transparent hover:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 bg-white shadow-sm hover:shadow-md transition-all duration-200"
+                                                            className="group relative flex items-center justify-center p-1 rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-violet-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 transition-all duration-200"
                                                         >
-                                                            <div className="flex h-12 w-full">
-                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color }}></div>
-                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color_secondary }}></div>
-                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color_primary }}></div>
-                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color_accent }}></div>
-                                                            </div>
-                                                            <div className="p-2 text-center">
-                                                                <span className="text-xs font-semibold text-gray-700 group-hover:text-violet-700">{preset.name}</span>
+                                                            <div className="h-12 w-12 rounded-full overflow-hidden shadow-sm relative">
+                                                                <div className="absolute top-0 left-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color }}></div>
+                                                                <div className="absolute top-0 right-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color_secondary }}></div>
+                                                                <div className="absolute bottom-0 left-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color_primary }}></div>
+                                                                <div className="absolute bottom-0 right-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color_accent }}></div>
                                                             </div>
 
-                                                            {/* Selected Indicator - Approximate check based on primary color */}
+                                                            {/* Selected Indicator */}
                                                             {data['theme_color'] === preset.colors.theme_color && (
-                                                                <div className="absolute top-1 right-1 h-4 w-4 rounded-full bg-white text-violet-600 flex items-center justify-center shadow-sm">
+                                                                <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-md ring-2 ring-white">
                                                                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                                                     </svg>
@@ -524,7 +576,7 @@ export default function Index({ settings }) {
                                                     <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
-                                                    <p>Selecting a preset above will automatically update all 4 color fields below. You can still manually tweak individual colors if needed.</p>
+                                                    <p>Hover to see theme names. Click to apply colors instantly to the form below.</p>
                                                 </div>
                                             </div>
                                         )}
