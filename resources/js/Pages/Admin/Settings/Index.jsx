@@ -4,6 +4,123 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { compressImage } from '@/Utils/imageCompression';
 
 export default function Index({ settings }) {
+
+    const THEME_PRESETS = [
+        {
+            name: 'Modern Violet',
+            colors: {
+                theme_color: '#7c3aed',         // Violet 600
+                theme_color_primary: '#5b21b6', // Violet 800
+                theme_color_secondary: '#ede9fe', // Violet 100
+                theme_color_accent: '#8b5cf6',  // Violet 500
+            }
+        },
+        {
+            name: 'Ocean Blue',
+            colors: {
+                theme_color: '#2563eb',         // Blue 600
+                theme_color_primary: '#1e3a8a', // Blue 900
+                theme_color_secondary: '#dbeafe', // Blue 100
+                theme_color_accent: '#3b82f6',  // Blue 500
+            }
+        },
+        {
+            name: 'Emerald City',
+            colors: {
+                theme_color: '#059669',         // Emerald 600
+                theme_color_primary: '#064e3b', // Emerald 900
+                theme_color_secondary: '#d1fae5', // Emerald 100
+                theme_color_accent: '#10b981',  // Emerald 500
+            }
+        },
+        {
+            name: 'Sunset Orange',
+            colors: {
+                theme_color: '#ea580c',         // Orange 600
+                theme_color_primary: '#7c2d12', // Orange 900
+                theme_color_secondary: '#ffedd5', // Orange 100
+                theme_color_accent: '#f97316',  // Orange 500
+            }
+        },
+        {
+            name: 'Royal Rose',
+            colors: {
+                theme_color: '#e11d48',         // Rose 600
+                theme_color_primary: '#881337', // Rose 900
+                theme_color_secondary: '#ffe4e6', // Rose 100
+                theme_color_accent: '#f43f5e',  // Rose 500
+            }
+        },
+        {
+            name: 'Midnight Slate',
+            colors: {
+                theme_color: '#475569',         // Slate 600
+                theme_color_primary: '#0f172a', // Slate 900
+                theme_color_secondary: '#f1f5f9', // Slate 100
+                theme_color_accent: '#64748b',  // Slate 500
+            }
+        },
+        {
+            name: 'Golden Amber',
+            colors: {
+                theme_color: '#d97706',         // Amber 600
+                theme_color_primary: '#78350f', // Amber 900
+                theme_color_secondary: '#fef3c7', // Amber 100
+                theme_color_accent: '#f59e0b',  // Amber 500
+            }
+        },
+        {
+            name: 'Teal Waters',
+            colors: {
+                theme_color: '#0d9488',         // Teal 600
+                theme_color_primary: '#134e4a', // Teal 900
+                theme_color_secondary: '#ccfbf1', // Teal 100
+                theme_color_accent: '#14b8a6',  // Teal 500
+            }
+        },
+        {
+            name: 'Crimson Red',
+            colors: {
+                theme_color: '#dc2626',         // Red 600
+                theme_color_primary: '#7f1d1d', // Red 900
+                theme_color_secondary: '#fee2e2', // Red 100
+                theme_color_accent: '#ef4444',  // Red 500
+            }
+        },
+        {
+            name: 'Indigo Night',
+            colors: {
+                theme_color: '#4f46e5',         // Indigo 600
+                theme_color_primary: '#312e81', // Indigo 900
+                theme_color_secondary: '#e0e7ff', // Indigo 100
+                theme_color_accent: '#6366f1',  // Indigo 500
+            }
+        }
+    ];
+
+    const applyThemePreset = (preset) => {
+        // We need to update multiple fields. 
+        // Since setData in Inertia/react acts like useState's setter but merged with the form object logic,
+        // we can probably call it multiple times or use the functional update if available, 
+        // BUT inertia useForm setData usually takes (key, value) OR (object).
+        // Let's check documentation or assumption. 
+        // Usually setData(previousData => ({ ...previousData, ...newValues })) works if it supports functional updates.
+        // If not, we might need to do setData({...data, ...preset.colors}).
+
+        // Let's assume standard object merge is safer:
+        // Actually, looking at lines 17-20: const { data, setData ... } = useForm(...)
+        // Inertia useForm `setData` can take an object to replace ALL data, or key/value.
+        // It does NOT typically support partial object merge to update subset of fields easily without replacing everything?
+        // Wait, standard Inertia useForm:
+        // setData(key, value)
+        // setData(data => ({ ...data, ...updates })) works!
+
+        setData(previousData => ({
+            ...previousData,
+            ...preset.colors
+        }));
+    };
+
     // Transform settings object into form data structure
     const initialData = {};
     Object.keys(settings).forEach(key => {
@@ -190,36 +307,7 @@ export default function Index({ settings }) {
 
                 {setting.type === 'color' && (
                     <div className="space-y-4">
-                        <label className="block text-xs font-medium text-gray-500">Preset Palettes</label>
-                        <div className="flex flex-wrap gap-3 mb-4">
-                            {[
-                                { name: 'Violet', hex: '#7c3aed' },
-                                { name: 'Blue', hex: '#2563eb' },
-                                { name: 'Sky', hex: '#0ea5e9' },
-                                { name: 'Teal', hex: '#0d9488' },
-                                { name: 'Rose', hex: '#e11d48' },
-                                { name: 'Amber', hex: '#d97706' },
-                                { name: 'Emerald', hex: '#059669' },
-                                { name: 'Slate', hex: '#475569' },
-                                { name: 'Midnight', hex: '#1e1b4b' },
-                            ].map((palette) => (
-                                <button
-                                    key={palette.hex}
-                                    type="button"
-                                    onClick={() => setData(setting.key, palette.hex)}
-                                    className={`
-                                        w-8 h-8 rounded-full border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500
-                                        ${(typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value)) === palette.hex
-                                            ? 'border-gray-900 scale-110 shadow-md ring-2 ring-violet-500 ring-offset-2'
-                                            : 'border-transparent hover:scale-110'
-                                        }
-                                    `}
-                                    style={{ backgroundColor: palette.hex }}
-                                    title={palette.name}
-                                />
-                            ))}
-                        </div>
-                        <div className="flex items-center gap-x-6 border-t border-gray-100 pt-4">
+                        <div className="flex items-center gap-x-6">
                             <div className="flex items-center gap-4">
                                 <input
                                     type="color"
@@ -317,7 +405,7 @@ export default function Index({ settings }) {
                     {/* Sidebar Navigation */}
                     <div className="md:col-span-1">
                         <div className="sticky top-6 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                            <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-violet-50 to-purple-50">
+                            <div className="px-4 py-3 border-b border-gray-200 bg-linear-to-r from-violet-50 to-purple-50">
                                 <h3 className="text-sm font-semibold text-gray-900">Settings Sections</h3>
                             </div>
                             <nav
@@ -400,6 +488,47 @@ export default function Index({ settings }) {
                                     </div>
 
                                     <div className="space-y-6">
+                                        {sections[activeTab].title === 'Theme' && (
+                                            <div className="mb-8">
+                                                <label className="block text-sm font-medium text-gray-700 mb-4">Select a Theme Preset</label>
+                                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                                    {THEME_PRESETS.map((preset) => (
+                                                        <button
+                                                            key={preset.name}
+                                                            type="button"
+                                                            onClick={() => applyThemePreset(preset)}
+                                                            className="group relative flex flex-col overflow-hidden rounded-xl border-2 border-transparent hover:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 bg-white shadow-sm hover:shadow-md transition-all duration-200"
+                                                        >
+                                                            <div className="flex h-12 w-full">
+                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color }}></div>
+                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color_secondary }}></div>
+                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color_primary }}></div>
+                                                                <div className="h-full w-1/4" style={{ backgroundColor: preset.colors.theme_color_accent }}></div>
+                                                            </div>
+                                                            <div className="p-2 text-center">
+                                                                <span className="text-xs font-semibold text-gray-700 group-hover:text-violet-700">{preset.name}</span>
+                                                            </div>
+
+                                                            {/* Selected Indicator - Approximate check based on primary color */}
+                                                            {data['theme_color'] === preset.colors.theme_color && (
+                                                                <div className="absolute top-1 right-1 h-4 w-4 rounded-full bg-white text-violet-600 flex items-center justify-center shadow-sm">
+                                                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                                    </svg>
+                                                                </div>
+                                                            )}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                                <div className="mt-6 flex items-center gap-2 text-sm text-gray-500 bg-blue-50 p-3 rounded-md border border-blue-100">
+                                                    <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                    <p>Selecting a preset above will automatically update all 4 color fields below. You can still manually tweak individual colors if needed.</p>
+                                                </div>
+                                            </div>
+                                        )}
+
                                         {sections[activeTab].keys.map(key => renderField(key))}
                                     </div>
                                 </div>
