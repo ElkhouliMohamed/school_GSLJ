@@ -459,7 +459,12 @@ export default function Index({ settings }) {
                     {/* Sidebar Navigation */}
                     <div className="md:col-span-1">
                         <div className="sticky top-6 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                            <div className="px-4 py-3 border-b border-gray-200 bg-linear-to-r from-violet-50 to-purple-50">
+                            <div
+                                className="px-4 py-3 border-b border-gray-200"
+                                style={{
+                                    background: `linear-gradient(to right, ${data.theme_color || '#fdf2f8'}, #ffffff)`
+                                }}
+                            >
                                 <h3 className="text-sm font-semibold text-gray-900">Settings Sections</h3>
                             </div>
                             <nav
@@ -474,11 +479,16 @@ export default function Index({ settings }) {
                                     <button
                                         key={section.title}
                                         onClick={() => setActiveTab(idx)}
+                                        style={activeTab === idx ? {
+                                            color: data.theme_color || '#7c3aed',
+                                            backgroundColor: '#f9fafb', // gray-50
+                                            borderLeft: `3px solid ${data.theme_color || '#7c3aed'}`,
+                                        } : {}}
                                         className={`
-                                        group flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200
+                                        group flex w-full items-center rounded-r-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 border-l-3 border-transparent
                                         ${activeTab === idx
-                                                ? 'bg-violet-600 text-white shadow-md shadow-violet-200'
-                                                : 'text-gray-700 hover:bg-violet-50 hover:text-violet-700'
+                                                ? 'bg-gray-50'
+                                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                             }
                                     `}
                                     >
@@ -488,12 +498,12 @@ export default function Index({ settings }) {
                             </nav>
                         </div>
 
-                        <div className="mt-4 px-3">
+                        <div className="p-3 border-t border-gray-200 bg-gray-50">
                             {wasSuccessful && (
-                                <div className="rounded-md bg-green-50 p-4 mb-4">
+                                <div className="rounded-md bg-green-50 p-3 mb-3 border border-green-200">
                                     <div className="flex">
-                                        <div className="ml-3">
-                                            <p className="text-sm font-medium text-green-800">Settings saved successfully.</p>
+                                        <div className="ml-2">
+                                            <p className="text-xs font-medium text-green-800">Settings saved successfully.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -502,24 +512,27 @@ export default function Index({ settings }) {
                             <button
                                 onClick={submit}
                                 disabled={processing || isCompressing}
-                                className="w-full rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:opacity-50"
+                                className="w-full rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:opacity-50 transition-all duration-200"
+                                style={{
+                                    backgroundColor: data.theme_color || '#7c3aed',
+                                }}
                             >
                                 {isCompressing ? 'Compressing Image...' : (processing ? 'Saving Changes...' : 'Save All Changes')}
                             </button>
 
-                            {/* Upload Progress Bar - Only valid if using useForm's logic, but useForm `progress` is for the overall form. 
-                                Actually, useForm from @inertiajs/react exposes a `progress` property which is an object { percentage } if uploading. 
-                            */}
                             {progress && (
-                                <div className="mt-4">
-                                    <div className="flex justify-between text-sm font-medium text-gray-900 mb-1">
+                                <div className="mt-3">
+                                    <div className="flex justify-between text-xs font-medium text-gray-900 mb-1">
                                         <span>Uploading...</span>
                                         <span>{progress.percentage}%</span>
                                     </div>
-                                    <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div className="w-full bg-gray-200 rounded-full h-1.5">
                                         <div
-                                            className="bg-violet-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
-                                            style={{ width: `${progress.percentage}%` }}
+                                            className="bg-violet-600 h-1.5 rounded-full transition-all duration-300 ease-in-out"
+                                            style={{
+                                                width: `${progress.percentage}%`,
+                                                backgroundColor: data.theme_color || '#7c3aed'
+                                            }}
                                         ></div>
                                     </div>
                                 </div>
@@ -545,29 +558,25 @@ export default function Index({ settings }) {
                                         {sections[activeTab].title === 'Theme' && (
                                             <div className="mb-8">
                                                 <label className="block text-sm font-medium text-gray-700 mb-4">Select a Theme Preset</label>
-                                                <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
+                                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                                                     {THEME_PRESETS.map((preset) => (
                                                         <button
                                                             key={preset.name}
                                                             type="button"
                                                             title={preset.name}
                                                             onClick={() => applyThemePreset(preset)}
-                                                            className="group relative flex items-center justify-center p-1 rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-violet-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 transition-all duration-200"
+                                                            className="group relative flex items-center justify-center p-0.5 rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200 bg-white shadow-sm hover:shadow-md h-12 w-20 sm:w-24 border border-gray-200 overflow-hidden"
                                                         >
-                                                            <div className="h-12 w-12 rounded-full overflow-hidden shadow-sm relative">
-                                                                <div className="absolute top-0 left-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color }}></div>
-                                                                <div className="absolute top-0 right-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color_secondary }}></div>
-                                                                <div className="absolute bottom-0 left-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color_primary }}></div>
-                                                                <div className="absolute bottom-0 right-0 w-1/2 h-1/2" style={{ backgroundColor: preset.colors.theme_color_accent }}></div>
+                                                            <div className="h-full w-full flex rounded-full overflow-hidden">
+                                                                {/* Pill Design: Vertical Stripes */}
+                                                                <div className="h-full w-1/3" style={{ backgroundColor: preset.colors.theme_color }}></div>
+                                                                <div className="h-full w-1/3" style={{ backgroundColor: preset.colors.theme_color_secondary }}></div>
+                                                                <div className="h-full w-1/3" style={{ backgroundColor: preset.colors.theme_color_primary }}></div>
                                                             </div>
 
                                                             {/* Selected Indicator */}
                                                             {data['theme_color'] === preset.colors.theme_color && (
-                                                                <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-md ring-2 ring-white">
-                                                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                                    </svg>
-                                                                </div>
+                                                                <div className="absolute inset-0 ring-2 ring-gray-900 rounded-full z-10 pointer-events-none"></div>
                                                             )}
                                                         </button>
                                                     ))}

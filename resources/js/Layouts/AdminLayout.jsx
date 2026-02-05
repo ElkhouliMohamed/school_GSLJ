@@ -87,32 +87,37 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
             {/* Sidebar */}
             <div className={classNames(
                 sidebarOpen ? 'translate-x-0' : '-translate-x-full',
-                "fixed inset-y-0 z-50 flex w-72 flex-col bg-[#111827] transition-transform duration-300 ease-in-out md:static md:translate-x-0 md:flex border-r border-gray-800"
+                "fixed inset-y-0 z-50 flex w-72 flex-col bg-white transition-transform duration-300 ease-in-out md:static md:translate-x-0 md:flex border-r border-gray-200"
             )}>
                 {/* Logo & Close Button */}
-                <div className="flex h-20 shrink-0 items-center justify-between bg-[#111827] px-6 shadow-sm border-b border-gray-800">
+                <div className="flex h-20 shrink-0 items-center justify-between bg-white px-6 shadow-sm border-b border-gray-100">
                     <div className="flex items-center gap-3">
                         <img
                             src="/images/gslj/logo.jpg"
                             alt="GSLJ Logo"
-                            className="h-10 w-10 rounded-full object-cover shadow-lg border-2 border-violet-500/30"
+                            style={{ borderColor: auth?.settings?.theme_color || '#7c3aed' }}
+                            className="h-10 w-10 rounded-full object-cover shadow-lg border-2"
                         />
                         <div className="flex flex-col">
-                            <span className="text-lg font-bold tracking-tight text-white leading-tight">
+                            <span className="text-lg font-bold tracking-tight text-gray-900 leading-tight">
                                 GSLJ
                             </span>
-                            <span className="text-[10px] font-medium text-violet-400 uppercase tracking-widest">
+                            <span
+                                className="text-[10px] font-medium uppercase tracking-widest"
+                                style={{ color: auth?.settings?.theme_color_accent || '#a78bfa' }}
+                            >
                                 Admin Portal
                             </span>
                         </div>
                     </div>
                     <button
                         onClick={() => setSidebarOpen(false)}
-                        className="text-slate-400 hover:text-white md:hidden"
+                        className="text-gray-500 hover:text-gray-900 md:hidden"
                     >
                         <XMarkIcon className="h-6 w-6" />
                     </button>
                 </div>
+
 
                 {/* Navigation */}
                 <div className="flex flex-1 flex-col overflow-y-auto px-3 py-6 custom-scrollbar space-y-8">
@@ -124,20 +129,26 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                             <nav className="space-y-1">
                                 {group.items.map((item) => {
                                     const isActive = window.location.pathname === item.href || window.location.pathname.startsWith(item.href + '/');
+                                    const themeColor = auth?.settings?.theme_color || '#7c3aed';
+                                    const themeColorPrimary = auth?.settings?.theme_color_primary || '#5b21b6';
+
                                     return (
                                         <Link
                                             key={item.name}
                                             href={item.href}
+                                            style={isActive ? {
+                                                background: `linear-gradient(to right, ${themeColor}, ${themeColorPrimary})`,
+                                            } : {}}
                                             className={classNames(
                                                 isActive
-                                                    ? 'bg-gradient-to-r from-violet-600 to-violet-900 text-white shadow-lg shadow-violet-900/20'
-                                                    : 'text-slate-400 hover:bg-slate-800/50 hover:text-white',
+                                                    ? 'text-white shadow-md shadow-gray-200'
+                                                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                                 'group flex items-center rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200'
                                             )}
                                         >
                                             <item.icon
                                                 className={classNames(
-                                                    isActive ? 'text-white' : 'text-slate-500 group-hover:text-white',
+                                                    isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-600',
                                                     'mr-3 h-5 w-5 shrink-0 transition-colors'
                                                 )}
                                                 aria-hidden="true"
@@ -150,14 +161,14 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                         </div>
                     ))}
 
-                    <div className="pt-4 mt-4 border-t border-gray-800">
+                    <div className="pt-4 mt-4 border-t border-gray-100">
                         <a
                             href="/"
                             target="_blank"
-                            className="group flex items-center rounded-xl px-3 py-2 text-sm font-medium text-emerald-400 hover:bg-emerald-400/10 hover:text-emerald-300 transition-all duration-200"
+                            className="group flex items-center rounded-xl px-3 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-200"
                         >
                             <GlobeAltIcon
-                                className="mr-3 h-5 w-5 shrink-0 text-emerald-500 group-hover:text-emerald-400 transition-colors"
+                                className="mr-3 h-5 w-5 shrink-0 text-emerald-500 group-hover:text-emerald-600 transition-colors"
                                 aria-hidden="true"
                             />
                             Voir le site
@@ -166,24 +177,29 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                 </div>
 
                 {/* User Section (Neam Section) */}
-                <div className="border-t border-slate-800 bg-[#0b111e] p-4">
-                    <div className="flex items-center gap-3 rounded-xl bg-slate-800/50 p-3 transition-colors hover:bg-slate-800 border border-slate-700/50">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 font-bold text-white shadow-lg overflow-hidden">
+                <div className="border-t border-gray-200 bg-gray-50 p-4">
+                    <div className="flex items-center gap-3 rounded-xl bg-white p-3 transition-colors hover:shadow-md border border-gray-200 shadow-sm">
+                        <div
+                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg font-bold text-white shadow-md overflow-hidden"
+                            style={{
+                                background: `linear-gradient(to bottom right, ${auth?.settings?.theme_color || '#7c3aed'}, ${auth?.settings?.theme_color_primary || '#5b21b6'})`
+                            }}
+                        >
                             {/* Try to use the user avatar if available, else show initial */}
                             {/* Assuming we might want to use the director image here dynamically if it was the authenticated user, but for now stick to initial or placeholder */}
                             {userInitial}
                         </div>
                         <div className="min-w-0 flex-1">
-                            <p className="truncate text-sm font-semibold text-white">
+                            <p className="truncate text-sm font-semibold text-gray-900">
                                 {userName}
                             </p>
-                            <p className="truncate text-xs text-slate-400">Administrator</p>
+                            <p className="truncate text-xs text-gray-500">Administrator</p>
                         </div>
                         <Link
                             href="/logout"
                             method="post"
                             as="button"
-                            className="group flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-rose-500/10 hover:text-rose-500 transition-all"
+                            className="group flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-rose-50 hover:text-rose-600 transition-all"
                             title="Sign Out"
                         >
                             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
