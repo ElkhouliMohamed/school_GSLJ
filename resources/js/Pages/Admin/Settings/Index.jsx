@@ -223,6 +223,11 @@ export default function Index({ settings }) {
             keys: ['hero_title', 'hero_highlight', 'hero_location', 'hero_motto', 'hero_bottom_bar_text', 'hero_image_1', 'hero_image_2', 'hero_image_3']
         },
         {
+            title: "Home: Info Section",
+            description: "Content for 'Notre Établissement'.",
+            keys: ['info_image']
+        },
+        {
             title: "Home: Director's Word",
             description: "Message from the school principal.",
             keys: ['director_title', 'director_name', 'director_role', 'director_content', 'director_image']
@@ -240,7 +245,7 @@ export default function Index({ settings }) {
         {
             title: "Home: Why Choose Us",
             description: "Content for the 'Pourquoi Choisir' section.",
-            keys: ['why_us_title', 'why_us_description', 'why_us_point_1', 'why_us_point_2', 'why_us_point_3', 'why_us_point_4', 'why_us_cta_text', 'why_us_floating_text']
+            keys: ['why_us_title', 'why_us_description', 'why_us_point_1', 'why_us_point_2', 'why_us_point_3', 'why_us_point_4', 'why_us_cta_text', 'why_us_floating_text', 'why_us_image']
         },
         {
             title: "Home: Events Section",

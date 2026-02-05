@@ -12,25 +12,44 @@ import {
     ChartBarIcon,
     Bars3Icon,
     XMarkIcon,
-    PlusCircleIcon
+    PlusCircleIcon,
+    GlobeAltIcon,
+    ClipboardDocumentListIcon
 } from '@heroicons/react/24/outline';
 
 const navigation = [
-    { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon },
-    { name: 'Statistiques', href: '/admin/kpi', icon: ChartBarIcon },
-    { name: 'Actualités', href: '/admin/news', icon: NewspaperIcon },
-    { name: 'Événements', href: '/admin/events', icon: CalendarIcon },
-    { name: 'Programmes', href: '/admin/programs', icon: DocumentTextIcon },
-    { name: 'Ajouter Programme', href: '/admin/programs/create', icon: PlusCircleIcon },
-    { name: 'Services', href: '/admin/facilities', icon: PhotoIcon },
-    { name: 'Ajouter Service', href: '/admin/facilities/create', icon: PlusCircleIcon },
-    { name: 'Équipe', href: '/admin/team-members', icon: UsersIcon },
-    { name: 'Ajouter Membre', href: '/admin/team-members/create', icon: PlusCircleIcon },
-    { name: 'Partenaires', href: '/admin/partners', icon: UsersIcon },
-    { name: 'Nouveau Partenaire', href: '/admin/partners/create', icon: PlusCircleIcon },
-    { name: 'Galerie', href: '/admin/albums', icon: PhotoIcon },
-    { name: 'Utilisateurs', href: '/admin/users', icon: UsersIcon },
-    { name: 'Paramètres', href: '/admin/settings', icon: Cog6ToothIcon },
+    {
+        title: 'Vue d\'ensemble',
+        items: [
+            { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon },
+            { name: 'Statistiques', href: '/admin/kpi', icon: ChartBarIcon },
+        ]
+    },
+    {
+        title: 'Gestion Scolaire',
+        items: [
+            { name: 'Programmes', href: '/admin/programs', icon: DocumentTextIcon },
+            { name: 'Services', href: '/admin/facilities', icon: PhotoIcon },
+            { name: 'Pré-inscriptions', href: '/admin/pre-registrations', icon: ClipboardDocumentListIcon },
+        ]
+    },
+    {
+        title: 'Contenu',
+        items: [
+            { name: 'Actualités', href: '/admin/news', icon: NewspaperIcon },
+            { name: 'Événements', href: '/admin/events', icon: CalendarIcon },
+            { name: 'Galerie', href: '/admin/albums', icon: PhotoIcon },
+            { name: 'Paramètres', href: '/admin/settings', icon: Cog6ToothIcon },
+        ]
+    },
+    {
+        title: 'Personnes',
+        items: [
+            { name: 'Équipe', href: '/admin/team-members', icon: UsersIcon },
+            { name: 'Partenaires', href: '/admin/partners', icon: UsersIcon },
+            { name: 'Utilisateurs', href: '/admin/users', icon: UsersIcon },
+        ]
+    },
 ];
 
 function classNames(...classes) {
@@ -96,49 +115,53 @@ export default function AdminLayout({ children, title = 'Dashboard' }) {
                 </div>
 
                 {/* Navigation */}
-                <div className="flex flex-1 flex-col overflow-y-auto px-3 py-6 custom-scrollbar">
-                    <nav className="flex-1 space-y-1">
-                        {navigation.map((item) => {
-                            const isActive = window.location.pathname === item.href || window.location.pathname.startsWith(item.href + '/');
-                            return (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    className={classNames(
-                                        isActive
-                                            ? 'bg-gradient-to-r from-violet-600 to-violet-900 text-white shadow-lg shadow-violet-900/20'
-                                            : 'text-slate-400 hover:bg-slate-800/50 hover:text-white',
-                                        'group flex items-center rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200'
-                                    )}
-                                >
-                                    <item.icon
-                                        className={classNames(
-                                            isActive ? 'text-white' : 'text-slate-500 group-hover:text-white',
-                                            'mr-3 h-5 w-5 shrink-0 transition-colors'
-                                        )}
-                                        aria-hidden="true"
-                                    />
-                                    {item.name}
-                                </Link>
-                            );
-                        })}
-                    </nav>
+                <div className="flex flex-1 flex-col overflow-y-auto px-3 py-6 custom-scrollbar space-y-8">
+                    {navigation.map((group) => (
+                        <div key={group.title}>
+                            <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                                {group.title}
+                            </h3>
+                            <nav className="space-y-1">
+                                {group.items.map((item) => {
+                                    const isActive = window.location.pathname === item.href || window.location.pathname.startsWith(item.href + '/');
+                                    return (
+                                        <Link
+                                            key={item.name}
+                                            href={item.href}
+                                            className={classNames(
+                                                isActive
+                                                    ? 'bg-gradient-to-r from-violet-600 to-violet-900 text-white shadow-lg shadow-violet-900/20'
+                                                    : 'text-slate-400 hover:bg-slate-800/50 hover:text-white',
+                                                'group flex items-center rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200'
+                                            )}
+                                        >
+                                            <item.icon
+                                                className={classNames(
+                                                    isActive ? 'text-white' : 'text-slate-500 group-hover:text-white',
+                                                    'mr-3 h-5 w-5 shrink-0 transition-colors'
+                                                )}
+                                                aria-hidden="true"
+                                            />
+                                            {item.name}
+                                        </Link>
+                                    );
+                                })}
+                            </nav>
+                        </div>
+                    ))}
 
-                    {/* System Status */}
-                    <div className="mt-8 rounded-xl bg-slate-800/30 p-4 border border-slate-700/30 backdrop-blur-sm">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">System Status</span>
-                            <div className="flex items-center gap-1.5">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                </span>
-                                <span className="text-[10px] font-medium text-emerald-500">Online</span>
-                            </div>
-                        </div>
-                        <div className="h-1.5 w-full rounded-full bg-slate-700 overflow-hidden">
-                            <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500"></div>
-                        </div>
+                    <div className="pt-4 mt-4 border-t border-gray-800">
+                        <a
+                            href="/"
+                            target="_blank"
+                            className="group flex items-center rounded-xl px-3 py-2 text-sm font-medium text-emerald-400 hover:bg-emerald-400/10 hover:text-emerald-300 transition-all duration-200"
+                        >
+                            <GlobeAltIcon
+                                className="mr-3 h-5 w-5 shrink-0 text-emerald-500 group-hover:text-emerald-400 transition-colors"
+                                aria-hidden="true"
+                            />
+                            Voir le site
+                        </a>
                     </div>
                 </div>
 

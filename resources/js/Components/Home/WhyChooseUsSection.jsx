@@ -18,6 +18,7 @@ export default function WhyChooseUsSection() {
 
     const ctaText = getSetting('why_us_cta_text', "Inscrivez-vous !");
     const floatingText = getSetting('why_us_floating_text', "Excellence & Partage");
+    const image = getSetting('why_us_image', "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
 
 
     return (
@@ -58,7 +59,7 @@ export default function WhyChooseUsSection() {
                         {/* Main Image in Shape */}
                         <div className="w-full aspect-square max-w-md mx-auto relative rounded-tl-[100px] rounded-br-[100px] overflow-hidden shadow-2xl border-4 border-white/20">
                             <img
-                                src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                src={image}
                                 alt="Students"
                                 className="w-full h-full object-cover"
                             />

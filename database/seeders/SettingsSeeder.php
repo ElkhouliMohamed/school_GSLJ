@@ -42,6 +42,19 @@ class SettingsSeeder extends Seeder
                 'type' => 'text',
             ],
 
+            // Home - Why Choose Us
+            [
+                'key' => 'why_us_floating_text',
+                'value' => ['en' => 'Excellence & Partage', 'fr' => 'Excellence & Partage'],
+                'type' => 'text',
+            ],
+            // Added Image
+            [
+                'key' => 'why_us_image',
+                'value' => ['en' => 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'fr' => 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+                'type' => 'image',
+            ],
+
             // Home - Hero
             [
                 'key' => 'hero_title',
@@ -59,6 +72,13 @@ class SettingsSeeder extends Seeder
             [
                 'key' => 'hero_image',
                 'value' => ['en' => '/images/gslj/hero.jpg', 'fr' => '/images/gslj/hero.jpg'],
+                'type' => 'image',
+            ],
+
+            // Home - Info Section ("Notre Établissement")
+            [
+                'key' => 'info_image',
+                'value' => ['en' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'fr' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
                 'type' => 'image',
             ],
 

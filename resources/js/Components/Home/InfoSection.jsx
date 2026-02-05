@@ -2,6 +2,9 @@ import React from 'react';
 import useSettings from '@/Hooks/useSettings';
 
 export default function InfoSection() {
+    const { getSetting } = useSettings();
+    const image = getSetting('info_image', "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
+
     return (
         <section className="bg-secondary text-white py-20 relative overflow-hidden">
             {/* Decorative Circles (Approximating the design) */}
@@ -32,7 +35,7 @@ export default function InfoSection() {
                 <div className="flex-1 relative">
                     <div className="relative rounded-full overflow-hidden aspect-square border-4 border-white/20 shadow-2xl max-w-md mx-auto">
                         <img
-                            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            src={image}
                             alt="Notre Établissement"
                             className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
                         />
