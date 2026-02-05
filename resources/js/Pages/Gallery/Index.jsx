@@ -69,11 +69,11 @@ export default function Index({ galleries, currentType }) {
             <div className="relative bg-violet-950 py-20 sm:py-24 lg:py-32">
                 <div className="absolute inset-0 overflow-hidden">
                     <img
-                        src="https://images.unsplash.com/photo-1544928147-79a2af1f9850?ixlib=rb-4.0.3&auto=format&fit=crop&w=2835&q=80"
+                        src="/images/gslj/hero.jpg"
                         alt=""
                         className="h-full w-full object-cover object-center opacity-10"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-violet-950 via-violet-950/50" />
+                    <div className="absolute inset-0 bg-linear-to-t from-violet-950 via-violet-950/50" />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-6 lg:px-8 text-center">
                     <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif">
@@ -115,7 +115,7 @@ export default function Index({ galleries, currentType }) {
                         {galleries.data.map((item) => (
                             <div
                                 key={item.id}
-                                className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-2xl bg-gray-100 shadow-md hover:shadow-xl transition-all duration-300"
+                                className="group relative aspect-4/3 cursor-pointer overflow-hidden rounded-2xl bg-gray-100 shadow-md hover:shadow-xl transition-all duration-300"
                                 onClick={() => openModal(item)}
                             >
                                 {item.type === 'photo' ? (
@@ -131,14 +131,14 @@ export default function Index({ galleries, currentType }) {
                                             <VideoCameraIcon className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
                                         </div>
                                         <img
-                                            src={item.thumbnail || "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"}
+                                            src={item.thumbnail || "/images/gslj/logo.jpg"}
                                             alt={item.title?.[locale]}
                                             className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-110"
                                         />
                                     </div>
                                 )}
 
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <div className="absolute bottom-0 left-0 right-0 p-6">
                                         {item.title?.[locale] && (
                                             <h3 className="text-lg font-bold text-white mb-1">
@@ -188,7 +188,7 @@ export default function Index({ galleries, currentType }) {
             {/* Lightbox Modal */}
             {
                 selectedItem && (
-                    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={closeModal}>
+                    <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={closeModal}>
                         <button
                             className="absolute top-4 right-4 text-white hover:text-gray-300 z-50 p-2"
                             onClick={closeModal}
