@@ -14,6 +14,10 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
+        if (auth()->check() && auth()->user()->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+
         // Fetch latest news/posts
         // Assuming Post model has a 'published' scope or similiar, if not just take latest.
         // If Post model doesn't exist yet or is in a different namespace, we might need to adjust.
