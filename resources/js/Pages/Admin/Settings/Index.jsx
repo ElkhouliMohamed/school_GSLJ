@@ -189,19 +189,50 @@ export default function Index({ settings }) {
                 )}
 
                 {setting.type === 'color' && (
-                    <div className="flex items-center gap-x-6">
-                        <div className="flex items-center gap-4">
-                            <input
-                                type="color"
-                                value={typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
-                                onChange={(e) => setData(setting.key, e.target.value)}
-                                className="h-12 w-24 rounded-lg border-2 border-gray-300 cursor-pointer"
-                            />
-                            <div>
-                                <p className="text-sm font-medium text-gray-900">
-                                    {typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
-                                </p>
-                                <p className="text-xs text-gray-500">Click to change the primary theme color</p>
+                    <div className="space-y-4">
+                        <label className="block text-xs font-medium text-gray-500">Preset Palettes</label>
+                        <div className="flex flex-wrap gap-3 mb-4">
+                            {[
+                                { name: 'Violet', hex: '#7c3aed' },
+                                { name: 'Blue', hex: '#2563eb' },
+                                { name: 'Sky', hex: '#0ea5e9' },
+                                { name: 'Teal', hex: '#0d9488' },
+                                { name: 'Rose', hex: '#e11d48' },
+                                { name: 'Amber', hex: '#d97706' },
+                                { name: 'Emerald', hex: '#059669' },
+                                { name: 'Slate', hex: '#475569' },
+                                { name: 'Midnight', hex: '#1e1b4b' },
+                            ].map((palette) => (
+                                <button
+                                    key={palette.hex}
+                                    type="button"
+                                    onClick={() => setData(setting.key, palette.hex)}
+                                    className={`
+                                        w-8 h-8 rounded-full border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500
+                                        ${(typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value)) === palette.hex
+                                            ? 'border-gray-900 scale-110 shadow-md ring-2 ring-violet-500 ring-offset-2'
+                                            : 'border-transparent hover:scale-110'
+                                        }
+                                    `}
+                                    style={{ backgroundColor: palette.hex }}
+                                    title={palette.name}
+                                />
+                            ))}
+                        </div>
+                        <div className="flex items-center gap-x-6 border-t border-gray-100 pt-4">
+                            <div className="flex items-center gap-4">
+                                <input
+                                    type="color"
+                                    value={typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
+                                    onChange={(e) => setData(setting.key, e.target.value)}
+                                    className="h-12 w-24 rounded-lg border-2 border-gray-300 cursor-pointer p-1"
+                                />
+                                <div>
+                                    <p className="text-sm font-medium text-gray-900">
+                                        {typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
+                                    </p>
+                                    <p className="text-xs text-gray-500">Or select a custom color</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -225,7 +256,7 @@ export default function Index({ settings }) {
         {
             title: "Home: Info Section",
             description: "Content for 'Notre Établissement'.",
-            keys: ['info_image']
+            keys: ['info_title', 'info_description', 'info_motto', 'info_cta_text', 'info_image']
         },
         {
             title: "Home: Director's Word",

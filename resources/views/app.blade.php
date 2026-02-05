@@ -17,6 +17,17 @@
 
     @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
     @inertiaHead
+
+    <style>
+        :root {
+            --theme-color:
+                {{ $themeColor ?? '#7c3aed' }}
+            ;
+            --theme-color-rgb:
+                {{ $themeColorRgb ?? '124, 58, 237' }}
+            ;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">

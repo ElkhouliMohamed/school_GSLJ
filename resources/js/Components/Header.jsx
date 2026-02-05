@@ -11,7 +11,7 @@ export default function Header() {
 
     const t = (key) => getTranslation(key, locale);
 
-    const logo = getSetting('site_logo') || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Logo_AEFE.svg/1200px-Logo_AEFE.svg.png";
+    const logo = getSetting('site_logo') || "/logo.svg";
     const siteName = getSetting('site_name', "Groupe Scolaire Privé Bilingue LES JUMELLES");
 
     const navigation = [

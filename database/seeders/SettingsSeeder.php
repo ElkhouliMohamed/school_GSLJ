@@ -77,6 +77,29 @@ class SettingsSeeder extends Seeder
 
             // Home - Info Section ("Notre Établissement")
             [
+                'key' => 'info_title',
+                'value' => ['en' => 'Notre <br /> Établissement', 'fr' => 'Notre <br /> Établissement'],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'info_description',
+                'value' => [
+                    'en' => "Situé à Dakar depuis 1976, le Groupe Scolaire Privé Bilingue LES JUMELLES dispense un enseignement d'excellence conforme aux programmes français, de la maternelle à la terminale.\nPartenaire de l'AEFE, nous accueillons plus de 2500 élèves de toutes nationalités dans un cadre exceptionnel propice à l'épanouissement et à la réussite.",
+                    'fr' => "Situé à Dakar depuis 1976, le Groupe Scolaire Privé Bilingue LES JUMELLES dispense un enseignement d'excellence conforme aux programmes français, de la maternelle à la terminale.\nPartenaire de l'AEFE, nous accueillons plus de 2500 élèves de toutes nationalités dans un cadre exceptionnel propice à l'épanouissement et à la réussite."
+                ],
+                'type' => 'textarea',
+            ],
+            [
+                'key' => 'info_motto',
+                'value' => ['en' => 'Excellence, Partage et Engagement sont les valeurs qui nous animent chaque jour.', 'fr' => 'Excellence, Partage et Engagement sont les valeurs qui nous animent chaque jour.'],
+                'type' => 'textarea',
+            ],
+            [
+                'key' => 'info_cta_text',
+                'value' => ['en' => "Découvrir l'établissement", 'fr' => "Découvrir l'établissement"],
+                'type' => 'text',
+            ],
+            [
                 'key' => 'info_image',
                 'value' => ['en' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'fr' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
                 'type' => 'image',

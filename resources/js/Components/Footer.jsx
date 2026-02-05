@@ -1,10 +1,29 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import useSettings from '@/Hooks/useSettings';
 import { Phone } from 'lucide-react';
 
 export default function Footer() {
     const { getSetting } = useSettings();
+    const { url, component } = usePage();
+
+    // Helper to determine active state
+    // We can check if the current link href matches the start of the current URL
+    const isActive = (href) => {
+        if (href === '/') return url === '/';
+        return url.startsWith(href);
+    };
+
+    const LinkItem = ({ href, children }) => (
+        <li>
+            <Link
+                href={href}
+                className={`transition-colors duration-200 ${isActive(href) ? 'text-primary font-bold' : 'hover:text-primary'}`}
+            >
+                {children}
+            </Link>
+        </li>
+    );
 
     const siteName = getSetting('site_name', 'Lycée Français Jean Mermoz');
     const contactEmail = getSetting('contact_email', 'contact@gslj.sn');
@@ -16,7 +35,7 @@ export default function Footer() {
             {/* Main Footer Content */}
             <div className="bg-white py-12 px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
                         {/* Column 1: Contact */}
                         <div className="space-y-4">
                             <h3 className="text-lg font-bold text-primary uppercase mb-4">Contact</h3>
@@ -43,49 +62,7 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        {/* Column 2: Nos Partenaires */}
-                        <div className="space-y-4">
-                            <h3 className="text-lg font-bold text-primary uppercase mb-4">Nos Partenaires</h3>
-                            <div className="space-y-3">
-                                {/* Placeholder for partner logos - you can add images here */}
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        AEFE Logo
-                                    </div>
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        France Logo
-                                    </div>
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        Ambassade
-                                    </div>
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        Institut
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        {/* Column 3: Nos Labels */}
-                        <div className="space-y-4">
-                            <h3 className="text-lg font-bold text-primary uppercase mb-4">Nos Labels</h3>
-                            <div className="space-y-3">
-                                {/* Placeholder for label badges */}
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        Label 1
-                                    </div>
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        Label 2
-                                    </div>
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        Label 3
-                                    </div>
-                                    <div className="bg-gray-100 h-16 rounded flex items-center justify-center text-xs text-gray-400">
-                                        Label 4
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         {/* Column 4: Médias */}
                         <div className="space-y-4">
@@ -118,46 +95,14 @@ export default function Footer() {
                         <div className="space-y-4">
                             <h3 className="text-lg font-bold text-primary uppercase mb-4">Navigation</h3>
                             <ul className="space-y-2 text-sm text-gray-700">
-                                <li>
-                                    <Link href="/" className="hover:text-primary transition-colors">
-                                        Accueil
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/establishment" className="hover:text-primary transition-colors">
-                                        Établissement
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/programs" className="hover:text-primary transition-colors">
-                                        Primaire
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/secondary" className="hover:text-primary transition-colors">
-                                        Secondaire
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/international" className="hover:text-primary transition-colors">
-                                        Section internationale
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/scolarity" className="hover:text-primary transition-colors">
-                                        Scolarité
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/activities" className="hover:text-primary transition-colors">
-                                        Actualités
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/recruitment" className="hover:text-primary transition-colors">
-                                        Recrutement
-                                    </Link>
-                                </li>
+                                <LinkItem href="/">Accueil</LinkItem>
+                                <LinkItem href="/about">Notre Établissement</LinkItem>
+                                <LinkItem href="/programs">Nos Programmes</LinkItem>
+                                <LinkItem href="/team">Notre Équipe</LinkItem>
+                                {/* <LinkItem href="/international">Section internationale</LinkItem> */}
+                                <LinkItem href="/admissions">Scolarité / Admissions</LinkItem>
+                                <LinkItem href="/news">Actualités</LinkItem>
+                                <LinkItem href="/contact">Contact / Recrutement</LinkItem>
                             </ul>
                         </div>
                     </div>

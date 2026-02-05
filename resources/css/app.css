@@ -28,12 +28,12 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-primary: #8A2BE2;
+    --color-primary: var(--theme-color);
     /* Mauve/Violet */
     --color-secondary: #DC2626;
     /* Red */
     --color-accent: #2563EB;
     /* Blue */
-    --color-violet-600: #8A2BE2;
+    --color-violet-600: var(--theme-color);
     /* Backwards compatibility */
 }

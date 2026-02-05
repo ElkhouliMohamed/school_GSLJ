@@ -37,7 +37,9 @@ export default function MainLayout({ children }) {
         return val || fallback;
     };
 
-    const primaryColor = getSettingValue('theme_color_primary', '#8A2BE2');
+    // Use theme_color as fallback for primary if specific primary is not set
+    const mainThemeColor = getSettingValue('theme_color', '#7c3aed');
+    const primaryColor = getSettingValue('theme_color_primary', mainThemeColor);
     const secondaryColor = getSettingValue('theme_color_secondary', '#DC2626');
     const accentColor = getSettingValue('theme_color_accent', '#2563EB');
 

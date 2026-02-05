@@ -31,7 +31,11 @@ export default function PartnersSection({ partners }) {
                 {partners && partners.length > 0 ? (
                     <div className="mx-auto grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
                         {partners.map((partner) => {
-                            const logoUrl = partner.logo.startsWith('http')
+                            // Handle various path formats:
+                            // 1. External URLs (http/https)
+                            // 2. Absolute paths from root (/images/..., /storage/...)
+                            // 3. Relative paths (assume they need /storage/ prefix)
+                            const logoUrl = partner.logo.startsWith('http') || partner.logo.startsWith('/')
                                 ? partner.logo
                                 : `/storage/${partner.logo}`;
 
@@ -49,6 +53,11 @@ export default function PartnersSection({ partners }) {
                                         alt={getLocalized(partner.name)}
                                         width={158}
                                         height={48}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            // Fallback to a simple SVG placeholder
+                                            e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='158' height='48' viewBox='0 0 158 48'%3E%3Crect width='158' height='48' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='12' fill='%239ca3af'%3EPreview%3C/text%3E%3C/svg%3E";
+                                        }}
                                     />
                                 </a>
                             );

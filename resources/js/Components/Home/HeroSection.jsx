@@ -31,7 +31,14 @@ export default function HeroSection() {
     const highlight = getSetting('hero_highlight', "LES JUMELLES");
     const location = getSetting('hero_location', "de Yeumbeul Comico 4");
     const motto = getSetting('hero_motto', "L'EXCELLENCE NOTRE CREDO");
-    const bottomBarText = getSetting('hero_bottom_bar_text', "Inscriptions ouvertes 2024 - 2025 • Places limitées");
+    const currentYear = new Date().getFullYear();
+
+    const nextYear = currentYear + 1;
+    const rawBottomText = getSetting('hero_bottom_bar_text', "Inscriptions ouvertes {{}} - {{}} • Places limitées");
+    const bottomBarText = rawBottomText
+        .replace('{{}}', currentYear)
+        .replace('{{}}', nextYear)
+        .replace(currentYear - 1, nextYear); // Fallback for the literal 2025 if still present
 
     return (
         <div className="relative w-full h-screen overflow-hidden bg-gray-900 flex flex-col justify-between">

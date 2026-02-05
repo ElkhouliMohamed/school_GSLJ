@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
-    public function index()
+    private function getSettingDefinitions()
     {
-        // Define default settings we expect
-        $keys = [
+        return [
             // General
             'site_name' => ['type' => 'text', 'label' => 'Site Name'],
             'contact_email' => ['type' => 'text', 'label' => 'Contact Email'],
@@ -23,10 +22,20 @@ class SettingController extends Controller
             'twitter_url' => ['type' => 'text', 'label' => 'Twitter/X URL'],
             'instagram_url' => ['type' => 'text', 'label' => 'Instagram URL'],
 
+            // Home - Info Section
+            'info_title' => ['type' => 'text', 'label' => 'Info Section Title'],
+            'info_description' => ['type' => 'textarea', 'label' => 'Info Section Description'],
+            'info_motto' => ['type' => 'textarea', 'label' => 'Info Section Motto/Footer'],
+            'info_cta_text' => ['type' => 'text', 'label' => 'Info Section Button Text'],
+            'info_image' => ['type' => 'image', 'label' => 'Info Section Image'],
+
             // Home - Hero
             'hero_title' => ['type' => 'text', 'label' => 'Hero Title'],
+            'hero_highlight' => ['type' => 'text', 'label' => 'Hero Highlight Text'],
+            'hero_location' => ['type' => 'text', 'label' => 'Hero Location'],
+            'hero_motto' => ['type' => 'text', 'label' => 'Hero Motto'],
+            'hero_bottom_bar_text' => ['type' => 'text', 'label' => 'Bottom Bar Text'],
             'hero_description' => ['type' => 'textarea', 'label' => 'Hero Description'],
-            // 'hero_image' => ['type' => 'image', 'label' => 'Hero Image'], // Deprecated for slider
             'hero_image_1' => ['type' => 'image', 'label' => 'Slider Image 1'],
             'hero_image_2' => ['type' => 'image', 'label' => 'Slider Image 2'],
             'hero_image_3' => ['type' => 'image', 'label' => 'Slider Image 3'],
@@ -47,10 +56,23 @@ class SettingController extends Controller
             // Home - News
             'news_title' => ['type' => 'text', 'label' => 'News Section Title'],
             'news_description' => ['type' => 'textarea', 'label' => 'News Section Description'],
+            'news_cta_text' => ['type' => 'text', 'label' => 'News Button Text'],
+
+            // Home - Why Choose Us
+            'why_us_title' => ['type' => 'text', 'label' => 'Why Choose Us Title'],
+            'why_us_description' => ['type' => 'textarea', 'label' => 'Why Choose Us Description'],
+            'why_us_point_1' => ['type' => 'text', 'label' => 'Point 1'],
+            'why_us_point_2' => ['type' => 'text', 'label' => 'Point 2'],
+            'why_us_point_3' => ['type' => 'text', 'label' => 'Point 3'],
+            'why_us_point_4' => ['type' => 'text', 'label' => 'Point 4'],
+            'why_us_cta_text' => ['type' => 'text', 'label' => 'Button Text'],
+            'why_us_floating_text' => ['type' => 'text', 'label' => 'Floating Badge Text'],
+            'why_us_image' => ['type' => 'image', 'label' => 'Section Image'],
 
             // Home - Events
             'events_title' => ['type' => 'text', 'label' => 'Events Section Title'],
             'events_description' => ['type' => 'textarea', 'label' => 'Events Section Description'],
+            'events_section_image' => ['type' => 'image', 'label' => 'Events Background Image'],
 
             // Home - Stats
             'stats_title' => ['type' => 'text', 'label' => 'Stats Section Title'],
@@ -67,7 +89,15 @@ class SettingController extends Controller
 
             // Theme
             'theme_color' => ['type' => 'color', 'label' => 'Primary Theme Color'],
+            'theme_color_primary' => ['type' => 'color', 'label' => 'Primary Theme Color (Tailwind)'],
+            'theme_color_secondary' => ['type' => 'color', 'label' => 'Secondary Theme Color'],
+            'theme_color_accent' => ['type' => 'color', 'label' => 'Accent Theme Color'],
         ];
+    }
+
+    public function index()
+    {
+        $keys = $this->getSettingDefinitions();
 
         // Fetch existing settings
         $settings = Setting::whereIn('key', array_keys($keys))->get()->keyBy('key');
@@ -89,16 +119,12 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-        // $request->settings is an array of [key => value]
-        // Actually, let's receive individual fields or a wrapper.
-        // For images, it's tricky with bulk update.
-        // Let's assume the form submits everything.
-
+        $definitions = $this->getSettingDefinitions();
         $inputs = $request->except(['_token', '_method']);
 
         foreach ($inputs as $key => $value) {
-            // Handle file uploads separately if needed, but Inertia form helper handles files nicely if structured right.
-            // However, for mixed types, iterating is cleaner.
+            $definition = $definitions[$key] ?? null;
+            $type = $definition['type'] ?? 'text'; // Default to text if unknown
 
             // Check if this key is a file upload
             if ($request->hasFile($key)) {
@@ -106,12 +132,13 @@ class SettingController extends Controller
                 $path = $file->store('settings', 'public');
                 $value = '/storage/' . $path; // Store relative path
 
-                // Determine type based on existing config or file mime
-                // For now, simpler: check if key is video_file
-                $type = $key === 'video_file' ? 'file' : 'image';
+                // Determine type based on explicit definition or default
+                // $type from definition is preferred. 
+                // Special check for video_file if definition missing (fallback)
+                if ($key === 'video_file' || $type === 'video_file' || $type === 'file') {
+                    $type = 'file'; // or video_file
 
-                // Add Validation for Video File
-                if ($key === 'video_file') {
+                    // Add Validation for Video File
                     $validator = \Illuminate\Support\Facades\Validator::make(
                         [$key => $file],
                         [$key => 'mimes:mp4,webm,ogg|max:51200'], // 50MB Max
@@ -124,6 +151,8 @@ class SettingController extends Controller
                     if ($validator->fails()) {
                         return redirect()->back()->withErrors($validator)->withInput();
                     }
+                } else {
+                    $type = 'image';
                 }
 
                 // Save for both English and French as media is usually language-agnostic in this context
@@ -132,14 +161,15 @@ class SettingController extends Controller
                     ['value' => ['en' => $value, 'fr' => $value], 'type' => $type]
                 );
             } else {
-                // It's a text/array. Our Setting model has Translatable 'value'.
-                // If the frontend sends { en: '...', fr: '...' }, it works automatically with spatie/translatable if we pass it as array.
+                // If it's expected to be an image/file but no file is uploaded, SKIP.
+                // Do NOT overwrite with text/null.
+                if ($type === 'image' || $type === 'file' || $type === 'video_file') {
+                    continue;
+                }
+
+                // It's a text/array.
                 if (is_array($value) || is_string($value)) {
-                    // Check existing type
-                    $type = 'text'; // Default
-                    if (str_contains($key, 'description'))
-                        $type = 'textarea';
-                    if ($key === 'theme_color') {
+                    if (in_array($key, ['theme_color', 'theme_color_primary', 'theme_color_secondary', 'theme_color_accent'])) {
                         $type = 'color';
                         // Validate hex color format
                         if (is_string($value) && !preg_match('/^#[0-9A-Fa-f]{6}$/', $value)) {
