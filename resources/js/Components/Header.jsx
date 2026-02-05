@@ -48,7 +48,11 @@ export default function Header() {
                     </div>
                     <div className="flex items-center gap-4">
                         <span className="text-white/50">|</span>
-                        <Link href="/login" className="hover:underline">espace enseignant</Link>
+                        {auth?.user ? (
+                            <Link href="/dashboard" className="hover:underline">Dashboard</Link>
+                        ) : (
+                            <Link href="/login" className="hover:underline">espace enseignant</Link>
+                        )}
                         <span className="text-white/50">|</span>
                         {/* Language Switcher */}
                         <div className="flex items-center gap-2">
