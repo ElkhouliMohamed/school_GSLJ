@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Program;
+use App\Models\Facility;
+use App\Models\TeamMember;
 use Illuminate\Http\Response;
 
 class SitemapController extends Controller
@@ -14,6 +17,18 @@ class SitemapController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
+        $programs = Program::where('is_active', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        $facilities = Facility::where('is_active', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        $teamMembers = TeamMember::where('is_active', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
         $staticPages = [
             '/',
             '/about',
@@ -22,10 +37,16 @@ class SitemapController extends Controller
             '/contact',
             '/gallery',
             '/news',
+            '/programs',
+            '/facilities',
+            '/team',
         ];
 
         $content = view('sitemap', [
             'posts' => $posts,
+            'programs' => $programs,
+            'facilities' => $facilities,
+            'teamMembers' => $teamMembers,
             'staticPages' => $staticPages,
         ])->render();
 

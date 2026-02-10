@@ -16,4 +16,31 @@
             <priority>0.6</priority>
         </url>
     @endforeach
+
+    @foreach ($programs as $program)
+        <url>
+            <loc>{{ route('programs.show', $program->slug) }}</loc>
+            <lastmod>{{ $program->updated_at->tz('UTC')->toAtomString() }}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
+        </url>
+    @endforeach
+
+    @foreach ($facilities as $facility)
+        <url>
+            <loc>{{ route('facilities.show', $facility->slug) }}</loc>
+            <lastmod>{{ $facility->updated_at->tz('UTC')->toAtomString() }}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
+        </url>
+    @endforeach
+
+    @foreach ($teamMembers as $teamMember)
+        <url>
+            <loc>{{ route('team.show', $teamMember->slug) }}</loc>
+            <lastmod>{{ $teamMember->updated_at->tz('UTC')->toAtomString() }}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.6</priority>
+        </url>
+    @endforeach
 </urlset>
