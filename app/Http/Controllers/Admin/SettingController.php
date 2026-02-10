@@ -17,6 +17,8 @@ class SettingController extends Controller
             'site_name' => ['type' => 'text', 'label' => 'Site Name'],
             'contact_email' => ['type' => 'text', 'label' => 'Contact Email'],
             'contact_phone' => ['type' => 'text', 'label' => 'Contact Phone'],
+            'site_email' => ['type' => 'text', 'label' => 'Site Email (Navbar)'],
+            'site_phone' => ['type' => 'text', 'label' => 'Site Phone (Navbar)'],
             'site_logo' => ['type' => 'image', 'label' => 'Site Logo'],
             'facebook_url' => ['type' => 'text', 'label' => 'Facebook URL'],
             'twitter_url' => ['type' => 'text', 'label' => 'Twitter/X URL'],

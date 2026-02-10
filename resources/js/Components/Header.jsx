@@ -13,6 +13,8 @@ export default function Header() {
 
     const logo = getSetting('site_logo') || "/logo.svg";
     const siteName = getSetting('site_name', "Groupe Scolaire Privé Bilingue LES JUMELLES");
+    const sitePhone = getSetting('site_phone') || "+221 33 000 00 00";
+    const siteEmail = getSetting('site_email') || "contact@lesjumelles.sn";
 
     const navigation = [
         { name: 'ACCUEIL', href: '/' },
@@ -37,13 +39,13 @@ export default function Header() {
             <div className="bg-secondary text-white py-2 text-xs md:text-sm font-bold tracking-wide">
                 <div className="mx-auto flex flex-col md:flex-row max-w-7xl items-center justify-between px-6 lg:px-8 gap-2 md:gap-0">
                     <div className="flex items-center gap-6">
-                        <a href="tel:+22100000000" className="flex items-center gap-1 hover:text-gray-200">
+                        <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-1 hover:text-gray-200">
                             <PhoneIcon className="h-4 w-4" />
-                            <span>+221 33 000 00 00</span>
+                            <span>{sitePhone}</span>
                         </a>
-                        <a href="mailto:contact@lesjumelles.sn" className="flex items-center gap-1 hover:text-gray-200">
+                        <a href={`mailto:${siteEmail}`} className="flex items-center gap-1 hover:text-gray-200">
                             <EnvelopeIcon className="h-4 w-4" />
-                            <span>contact@lesjumelles.sn</span>
+                            <span>{siteEmail}</span>
                         </a>
                     </div>
                     <div className="flex items-center gap-4">
@@ -198,13 +200,13 @@ export default function Header() {
                                 ))}
                             </div>
                             <div className="py-6 border-t border-gray-200">
-                                <a href="tel:+22100000000" className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                     <PhoneIcon className="h-5 w-5 text-secondary" />
-                                    +221 33 000 00 00
+                                    {sitePhone}
                                 </a>
-                                <a href="mailto:contact@lesjumelles.sn" className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                <a href={`mailto:${siteEmail}`} className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                     <EnvelopeIcon className="h-5 w-5 text-secondary" />
-                                    contact@lesjumelles.sn
+                                    {siteEmail}
                                 </a>
                             </div>
                         </div>

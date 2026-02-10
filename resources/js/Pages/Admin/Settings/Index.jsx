@@ -388,7 +388,7 @@ export default function Index({ settings }) {
         {
             title: "General Settings",
             description: "Basic site information and contacts.",
-            keys: ['site_name', 'site_logo', 'contact_email', 'contact_phone', 'facebook_url', 'twitter_url', 'instagram_url']
+            keys: ['site_name', 'site_logo', 'contact_email', 'contact_phone', 'site_email', 'site_phone', 'facebook_url', 'twitter_url', 'instagram_url']
         },
         {
             title: "Home: Hero Section",
