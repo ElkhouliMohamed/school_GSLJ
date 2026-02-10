@@ -354,7 +354,7 @@ export default function Index({ settings }) {
                                     hover:file:bg-violet-100
                                 "
                             />
-                            <p className="mt-2 text-xs text-gray-500">Upload to replace. Recommended size depends on section.</p>
+                            <p className="mt-2 text-xs text-gray-500">Upload to replace. Recommended size depends on section. Images will be automatically converted to WebP.</p>
                         </div>
                     </div>
                 )}

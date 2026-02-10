@@ -129,14 +129,10 @@ class SettingController extends Controller
             // Check if this key is a file upload
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
-                $path = $file->store('settings', 'public');
-                $value = '/storage/' . $path; // Store relative path
-
-                // Determine type based on explicit definition or default
-                // $type from definition is preferred. 
-                // Special check for video_file if definition missing (fallback)
                 if ($key === 'video_file' || $type === 'video_file' || $type === 'file') {
                     $type = 'file'; // or video_file
+                    $path = $file->store('settings', 'public');
+                    $value = '/storage/' . $path; // Store relative path
 
                     // Add Validation for Video File
                     $validator = \Illuminate\Support\Facades\Validator::make(
@@ -153,6 +149,60 @@ class SettingController extends Controller
                     }
                 } else {
                     $type = 'image';
+
+                    try {
+                        // Create a unique filename
+                        $filename = uniqid() . '.webp';
+                        $path = 'settings/' . $filename;
+                        $fullPath = storage_path('app/public/' . $path);
+
+                        // Ensure directory exists
+                        if (!file_exists(dirname($fullPath))) {
+                            mkdir(dirname($fullPath), 0755, true);
+                        }
+
+                        // Get image info
+                        $imageInfo = getimagesize($file->getPathname());
+                        $mime = $imageInfo['mime'];
+
+                        // Create image resource from uploaded file
+                        $image = null;
+                        switch ($mime) {
+                            case 'image/jpeg':
+                            case 'image/jpg':
+                                $image = imagecreatefromjpeg($file->getPathname());
+                                break;
+                            case 'image/png':
+                                $image = imagecreatefrompng($file->getPathname());
+                                imagepalettetotruecolor($image);
+                                imagealphablending($image, true);
+                                imagesavealpha($image, true);
+                                break;
+                            case 'image/gif':
+                                $image = imagecreatefromgif($file->getPathname());
+                                break;
+                            case 'image/webp':
+                                $image = imagecreatefromwebp($file->getPathname());
+                                break;
+                        }
+
+                        if ($image) {
+                            // Convert to WebP
+                            imagewebp($image, $fullPath, 80); // 80% quality
+                            imagedestroy($image);
+                            $value = '/storage/' . $path;
+                        } else {
+                            // Fallback if image creation failed or type not supported
+                            $storedPath = $file->store('settings', 'public');
+                            $value = '/storage/' . $storedPath;
+                        }
+
+                    } catch (\Exception $e) {
+                        // Fallback on error
+                        \Illuminate\Support\Facades\Log::error("WebP conversion failed: " . $e->getMessage());
+                        $storedPath = $file->store('settings', 'public');
+                        $value = '/storage/' . $storedPath;
+                    }
                 }
 
                 // Save for both English and French as media is usually language-agnostic in this context
