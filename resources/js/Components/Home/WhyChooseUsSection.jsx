@@ -62,6 +62,9 @@ export default function WhyChooseUsSection() {
                                 src={image}
                                 alt="Students"
                                 className="w-full h-full object-cover"
+                                width="500"
+                                height="500"
+                                loading="lazy"
                             />
                         </div>
                         {/* Floating Element */}

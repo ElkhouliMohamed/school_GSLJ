@@ -12,7 +12,10 @@ import PartnersSection from '@/Components/Home/PartnersSection';
 export default function Home({ news, events, partners, gallery }) {
     return (
         <MainLayout>
-            <Head title="Accueil" />
+            <Head>
+                <title>Accueil</title>
+                <meta name="description" content="Bienvenue au Groupe Scolaire Privé Bilingue Les Jumelles - L'excellence notre credo. Découvrez nos programmes de la maternelle au lycée." />
+            </Head>
 
             <main>
                 <HeroSection />

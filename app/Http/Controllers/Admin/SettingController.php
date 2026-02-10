@@ -187,6 +187,37 @@ class SettingController extends Controller
                         }
 
                         if ($image) {
+                            // Resize if too large (Max 1920x1080)
+                            $width = imagesx($image);
+                            $height = imagesy($image);
+                            $maxWidth = 1920;
+                            $maxHeight = 1080;
+
+                            if ($width > $maxWidth || $height > $maxHeight) {
+                                $ratio = $width / $height;
+                                if ($maxWidth / $maxHeight > $ratio) {
+                                    $newWidth = $maxHeight * $ratio;
+                                    $newHeight = $maxHeight;
+                                } else {
+                                    $newHeight = $maxWidth / $ratio;
+                                    $newWidth = $maxWidth;
+                                }
+
+                                $newImage = imagecreatetruecolor($newWidth, $newHeight);
+
+                                // Preserve transparency for PNG/WebP
+                                if ($mime == 'image/png' || $mime == 'image/webp') {
+                                    imagealphablending($newImage, false);
+                                    imagesavealpha($newImage, true);
+                                    $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
+                                    imagefilledrectangle($newImage, 0, 0, $newWidth, $newHeight, $transparent);
+                                }
+
+                                imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                                imagedestroy($image);
+                                $image = $newImage;
+                            }
+
                             // Convert to WebP
                             imagewebp($image, $fullPath, 80); // 80% quality
                             imagedestroy($image);

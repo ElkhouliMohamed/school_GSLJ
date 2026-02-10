@@ -41,6 +41,9 @@ export default function InfoSection() {
                             src={image}
                             alt={title.replace(/<[^>]*>/g, '')}
                             className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+                            width="500"
+                            height="500"
+                            loading="lazy"
                         />
                         {/* Circle Overlay Text - optional aesthetic touch */}
                         <div className="absolute top-10 right-10 w-24 h-24 bg-primary rounded-full flex items-center justify-center text-center p-2 shadow-lg animate-pulse">
