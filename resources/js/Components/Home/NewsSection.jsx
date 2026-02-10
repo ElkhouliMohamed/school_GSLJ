@@ -25,7 +25,7 @@ export default function NewsSection({ news }) {
     const posts = news.slice(0, 3); // Limit to 3 for the design
 
     return (
-        <section className="bg-white py-16 sm:py-24">
+        <section className="bg-white py-10 sm:py-16">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center mb-16">
                     <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl uppercase mb-2">

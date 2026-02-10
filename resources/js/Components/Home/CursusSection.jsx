@@ -28,7 +28,7 @@ export default function CursusSection() {
     ];
 
     return (
-        <section className="bg-white py-20 relative">
+        <section className="bg-white py-10 relative">
             {/* Decorative shapes */}
             <div className="absolute top-0 left-0 w-32 h-32 bg-secondary/10 rounded-br-full" />
             <div className="absolute bottom-0 right-0 w-48 h-48 bg-primary/10 rounded-tl-full" />

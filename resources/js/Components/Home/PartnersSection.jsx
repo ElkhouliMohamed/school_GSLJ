@@ -15,7 +15,7 @@ export default function PartnersSection({ partners }) {
 
 
     return (
-        <section className="bg-white py-12 sm:py-16 border-t border-gray-100">
+        <section className="bg-white py-8 sm:py-12 border-t border-gray-100">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center mb-10">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">

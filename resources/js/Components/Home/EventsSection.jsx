@@ -24,7 +24,7 @@ export default function EventsSection({ events }) {
     ];
 
     return (
-        <section className={`relative py-24 sm:py-32 ${sectionImage ? 'bg-gray-900' : 'bg-white'}`}>
+        <section className={`relative py-12 sm:py-20 ${sectionImage ? 'bg-gray-900' : 'bg-white'}`}>
             {/* Dynamic Background Image */}
             {sectionImage && (
                 <div className="absolute inset-0 overflow-hidden">
@@ -33,7 +33,7 @@ export default function EventsSection({ events }) {
                         alt=""
                         className="h-full w-full object-cover object-center opacity-20"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40" />
+                    <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/40" />
                 </div>
             )}
 

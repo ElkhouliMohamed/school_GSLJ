@@ -22,7 +22,7 @@ export default function WhyChooseUsSection() {
 
 
     return (
-        <section className="bg-secondary py-20 relative overflow-hidden text-white">
+        <section className="bg-secondary py-10 relative overflow-hidden text-white">
             <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-16">
                 {/* Text Content */}
                 <div className="lg:w-1/2">

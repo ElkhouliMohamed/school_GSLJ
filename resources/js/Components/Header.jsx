@@ -75,51 +75,46 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Main Header Area - Logo & Name */}
-            <div className="bg-white border-b border-gray-100 py-1">
-                <div className="mx-auto flex max-w-7xl items-center px-4 lg:px-8 gap-3">
-                    {/* Logo - Reduced Size */}
-                    <Link href="/" className="flex-shrink-0">
-                        <img className="h-12 sm:h-16 w-auto object-contain hover:scale-105 transition-transform" src={logo} alt={siteName} />
-                    </Link>
-
-                    {/* School Name - Visible & Explicit */}
-                    <div className="flex flex-col justify-center">
-                        <Link href="/" className="hover:opacity-80 transition-opacity">
-                            <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-primary uppercase leading-tight">
-                                Groupe Scolaire Privé Bilingue <br className="hidden sm:block" />
-                                <span className="text-secondary">LES JUMELLES</span>
-                            </h1>
-                            <p className="text-gray-500 text-[10px] sm:text-xs font-bold tracking-widest uppercase mt-0">
-                                de Yeumbeul Comico 4
-                            </p>
+            {/* Main Header Area - Logo & Name & Navigation */}
+            <div className="bg-white border-b border-gray-100 py-2">
+                <div className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-8 gap-4">
+                    {/* Logo & Name Container */}
+                    <div className="flex items-center gap-3">
+                        {/* Logo - Reduced Size */}
+                        <Link href="/" className="flex-shrink-0">
+                            <img className="h-10 sm:h-14 w-auto object-contain hover:scale-105 transition-transform" src={logo} alt={siteName} />
                         </Link>
-                    </div>
-                </div>
-            </div>
 
-            {/* Navigation Bar - Compact */}
-            <nav className="bg-primary text-white mx-auto w-full relative shadow-md" aria-label="Global">
-                <div className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-8">
-                    {/* Desktop Menu */}
-                    <div className="hidden lg:flex lg:gap-x-1 items-center w-full justify-center">
+                        {/* School Name - Visible & Explicit */}
+                        <div className="flex flex-col justify-center">
+                            <Link href="/" className="hover:opacity-80 transition-opacity">
+                                <h1 className="text-sm sm:text-base md:text-lg font-extrabold text-primary uppercase leading-tight">
+                                    Groupe Scolaire Privé Bilingue <br className="hidden sm:block" />
+                                    <span className="text-secondary">LES JUMELLES</span>
+                                </h1>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden lg:flex items-center gap-x-1" aria-label="Global">
                         {navigation.map((item) => (
                             <div key={item.name} className="relative group">
                                 {item.children ? (
                                     <>
-                                        <button className="flex items-center gap-1 text-xs font-bold text-white hover:bg-secondary/80 transition-colors px-3 py-2 uppercase tracking-wider">
+                                        <button className="flex items-center gap-1 text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-2 py-2 uppercase tracking-wide">
                                             {item.name}
-                                            <svg className="h-3 w-3 flex-none text-white/70" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <svg className="h-3 w-3 flex-none text-gray-400 group-hover:text-secondary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                             </svg>
                                         </button>
-                                        <div className="absolute left-0 top-full z-20 w-48 overflow-hidden rounded-b-md bg-white shadow-xl ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left">
+                                        <div className="absolute top-full right-0 z-20 w-48 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
                                             <div className="py-1">
                                                 {item.children.map((child) => (
                                                     <Link
                                                         key={child.name}
                                                         href={child.href}
-                                                        className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-primary border-b border-gray-50 last:border-0"
+                                                        className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
                                                     >
                                                         {child.name}
                                                     </Link>
@@ -128,27 +123,29 @@ export default function Header() {
                                         </div>
                                     </>
                                 ) : (
-                                    <Link key={item.name} href={item.href} className="text-xs font-bold text-white hover:bg-secondary/80 transition-colors px-3 py-2 uppercase tracking-wider block h-full">
+                                    <Link key={item.name} href={item.href} className="text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-2 py-2 uppercase tracking-wide">
                                         {item.name}
                                     </Link>
                                 )}
                             </div>
                         ))}
+                    </nav>
+
+                    {/* Mobile Menu Trigger */}
+                    <div className="flex lg:hidden">
+                        <button
+                            type="button"
+                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                            onClick={() => setMobileMenuOpen(true)}
+                        >
+                            <span className="sr-only">Ouvrir le menu</span>
+                            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                        </button>
                     </div>
                 </div>
-            </nav>
-
-            {/* Mobile Menu Trigger */}
-            <div className="lg:hidden absolute top-[4.5rem] right-6 p-2">
-                <button
-                    type="button"
-                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2 text-primary"
-                    onClick={() => setMobileMenuOpen(true)}
-                >
-                    <span className="sr-only">Ouvrir le menu</span>
-                    <Bars3Icon className="h-8 w-8" aria-hidden="true" />
-                </button>
             </div>
+
+
 
             {/* Mobile menu */}
             <div className={`lg:hidden fixed inset-0 z-50 transform transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>

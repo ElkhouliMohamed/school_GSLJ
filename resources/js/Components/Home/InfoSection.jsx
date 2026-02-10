@@ -10,7 +10,7 @@ export default function InfoSection() {
     const ctaText = getSetting('info_cta_text', "Découvrir l'établissement");
 
     return (
-        <section className="bg-secondary text-white py-20 relative overflow-hidden">
+        <section className="bg-secondary text-white py-10 relative overflow-hidden">
             {/* Decorative Circles (Approximating the design) */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-60 h-60 rounded-full bg-purple-900/20 blur-3xl" />
