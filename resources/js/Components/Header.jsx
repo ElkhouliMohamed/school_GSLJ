@@ -36,7 +36,7 @@ export default function Header() {
     return (
         <header className="sticky top-0 z-50 transition-all duration-300 font-sans shadow-lg bg-white">
             {/* Top Bar - Vibrant Red/Secondary */}
-            <div className="bg-secondary text-white py-2 text-xs md:text-sm font-bold tracking-wide">
+            <div className="hidden md:block bg-secondary text-white py-2 text-xs md:text-sm font-bold tracking-wide">
                 <div className="mx-auto flex flex-col md:flex-row max-w-7xl items-center justify-between px-6 lg:px-8 gap-2 md:gap-0">
                     <div className="flex items-center gap-6">
                         <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-1 hover:text-gray-200">
@@ -49,13 +49,7 @@ export default function Header() {
                         </a>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-white/50">|</span>
-                        {auth?.user ? (
-                            <Link href="/admin/dashboard" className="hover:underline">Dashboard</Link>
-                        ) : (
-                            <Link href="/login" className="hover:underline">espace enseignant</Link>
-                        )}
-                        <span className="text-white/50">|</span>
+
                         {/* Language Switcher */}
                         <div className="flex items-center gap-2">
                             <Link
@@ -199,7 +193,8 @@ export default function Header() {
                                     )
                                 ))}
                             </div>
-                            <div className="py-6 border-t border-gray-200">
+                            <div className="py-6 border-t border-gray-200 space-y-2">
+
                                 <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                     <PhoneIcon className="h-5 w-5 text-secondary" />
                                     {sitePhone}
