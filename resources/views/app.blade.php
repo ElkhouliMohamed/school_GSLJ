@@ -7,6 +7,20 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link rel="apple-touch-icon" href="/logo.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:image" content="{{ asset('logo.svg') }}">
+    <meta property="og:image:type" content="image/svg+xml">
+    <meta property="og:image:alt" content="Groupe Scolaire Privé Bilingue LES JUMELLES Logo">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="{{ asset('logo.svg') }}">
+    <meta name="twitter:image:alt" content="Groupe Scolaire Privé Bilingue LES JUMELLES Logo">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

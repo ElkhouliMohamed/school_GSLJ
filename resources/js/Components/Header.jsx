@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Bars3Icon, XMarkIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'; // Added useful icons
+import { Bars3Icon, XMarkIcon, PhoneIcon, EnvelopeIcon, ChevronDownIcon } from '@heroicons/react/24/outline'; // Added useful icons
 import { getTranslation } from '../translations';
 import useSettings from '@/Hooks/useSettings';
 
 export default function Header() {
     const { settings, locale, auth } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileDropdownOpen, setMobileDropdownOpen] = useState({});
     const { getSetting } = useSettings();
+
+    const toggleMobileDropdown = (itemName) => {
+        setMobileDropdownOpen(prev => ({
+            ...prev,
+            [itemName]: !prev[itemName]
+        }));
+    };
 
     const t = (key) => getTranslation(key, locale);
 
@@ -77,7 +85,7 @@ export default function Header() {
                     {/* Logo & Name Container */}
                     <div className="flex items-center gap-3">
                         {/* Logo - Reduced Size */}
-                        <Link href="/" className="flex-shrink-0">
+                        <Link href="/" className="shrink-0">
                             <img className="h-10 sm:h-14 w-auto object-contain hover:scale-105 transition-transform" src={logo} alt={siteName} />
                         </Link>
 
@@ -167,25 +175,41 @@ export default function Header() {
                                 {navigation.map((item) => (
                                     item.children ? (
                                         <div key={item.name} className="space-y-1">
-                                            <div className="block rounded-lg px-3 py-2 text-base font-bold leading-7 text-primary bg-primary/5">
-                                                {item.name}
+                                            <button
+                                                onClick={() => toggleMobileDropdown(item.name)}
+                                                className="w-full flex items-center justify-between rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
+                                            >
+                                                <span>{item.name}</span>
+                                                <ChevronDownIcon
+                                                    className={`h-5 w-5 text-primary transition-transform duration-200 ${mobileDropdownOpen[item.name] ? 'rotate-180' : ''}`}
+                                                    aria-hidden="true"
+                                                />
+                                            </button>
+                                            <div
+                                                className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileDropdownOpen[item.name]
+                                                    ? 'max-h-96 opacity-100'
+                                                    : 'max-h-0 opacity-0'
+                                                    }`}
+                                            >
+                                                <div className="space-y-1 pt-1">
+                                                    {item.children.map((child) => (
+                                                        <Link
+                                                            key={child.name}
+                                                            href={child.href}
+                                                            className="block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                            onClick={() => setMobileMenuOpen(false)}
+                                                        >
+                                                            {child.name}
+                                                        </Link>
+                                                    ))}
+                                                </div>
                                             </div>
-                                            {item.children.map((child) => (
-                                                <Link
-                                                    key={child.name}
-                                                    href={child.href}
-                                                    className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                                    onClick={() => setMobileMenuOpen(false)}
-                                                >
-                                                    {child.name}
-                                                </Link>
-                                            ))}
                                         </div>
                                     ) : (
                                         <Link
                                             key={item.name}
                                             href={item.href}
-                                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-bold leading-7 text-gray-900 hover:bg-gray-50"
+                                            className="-mx-3 block rounded-lg px-3 py-3 text-base font-bold leading-7 text-gray-900 hover:bg-gray-50 transition-colors"
                                             onClick={() => setMobileMenuOpen(false)}
                                         >
                                             {item.name}
