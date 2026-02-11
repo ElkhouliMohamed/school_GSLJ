@@ -34,6 +34,50 @@ class AppServiceProvider extends ServiceProvider
                         $themeColor = $val;
                     }
                 }
+
+                // Mail Settings
+                $mailSettings = \App\Models\Setting::whereIn('key', [
+                    'mail_mailer',
+                    'mail_host',
+                    'mail_port',
+                    'mail_username',
+                    'mail_password',
+                    'mail_encryption',
+                    'mail_from_address',
+                    'mail_from_name'
+                ])->get()->pluck('value', 'key');
+
+                if ($mailSettings->has('mail_mailer')) {
+                    config(['mail.default' => $mailSettings['mail_mailer']]);
+                }
+
+                if ($mailSettings->has('mail_host')) {
+                    config(['mail.mailers.smtp.host' => $mailSettings['mail_host']]);
+                }
+
+                if ($mailSettings->has('mail_port')) {
+                    config(['mail.mailers.smtp.port' => $mailSettings['mail_port']]);
+                }
+
+                if ($mailSettings->has('mail_username')) {
+                    config(['mail.mailers.smtp.username' => $mailSettings['mail_username']]);
+                }
+
+                if ($mailSettings->has('mail_password')) {
+                    config(['mail.mailers.smtp.password' => $mailSettings['mail_password']]);
+                }
+
+                if ($mailSettings->has('mail_encryption')) {
+                    config(['mail.mailers.smtp.encryption' => $mailSettings['mail_encryption']]);
+                }
+
+                if ($mailSettings->has('mail_from_address')) {
+                    config(['mail.from.address' => $mailSettings['mail_from_address']]);
+                }
+
+                if ($mailSettings->has('mail_from_name')) {
+                    config(['mail.from.name' => $mailSettings['mail_from_name']]);
+                }
             }
 
             // Sanitize Hex

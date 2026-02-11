@@ -15,10 +15,19 @@ class SettingController extends Controller
         return [
             // General
             'site_name' => ['type' => 'text', 'label' => 'Site Name'],
+            'mail_mailer' => ['type' => 'text', 'label' => 'Mailer (smtp)'],
+            'mail_host' => ['type' => 'text', 'label' => 'Mail Host'],
+            'mail_port' => ['type' => 'number', 'label' => 'Mail Port'],
+            'mail_username' => ['type' => 'text', 'label' => 'Mail Username'],
+            'mail_password' => ['type' => 'password', 'label' => 'Mail Password'],
+            'mail_encryption' => ['type' => 'text', 'label' => 'Mail Encryption (tls/ssl)'],
+            'mail_from_address' => ['type' => 'text', 'label' => 'From Address'],
+            'mail_from_name' => ['type' => 'text', 'label' => 'From Name'],
             'contact_email' => ['type' => 'text', 'label' => 'Contact Email'],
             'contact_phone' => ['type' => 'text', 'label' => 'Contact Phone'],
             'site_email' => ['type' => 'text', 'label' => 'Site Email (Navbar)'],
             'site_phone' => ['type' => 'text', 'label' => 'Site Phone (Navbar)'],
+            'site_address' => ['type' => 'textarea', 'label' => 'Site Address'],
             'site_logo' => ['type' => 'image', 'label' => 'Site Logo'],
             'facebook_url' => ['type' => 'text', 'label' => 'Facebook URL'],
             'twitter_url' => ['type' => 'text', 'label' => 'Twitter/X URL'],
@@ -88,6 +97,8 @@ class SettingController extends Controller
             'about_title' => ['type' => 'text', 'label' => 'About Page Title'],
             'about_content' => ['type' => 'textarea', 'label' => 'About Page Content'],
             'about_image' => ['type' => 'image', 'label' => 'About Page Image'],
+            'about_contact_title' => ['type' => 'text', 'label' => 'About Page Contact Title'],
+            'about_contact_description' => ['type' => 'textarea', 'label' => 'About Page Contact Description'],
 
             // Theme
             'theme_color' => ['type' => 'color', 'label' => 'Primary Theme Color'],

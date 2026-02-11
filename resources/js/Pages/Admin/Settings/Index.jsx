@@ -387,8 +387,18 @@ export default function Index({ settings }) {
     const sections = [
         {
             title: "General Settings",
-            description: "Basic site information and contacts.",
-            keys: ['site_name', 'site_logo', 'contact_email', 'contact_phone', 'site_email', 'site_phone', 'facebook_url', 'twitter_url', 'instagram_url']
+            description: "Basic site information.",
+            keys: ['site_name', 'site_logo', 'facebook_url', 'twitter_url', 'instagram_url']
+        },
+        {
+            title: "Contact Information",
+            description: "Address, phone numbers, and emails displayed on the site.",
+            keys: ['site_address', 'site_email', 'site_phone', 'contact_email', 'contact_phone']
+        },
+        {
+            title: "Mail Configuration",
+            description: "SMTP settings for sending emails.",
+            keys: ['mail_mailer', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption', 'mail_from_address', 'mail_from_name']
         },
         {
             title: "Home: Hero Section",
@@ -438,7 +448,7 @@ export default function Index({ settings }) {
         {
             title: "About Page",
             description: "Content for the About page.",
-            keys: ['about_title', 'about_content', 'about_image']
+            keys: ['about_title', 'about_content', 'about_image', 'about_contact_title', 'about_contact_description']
         },
         {
             title: "Theme",

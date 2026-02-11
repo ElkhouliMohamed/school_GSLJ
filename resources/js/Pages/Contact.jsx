@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { getLocalized } from '@/Utils/localization';
 
 export default function Contact({ flash }) {
+    const { settings, locale } = usePage().props;
     const { data, setData, post, processing, errors, reset } = useForm({
         firstName: '',
         lastName: '',
@@ -66,9 +68,11 @@ export default function Contact({ flash }) {
                                     <rect width="100%" height="100%" strokeWidth={0} fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" />
                                 </svg>
                             </div>
-                            <h2 className="text-3xl font-bold tracking-tight text-violet-800 font-serif">Contactez-nous</h2>
+                            <h2 className="text-3xl font-bold tracking-tight text-violet-800 font-serif">
+                                {getLocalized(settings?.about_contact_title, locale, 'Contactez-nous')}
+                            </h2>
                             <p className="mt-6 text-lg leading-8 text-gray-600">
-                                Vous avez des questions sur nos programmes ou les admissions ? N'hésitez pas à nous écrire ou à visiter nos locaux.
+                                {getLocalized(settings?.about_contact_description, locale, 'Vous avez des questions sur nos programmes ou les admissions ? N\'hésitez pas à nous écrire ou à visiter nos locaux.')}
                             </p>
                             <dl className="mt-10 space-y-4 text-base leading-7 text-gray-600">
                                 <div className="flex gap-x-4">
@@ -76,9 +80,9 @@ export default function Contact({ flash }) {
                                         <span className="sr-only">Adresse</span>
                                         <BuildingOffice2Icon className="h-7 w-6 text-yellow-600" aria-hidden="true" />
                                     </dt>
-                                    <dd>
-                                        GSLJ Sénégal<br />
-                                        Dakar, Sénégal
+                                    <dd className="whitespace-pre-wrap">
+                                        {settings?.site_address ? getLocalized(settings.site_address, locale) : 'GSLJ Sénégal'}<br />
+                                        {/* Dakar, Sénégal */}
                                     </dd>
                                 </div>
                                 <div className="flex gap-x-4">
@@ -87,7 +91,9 @@ export default function Contact({ flash }) {
                                         <PhoneIcon className="h-7 w-6 text-yellow-600" aria-hidden="true" />
                                     </dt>
                                     <dd>
-                                        <a className="hover:text-violet-700" href="tel:+221330000000">+221 33 000 00 00</a>
+                                        <a className="hover:text-violet-700" href={`tel:${settings?.site_phone ? getLocalized(settings.site_phone, locale) : '+221330000000'}`}>
+                                            {settings?.site_phone ? getLocalized(settings.site_phone, locale) : '+221 33 000 00 00'}
+                                        </a>
                                     </dd>
                                 </div>
                                 <div className="flex gap-x-4">
@@ -96,7 +102,9 @@ export default function Contact({ flash }) {
                                         <EnvelopeIcon className="h-7 w-6 text-yellow-600" aria-hidden="true" />
                                     </dt>
                                     <dd>
-                                        <a className="hover:text-violet-700" href="mailto:info@gslj.sn">info@gslj.sn</a>
+                                        <a className="hover:text-violet-700" href={`mailto:${settings?.contact_email ? getLocalized(settings.contact_email, locale) : (settings?.site_email ? getLocalized(settings.site_email, locale) : 'info@gslj.sn')}`}>
+                                            {settings?.contact_email ? getLocalized(settings.contact_email, locale) : (settings?.site_email ? getLocalized(settings.site_email, locale) : 'info@gslj.sn')}
+                                        </a>
                                     </dd>
                                 </div>
                             </dl>
