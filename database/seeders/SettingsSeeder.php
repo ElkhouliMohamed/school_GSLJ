@@ -44,6 +44,41 @@ class SettingsSeeder extends Seeder
 
             // Home - Why Choose Us
             [
+                'key' => 'why_us_title',
+                'value' => ['en' => 'Why Choose GSPB Les Jumelles?', 'fr' => 'Pourquoi Choisir le GSLJ ?'],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'why_us_description',
+                'value' => ['en' => 'The Groupe Scolaire Privé Bilingue LES JUMELLES offers a unique learning framework, combining academic rigor and personal fulfillment.', 'fr' => 'Le Groupe Scolaire Privé Bilingue LES JUMELLES offre un cadre d\'apprentissage unique, alliant rigueur académique et épanouissement personnel.'],
+                'type' => 'textarea',
+            ],
+            [
+                'key' => 'why_us_point_1',
+                'value' => ['en' => '100% Success in Baccalaureate', 'fr' => '100% de réussite au Baccalauréat'],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'why_us_point_2',
+                'value' => ['en' => 'Exceptional International Openness', 'fr' => 'Une ouverture internationale exceptionnelle'],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'why_us_point_3',
+                'value' => ['en' => 'State-of-the-art Sports and Cultural Infrastructures', 'fr' => 'Des infrastructures sportives et culturelles de pointe'],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'why_us_point_4',
+                'value' => ['en' => 'A World Network AEFE with 500 High Schools', 'fr' => 'Un réseau mondial AEFE fort de 500 lycées'],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'why_us_cta_text',
+                'value' => ['en' => 'Register Now!', 'fr' => 'Inscrivez-vous !'],
+                'type' => 'text',
+            ],
+            [
                 'key' => 'why_us_floating_text',
                 'value' => ['en' => 'Excellence & Partage', 'fr' => 'Excellence & Partage'],
                 'type' => 'text',

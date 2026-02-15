@@ -6,7 +6,6 @@ export default function WhyChooseUsSection() {
     const { getSetting } = useSettings();
 
     const title = getSetting('why_us_title', "Pourquoi Choisir le GSLJ ?");
-    // Ensure we handle potential newlines if user inputs them as \n or just renders text
     const description = getSetting('why_us_description', "Le Groupe Scolaire Privé Bilingue LES JUMELLES offre un cadre d'apprentissage unique, alliant rigueur académique et épanouissement personnel.");
 
     const points = [

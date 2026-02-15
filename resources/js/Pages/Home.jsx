@@ -20,7 +20,7 @@ export default function Home({ news, events, partners, gallery }) {
             <main>
                 <HeroSection />
                 <NewsSection news={news} />
-                <EventsSection events={events} />
+                {/* <EventsSection events={events} /> */}
                 <InfoSection />
                 <CursusSection />
                 <WhyChooseUsSection />
