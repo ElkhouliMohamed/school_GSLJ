@@ -58,7 +58,7 @@ export default function Header() {
     return (
         <header className="sticky top-0 z-50 transition-all duration-300 font-sans shadow-lg bg-white">
             {/* Top Bar - Teal/Green inspired by Maarif */}
-            <div className="hidden md:block bg-[#00897B] text-white py-2 text-xs md:text-sm font-bold tracking-wide">
+            <div className="hidden md:block bg-primary text-white py-2 text-xs md:text-sm font-bold tracking-wide">
                 <div className="container mx-auto flex flex-col md:flex-row w-full items-center justify-between px-6 lg:px-8 gap-2 md:gap-0">
                     <div className="flex items-center gap-6">
                         <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-1 hover:text-gray-200">
