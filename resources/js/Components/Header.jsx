@@ -107,14 +107,14 @@ export default function Header() {
                         <div className="flex flex-col justify-center">
                             <Link href="/" className="hover:opacity-80 transition-opacity">
                                 {/* Mobile/Tablet Name (< lg) */}
-                                <h1 className="lg:hidden text-base font-extrabold text-primary uppercase leading-tight">
+                                <h1 className="lg:hidden text-sm font-extrabold text-primary uppercase leading-tight">
                                     GS LES JUMELLES
                                 </h1>
 
                                 {/* Desktop Name (>= lg) */}
-                                <h1 className="hidden lg:block text-sm sm:text-base md:text-lg font-extrabold text-primary uppercase leading-tight">
+                                <h1 className="hidden lg:block text-xs sm:text-sm md:text-base font-extrabold text-primary uppercase leading-tight">
                                     Groupe Scolaire Privé Bilingue <br />
-                                    <span className="text-secondary">LES JUMELLES</span>
+                                    <span className="text-secondary text-base sm:text-lg md:text-xl">LES JUMELLES</span>
                                 </h1>
                             </Link>
                         </div>
