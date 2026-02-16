@@ -1,6 +1,6 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
-import GuestLayout from '@/Layouts/GuestLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import useSettings from '@/Hooks/useSettings';
 
 export default function MentionsLegales() {
@@ -11,7 +11,7 @@ export default function MentionsLegales() {
     const phone = getSetting('contact_phone', '(+ 221) 33 860 45 33');
 
     return (
-        <GuestLayout>
+        <MainLayout>
             <Head title="Mentions Légales" />
 
             <div className="bg-white py-16 sm:py-24">
@@ -70,6 +70,6 @@ export default function MentionsLegales() {
                     </div>
                 </div>
             </div>
-        </GuestLayout>
+        </MainLayout>
     );
 }

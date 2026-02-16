@@ -10,7 +10,6 @@ export default function Admissions() {
         student_first_name: '',
         birth_date: '',
         requested_class: '',
-        requested_class: '',
         parent_name: '',
         email: '',
         phone: '',

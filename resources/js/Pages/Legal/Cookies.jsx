@@ -1,6 +1,6 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
-import GuestLayout from '@/Layouts/GuestLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import useSettings from '@/Hooks/useSettings';
 
 export default function Cookies() {
@@ -8,7 +8,7 @@ export default function Cookies() {
     const siteName = getSetting('site_name', 'Groupe Scolaire Les Jumelles');
 
     return (
-        <GuestLayout>
+        <MainLayout>
             <Head title="Gestion des Cookies" />
 
             <div className="bg-white py-16 sm:py-24">
@@ -53,6 +53,6 @@ export default function Cookies() {
                     </div>
                 </div>
             </div>
-        </GuestLayout>
+        </MainLayout>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
-import GuestLayout from '@/Layouts/GuestLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import useSettings from '@/Hooks/useSettings';
 
 export default function PrivacyPolicy() {
@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
     const email = getSetting('contact_email', 'contact@gslj.sn');
 
     return (
-        <GuestLayout>
+        <MainLayout>
             <Head title="Politique de Confidentialité" />
 
             <div className="bg-white py-16 sm:py-24">
@@ -66,6 +66,6 @@ export default function PrivacyPolicy() {
                     </div>
                 </div>
             </div>
-        </GuestLayout>
+        </MainLayout>
     );
 }
