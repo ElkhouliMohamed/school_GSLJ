@@ -35,30 +35,14 @@ class PreRegistrationNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
+    /**
+     * Get the mail representation of the notification.
+     */
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Nouvelle Pré-inscription - ' . $this->preRegistration->student_first_name . ' ' . $this->preRegistration->student_last_name)
-            ->greeting('Nouvelle Demande de Pré-inscription')
-            ->line('Une nouvelle demande de pré-inscription a été soumise.')
-            ->line('')
-            ->line('**Informations de l\'élève:**')
-            ->line('Nom: ' . $this->preRegistration->student_last_name)
-            ->line('Prénom: ' . $this->preRegistration->student_first_name)
-            ->line('Date de naissance: ' . $this->preRegistration->birth_date->format('d/m/Y'))
-            ->line('Classe demandée: ' . $this->preRegistration->requested_class)
-            ->line('')
-            ->line('**Informations du parent:**')
-            ->line('Nom et prénom: ' . $this->preRegistration->parent_name)
-            ->line('Téléphone: ' . $this->preRegistration->phone)
-            ->line('')
-            ->when($this->preRegistration->message, function ($mail) {
-                return $mail->line('**Message:**')
-                    ->line($this->preRegistration->message)
-                    ->line('');
-            })
-            ->action('Voir dans le panneau d\'administration', url('/admin/pre-registrations'))
-            ->line('Merci de traiter cette demande rapidement.');
+            ->view('emails.admission.admin_notification', ['preRegistration' => $this->preRegistration]);
     }
 
     /**

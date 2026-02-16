@@ -438,7 +438,7 @@ export default function Index({ settings }) {
         {
             title: "Contact Information",
             description: "Address, phone numbers, and emails displayed on the site.",
-            keys: ['site_address', 'site_email', 'site_phone', 'contact_email', 'contact_phone']
+            keys: ['site_address', 'site_email', 'site_phone', 'contact_email', 'contact_phone', 'admin_notification_email']
         },
         {
             title: "Mail Configuration",

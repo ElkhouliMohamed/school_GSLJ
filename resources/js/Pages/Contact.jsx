@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import { Head, useForm, usePage } from '@inertiajs/react';
@@ -28,9 +29,23 @@ export default function Contact({ flash }) {
             onSuccess: () => {
                 reset();
                 setSubmissionStatus('success');
+                Swal.fire({
+                    title: 'Message Envoyé!',
+                    text: 'Votre message a été envoyé avec succès! Nous vous contacterons bientôt.',
+                    icon: 'success',
+                    confirmButtonText: 'Fermer',
+                    confirmButtonColor: '#7c3aed' // Violet 600
+                });
             },
             onError: () => {
                 setSubmissionStatus('error');
+                Swal.fire({
+                    title: 'Erreur',
+                    text: 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.',
+                    icon: 'error',
+                    confirmButtonText: 'Fermer',
+                    confirmButtonColor: '#dc2626' // Red 600
+                });
             }
         });
     }
@@ -112,16 +127,7 @@ export default function Contact({ flash }) {
                     </div>
                     <form onSubmit={handleSubmit} className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
                         <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-                            {flash?.success && (
-                                <div className="mb-6 rounded-md bg-green-50 p-4 text-sm text-green-700">
-                                    {flash.success}
-                                </div>
-                            )}
-                            {flash?.error && (
-                                <div className="mb-6 rounded-md bg-red-50 p-4 text-sm text-red-700">
-                                    {flash.error}
-                                </div>
-                            )}
+
 
                             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                                 <div>

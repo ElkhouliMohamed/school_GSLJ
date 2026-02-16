@@ -31,8 +31,23 @@ class PreRegistrationController extends Controller
 
         $preRegistration = PreRegistration::create($validated);
 
+        // Get admin email from settings
+        $adminEmail = \App\Models\Setting::where('key', 'admin_notification_email')->value('value');
+
+        // Handle translatable value (JSON) or simple string
+        if ($adminEmail) {
+            $decoded = json_decode($adminEmail, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $adminEmail = $decoded['en'] ?? $decoded['fr'] ?? $adminEmail;
+            }
+        }
+
+        // Fallback
+        if (!$adminEmail) {
+            $adminEmail = env('ADMIN_EMAIL', 'admin@school.com');
+        }
+
         // Send email notification to admin
-        $adminEmail = env('ADMIN_EMAIL', 'admin@school.com');
         Notification::route('mail', $adminEmail)
             ->notify(new PreRegistrationNotification($preRegistration));
 

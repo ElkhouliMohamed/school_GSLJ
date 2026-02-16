@@ -1,12 +1,16 @@
-<x-mail::message>
-    # Confirmation de demande de contact
+@extends('emails.layouts.main')
 
-    Bonjour {{ $data['firstName'] }} {{ $data['lastName'] }},
+@section('content')
+    <h2 style="color: #111827; margin-top: 0;">Confirmation de demande de contact</h2>
 
-    Merci de nous avoir contactés.
+    <p>Bonjour {{ $data['firstName'] }} {{ $data['lastName'] }},</p>
 
-    Votre demande est en attente, nous vous contacterons bientôt.
+    <p>Merci de nous avoir contactés.</p>
 
-    Cordialement,<br>
-    {{ config('app.name') }}
-</x-mail::message>
+    <p>Votre demande est en attente, nous vous contacterons bientôt.</p>
+
+    <p style="margin-top: 30px;">
+        Cordialement,<br>
+        <strong>{{ config('app.name') }}</strong>
+    </p>
+@endsection

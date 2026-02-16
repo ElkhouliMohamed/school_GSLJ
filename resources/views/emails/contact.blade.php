@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html>
+@extends('emails.layouts.main')
 
-<head>
-    <title>Nouveau message de contact</title>
-</head>
+@section('content')
+    <h2 style="color: #111827; margin-top: 0;">Nouveau Message de Contact</h2>
+    <p>Un nouveau message a été envoyé depuis le formulaire de contact du site web.</p>
 
-<body>
-    <h1>Nouveau message depuis le site web</h1>
-    <p><strong>Nom:</strong> {{ $data['firstName'] }} {{ $data['lastName'] }}</p>
-    <p><strong>Email:</strong> {{ $data['email'] }}</p>
-    <p><strong>Téléphone:</strong> {{ $data['phoneNumber'] }}</p>
-    <p><strong>Message:</strong></p>
-    <p>{{ $data['message'] }}</p>
-</body>
-
-</html>
+    <table class="info-table">
+        <tr>
+            <td class="label">Nom :</td>
+            <td class="value">{{ $data['firstName'] }} {{ $data['lastName'] }}</td>
+        </tr>
+        <tr>
+            <td class="label">Email :</td>
+            <td class="value"><a href="mailto:{{ $data['email'] }}" style="color: #7c3aed;">{{ $data['email'] }}</a></td>
+        </tr>
+        <tr>
+            <td class="label">Téléphone :</td>
+            <td class="value">{{ $data['phoneNumber'] }}</td>
+        </tr>
+        <tr>
+            <td class="label">Message :</td>
+            <td class="value" style="white-space: pre-line;">{{ $data['message'] }}</td>
+        </tr>
+    </table>
+@endsection

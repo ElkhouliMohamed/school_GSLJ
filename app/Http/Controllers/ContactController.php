@@ -23,7 +23,21 @@ class ContactController extends Controller
         try {
             // Get admin email from env or config, fallback to a default if not set
             // Ideally should be a setting in the DB or config
-            $adminEmail = config('mail.from.address');
+            // Get admin email from settings
+            $adminEmail = \App\Models\Setting::where('key', 'admin_notification_email')->value('value');
+
+            // Handle translatable value (JSON) or simple string
+            if ($adminEmail) {
+                $decoded = json_decode($adminEmail, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    $adminEmail = $decoded['en'] ?? $decoded['fr'] ?? $adminEmail;
+                }
+            }
+
+            // Fallback
+            if (!$adminEmail) {
+                $adminEmail = config('mail.from.address');
+            }
 
             Mail::to($adminEmail)->send(new ContactFormMail($data));
 

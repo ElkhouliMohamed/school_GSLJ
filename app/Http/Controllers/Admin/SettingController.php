@@ -25,6 +25,7 @@ class SettingController extends Controller
             'mail_from_name' => ['type' => 'text', 'label' => 'From Name'],
             'contact_email' => ['type' => 'text', 'label' => 'Contact Email'],
             'contact_phone' => ['type' => 'text', 'label' => 'Contact Phone'],
+            'admin_notification_email' => ['type' => 'text', 'label' => 'Admin Notification Email'],
             'site_email' => ['type' => 'text', 'label' => 'Site Email (Navbar)'],
             'site_phone' => ['type' => 'text', 'label' => 'Site Phone (Navbar)'],
             'site_address' => ['type' => 'textarea', 'label' => 'Site Address'],
