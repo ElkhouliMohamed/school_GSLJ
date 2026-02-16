@@ -44,6 +44,17 @@ class HandleInertiaRequests extends Middleware
             'settings' => \App\Models\Setting::all()->mapWithKeys(function ($setting) {
                 return [$setting->key => $setting->getTranslations('value')];
             })->toArray(),
+            'facilities' => \App\Models\Facility::where('is_active', true)
+                ->orderBy('order')
+                ->get(['id', 'name', 'slug', 'type'])
+                ->map(function ($facility) {
+                    return [
+                        'id' => $facility->id,
+                        'name' => $facility->getTranslations('name'),
+                        'slug' => $facility->slug,
+                        'type' => $facility->type,
+                    ];
+                }),
         ];
     }
 }

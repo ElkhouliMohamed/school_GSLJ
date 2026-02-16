@@ -36,7 +36,7 @@ export default function CreateEdit({ gallery = null }) {
             try {
                 setIsCompressing(true);
                 setCompressionProgress({ current: 0, total: FileList.length });
-                
+
                 for (let i = 0; i < FileList.length; i++) {
                     const file = FileList[i];
                     setCompressionProgress({ current: i + 1, total: FileList.length });
@@ -73,7 +73,7 @@ export default function CreateEdit({ gallery = null }) {
                     setIsCompressing(true);
                     const compressedFile = await compressImage(file, { maxSizeMB: 7, maxWidthOrHeight: 1920 });
                     setData('file', compressedFile);
-                    
+
                     const reader = new FileReader();
                     reader.onloadend = () => {
                         setPreviews([reader.result]);
@@ -99,11 +99,11 @@ export default function CreateEdit({ gallery = null }) {
 
     const submit = (e) => {
         e.preventDefault();
-        
+
         let routeName;
         if (isEditing) {
-            // Note: Route parameter must be 'album' because Route::resource('albums', ...)
-            routeName = route('admin.galleries.update', { album: gallery.id }, false);
+            // Note: Route parameter must be 'gallery_item' because Route::resource('gallery-items', ...)
+            routeName = route('admin.galleries.update', gallery.id, false);
         } else {
             routeName = route('admin.galleries.store', undefined, false);
         }

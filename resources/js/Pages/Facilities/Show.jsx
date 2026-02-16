@@ -66,18 +66,27 @@ export default function Show({ facility }) {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="bg-violet-600">
-                    <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+                <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+                    {facility.images && facility.images.length > 0 && (
+                        <img
+                            src={facility.images[0]}
+                            alt={getLocalized(facility.name)}
+                            className="absolute inset-0 -z-10 h-full w-full object-cover object-center opacity-40"
+                        />
+                    )}
+                    <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
+
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="text-center">
                             <div className="flex justify-center mb-6">
-                                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-violet-100 text-violet-600">
+                                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20">
                                     <IconComponent className="h-10 w-10" />
                                 </div>
                             </div>
-                            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl font-serif shadow-sm">
                                 {getLocalized(facility.name)}
                             </h1>
-                            <p className="mt-4 text-xl text-violet-100 capitalize">
+                            <p className="mt-4 text-xl text-gray-300 capitalize font-light">
                                 {getTypeLabel(facility.type) || facility.type}
                             </p>
                         </div>

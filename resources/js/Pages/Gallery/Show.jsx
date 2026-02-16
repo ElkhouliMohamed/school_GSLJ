@@ -1,0 +1,234 @@
+import React, { useState, useEffect } from 'react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import MainLayout from '@/Layouts/MainLayout';
+import { VideoCameraIcon, ChevronLeftIcon, ChevronRightIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { getTranslation } from '../../translations';
+
+export default function Show({ album, galleries }) {
+    const { locale } = usePage().props;
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const t = (key) => getTranslation(key, locale);
+
+    const openModal = (item) => {
+        setSelectedItem(item);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        setSelectedItem(null);
+        document.body.style.overflow = 'auto';
+    };
+
+    const getCurrentIndex = () => {
+        if (!selectedItem) return -1;
+        return galleries.data.findIndex(item => item.id === selectedItem.id);
+    };
+
+    const goToNext = () => {
+        const currentIndex = getCurrentIndex();
+        if (currentIndex < galleries.data.length - 1) {
+            setSelectedItem(galleries.data[currentIndex + 1]);
+        }
+    };
+
+    const goToPrevious = () => {
+        const currentIndex = getCurrentIndex();
+        if (currentIndex > 0) {
+            setSelectedItem(galleries.data[currentIndex - 1]);
+        }
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!selectedItem) return;
+
+            if (e.key === 'ArrowRight') {
+                goToNext();
+            } else if (e.key === 'ArrowLeft') {
+                goToPrevious();
+            } else if (e.key === 'Escape') {
+                closeModal();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedItem, galleries.data]);
+
+    return (
+        <MainLayout>
+            <Head title={album.title[locale]} />
+
+            {/* Hero Section */}
+            <div className="relative bg-violet-950 py-16 sm:py-20">
+                <div className="absolute inset-0 overflow-hidden">
+                    <img
+                        src={album.cover_image || "/images/gslj/hero.jpg"}
+                        alt=""
+                        className="h-full w-full object-cover object-center opacity-20 blur-sm"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-violet-950 via-violet-950/60" />
+                </div>
+                <div className="relative mx-auto max-w-7xl px-6 lg:px-8 text-center">
+                    <Link href={route('gallery.index')} className="inline-flex items-center text-violet-200 hover:text-white mb-6 transition-colors">
+                        <ArrowLeftIcon className="w-4 h-4 mr-2" />
+                        {t('back_to_gallery', 'Back to Albums')}
+                    </Link>
+                    <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl font-serif">
+                        {album.title[locale]}
+                    </h1>
+                    {album.description?.[locale] && (
+                        <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+                            {album.description[locale]}
+                        </p>
+                    )}
+                </div>
+            </div>
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
+                {galleries.data.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {galleries.data.map((item) => (
+                            <div
+                                key={item.id}
+                                className="group relative aspect-square cursor-pointer overflow-hidden rounded-lg bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                                onClick={() => openModal(item)}
+                            >
+                                {item.type === 'photo' ? (
+                                    <img
+                                        src={item.thumbnail || item.path}
+                                        alt={item.title?.[locale]}
+                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                ) : (
+                                    <div className="relative h-full w-full bg-gray-900">
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <VideoCameraIcon className="w-12 h-12 text-white/80 group-hover:text-white transition-colors" />
+                                        </div>
+                                        <img
+                                            src={item.thumbnail || "/images/gslj/logo.jpg"}
+                                            alt={item.title?.[locale]}
+                                            className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-20">
+                        <p className="text-gray-500 text-lg">{t('Aucun élément trouvé.', 'No images in this album yet.')}</p>
+                    </div>
+                )}
+
+                {/* Pagination */}
+                {galleries.links.length > 3 && (
+                    <div className="mt-12 flex justify-center">
+                        <div className="flex gap-2">
+                            {galleries.links.map((link, k) => (
+                                link.url ? (
+                                    <Link
+                                        key={k}
+                                        href={link.url}
+                                        className={`px-4 py-2 text-sm rounded-lg transition-colors ${link.active
+                                            ? 'bg-violet-600 text-white font-bold'
+                                            : 'text-gray-600 hover:bg-gray-100'
+                                            }`}
+                                        dangerouslySetInnerHTML={{ __html: link.label }}
+                                    />
+                                ) : (
+                                    <span
+                                        key={k}
+                                        className="px-4 py-2 text-sm rounded-lg transition-colors text-gray-300 cursor-default"
+                                        dangerouslySetInnerHTML={{ __html: link.label }}
+                                    />
+                                )
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Lightbox Modal */}
+            {selectedItem && (
+                <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md" onClick={closeModal}>
+                    <button
+                        className="absolute top-4 right-4 text-white/70 hover:text-white z-50 p-2 transition-colors"
+                        onClick={closeModal}
+                    >
+                        <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    {/* Previous Arrow */}
+                    {getCurrentIndex() > 0 && (
+                        <button
+                            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-200 backdrop-blur-sm"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToPrevious();
+                            }}
+                        >
+                            <ChevronLeftIcon className="h-8 w-8" />
+                        </button>
+                    )}
+
+                    {/* Next Arrow */}
+                    {getCurrentIndex() < galleries.data.length - 1 && (
+                        <button
+                            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-200 backdrop-blur-sm"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToNext();
+                            }}
+                        >
+                            <ChevronRightIcon className="h-8 w-8" />
+                        </button>
+                    )}
+
+                    <div className="relative max-w-6xl w-full h-full flex items-center justify-center p-4" onClick={(e) => e.stopPropagation()}>
+                        {selectedItem.type === 'photo' ? (
+                            <img
+                                src={selectedItem.path}
+                                alt={selectedItem.title?.[locale]}
+                                className="max-w-full max-h-[85vh] object-contain rounded shadow-2xl"
+                            />
+                        ) : (
+                            <div className="w-full max-w-4xl aspect-video rounded-lg overflow-hidden shadow-2xl bg-black">
+                                {selectedItem.path.startsWith('/storage') ? (
+                                    <video
+                                        src={selectedItem.path}
+                                        controls
+                                        autoPlay
+                                        className="w-full h-full"
+                                    />
+                                ) : (
+                                    /* Embed Frame Handling */
+                                    <div className="flex flex-col items-center justify-center h-full text-white">
+                                        <p className="mb-4 text-lg">{t('external_video')}</p>
+                                        <a
+                                            href={selectedItem.path}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-6 py-3 bg-blue-600 rounded-full font-bold hover:bg-blue-500 transition-colors"
+                                        >
+                                            {t('watch_provider')}
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                        {selectedItem.title?.[locale] && (
+                            <div className="absolute bottom-4 left-0 right-0 text-center text-white font-medium text-lg drop-shadow-md pointer-events-none">
+                                {selectedItem.title[locale]}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+        </MainLayout>
+    );
+}

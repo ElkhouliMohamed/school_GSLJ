@@ -27,7 +27,7 @@ class GalleryController extends Controller
         }
 
         $galleries = $query->paginate(12)->withQueryString();
-        
+
         return Inertia::render('Admin/Galleries/Index', [
             'galleries' => $galleries,
             'filters' => [
@@ -49,6 +49,7 @@ class GalleryController extends Controller
             'video_source' => 'nullable|in:url,upload',
             'title.en' => 'nullable|string',
             'title.fr' => 'nullable|string',
+            'gallery_album_id' => 'nullable|exists:gallery_albums,id',
         ];
 
         if ($request->type === 'photo') {
@@ -64,7 +65,7 @@ class GalleryController extends Controller
 
         $request->validate($rules);
 
-        $baseData = $request->only(['title', 'type']);
+        $baseData = $request->only(['title', 'type', 'gallery_album_id']);
 
         if ($request->type === 'photo' && $request->hasFile('files')) {
             foreach ($request->file('files') as $file) {

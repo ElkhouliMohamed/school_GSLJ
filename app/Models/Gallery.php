@@ -10,7 +10,12 @@ class Gallery extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['title', 'type', 'path', 'thumbnail'];
+    protected $fillable = ['title', 'type', 'path', 'thumbnail', 'gallery_album_id'];
 
     public $translatable = ['title'];
+
+    public function album()
+    {
+        return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id');
+    }
 }

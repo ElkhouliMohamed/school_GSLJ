@@ -29,9 +29,6 @@ export default function InfoSection() {
                     <p className="text-base opacity-80 mb-8 italic">
                         {motto}
                     </p>
-                    <a href="/about" className="inline-block bg-primary text-white font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-white hover:text-primary transition-all duration-300 shadow-lg">
-                        {ctaText}
-                    </a>
                 </div>
 
                 {/* Image/Graphic Content */}

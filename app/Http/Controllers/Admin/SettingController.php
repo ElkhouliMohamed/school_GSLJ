@@ -21,7 +21,7 @@ class SettingController extends Controller
             'mail_username' => ['type' => 'text', 'label' => 'Mail Username'],
             'mail_password' => ['type' => 'password', 'label' => 'Mail Password'],
             'mail_encryption' => ['type' => 'text', 'label' => 'Mail Encryption (tls/ssl)'],
-            'mail_from_address' => ['type' => 'text', 'label' => 'From Address'],
+            'mail_from_address' => ['type' => 'text_simple', 'label' => 'From Address'],
             'mail_from_name' => ['type' => 'text', 'label' => 'From Name'],
             'contact_email' => ['type' => 'text', 'label' => 'Contact Email'],
             'contact_phone' => ['type' => 'text', 'label' => 'Contact Phone'],
@@ -30,7 +30,8 @@ class SettingController extends Controller
             'site_address' => ['type' => 'textarea', 'label' => 'Site Address'],
             'site_logo' => ['type' => 'image', 'label' => 'Site Logo'],
             'facebook_url' => ['type' => 'text', 'label' => 'Facebook URL'],
-            'twitter_url' => ['type' => 'text', 'label' => 'Twitter/X URL'],
+            'youtube_url' => ['type' => 'text', 'label' => 'YouTube URL'],
+            'tiktok_url' => ['type' => 'text', 'label' => 'TikTok URL'],
             'instagram_url' => ['type' => 'text', 'label' => 'Instagram URL'],
 
             // Home - Info Section
@@ -100,6 +101,15 @@ class SettingController extends Controller
             'about_contact_title' => ['type' => 'text', 'label' => 'About Page Contact Title'],
             'about_contact_description' => ['type' => 'textarea', 'label' => 'About Page Contact Description'],
 
+
+            // About Page - Values
+            'about_values_title' => ['type' => 'text', 'label' => 'Values Section Title'],
+            'about_value_1_title' => ['type' => 'text', 'label' => 'Value 1 Title (Excellence)'],
+            'about_value_1_description' => ['type' => 'textarea', 'label' => 'Value 1 Description'],
+            'about_value_2_title' => ['type' => 'text', 'label' => 'Value 2 Title (Respect)'],
+            'about_value_2_description' => ['type' => 'textarea', 'label' => 'Value 2 Description'],
+            'about_value_3_title' => ['type' => 'text', 'label' => 'Value 3 Title (Empathy)'],
+            'about_value_3_description' => ['type' => 'textarea', 'label' => 'Value 3 Description'],
             // Theme
             'theme_color' => ['type' => 'color', 'label' => 'Primary Theme Color'],
             'theme_color_primary' => ['type' => 'color', 'label' => 'Primary Theme Color (Tailwind)'],
@@ -271,6 +281,15 @@ class SettingController extends Controller
                         }
                         // Color should be same for both languages
                         if (is_string($value)) {
+                            $value = ['en' => $value, 'fr' => $value];
+                        }
+                    }
+
+
+
+                    // Handle simple text/number/password fields that should be same for both languages
+                    if ($type === 'text_simple' || $type === 'number' || $type === 'password') {
+                        if (is_string($value) || is_numeric($value) || $value === null) {
                             $value = ['en' => $value, 'fr' => $value];
                         }
                     }

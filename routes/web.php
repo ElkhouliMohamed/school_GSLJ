@@ -18,7 +18,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
     Route::resource('events', \App\Http\Controllers\Admin\EventController::class);
-    Route::resource('albums', \App\Http\Controllers\Admin\GalleryController::class)->names('galleries');
+    Route::resource('albums', \App\Http\Controllers\Admin\GalleryAlbumController::class);
+    Route::resource('gallery-items', \App\Http\Controllers\Admin\GalleryController::class)->names('galleries');
     Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class);
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('programs', \App\Http\Controllers\Admin\ProgramController::class);
@@ -46,6 +47,7 @@ Route::get('/news', [\App\Http\Controllers\Public\BlogController::class, 'index'
 Route::get('/news/{slug}', [\App\Http\Controllers\Public\BlogController::class, 'show'])->name('news.show');
 
 Route::get('/gallery', [\App\Http\Controllers\Public\GalleryController::class, 'index'])->name('gallery.index');
+Route::get('/gallery/{slug}', [\App\Http\Controllers\Public\GalleryController::class, 'show'])->name('gallery.show');
 
 // Programs (Educational Cycles)
 Route::get('/programs', [\App\Http\Controllers\ProgramController::class, 'index'])->name('programs.index');
@@ -61,8 +63,13 @@ Route::get('/team/{slug}', [\App\Http\Controllers\TeamController::class, 'show']
 
 
 
+
+
 Route::get('/about', function () {
-    return Inertia::render('About');
+    $team = \App\Models\TeamMember::where('is_active', true)->orderBy('order')->get();
+    return Inertia::render('About', [
+        'team' => $team
+    ]);
 })->name('about');
 
 Route::get('/admissions', function () {
@@ -78,4 +85,18 @@ Route::get('/contact', function () {
 })->name('contact');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+
+// Legal Pages
+Route::get('/mentions-legales', function () {
+    return Inertia::render('Legal/MentionsLegales');
+})->name('legal.mentions');
+
+Route::get('/protection-donnees', function () {
+    return Inertia::render('Legal/PrivacyPolicy');
+})->name('legal.privacy');
+
+Route::get('/cookies', function () {
+    return Inertia::render('Legal/Cookies');
+})->name('legal.cookies');
+
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);

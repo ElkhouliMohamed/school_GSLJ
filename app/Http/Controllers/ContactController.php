@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactFormMail;
+use App\Mail\ContactSubmissionMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -25,6 +26,9 @@ class ContactController extends Controller
             $adminEmail = config('mail.from.address');
 
             Mail::to($adminEmail)->send(new ContactFormMail($data));
+
+            // Send confirmation email to user
+            Mail::to($data['email'])->send(new ContactSubmissionMail($data));
 
             return back()->with('success', 'Votre message a été envoyé avec succès! Nous vous contacterons bientôt.');
         } catch (\Exception $e) {

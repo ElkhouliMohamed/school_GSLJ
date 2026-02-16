@@ -5,7 +5,7 @@ import { getTranslation } from '../translations';
 import useSettings from '@/Hooks/useSettings';
 
 export default function Header() {
-    const { settings, locale, auth } = usePage().props;
+    const { settings, locale, auth, facilities } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileDropdownOpen, setMobileDropdownOpen] = useState({});
     const { getSetting } = useSettings();
@@ -24,10 +24,24 @@ export default function Header() {
     const sitePhone = getSetting('site_phone') || "+221 33 000 00 00";
     const siteEmail = getSetting('site_email') || "contact@lesjumelles.sn";
 
+    // Helper for localized content
+    const getLocalized = (content) => {
+        if (!content) return '';
+        if (typeof content === 'string') return content;
+        return content[locale] || content['fr'] || content['en'] || Object.values(content)[0] || '';
+    };
+
     const navigation = [
         { name: 'ACCUEIL', href: '/' },
         { name: 'À PROPOS', href: '/about' },
         { name: 'INSCRIPTIONS', href: '/admissions' },
+        {
+            name: 'SERVICES',
+            children: facilities?.map(facility => ({
+                name: getLocalized(facility.name),
+                href: `/facilities/${facility.slug}`
+            })) || []
+        },
         {
             name: 'PÉDAGOGIE',
             children: [
@@ -43,9 +57,9 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50 transition-all duration-300 font-sans shadow-lg bg-white">
-            {/* Top Bar - Vibrant Red/Secondary */}
-            <div className="hidden md:block bg-secondary text-white py-2 text-xs md:text-sm font-bold tracking-wide">
-                <div className="flex flex-col md:flex-row w-full items-center justify-between px-6 lg:px-8 gap-2 md:gap-0">
+            {/* Top Bar - Teal/Green inspired by Maarif */}
+            <div className="hidden md:block bg-[#00897B] text-white py-2 text-xs md:text-sm font-bold tracking-wide">
+                <div className="container mx-auto flex flex-col md:flex-row w-full items-center justify-between px-6 lg:px-8 gap-2 md:gap-0">
                     <div className="flex items-center gap-6">
                         <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-1 hover:text-gray-200">
                             <PhoneIcon className="h-4 w-4" />
@@ -81,7 +95,7 @@ export default function Header() {
 
             {/* Main Header Area - Logo & Name & Navigation */}
             <div className="bg-white border-b border-gray-100 py-2">
-                <div className="flex w-full items-center justify-between px-4 lg:px-8 gap-4">
+                <div className="container mx-auto flex w-full items-center justify-between px-4 lg:px-8 gap-4">
                     {/* Logo & Name Container */}
                     <div className="flex items-center gap-3">
                         {/* Logo - Reduced Size */}
@@ -92,8 +106,14 @@ export default function Header() {
                         {/* School Name - Visible & Explicit */}
                         <div className="flex flex-col justify-center">
                             <Link href="/" className="hover:opacity-80 transition-opacity">
-                                <h1 className="text-sm sm:text-base md:text-lg font-extrabold text-primary uppercase leading-tight">
-                                    Groupe Scolaire Privé Bilingue <br className="hidden sm:block" />
+                                {/* Mobile/Tablet Name (< lg) */}
+                                <h1 className="lg:hidden text-base font-extrabold text-primary uppercase leading-tight">
+                                    GS LES JUMELLES
+                                </h1>
+
+                                {/* Desktop Name (>= lg) */}
+                                <h1 className="hidden lg:block text-sm sm:text-base md:text-lg font-extrabold text-primary uppercase leading-tight">
+                                    Groupe Scolaire Privé Bilingue <br />
                                     <span className="text-secondary">LES JUMELLES</span>
                                 </h1>
                             </Link>

@@ -42,7 +42,7 @@ export default function Index({ galleries, filters }) {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route('admin.galleries.destroy', { album: id }), {
+                router.delete(route('admin.galleries.destroy', id), {
                     preserveScroll: true,
                     onSuccess: () => {
                         Swal.fire({
@@ -93,37 +93,34 @@ export default function Index({ galleries, filters }) {
                         <FunnelIcon className="h-5 w-5 text-gray-500" />
                         <span className="text-sm font-medium text-gray-700">Filters:</span>
                     </div>
-                    
+
                     {/* Type Filter */}
                     <div className="flex gap-2">
                         <button
                             onClick={() => handleTypeChange('all')}
-                            className={`px-4 py-2 text-sm rounded-md transition-colors ${
-                                typeFilter === 'all'
-                                    ? 'bg-blue-600 text-white font-medium'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
+                            className={`px-4 py-2 text-sm rounded-md transition-colors ${typeFilter === 'all'
+                                ? 'bg-blue-600 text-white font-medium'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
                         >
                             All
                         </button>
                         <button
                             onClick={() => handleTypeChange('photo')}
-                            className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-1 ${
-                                typeFilter === 'photo'
-                                    ? 'bg-blue-600 text-white font-medium'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
+                            className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-1 ${typeFilter === 'photo'
+                                ? 'bg-blue-600 text-white font-medium'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
                         >
                             <PhotoIcon className="h-4 w-4" />
                             Images
                         </button>
                         <button
                             onClick={() => handleTypeChange('video')}
-                            className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-1 ${
-                                typeFilter === 'video'
-                                    ? 'bg-blue-600 text-white font-medium'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
+                            className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-1 ${typeFilter === 'video'
+                                ? 'bg-blue-600 text-white font-medium'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
                         >
                             <VideoCameraIcon className="h-4 w-4" />
                             Videos
@@ -157,7 +154,7 @@ export default function Index({ galleries, filters }) {
                         )}
 
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <Link href={route('admin.galleries.edit', { album: item.id })} className="p-2 bg-white rounded-full text-blue-600 hover:bg-blue-50">
+                            <Link href={route('admin.galleries.edit', item.id)} className="p-2 bg-white rounded-full text-blue-600 hover:bg-blue-50">
                                 <PencilSquareIcon className="h-5 w-5" />
                             </Link>
                             <button onClick={() => handleDelete(item.id)} className="p-2 bg-white rounded-full text-red-600 hover:bg-red-50">

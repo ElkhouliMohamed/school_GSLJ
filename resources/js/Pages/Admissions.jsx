@@ -10,7 +10,9 @@ export default function Admissions() {
         student_first_name: '',
         birth_date: '',
         requested_class: '',
+        requested_class: '',
         parent_name: '',
+        email: '',
         phone: '',
         message: '',
     });
@@ -251,6 +253,24 @@ export default function Admissions() {
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                                         />
                                         {errors.parent_name && <p className="mt-2 text-sm text-red-600">{errors.parent_name}</p>}
+                                    </div>
+                                </div>
+
+                                {/* Email du parent */}
+                                <div>
+                                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Email
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            value={data.email}
+                                            onChange={(e) => setData('email', e.target.value)}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                        />
+                                        {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
                                     </div>
                                 </div>
 

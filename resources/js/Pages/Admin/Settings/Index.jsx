@@ -183,6 +183,15 @@ export default function Index({ settings }) {
             // For images and video files, we want to initialize null for new upload inputs
             initialData[key] = null;
         }
+        // Initialize single value fields
+        if (['text_simple', 'number', 'password'].includes(settings[key].type)) {
+            // If existing value is an object (from DB translation), perform a safe check to get one value
+            // OR if it's already a simple value (though backend sends array usually)
+            // The backend logic $settings[$key]->getTranslations('value') returns an array ['en' => ..., 'fr' => ...]
+            // So we take 'en' as the value.
+            const val = settings[key].value;
+            initialData[key] = (val && typeof val === 'object' && val.en) ? val.en : (val || '');
+        }
     });
 
     const { data, setData, post, processing, progress, errors, wasSuccessful } = useForm({
@@ -260,6 +269,42 @@ export default function Index({ settings }) {
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
                             />
                         </div>
+                    </div>
+                )}
+
+                {/* Single Text Input (text_simple) */}
+                {setting.type === 'text_simple' && (
+                    <div>
+                        <input
+                            type="text"
+                            value={data[setting.key] || ''}
+                            onChange={(e) => setData(setting.key, e.target.value)}
+                            className="block w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
+                        />
+                    </div>
+                )}
+
+                {/* Number Input */}
+                {setting.type === 'number' && (
+                    <div>
+                        <input
+                            type="number"
+                            value={data[setting.key] || ''}
+                            onChange={(e) => setData(setting.key, e.target.value)}
+                            className="block w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
+                        />
+                    </div>
+                )}
+
+                {/* Password Input */}
+                {setting.type === 'password' && (
+                    <div>
+                        <input
+                            type="password"
+                            value={data[setting.key] || ''}
+                            onChange={(e) => setData(setting.key, e.target.value)}
+                            className="block w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
+                        />
                     </div>
                 )}
 
@@ -388,7 +433,7 @@ export default function Index({ settings }) {
         {
             title: "General Settings",
             description: "Basic site information.",
-            keys: ['site_name', 'site_logo', 'facebook_url', 'twitter_url', 'instagram_url']
+            keys: ['site_name', 'site_logo', 'facebook_url', 'youtube_url', 'tiktok_url', 'instagram_url']
         },
         {
             title: "Contact Information",
@@ -411,7 +456,7 @@ export default function Index({ settings }) {
             keys: ['info_title', 'info_description', 'info_motto', 'info_cta_text', 'info_image']
         },
         {
-            title: "Home: Director's Word",
+            title: "About: Director's Word",
             description: "Message from the school principal.",
             keys: ['director_title', 'director_name', 'director_role', 'director_content', 'director_image']
         },
@@ -449,6 +494,16 @@ export default function Index({ settings }) {
             title: "About Page",
             description: "Content for the About page.",
             keys: ['about_title', 'about_content', 'about_image', 'about_contact_title', 'about_contact_description']
+        },
+        {
+            title: "About Page: Nos Valeurs",
+            description: "Manage the values displayed on the About page.",
+            keys: [
+                'about_values_title',
+                'about_value_1_title', 'about_value_1_description',
+                'about_value_2_title', 'about_value_2_description',
+                'about_value_3_title', 'about_value_3_description'
+            ]
         },
         {
             title: "Theme",

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\PreRegistration;
 use App\Models\User;
 use App\Notifications\PreRegistrationNotification;
+use App\Mail\AdmissionSubmissionMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
 
@@ -22,6 +24,7 @@ class PreRegistrationController extends Controller
             'birth_date' => 'required|date',
             'requested_class' => 'required|string|max:255',
             'parent_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'message' => 'nullable|string',
         ]);
@@ -32,6 +35,9 @@ class PreRegistrationController extends Controller
         $adminEmail = env('ADMIN_EMAIL', 'admin@school.com');
         Notification::route('mail', $adminEmail)
             ->notify(new PreRegistrationNotification($preRegistration));
+
+        // Send confirmation email to user
+        Mail::to($preRegistration->email)->send(new AdmissionSubmissionMail($preRegistration));
 
         return back()->with('success', 'Votre demande de pré-inscription a été envoyée avec succès. Nous vous contacterons bientôt.');
     }
