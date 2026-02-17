@@ -100,3 +100,4 @@ Route::get('/cookies', function () {
 })->name('legal.cookies');
 
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
+

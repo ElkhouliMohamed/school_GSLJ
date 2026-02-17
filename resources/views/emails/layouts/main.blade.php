@@ -273,11 +273,31 @@
 
 <body>
     <div class="wrapper" style="background-color: #f8fafc; padding: 48px 20px; width: 100%;">
-        <div class="container" style="max-width: 620px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);">
+        <div class="container"
+            style="max-width: 620px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);">
 
             <!-- Header -->
             <div class="header" style="background-color: #ffffff; padding: 48px 40px 32px; text-align: center;">
-                <img src="{{ url('images/gslj/logo.jpg') }}" alt="{{ config('app.name') }}" class="logo" style="max-height: 72px; width: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;">
+                @php
+                    $logoSetting = \App\Models\Setting::where('key', 'site_logo')->first();
+                    $logoUrl = asset('images/gslj/logo.jpg'); // Default fallback
+
+                    if ($logoSetting) {
+                        // Spatie Translatable automatically handles JSON decoding and locale selection
+                        // when accessing the attribute, but only if the model is instantiated.
+                        // However, accessing ->value could return the string if current locale matches,
+                        // or we might need to be explicit if validation failed upstream or structure varies.
+                        // safest is to trust the accessor if generic, or manually decode if raw.
+                        // Given Setting model uses HasTranslations, $logoSetting->value should be the translated string (path).
+
+                        $logoPath = $logoSetting->value;
+                        if ($logoPath) {
+                            $logoUrl = asset($logoPath);
+                        }
+                    }
+                @endphp
+                <img src="{{ $logoUrl }}" alt="{{ config('app.name') }}" class="logo"
+                    style="max-height: 72px; width: auto; margin: 0 auto; display: block; border: 0; outline: none; text-decoration: none;">
             </div>
 
             <!-- Main Content -->
@@ -286,16 +306,18 @@
             </div>
 
             <!-- Footer -->
-            <div class="footer" style="background-color: #f1f5f9; padding: 40px 40px 32px; text-align: center; font-size: 14px; color: #64748b;">
+            <div class="footer"
+                style="background-color: #f1f5f9; padding: 40px 40px 32px; text-align: center; font-size: 14px; color: #64748b;">
                 <p>© {{ date('Y') }} {{ config('app.name') }}. {{ __('All rights reserved.') }}</p>
 
                 @php
                     $address = \App\Models\Setting::where('key', 'site_address')->value('value');
                     if ($address) {
-                        $decoded = json_decode($address, true);
-                        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                            $address = $decoded['fr'] ?? $decoded['en'] ?? $address;
-                        }
+                        // Manual decode because ->value('value') returns raw JSON string for translatable columns in some contexts
+                        // But wait, ->value('value') executes a query "select value from settings ... limit 1".
+                        // Use the Model instance method to be consistent with logo logic above.
+                        $addressSetting = \App\Models\Setting::where('key', 'site_address')->first();
+                        $address = $addressSetting ? $addressSetting->value : null;
                     }
                 @endphp
 
