@@ -55,6 +55,18 @@ class HandleInertiaRequests extends Middleware
                         'type' => $facility->type,
                     ];
                 }),
+            'programs' => \App\Models\Program::where('is_active', true)
+                ->orderBy('order')
+                ->get(['id', 'name', 'slug', 'level'])
+                ->map(function ($program) {
+                    return [
+                        'id' => $program->id,
+                        'name' => $program->getTranslations('name'),
+                        'slug' => $program->slug,
+                        'level' => $program->level,
+                        'description' => $program->getTranslations('description'),
+                    ];
+                }),
         ];
     }
 }

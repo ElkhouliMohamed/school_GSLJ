@@ -26,7 +26,5 @@ class Program extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'objectives' => 'array',
-        'curriculum' => 'array',
     ];
 }

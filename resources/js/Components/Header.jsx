@@ -5,7 +5,7 @@ import { getTranslation } from '../translations';
 import useSettings from '@/Hooks/useSettings';
 
 export default function Header() {
-    const { settings, locale, auth, facilities } = usePage().props;
+    const { settings, locale, auth, facilities, programs } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileDropdownOpen, setMobileDropdownOpen] = useState({});
     const { getSetting } = useSettings();
@@ -34,7 +34,14 @@ export default function Header() {
     const navigation = [
         { name: 'ACCUEIL', href: '/' },
         { name: 'À PROPOS', href: '/about' },
-        { name: 'INSCRIPTIONS', href: '/admissions' },
+        { name: 'À PROPOS', href: '/about' },
+        {
+            name: 'INSCRIPTIONS',
+            children: programs?.map(program => ({
+                name: getLocalized(program.name),
+                href: `/programs/${program.slug}`
+            })) || []
+        },
         {
             name: 'SERVICES',
             children: facilities?.map(facility => ({
@@ -45,8 +52,8 @@ export default function Header() {
         {
             name: 'PÉDAGOGIE',
             children: [
-                { name: 'Maternelle & Primaire', href: '/programs/elementary-school-program' },
-                { name: 'Collège & Lycée', href: '/programs/high-school-program' },
+                { name: 'Maternelle & Primaire', href: '/programs/elementaire' },
+                { name: 'Collège & Lycée', href: '/programs/moyen-secondaire' },
             ]
         },
         { name: 'ACTUALITÉS', href: '/news' },

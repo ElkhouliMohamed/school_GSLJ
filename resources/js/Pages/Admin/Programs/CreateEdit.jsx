@@ -9,13 +9,17 @@ export default function CreateEdit({ program = null }) {
 
     const { data, setData, post: submitPost, processing, errors } = useForm({
         name: {
-            en: program?.name?.en || '',
-            fr: program?.name?.fr || '',
+            fr: program?.name?.fr || program?.name?.en || '',
         },
         level: program?.level || 'preschool',
         description: {
-            en: program?.description?.en || '',
-            fr: program?.description?.fr || '',
+            fr: program?.description?.fr || program?.description?.en || '',
+        },
+        objectives: {
+            fr: program?.objectives?.fr || (Array.isArray(program?.objectives) ? program.objectives : []) || [],
+        },
+        curriculum: {
+            fr: program?.curriculum?.fr || (Array.isArray(program?.curriculum) ? program.curriculum : []) || [],
         },
         image: null,
         order: program?.order || 0,
@@ -34,7 +38,7 @@ export default function CreateEdit({ program = null }) {
             setIsCompressing(true);
             const compressedFile = await compressImage(file, { maxSizeMB: 5, maxWidthOrHeight: 1920 });
             setData('image', compressedFile);
-            
+
             const reader = new FileReader();
             reader.onloadend = () => setPreview(reader.result);
             reader.readAsDataURL(compressedFile);
@@ -60,25 +64,12 @@ export default function CreateEdit({ program = null }) {
                 <div className="px-4 py-6 sm:p-8">
                     <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                        {/* Name English */}
-                        <div className="sm:col-span-3">
-                            <label htmlFor="name_en" className="block text-sm font-medium leading-6 text-gray-900">
-                                Name (English)
-                            </label>
-                            <input
-                                type="text"
-                                id="name_en"
-                                value={data.name.en}
-                                onChange={(e) => setData('name', { ...data.name, en: e.target.value })}
-                                className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
-                            />
-                            {errors['name.en'] && <p className="mt-2 text-sm text-red-600">{errors['name.en']}</p>}
-                        </div>
+
 
                         {/* Name French */}
                         <div className="sm:col-span-3">
                             <label htmlFor="name_fr" className="block text-sm font-medium leading-6 text-gray-900">
-                                Name (French)
+                                Nom (Français)
                             </label>
                             <input
                                 type="text"
@@ -93,7 +84,7 @@ export default function CreateEdit({ program = null }) {
                         {/* Level */}
                         <div className="sm:col-span-3">
                             <label htmlFor="level" className="block text-sm font-medium leading-6 text-gray-900">
-                                Level
+                                Niveau Académique
                             </label>
                             <select
                                 id="level"
@@ -101,10 +92,11 @@ export default function CreateEdit({ program = null }) {
                                 onChange={(e) => setData('level', e.target.value)}
                                 className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
                             >
-                                <option value="preschool">Preschool</option>
-                                <option value="elementary">Elementary</option>
-                                <option value="middle">Middle School</option>
-                                <option value="secondary">Secondary</option>
+                                <option value="preschool">Préscolaire</option>
+                                <option value="elementary">Élémentaire</option>
+                                <option value="middle">Moyen</option>
+                                <option value="secondary">Secondaire</option>
+                                <option value="vocational">Formation Professionnelle</option>
                             </select>
                             {errors.level && <p className="mt-2 text-sm text-red-600">{errors.level}</p>}
                         </div>
@@ -112,7 +104,7 @@ export default function CreateEdit({ program = null }) {
                         {/* Order */}
                         <div className="sm:col-span-3">
                             <label htmlFor="order" className="block text-sm font-medium leading-6 text-gray-900">
-                                Display Order
+                                Ordre d'affichage
                             </label>
                             <input
                                 type="number"
@@ -123,25 +115,12 @@ export default function CreateEdit({ program = null }) {
                             />
                         </div>
 
-                        {/* Description English */}
-                        <div className="col-span-full">
-                            <label htmlFor="description_en" className="block text-sm font-medium leading-6 text-gray-900">
-                                Description (English)
-                            </label>
-                            <textarea
-                                id="description_en"
-                                rows={5}
-                                value={data.description.en}
-                                onChange={(e) => setData('description', { ...data.description, en: e.target.value })}
-                                className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
-                            />
-                            {errors['description.en'] && <p className="mt-2 text-sm text-red-600">{errors['description.en']}</p>}
-                        </div>
+
 
                         {/* Description French */}
                         <div className="col-span-full">
                             <label htmlFor="description_fr" className="block text-sm font-medium leading-6 text-gray-900">
-                                Description (French)
+                                Description (Français)
                             </label>
                             <textarea
                                 id="description_fr"
@@ -153,9 +132,91 @@ export default function CreateEdit({ program = null }) {
                             {errors['description.fr'] && <p className="mt-2 text-sm text-red-600">{errors['description.fr']}</p>}
                         </div>
 
+                        {/* Objectives (French) */}
+                        <div className="col-span-full">
+                            <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                                Objectifs Pédagogiques (Français)
+                            </label>
+                            <div className="space-y-2">
+                                {(data.objectives.fr || []).map((item, index) => (
+                                    <div key={index} className="flex gap-2">
+                                        <input
+                                            type="text"
+                                            value={item}
+                                            onChange={(e) => {
+                                                const newObjectives = [...data.objectives.fr];
+                                                newObjectives[index] = e.target.value;
+                                                setData('objectives', { ...data.objectives, fr: newObjectives });
+                                            }}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
+                                            placeholder="Objectif..."
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const newObjectives = data.objectives.fr.filter((_, i) => i !== index);
+                                                setData('objectives', { ...data.objectives, fr: newObjectives });
+                                            }}
+                                            className="px-3 py-1.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-md border border-red-200"
+                                        >
+                                            Sup.
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => setData('objectives', { ...data.objectives, fr: [...(data.objectives.fr || []), ''] })}
+                                    className="mt-2 text-sm font-semibold text-violet-600 hover:text-violet-500"
+                                >
+                                    + Ajouter un objectif
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Curriculum (French) */}
+                        <div className="col-span-full">
+                            <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                                Programme Scolaire / Matières (Français)
+                            </label>
+                            <div className="space-y-2">
+                                {(data.curriculum.fr || []).map((item, index) => (
+                                    <div key={index} className="flex gap-2">
+                                        <input
+                                            type="text"
+                                            value={item}
+                                            onChange={(e) => {
+                                                const newCurriculum = [...data.curriculum.fr];
+                                                newCurriculum[index] = e.target.value;
+                                                setData('curriculum', { ...data.curriculum, fr: newCurriculum });
+                                            }}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
+                                            placeholder="Matière..."
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const newCurriculum = data.curriculum.fr.filter((_, i) => i !== index);
+                                                setData('curriculum', { ...data.curriculum, fr: newCurriculum });
+                                            }}
+                                            className="px-3 py-1.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-md border border-red-200"
+                                        >
+                                            Sup.
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => setData('curriculum', { ...data.curriculum, fr: [...(data.curriculum.fr || []), ''] })}
+                                    className="mt-2 text-sm font-semibold text-violet-600 hover:text-violet-500"
+                                >
+                                    + Ajouter une matière
+                                </button>
+                            </div>
+                        </div>
+
                         {/* Image Upload */}
                         <div className="col-span-full">
-                            <label className="block text-sm font-medium leading-6 text-gray-900">Program Image</label>
+                            <label className="block text-sm font-medium leading-6 text-gray-900">Image du Programme</label>
                             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                                 {preview ? (
                                     <div className="text-center">

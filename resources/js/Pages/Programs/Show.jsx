@@ -59,45 +59,51 @@ export default function Show({ program, teamMembers }) {
                             </div>
                         )}
 
-                        {program.objectives && program.objectives.length > 0 && (
-                            <div className="mb-16">
-                                <h2 className="text-3xl font-bold text-gray-900 mb-6">{locale === 'fr' || !locale ? 'Objectifs pédagogiques' : 'Learning Objectives'}</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {getLocalized(program.objectives).map((objective, index) => (
-                                        <div key={index} className="flex items-start">
-                                            <div className="flex-shrink-0">
-                                                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-100 text-violet-600">
-                                                    <span className="text-sm font-bold">{index + 1}</span>
-                                                </div>
-                                            </div>
-                                            <p className="ml-3 text-gray-600">{objective}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {program.curriculum && program.curriculum.length > 0 && (
-                            <div className="mb-16">
-                                <h2 className="text-3xl font-bold text-gray-900 mb-6">{locale === 'fr' || !locale ? 'Programme scolaire' : 'Curriculum'}</h2>
-                                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                                    <ul className="divide-y divide-gray-200">
-                                        {getLocalized(program.curriculum).map((subject, index) => (
-                                            <li key={index} className="px-6 py-4">
-                                                <div className="flex items-center">
-                                                    <div className="flex-shrink-0 h-5 w-5 text-violet-600">
-                                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                        </svg>
+                        {(() => {
+                            const objectives = getLocalized(program.objectives, []);
+                            return objectives && objectives.length > 0 && (
+                                <div className="mb-16">
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{locale === 'fr' || !locale ? 'Objectifs pédagogiques' : 'Learning Objectives'}</h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {objectives.map((objective, index) => (
+                                            <div key={index} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-100 text-violet-600">
+                                                        <span className="text-sm font-bold">{index + 1}</span>
                                                     </div>
-                                                    <p className="ml-3 text-gray-900 font-medium">{subject}</p>
                                                 </div>
-                                            </li>
+                                                <p className="ml-3 text-gray-600">{objective}</p>
+                                            </div>
                                         ))}
-                                    </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            );
+                        })()}
+
+                        {(() => {
+                            const curriculum = getLocalized(program.curriculum, []);
+                            return curriculum && curriculum.length > 0 && (
+                                <div className="mb-16">
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{locale === 'fr' || !locale ? 'Programme scolaire' : 'Curriculum'}</h2>
+                                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                                        <ul className="divide-y divide-gray-200">
+                                            {curriculum.map((subject, index) => (
+                                                <li key={index} className="px-6 py-4">
+                                                    <div className="flex items-center">
+                                                        <div className="flex-shrink-0 h-5 w-5 text-violet-600">
+                                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                            </svg>
+                                                        </div>
+                                                        <p className="ml-3 text-gray-900 font-medium">{subject}</p>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            );
+                        })()}
 
                         {program.image && (
                             <div className="mb-16">

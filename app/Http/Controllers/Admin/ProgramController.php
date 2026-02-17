@@ -26,16 +26,29 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name.en' => 'required|string',
             'name.fr' => 'required|string',
             'level' => 'required|string',
-            'description.en' => 'nullable|string',
             'description.fr' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
         ]);
 
         $data = $request->only(['name', 'level', 'description', 'objectives', 'curriculum', 'order', 'is_active']);
-        $data['slug'] = Str::slug($request->input('name.en'));
+
+        // Ensure we have array structures for translations
+        if (!is_array($data['name']))
+            $data['name'] = [];
+        if (!is_array($data['description']))
+            $data['description'] = [];
+
+        // If English is missing, use French
+        if (empty($data['name']['en'])) {
+            $data['name']['en'] = $request->input('name.fr');
+        }
+        if (empty($data['description']['en'])) {
+            $data['description']['en'] = $request->input('description.fr');
+        }
+
+        $data['slug'] = Str::slug($data['name']['en'] ?? $data['name']['fr']);
         $data['order'] = $request->input('order', 0);
         $data['is_active'] = $request->boolean('is_active');
 
@@ -59,15 +72,28 @@ class ProgramController extends Controller
     public function update(Request $request, Program $program)
     {
         $request->validate([
-            'name.en' => 'required|string',
             'name.fr' => 'required|string',
             'level' => 'required|string',
-            'description.en' => 'nullable|string',
             'description.fr' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
         ]);
 
         $data = $request->only(['name', 'level', 'description', 'objectives', 'curriculum', 'order', 'is_active']);
+
+        // Ensure we have array structures for translations
+        if (!is_array($data['name']))
+            $data['name'] = [];
+        if (!is_array($data['description']))
+            $data['description'] = [];
+
+        // If English is missing, use French
+        if (empty($data['name']['en'])) {
+            $data['name']['en'] = $request->input('name.fr');
+        }
+        if (empty($data['description']['en'])) {
+            $data['description']['en'] = $request->input('description.fr');
+        }
+
         $data['order'] = $request->input('order', 0);
         $data['is_active'] = $request->boolean('is_active');
 
