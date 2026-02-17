@@ -34,14 +34,7 @@ export default function Header() {
     const navigation = [
         { name: 'ACCUEIL', href: '/' },
         { name: 'À PROPOS', href: '/about' },
-        { name: 'À PROPOS', href: '/about' },
-        {
-            name: 'INSCRIPTIONS',
-            children: programs?.map(program => ({
-                name: getLocalized(program.name),
-                href: `/programs/${program.slug}`
-            })) || []
-        },
+        { name: 'INSCRIPTIONS', href: '/admissions' },
         {
             name: 'SERVICES',
             children: facilities?.map(facility => ({

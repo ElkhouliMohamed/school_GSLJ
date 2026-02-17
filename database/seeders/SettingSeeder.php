@@ -19,6 +19,16 @@ class SettingSeeder extends Seeder
             'twitter_url' => ['en' => 'https://twitter.com/lesjumelles', 'fr' => 'https://twitter.com/lesjumelles'],
             'instagram_url' => ['en' => 'https://instagram.com/lesjumelles', 'fr' => 'https://instagram.com/lesjumelles'],
 
+            // Helper for SMTP
+            'mail_mailer' => ['en' => 'smtp', 'fr' => 'smtp'],
+            'mail_host' => ['en' => 'smtp.resend.com', 'fr' => 'smtp.resend.com'],
+            'mail_port' => ['en' => '465', 'fr' => '465'],
+            'mail_username' => ['en' => 'resend', 'fr' => 'resend'],
+            'mail_password' => ['en' => 're_hkGTV8wP_CGfJWDMvcTTsLQpevV82NHGD', 'fr' => 're_hkGTV8wP_CGfJWDMvcTTsLQpevV82NHGD'],
+            'mail_encryption' => ['en' => 'tls', 'fr' => 'tls'],
+            'mail_from_address' => ['en' => 'noreplay@briefurl.app', 'fr' => 'noreplay@briefurl.app'],
+            'mail_from_name' => ['en' => 'Groupe Scolaire Privé Bilingue Les Jumelles', 'fr' => 'Groupe Scolaire Privé Bilingue Les Jumelles'],
+
             // Home - Hero
             'hero_title' => [
                 'en' => 'Welcome to Excellence',
