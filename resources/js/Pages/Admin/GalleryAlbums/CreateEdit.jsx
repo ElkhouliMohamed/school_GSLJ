@@ -3,7 +3,7 @@ import { Head, useForm, Link, router } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { ArrowLeft, Upload, X, Trash2 } from 'lucide-react';
 import Swal from 'sweetalert2';
-import imageCompression from 'browser-image-compression';
+import { compressImage } from '@/Utils/imageCompression';
 
 export default function CreateEdit({ album = null }) {
     const isEditing = !!album;
@@ -22,12 +22,27 @@ export default function CreateEdit({ album = null }) {
     });
 
     const [coverPreview, setCoverPreview] = useState(album?.cover_image || null);
+    const [isCompressingCover, setIsCompressingCover] = useState(false);
 
-    const handleCoverChange = (e) => {
+    const handleCoverChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
-            setData('cover_image', file);
-            setCoverPreview(URL.createObjectURL(file));
+            setIsCompressingCover(true);
+            try {
+                const compressedFile = await compressImage(file, {
+                    maxSizeMB: 1,
+                    maxWidthOrHeight: 1920,
+                    useWebWorker: true,
+                });
+                setData('cover_image', compressedFile);
+                setCoverPreview(URL.createObjectURL(compressedFile));
+            } catch (error) {
+                console.error("Cover compression failed", error);
+                setData('cover_image', file);
+                setCoverPreview(URL.createObjectURL(file));
+            } finally {
+                setIsCompressingCover(false);
+            }
         }
     };
 
@@ -84,7 +99,7 @@ export default function CreateEdit({ album = null }) {
             for (const file of files) {
                 if (file.type.startsWith('image/')) {
                     try {
-                        const compressedFile = await imageCompression(file, compressionOptions);
+                        const compressedFile = await compressImage(file, compressionOptions);
                         // Create a new File object because some backends expect the original name
                         const newFile = new File([compressedFile], file.name, {
                             type: file.type,
@@ -267,6 +282,7 @@ export default function CreateEdit({ album = null }) {
                                         </label>
                                     )}
                                 </div>
+                                {isCompressingCover && <p className="text-blue-500 text-sm mt-1 animate-pulse">Compressing cover image...</p>}
                                 {errors.cover_image && <p className="text-red-500 text-sm mt-1">{errors.cover_image}</p>}
                             </div>
 

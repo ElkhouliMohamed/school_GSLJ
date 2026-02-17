@@ -14,9 +14,9 @@ export default function About({ team }) {
     // --- Data for new sections ---
 
     // Mission Section Data
-    const missionTitle = "Notre Mission";
-    const missionContent = "Notre engagement est de nourrir la passion, l'envie et la soif d'apprendre. Nous formons le caractère par les valeurs, et la rigueur par le travail, le développement de la confiance en soi et la curiosité d'aller plus loin sont au cœur de notre projet.";
-    const missionImage = "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"; // Placeholder
+    const missionTitle = getSetting('about_mission_title', "Notre Mission");
+    const missionContent = getSetting('about_mission_content', "Notre engagement est de nourrir la passion, l'envie et la soif d'apprendre. Nous formons le caractère par les valeurs, et la rigueur par le travail, le développement de la confiance en soi et la curiosité d'aller plus loin sont au cœur de notre projet.\n\nPermettre un épanouissement de l'esprit, par la culture du goût, l'éveil à la curiosité intellectuelle et le développement de tous les potentiels en harmonie avec son milieu.\n\nFormer de futurs performance, futurs gestionnaires pleinement épanouis conscients de leurs responsabilités de meneur d'entreprise dans un environnement changeant de l'industrie.");
+    const missionImage = getSetting('about_mission_image', "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
 
     // Values Data
     const valuesTitle = getSetting('about_values_title', "Nos valeurs");
@@ -197,15 +197,9 @@ export default function About({ team }) {
                                 <h2 className="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl mb-6 font-serif">
                                     {missionTitle}
                                 </h2>
-                                <p className="text-lg leading-8 text-gray-700 mb-6">
+                                <div className="text-lg leading-8 text-gray-700 whitespace-pre-wrap">
                                     {missionContent}
-                                </p>
-                                <p className="text-lg leading-8 text-gray-700">
-                                    Permettre un épanouissement de l'esprit, par la culture du goût, l'éveil à la curiosité intellectuelle et le développement de tous les potentiels en harmonie avec son milieu.
-                                </p>
-                                <p className="text-lg leading-8 text-cyan-600 mt-4 font-medium">
-                                    Former de futurs performance, futurs gestionnaires pleinement épanouis conscients de leurs responsabilités de meneur d'entreprise dans un environnement changeant de l'industrie.
-                                </p>
+                                </div>
                             </div>
 
                             {/* Image */}

@@ -17,6 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\TrackVisits::class,
         ]);
 
+        $middleware->redirectUsersTo(function () {
+            if (\Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Auth::user()->hasRole('admin')) {
+                return route('admin.dashboard');
+            }
+            return route('home');
+        });
+
         $middleware->alias([
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,

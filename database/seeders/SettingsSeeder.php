@@ -253,6 +253,30 @@ class SettingsSeeder extends Seeder
                 'type' => 'textarea',
             ],
             [
+                'key' => 'about_mission_title',
+                'value' => [
+                    'en' => 'Our Mission',
+                    'fr' => 'Notre Mission'
+                ],
+                'type' => 'text',
+            ],
+            [
+                'key' => 'about_mission_content',
+                'value' => [
+                    'en' => "Our commitment is to nurture passion, desire, and thirst for learning. We form character through values, and rigor through work; developing self-confidence and curiosity to go further are at the heart of our project.\n\nEnabling mind fulfillment through the cultivation of taste, awakening intellectual curiosity, and developing all potentials in harmony with one's environment.\n\nTraining future performers, future managers fully fulfilled and conscious of their responsibilities as business leaders in a changing industry environment.",
+                    'fr' => "Notre engagement est de nourrir la passion, l'envie et la soif d'apprendre. Nous formons le caractère par les valeurs, et la rigueur par le travail, le développement de la confiance en soi et la curiosité d'aller plus loin sont au cœur de notre projet.\n\nPermettre un épanouissement de l'esprit, par la culture du goût, l'éveil à la curiosité intellectuelle et le développement de tous les potentiels en harmonie avec son milieu.\n\nFormer de futurs performance, futurs gestionnaires pleinement épanouis conscients de leurs responsabilités de meneur d'entreprise dans un environnement changeant de l'industrie."
+                ],
+                'type' => 'textarea',
+            ],
+            [
+                'key' => 'about_mission_image',
+                'value' => [
+                    'en' => 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'fr' => 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                'type' => 'image',
+            ],
+            [
                 'key' => 'about_image',
                 'value' => [
                     'en' => '/images/gslj/about.jpg',

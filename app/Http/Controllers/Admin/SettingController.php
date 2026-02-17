@@ -102,6 +102,11 @@ class SettingController extends Controller
             'about_contact_title' => ['type' => 'text', 'label' => 'About Page Contact Title'],
             'about_contact_description' => ['type' => 'textarea', 'label' => 'About Page Contact Description'],
 
+            // About Page - Mission
+            'about_mission_title' => ['type' => 'text', 'label' => 'Mission Title'],
+            'about_mission_content' => ['type' => 'textarea', 'label' => 'Mission Content'],
+            'about_mission_image' => ['type' => 'image', 'label' => 'Mission Image'],
+
 
             // About Page - Values
             'about_values_title' => ['type' => 'text', 'label' => 'Values Section Title'],

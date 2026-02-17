@@ -496,6 +496,11 @@ export default function Index({ settings }) {
             keys: ['about_title', 'about_content', 'about_image', 'about_contact_title', 'about_contact_description']
         },
         {
+            title: "About Page: Notre Mission",
+            description: "Manage the 'Notre Mission' section on the About page.",
+            keys: ['about_mission_title', 'about_mission_content', 'about_mission_image']
+        },
+        {
             title: "About Page: Nos Valeurs",
             description: "Manage the values displayed on the About page.",
             keys: [
