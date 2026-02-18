@@ -7,7 +7,7 @@ export default function Index({ settings }) {
 
     const THEME_PRESETS = [
         {
-            name: 'Modern Violet',
+            name: 'Violet Moderne',
             colors: {
                 theme_color: '#7c3aed',         // Violet 600
                 theme_color_primary: '#5b21b6', // Violet 800
@@ -16,7 +16,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Ocean Blue',
+            name: 'Bleu Océan',
             colors: {
                 theme_color: '#2563eb',         // Blue 600
                 theme_color_primary: '#1e3a8a', // Blue 900
@@ -25,7 +25,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Emerald City',
+            name: 'Émeraude',
             colors: {
                 theme_color: '#059669',         // Emerald 600
                 theme_color_primary: '#064e3b', // Emerald 900
@@ -34,7 +34,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Sunset Orange',
+            name: 'Orange Coucher de Soleil',
             colors: {
                 theme_color: '#ea580c',         // Orange 600
                 theme_color_primary: '#7c2d12', // Orange 900
@@ -43,7 +43,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Royal Rose',
+            name: 'Rose Royal',
             colors: {
                 theme_color: '#e11d48',         // Rose 600
                 theme_color_primary: '#881337', // Rose 900
@@ -52,7 +52,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Midnight Slate',
+            name: 'Ardoise Minuit',
             colors: {
                 theme_color: '#475569',         // Slate 600
                 theme_color_primary: '#0f172a', // Slate 900
@@ -61,7 +61,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Golden Amber',
+            name: 'Ambre Doré',
             colors: {
                 theme_color: '#d97706',         // Amber 600
                 theme_color_primary: '#78350f', // Amber 900
@@ -70,7 +70,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Teal Waters',
+            name: 'Eaux Sarcelles',
             colors: {
                 theme_color: '#0d9488',         // Teal 600
                 theme_color_primary: '#134e4a', // Teal 900
@@ -79,7 +79,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Crimson Red',
+            name: 'Rouge Cramoisi',
             colors: {
                 theme_color: '#dc2626',         // Red 600
                 theme_color_primary: '#7f1d1d', // Red 900
@@ -88,7 +88,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Indigo Night',
+            name: 'Nuit Indigo',
             colors: {
                 theme_color: '#4f46e5',         // Indigo 600
                 theme_color_primary: '#312e81', // Indigo 900
@@ -97,7 +97,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Sky Blue',
+            name: 'Bleu Ciel',
             colors: {
                 theme_color: '#0ea5e9',         // Sky 500
                 theme_color_primary: '#0c4a6e', // Sky 900
@@ -106,7 +106,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Hot Pink',
+            name: 'Rose Vif',
             colors: {
                 theme_color: '#db2777',         // Pink 600
                 theme_color_primary: '#831843', // Pink 900
@@ -115,7 +115,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Lime Zest',
+            name: 'Zeste de Citron Vert',
             colors: {
                 theme_color: '#65a30d',         // Lime 600
                 theme_color_primary: '#365314', // Lime 900
@@ -124,7 +124,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Fuchsia Fun',
+            name: 'Fuchsia Plaisir',
             colors: {
                 theme_color: '#c026d3',         // Fuchsia 600
                 theme_color_primary: '#701a75', // Fuchsia 900
@@ -133,7 +133,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Cyan Future',
+            name: 'Futur Cyan',
             colors: {
                 theme_color: '#0891b2',         // Cyan 600
                 theme_color_primary: '#164e63', // Cyan 900
@@ -142,7 +142,7 @@ export default function Index({ settings }) {
             }
         },
         {
-            name: 'Elegant Gray',
+            name: 'Gris Élégant',
             colors: {
                 theme_color: '#52525b',         // Zinc 600
                 theme_color_primary: '#18181b', // Zinc 900
@@ -246,7 +246,7 @@ export default function Index({ settings }) {
                 {setting.type === 'text' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="text-xs text-gray-500 mb-1 block">English</label>
+                            <label className="text-xs text-gray-500 mb-1 block">Anglais</label>
                             <input
                                 type="text"
                                 value={typeof data[setting.key] === 'object' && data[setting.key]?.en !== undefined ? data[setting.key].en : (typeof setting.value === 'object' ? setting.value.en : '')}
@@ -258,7 +258,7 @@ export default function Index({ settings }) {
                             />
                         </div>
                         <div>
-                            <label className="text-xs text-gray-500 mb-1 block">French</label>
+                            <label className="text-xs text-gray-500 mb-1 block">Français</label>
                             <input
                                 type="text"
                                 value={typeof data[setting.key] === 'object' && data[setting.key]?.fr !== undefined ? data[setting.key].fr : (typeof setting.value === 'object' ? setting.value.fr : '')}
@@ -311,7 +311,7 @@ export default function Index({ settings }) {
                 {setting.type === 'textarea' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="text-xs text-gray-500 mb-1 block">English</label>
+                            <label className="text-xs text-gray-500 mb-1 block">Anglais</label>
                             <textarea
                                 rows={3}
                                 value={typeof data[setting.key] === 'object' && data[setting.key]?.en !== undefined ? data[setting.key].en : (typeof setting.value === 'object' ? setting.value.en : '')}
@@ -323,7 +323,7 @@ export default function Index({ settings }) {
                             />
                         </div>
                         <div>
-                            <label className="text-xs text-gray-500 mb-1 block">French</label>
+                            <label className="text-xs text-gray-500 mb-1 block">Français</label>
                             <textarea
                                 rows={3}
                                 value={typeof data[setting.key] === 'object' && data[setting.key]?.fr !== undefined ? data[setting.key].fr : (typeof setting.value === 'object' ? setting.value.fr : '')}
@@ -343,12 +343,12 @@ export default function Index({ settings }) {
                         <div className="shrink-0">
                             {settings[setting.key].value?.en ? (
                                 <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs text-center p-1">
-                                    Video Uploaded
+                                    Vidéo Téléchargée
                                 </div>
                             ) : (
-                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs">No Video</div>
+                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs">Aucune Vidéo</div>
                             )}
-                            <p className="mt-1 text-xs text-center text-gray-500">Current</p>
+                            <p className="mt-1 text-xs text-center text-gray-500">Actuel</p>
                         </div>
 
                         <div className="flex-1">
@@ -364,7 +364,7 @@ export default function Index({ settings }) {
                                     hover:file:bg-violet-100
                                 "
                             />
-                            <p className="mt-2 text-xs text-gray-500">Max size: 50MB. Formats: MP4, WebM. Note: Uploading a file will override the YouTube URL.</p>
+                            <p className="mt-2 text-xs text-gray-500">Taille max : 50MB. Formats : MP4, WebM. Note : Télécharger un fichier remplacera l'URL YouTube.</p>
                             {errors[setting.key] && <p className="mt-2 text-sm text-red-600">{errors[setting.key]}</p>}
                         </div>
                     </div>
@@ -381,7 +381,7 @@ export default function Index({ settings }) {
                                     className="h-20 w-20 rounded-lg object-cover ring-1 ring-gray-200"
                                 />
                             ) : (
-                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs">No Image</div>
+                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs">Aucune Image</div>
                             )}
                             <p className="mt-1 text-xs text-center text-gray-500">Current</p>
                         </div>
@@ -399,7 +399,7 @@ export default function Index({ settings }) {
                                     hover:file:bg-violet-100
                                 "
                             />
-                            <p className="mt-2 text-xs text-gray-500">Upload to replace. Recommended size depends on section. Images will be automatically converted to WebP.</p>
+                            <p className="mt-2 text-xs text-gray-500">Télécharger pour remplacer. La taille recommandée dépend de la section. Les images seront automatiquement converties en WebP.</p>
                         </div>
                     </div>
                 )}
@@ -418,10 +418,10 @@ export default function Index({ settings }) {
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mb-1">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                     </svg>
-                                    <span className="text-[10px] font-medium">View</span>
+                                    <span className="text-[10px] font-medium">Voir</span>
                                 </a>
                             ) : (
-                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs text-center p-1">No File</div>
+                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs text-center p-1">Aucun Fichier</div>
                             )}
                             <p className="mt-1 text-xs text-center text-gray-500">Current</p>
                         </div>
@@ -439,7 +439,7 @@ export default function Index({ settings }) {
                                     hover:file:bg-violet-100
                                 "
                             />
-                            <p className="mt-2 text-xs text-gray-500">Max size: 10MB. Formats: PDF, Word, Excel, etc.</p>
+                            <p className="mt-2 text-xs text-gray-500">Taille max : 10MB. Formats : PDF, Word, Excel, etc.</p>
                             {errors[setting.key] && <p className="mt-2 text-sm text-red-600">{errors[setting.key]}</p>}
                         </div>
                     </div>
@@ -459,7 +459,7 @@ export default function Index({ settings }) {
                                     <p className="text-sm font-medium text-gray-900">
                                         {typeof data[setting.key] === 'string' ? data[setting.key] : (typeof setting.value === 'object' ? setting.value.en : setting.value) || '#7c3aed'}
                                     </p>
-                                    <p className="text-xs text-gray-500">Or select a custom color</p>
+                                    <p className="text-xs text-gray-500">Ou sélectionnez une couleur personnalisée</p>
                                 </div>
                             </div>
                         </div>
@@ -472,83 +472,83 @@ export default function Index({ settings }) {
     // Definition of sections
     const sections = [
         {
-            title: "General Settings",
-            description: "Basic site information.",
+            title: "Paramètres Généraux",
+            description: "Informations de base sur le site.",
             keys: ['site_name', 'site_logo', 'facebook_url', 'youtube_url', 'tiktok_url', 'instagram_url']
         },
         {
-            title: "Contact Information",
-            description: "Address, phone numbers, and emails displayed on the site.",
+            title: "Coordonnées",
+            description: "Adresse, numéros de téléphone et emails affichés sur le site.",
             keys: ['site_address', 'site_email', 'site_phone', 'contact_email', 'contact_phone', 'admin_notification_email']
         },
         {
             title: "Documents",
-            description: "Upload public documents (PDFs, etc).",
+            description: "Télécharger des documents publics (PDF, etc.).",
             keys: ['registration_pdf', 'rules_pdf']
         },
         {
-            title: "Mail Configuration",
-            description: "SMTP settings for sending emails.",
+            title: "Configuration Mail",
+            description: "Paramètres SMTP pour l'envoi d'emails.",
             keys: ['mail_mailer', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption', 'mail_from_address', 'mail_from_name']
         },
         {
-            title: "Home: Hero Section",
-            description: "The main top section of the home page.",
+            title: "Accueil : Section Héro",
+            description: "La section principale en haut de la page d'accueil.",
             keys: ['hero_title', 'hero_highlight', 'hero_location', 'hero_motto', 'hero_bottom_bar_text', 'hero_image_1', 'hero_image_2', 'hero_image_3']
         },
         {
-            title: "Home: Info Section",
-            description: "Content for 'Notre Établissement'.",
+            title: "Accueil : Section Info",
+            description: "Contenu pour la section 'Notre Établissement'.",
             keys: ['info_title', 'info_description', 'info_motto', 'info_cta_text', 'info_image']
         },
         {
-            title: "About: Director's Word",
-            description: "Message from the school principal.",
+            title: "À Propos : Mot du Directeur",
+            description: "Message du directeur de l'école.",
             keys: ['director_title', 'director_name', 'director_role', 'director_content', 'director_image']
         },
         {
-            title: "Home: Video Tour",
-            description: "Promotional video section.",
+            title: "Accueil : Visite Vidéo",
+            description: "Section vidéo promotionnelle.",
             keys: ['video_title', 'video_description', 'video_url', 'video_file']
         },
         {
-            title: "Home: News Section",
-            description: "Headings for the news area.",
+            title: "Accueil : Section Actualités",
+            description: "Titres pour la zone des actualités.",
             keys: ['news_title', 'news_description', 'news_cta_text']
         },
         {
-            title: "Home: Why Choose Us",
-            description: "Content for the 'Pourquoi Choisir' section.",
+            title: "Accueil : Pourquoi Nous Choisir",
+            description: "Contenu pour la section 'Pourquoi Choisir'.",
             keys: ['why_us_title', 'why_us_description', 'why_us_point_1', 'why_us_point_2', 'why_us_point_3', 'why_us_point_4', 'why_us_cta_text', 'why_us_floating_text', 'why_us_image']
         },
         {
-            title: "Home: Events Section",
-            description: "Headings for the upcoming events area.",
+            title: "Accueil : Section Événements",
+            description: "Titres pour la zone des événements à venir.",
             keys: ['events_title', 'events_description', 'events_section_image']
         },
         {
-            title: "Home: Stats Section",
-            description: "Key achievement numbers.",
+            title: "Accueil : Section Statistiques",
+            description: "Chiffres clés de réussite.",
             keys: ['stats_title', 'stats_description']
         },
         {
-            title: "Home: Partners Section",
-            description: "Logos or text about partners.",
+            title: "Accueil : Section Partenaires",
+            description: "Logos ou texte sur les partenaires.",
             keys: ['partners_title', 'partners_description']
         },
         {
-            title: "About Page",
-            description: "Content for the About page.",
+            title: "Page À Propos",
+            description: "Contenu pour la page À Propos.",
             keys: ['about_title', 'about_content', 'about_image', 'about_contact_title', 'about_contact_description']
         },
         {
-            title: "About Page: Notre Mission",
-            description: "Manage the 'Notre Mission' section on the About page.",
+            title: "Page À Propos : Notre Mission",
+            description: "Gérer la section 'Notre Mission' sur la page À Propos.",
             keys: ['about_mission_title', 'about_mission_content', 'about_mission_image']
         },
         {
-            title: "About Page: Nos Valeurs",
-            description: "Manage the values displayed on the About page.",
+            title: "Page À Propos : Nos Valeurs",
+            description: "Gérer les valeurs affichées sur la page À Propos.",
             keys: [
                 'about_values_title',
                 'about_value_1_title', 'about_value_1_description',
@@ -557,8 +557,8 @@ export default function Index({ settings }) {
             ]
         },
         {
-            title: "Theme",
-            description: "Customize the website's appearance. These colors will override the default theme.",
+            title: "Thème",
+            description: "Personnaliser l'apparence du site web. Ces couleurs remplaceront le thème par défaut.",
             keys: ['theme_color', 'theme_color_primary', 'theme_color_secondary', 'theme_color_accent']
         },
     ];
@@ -581,7 +581,7 @@ export default function Index({ settings }) {
                                     background: `linear-gradient(to right, ${data.theme_color || '#fdf2f8'}, #ffffff)`
                                 }}
                             >
-                                <h3 className="text-sm font-semibold text-gray-900">Settings Sections</h3>
+                                <h3 className="text-sm font-semibold text-gray-900">Sections de Paramètres</h3>
                             </div>
                             <nav
                                 className="max-h-[calc(100vh-12rem)] overflow-y-auto p-2 space-y-1 scrollbar-thin scrollbar-thumb-violet-200 scrollbar-track-gray-100 hover:scrollbar-thumb-violet-300"
@@ -619,7 +619,7 @@ export default function Index({ settings }) {
                                 <div className="rounded-md bg-green-50 p-3 mb-3 border border-green-200">
                                     <div className="flex">
                                         <div className="ml-2">
-                                            <p className="text-xs font-medium text-green-800">Settings saved successfully.</p>
+                                            <p className="text-xs font-medium text-green-800">Paramètres enregistrés avec succès.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -633,13 +633,13 @@ export default function Index({ settings }) {
                                     backgroundColor: data.theme_color || '#7c3aed',
                                 }}
                             >
-                                {isCompressing ? 'Compressing Image...' : (processing ? 'Saving Changes...' : 'Save All Changes')}
+                                {isCompressing ? 'Compression de l\'image...' : (processing ? 'Enregistrement...' : 'Enregistrer tout')}
                             </button>
 
                             {progress && (
                                 <div className="mt-3">
                                     <div className="flex justify-between text-xs font-medium text-gray-900 mb-1">
-                                        <span>Uploading...</span>
+                                        <span>Téléchargement...</span>
                                         <span>{progress.percentage}%</span>
                                     </div>
                                     <div className="w-full bg-gray-200 rounded-full h-1.5">
@@ -673,7 +673,7 @@ export default function Index({ settings }) {
                                     <div className="space-y-6">
                                         {sections[activeTab].title === 'Theme' && (
                                             <div className="mb-8">
-                                                <label className="block text-sm font-medium text-gray-700 mb-4">Select a Theme Preset</label>
+                                                <label className="block text-sm font-medium text-gray-700 mb-4">Sélectionner un préréglage de thème</label>
                                                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                                                     {THEME_PRESETS.map((preset) => (
                                                         <button
@@ -701,7 +701,7 @@ export default function Index({ settings }) {
                                                     <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
-                                                    <p>Hover to see theme names. Click to apply colors instantly to the form below.</p>
+                                                    <p>Survolez pour voir les noms des thèmes. Cliquez pour appliquer les couleurs instantanément au formulaire ci-dessous.</p>
                                                 </div>
                                             </div>
                                         )}
@@ -715,7 +715,7 @@ export default function Index({ settings }) {
                                         disabled={processing || isCompressing}
                                         className="inline-flex justify-center rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:opacity-50"
                                     >
-                                        {isCompressing ? 'Compressing...' : 'Save'}
+                                        {isCompressing ? 'Compression...' : 'Enregistrer'}
                                     </button>
                                 </div>
                             </div>

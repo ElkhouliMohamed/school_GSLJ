@@ -27,24 +27,29 @@ export default function About({ team }) {
             title: getSetting('about_value_1_title', "EXCELLENCE"),
             description: getSetting('about_value_1_description', "À travers nos offres, nous cherchons à développer tant chez nos élèves que chez le personnel l'envie de se dépasser pour mieux réussir. Ne pas se contenter du banal, le dépassement de soi pour que la remise en question permanente accompagne chacun dans l'exercice de toutes ses fonctions."),
             icon: StarIcon,
-            color: "bg-green-700"
+            color: "text-emerald-700",
+            bg: "bg-emerald-50",
+            border: "border-emerald-200"
         },
         {
             id: 2,
             title: getSetting('about_value_2_title', "RESPECT"),
             description: getSetting('about_value_2_description', "Le respect est essentiel pour créer un environnement propice à l'apprentissage. Au GSLJ, nous garantissons l'acceptation de l'autre avec ses différences non seulement, mais aussi le respect de soi."),
-            icon: StarIcon,
-            color: "bg-yellow-400"
-        }, // Icon placeholder
+            icon: HeartIcon, // Changed to Heart or Handshake if available, keeping Star/Heart per original but adjusting logic
+            color: "text-amber-500",
+            bg: "bg-amber-50",
+            border: "border-amber-200"
+        },
         {
             id: 3,
             title: getSetting('about_value_3_title', "EMPATHIE"),
             description: getSetting('about_value_3_description', "L'empathie est la base de toute communauté scolaire. Nous encourageons l'ouverture d'esprit et l'écoute des autres afin de faire une place pour chacun et de construire une culture où la pluralité communique et vit dans des relations urbaines."),
-            icon: HeartIcon,
-            color: "bg-red-600"
+            icon: UserIcon, // Keeping generic or swapping
+            color: "text-rose-600",
+            bg: "bg-rose-50",
+            border: "border-rose-200"
         },
     ];
-
 
     const ContactForm = () => {
         const { data, setData, post, processing, errors, wasSuccessful, reset } = useForm({
@@ -257,32 +262,42 @@ export default function About({ team }) {
 
 
                 {/* 4. Nos Valeurs Section */}
-                <section className="bg-sky-50 py-16 sm:py-24">
+                <section className="bg-white py-16 sm:py-24 relative overflow-hidden">
+                    {/* Decorative background element */}
+                    <div className="absolute top-0 left-0 w-full h-1/2 bg-sky-50 -z-10 skew-y-1 transform origin-top-left"></div>
+
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="text-center mb-12">
+                        <div className="text-center mb-16">
                             <h2 className="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl font-serif">
                                 {valuesTitle}
                             </h2>
+                            <div className="w-20 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white text-center">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {values.map((val, index) => (
-                                <div key={val.id} className={`${val.color} px-6 py-10 rounded-lg shadow-lg relative flex flex-col items-center`}>
-                                    {/* Number Badge */}
-                                    <div className="absolute -top-6 bg-gray-100 text-gray-900 font-bold text-2xl w-12 h-12 flex items-center justify-center rounded-full shadow-md border-4 border-white">
-                                        {index + 1}
+                                <div
+                                    key={val.id}
+                                    className={`group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 relative overflow-hidden flex flex-col items-start h-full`}
+                                >
+                                    {/* Top Accent Line */}
+                                    <div className={`absolute top-0 left-0 w-full h-2 ${val.bg.replace('bg-', 'bg-gradient-to-r from-white via-').replace('-50', '-400')} to-white`}></div>
+
+                                    <div className={`mb-6 p-4 rounded-2xl ${val.bg} ${val.color} group-hover:scale-110 transition-transform duration-300`}>
+                                        <val.icon className="h-8 w-8" />
                                     </div>
 
-                                    <h3 className="text-2xl font-bold uppercase tracking-wider mb-4 mt-8 text-white">
+                                    <h3 className={`text-2xl font-bold uppercase tracking-wide mb-4 ${val.color}`}>
                                         {val.title}
                                     </h3>
 
-                                    <p className="text-sm leading-relaxed mb-6 font-medium text-white/90">
+                                    <p className="text-gray-600 leading-relaxed font-medium">
                                         {val.description}
                                     </p>
 
-                                    <div className="mt-auto">
-                                        <val.icon className="h-10 w-10 text-white/80" />
+                                    {/* Big Number Watermark */}
+                                    <div className={`absolute -bottom-4 -right-4 text-9xl font-black opacity-5 ${val.color} select-none`}>
+                                        {index + 1}
                                     </div>
                                 </div>
                             ))}
