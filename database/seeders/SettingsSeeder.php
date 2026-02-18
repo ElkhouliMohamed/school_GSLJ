@@ -42,6 +42,18 @@ class SettingsSeeder extends Seeder
                 'type' => 'text',
             ],
 
+            // Documents
+            [
+                'key' => 'registration_pdf',
+                'value' => ['en' => '', 'fr' => ''],
+                'type' => 'file',
+            ],
+            [
+                'key' => 'rules_pdf',
+                'value' => ['en' => '', 'fr' => ''],
+                'type' => 'file',
+            ],
+
             // Home - Why Choose Us
             [
                 'key' => 'why_us_title',

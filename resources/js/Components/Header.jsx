@@ -38,11 +38,12 @@ export default function Header() {
         {
             name: 'VIE SCOLAIRE',
             children: [
-                ...(facilities?.map(facility => ({
-                    name: getLocalized(facility.name),
-                    href: `/facilities/${facility.slug}`
-                })) || []),
-                { name: 'Règlement Intérieur', href: '/rules_regulations.pdf', target: '_blank' }
+                ...(facilities?.filter(f => !['règlement intérieur', 'reglement interieur'].includes(getLocalized(f.name).toLowerCase()))
+                    .map(facility => ({
+                        name: getLocalized(facility.name),
+                        href: `/facilities/${facility.slug}`
+                    })) || []),
+                ...(getSetting('rules_pdf') ? [{ name: 'Règlement Intérieur', href: getSetting('rules_pdf'), download: true }] : [])
             ]
         },
         {
@@ -137,13 +138,24 @@ export default function Header() {
                                         <div className="absolute top-full right-0 z-20 w-48 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
                                             <div className="py-1">
                                                 {item.children.map((child) => (
-                                                    <Link
-                                                        key={child.name}
-                                                        href={child.href}
-                                                        className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
-                                                    >
-                                                        {child.name}
-                                                    </Link>
+                                                    child.download ? (
+                                                        <a
+                                                            key={child.name}
+                                                            href={child.href}
+                                                            download
+                                                            className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
+                                                        >
+                                                            {child.name}
+                                                        </a>
+                                                    ) : (
+                                                        <Link
+                                                            key={child.name}
+                                                            href={child.href}
+                                                            className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
+                                                        >
+                                                            {child.name}
+                                                        </Link>
+                                                    )
                                                 ))}
                                             </div>
                                         </div>
@@ -215,14 +227,26 @@ export default function Header() {
                                             >
                                                 <div className="space-y-1 pt-1">
                                                     {item.children.map((child) => (
-                                                        <Link
-                                                            key={child.name}
-                                                            href={child.href}
-                                                            className="block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
-                                                            onClick={() => setMobileMenuOpen(false)}
-                                                        >
-                                                            {child.name}
-                                                        </Link>
+                                                        child.download ? (
+                                                            <a
+                                                                key={child.name}
+                                                                href={child.href}
+                                                                download
+                                                                className="block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                            >
+                                                                {child.name}
+                                                            </a>
+                                                        ) : (
+                                                            <Link
+                                                                key={child.name}
+                                                                href={child.href}
+                                                                className="block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                            >
+                                                                {child.name}
+                                                            </Link>
+                                                        )
                                                     ))}
                                                 </div>
                                             </div>
