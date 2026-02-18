@@ -116,6 +116,10 @@ class SettingController extends Controller
             'about_value_2_description' => ['type' => 'textarea', 'label' => 'Value 2 Description'],
             'about_value_3_title' => ['type' => 'text', 'label' => 'Value 3 Title (Empathy)'],
             'about_value_3_description' => ['type' => 'textarea', 'label' => 'Value 3 Description'],
+            // Documents
+            'registration_pdf' => ['type' => 'file', 'label' => 'Modalités d\'inscription (PDF)'],
+            'rules_pdf' => ['type' => 'file', 'label' => 'Règlement Intérieur (PDF)'],
+
             // Theme
             'theme_color' => ['type' => 'color', 'label' => 'Primary Theme Color'],
             'theme_color_primary' => ['type' => 'color', 'label' => 'Primary Theme Color (Tailwind)'],
@@ -158,24 +162,41 @@ class SettingController extends Controller
             // Check if this key is a file upload
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
-                if ($key === 'video_file' || $type === 'video_file' || $type === 'file') {
-                    $type = 'file'; // or video_file
+                if ($type === 'file' || $type === 'video_file' || $key === 'video_file') {
+                    $type = $type === 'video_file' ? 'video_file' : 'file';
+
+                    if ($type === 'video_file') {
+                        // Add Validation for Video File
+                        $validator = \Illuminate\Support\Facades\Validator::make(
+                            [$key => $file],
+                            [$key => 'mimes:mp4,webm,ogg|max:51200'], // 50MB Max
+                            [
+                                $key . '.mimes' => 'The video must be a file of type: mp4, webm, ogg.',
+                                $key . '.max' => 'The video size must not exceed 50 MB.',
+                            ]
+                        );
+
+                        if ($validator->fails()) {
+                            return redirect()->back()->withErrors($validator)->withInput();
+                        }
+                    } else {
+                        // Generic file validation (e.g. PDF)
+                        $validator = \Illuminate\Support\Facades\Validator::make(
+                            [$key => $file],
+                            [$key => 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:10240'], // 10MB Max
+                            [
+                                $key . '.mimes' => 'The file must be a document (PDF, Word, Excel, etc.).',
+                                $key . '.max' => 'The file size must not exceed 10 MB.',
+                            ]
+                        );
+
+                        if ($validator->fails()) {
+                            return redirect()->back()->withErrors($validator)->withInput();
+                        }
+                    }
+
                     $path = $file->store('settings', 'public');
                     $value = '/storage/' . $path; // Store relative path
-
-                    // Add Validation for Video File
-                    $validator = \Illuminate\Support\Facades\Validator::make(
-                        [$key => $file],
-                        [$key => 'mimes:mp4,webm,ogg|max:51200'], // 50MB Max
-                        [
-                            $key . '.mimes' => 'The video must be a file of type: mp4, webm, ogg.',
-                            $key . '.max' => 'The video size must not exceed 50 MB.',
-                        ]
-                    );
-
-                    if ($validator->fails()) {
-                        return redirect()->back()->withErrors($validator)->withInput();
-                    }
                 } else {
                     $type = 'image';
 

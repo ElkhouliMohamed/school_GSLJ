@@ -21,7 +21,8 @@ class Post extends Model
         'start_date',
         'end_date',
         'location',
-        'organizer'
+        'organizer',
+        'gallery'
     ];
 
     public $translatable = ['title', 'content'];
@@ -31,5 +32,6 @@ class Post extends Model
         'published_at' => 'datetime',
         'start_date' => 'datetime',
         'end_date' => 'datetime',
+        'gallery' => 'array',
     ];
 }

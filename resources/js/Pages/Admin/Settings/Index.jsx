@@ -179,7 +179,7 @@ export default function Index({ settings }) {
     const initialData = {};
     Object.keys(settings).forEach(key => {
         initialData[key] = settings[key].value || { en: '', fr: '' };
-        if (settings[key].type === 'image' || settings[key].type === 'video_file') {
+        if (settings[key].type === 'image' || settings[key].type === 'video_file' || settings[key].type === 'file') {
             // For images and video files, we want to initialize null for new upload inputs
             initialData[key] = null;
         }
@@ -404,6 +404,47 @@ export default function Index({ settings }) {
                     </div>
                 )}
 
+                {setting.type === 'file' && (
+                    <div className="flex items-center gap-x-6">
+                        {/* Current File Indicator */}
+                        <div className="shrink-0">
+                            {settings[setting.key].value?.en ? (
+                                <a
+                                    href={settings[setting.key].value.en}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="h-20 w-20 rounded-lg bg-gray-100 flex flex-col items-center justify-center text-violet-600 hover:text-violet-800 hover:bg-violet-50 transition-colors border border-gray-200"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mb-1">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span className="text-[10px] font-medium">View</span>
+                                </a>
+                            ) : (
+                                <div className="h-20 w-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs text-center p-1">No File</div>
+                            )}
+                            <p className="mt-1 text-xs text-center text-gray-500">Current</p>
+                        </div>
+
+                        <div className="flex-1">
+                            <input
+                                type="file"
+                                onChange={(e) => handleFileChange(setting.key, e)}
+                                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt"
+                                className="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100
+                                "
+                            />
+                            <p className="mt-2 text-xs text-gray-500">Max size: 10MB. Formats: PDF, Word, Excel, etc.</p>
+                            {errors[setting.key] && <p className="mt-2 text-sm text-red-600">{errors[setting.key]}</p>}
+                        </div>
+                    </div>
+                )}
+
                 {setting.type === 'color' && (
                     <div className="space-y-4">
                         <div className="flex items-center gap-x-6">
@@ -439,6 +480,11 @@ export default function Index({ settings }) {
             title: "Contact Information",
             description: "Address, phone numbers, and emails displayed on the site.",
             keys: ['site_address', 'site_email', 'site_phone', 'contact_email', 'contact_phone', 'admin_notification_email']
+        },
+        {
+            title: "Documents",
+            description: "Upload public documents (PDFs, etc).",
+            keys: ['registration_pdf', 'rules_pdf']
         },
         {
             title: "Mail Configuration",

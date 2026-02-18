@@ -30,7 +30,8 @@ class NewsController extends Controller
             'title.fr' => 'required|string',
             'content.en' => 'required|string',
             'content.fr' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:8192', // 8MB
+            'gallery.*' => 'image|max:8192', // 8MB
         ]);
 
         $data = $request->only(['title', 'content', 'is_published']);
@@ -41,6 +42,16 @@ class NewsController extends Controller
             $path = $request->file('image')->store('news', 'public');
             $data['image'] = '/storage/' . $path;
         }
+
+        // Handle Gallery
+        $gallery = [];
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $file->store('news/gallery', 'public');
+                $gallery[] = '/storage/' . $path;
+            }
+        }
+        $data['gallery'] = $gallery;
 
         if ($request->is_published) {
             $data['published_at'] = now();
@@ -74,6 +85,16 @@ class NewsController extends Controller
             $path = $request->file('image')->store('news', 'public');
             $data['image'] = '/storage/' . $path;
         }
+
+        // Handle Gallery
+        $gallery = $request->input('existing_gallery', []); // Keep existing images
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $file->store('news/gallery', 'public');
+                $gallery[] = '/storage/' . $path;
+            }
+        }
+        $data['gallery'] = $gallery;
 
         $news->update($data);
 

@@ -53,7 +53,7 @@ export default function Footer() {
     return (
         <footer className="bg-gray-900 text-gray-300 font-sans border-t border-primary/20">
             {/* Top decorative line */}
-            <div className="w-full h-1 bg-gradient-to-r from-primary via-violet-600 to-secondary"></div>
+            <div className="w-full h-1 bg-linear-to-r from-primary via-violet-600 to-secondary"></div>
 
             {/* Main Footer Content */}
             <div className="py-16 px-6 lg:px-8">
@@ -115,7 +115,34 @@ export default function Footer() {
                                 <LinkItem href="/admissions">Admissions</LinkItem>
                                 <LinkItem href="/news">Actualités</LinkItem>
                                 <LinkItem href="/gallery">Galerie</LinkItem>
+                                <LinkItem href="/gallery">Galerie</LinkItem>
                                 <LinkItem href="/contact">Contact</LinkItem>
+                                {getSetting('registration_pdf')?.en && (
+                                    <li>
+                                        <a
+                                            href={getSetting('registration_pdf').en}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group flex items-center gap-2 text-sm transition-all duration-300 transform hover:translate-x-1 text-gray-400 hover:text-white"
+                                        >
+                                            <ArrowRight className="w-3 h-3 transition-opacity opacity-0 group-hover:opacity-100 text-primary" />
+                                            Modalités d'inscription
+                                        </a>
+                                    </li>
+                                )}
+                                {getSetting('rules_pdf')?.en && (
+                                    <li>
+                                        <a
+                                            href={getSetting('rules_pdf').en}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group flex items-center gap-2 text-sm transition-all duration-300 transform hover:translate-x-1 text-gray-400 hover:text-white"
+                                        >
+                                            <ArrowRight className="w-3 h-3 transition-opacity opacity-0 group-hover:opacity-100 text-primary" />
+                                            Règlement Intérieur
+                                        </a>
+                                    </li>
+                                )}
                             </ul>
                         </div>
 
