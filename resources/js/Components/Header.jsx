@@ -36,22 +36,24 @@ export default function Header() {
         { name: 'À PROPOS', href: '/about' },
         { name: 'INSCRIPTIONS', href: '/admissions' },
         {
-            name: 'SERVICES',
-            children: facilities?.map(facility => ({
-                name: getLocalized(facility.name),
-                href: `/facilities/${facility.slug}`
-            })) || []
+            name: 'VIE SCOLAIRE',
+            children: [
+                ...(facilities?.map(facility => ({
+                    name: getLocalized(facility.name),
+                    href: `/facilities/${facility.slug}`
+                })) || []),
+                { name: 'Règlement Intérieur', href: '/rules_regulations.pdf', target: '_blank' }
+            ]
         },
         {
             name: 'PÉDAGOGIE',
-            children: [
-                { name: 'Maternelle & Primaire', href: '/programs/elementaire' },
-                { name: 'Collège & Lycée', href: '/programs/moyen-secondaire' },
-            ]
+            children: programs?.map(program => ({
+                name: getLocalized(program.name),
+                href: `/programs/${program.slug}`
+            })) || []
         },
         { name: 'ACTUALITÉS', href: '/news' },
         { name: 'GALERIE', href: '/gallery' },
-        { name: 'NOTRE ÉQUIPE', href: '/team' },
         { name: 'CONTACTS', href: '/contact' },
     ];
 
@@ -86,7 +88,7 @@ export default function Header() {
                                 className={`hover:opacity-80 transition-opacity ${locale === 'en' ? 'opacity-100' : 'opacity-50'}`}
                                 title="English"
                             >
-                                🇬🇧
+                                en
                             </Link>
                         </div>
                     </div>
@@ -147,7 +149,7 @@ export default function Header() {
                                         </div>
                                     </>
                                 ) : (
-                                    <Link key={item.name} href={item.href} className="text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-2 py-2 uppercase tracking-wide">
+                                    <Link key={item.name} href={item.href} className="flex items-center text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-2 py-2 uppercase tracking-wide">
                                         {item.name}
                                     </Link>
                                 )}
