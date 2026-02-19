@@ -211,7 +211,7 @@ export default function Header() {
                                         <div key={item.name} className="space-y-1">
                                             <button
                                                 onClick={() => toggleMobileDropdown(item.name)}
-                                                className="w-full flex items-center justify-between rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
+                                                className="-mx-3 flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
                                             >
                                                 <span>{item.name}</span>
                                                 <ChevronDownIcon
@@ -232,7 +232,7 @@ export default function Header() {
                                                                 key={child.name}
                                                                 href={child.href}
                                                                 download
-                                                                className="block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                                className="-mx-3 block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                             >
                                                                 {child.name}
@@ -241,7 +241,7 @@ export default function Header() {
                                                             <Link
                                                                 key={child.name}
                                                                 href={child.href}
-                                                                className="block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                                className="-mx-3 block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                             >
                                                                 {child.name}
