@@ -232,7 +232,7 @@ export default function Header() {
                                                                 key={child.name}
                                                                 href={child.href}
                                                                 download
-                                                                className="-mx-3 block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                                className="-mx-3 block w-full rounded-lg px-3 py-3 pl-6 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                             >
                                                                 {child.name}
@@ -241,7 +241,7 @@ export default function Header() {
                                                             <Link
                                                                 key={child.name}
                                                                 href={child.href}
-                                                                className="-mx-3 block rounded-lg py-2.5 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-700 hover:bg-secondary/10 hover:text-secondary transition-colors"
+                                                                className="-mx-3 block w-full rounded-lg px-3 py-3 pl-6 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                             >
                                                                 {child.name}
@@ -255,7 +255,7 @@ export default function Header() {
                                         <Link
                                             key={item.name}
                                             href={item.href}
-                                            className="-mx-3 block rounded-lg px-3 py-3 text-base font-bold leading-7 text-gray-900 hover:bg-gray-50 transition-colors"
+                                            className="-mx-3 block rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
                                             onClick={() => setMobileMenuOpen(false)}
                                         >
                                             {item.name}
@@ -265,12 +265,12 @@ export default function Header() {
                             </div>
                             <div className="py-6 border-t border-gray-200 space-y-2">
 
-                                <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                    <PhoneIcon className="h-5 w-5 text-secondary" />
+                                <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="-mx-3 flex items-center gap-2 rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors">
+                                    <PhoneIcon className="h-5 w-5 text-primary" />
                                     {sitePhone}
                                 </a>
-                                <a href={`mailto:${siteEmail}`} className="flex items-center gap-2 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                    <EnvelopeIcon className="h-5 w-5 text-secondary" />
+                                <a href={`mailto:${siteEmail}`} className="-mx-3 flex items-center gap-2 rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors">
+                                    <EnvelopeIcon className="h-5 w-5 text-primary" />
                                     {siteEmail}
                                 </a>
                             </div>
