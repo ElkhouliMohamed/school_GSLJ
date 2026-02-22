@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { compressImage } from '@/Utils/imageCompression';
+import { Editor } from '@tinymce/tinymce-react';
 
 export default function Index({ settings }) {
 
@@ -312,27 +313,59 @@ export default function Index({ settings }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="text-xs text-gray-500 mb-1 block">Anglais</label>
-                            <textarea
-                                rows={3}
-                                value={typeof data[setting.key] === 'object' && data[setting.key]?.en !== undefined ? data[setting.key].en : (typeof setting.value === 'object' ? setting.value.en : '')}
-                                onChange={(e) => {
-                                    const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
-                                    setData(setting.key, { ...oldVal, en: e.target.value })
-                                }}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
-                            />
+                            <div className="mt-2.5 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-violet-600 overflow-hidden">
+                                <Editor
+                                    tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js"
+                                    value={typeof data[setting.key] === 'object' && data[setting.key]?.en !== undefined ? data[setting.key].en : (typeof setting.value === 'object' ? setting.value.en : '')}
+                                    onEditorChange={(content) => {
+                                        const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
+                                        setData(setting.key, { ...oldVal, en: content });
+                                    }}
+                                    init={{
+                                        height: 300,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                                        ],
+                                        toolbar: 'undo redo | blocks | ' +
+                                            'bold italic forecolor | alignleft aligncenter ' +
+                                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                                            'removeformat | help',
+                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                        branding: false
+                                    }}
+                                />
+                            </div>
                         </div>
                         <div>
                             <label className="text-xs text-gray-500 mb-1 block">Français</label>
-                            <textarea
-                                rows={3}
-                                value={typeof data[setting.key] === 'object' && data[setting.key]?.fr !== undefined ? data[setting.key].fr : (typeof setting.value === 'object' ? setting.value.fr : '')}
-                                onChange={(e) => {
-                                    const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
-                                    setData(setting.key, { ...oldVal, fr: e.target.value })
-                                }}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6"
-                            />
+                            <div className="mt-2.5 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-violet-600 overflow-hidden">
+                                <Editor
+                                    tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js"
+                                    value={typeof data[setting.key] === 'object' && data[setting.key]?.fr !== undefined ? data[setting.key].fr : (typeof setting.value === 'object' ? setting.value.fr : '')}
+                                    onEditorChange={(content) => {
+                                        const oldVal = typeof data[setting.key] === 'object' ? data[setting.key] : (settings[setting.key].value || { en: '', fr: '' });
+                                        setData(setting.key, { ...oldVal, fr: content });
+                                    }}
+                                    init={{
+                                        height: 300,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                                        ],
+                                        toolbar: 'undo redo | blocks | ' +
+                                            'bold italic forecolor | alignleft aligncenter ' +
+                                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                                            'removeformat | help',
+                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                        branding: false
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 )}

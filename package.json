@@ -18,6 +18,7 @@
         "@headlessui/react": "^2.2.9",
         "@heroicons/react": "^2.2.0",
         "@inertiajs/react": "^2.3.6",
+        "@tinymce/tinymce-react": "^6.3.0",
         "@vitejs/plugin-react": "^5.1.2",
         "browser-image-compression": "^2.0.2",
         "chart.js": "^4.5.1",
