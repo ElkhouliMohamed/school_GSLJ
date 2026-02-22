@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td class="label">Message :</td>
-            <td class="value" style="white-space: pre-line;">{{ $data['message'] }}</td>
+            <td class="value">{!! $data['message'] !!}</td>
         </tr>
     </table>
 @endsection
