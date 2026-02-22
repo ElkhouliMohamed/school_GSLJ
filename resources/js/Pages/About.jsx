@@ -202,9 +202,10 @@ export default function About({ team }) {
                                 <h2 className="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl mb-6 font-serif">
                                     {missionTitle}
                                 </h2>
-                                <div className="text-lg leading-8 text-gray-700 whitespace-pre-wrap">
-                                    {missionContent}
-                                </div>
+                                <div
+                                    className="text-lg leading-8 text-gray-700 space-y-4"
+                                    dangerouslySetInnerHTML={{ __html: missionContent }}
+                                />
                             </div>
 
                             {/* Image */}
@@ -291,9 +292,10 @@ export default function About({ team }) {
                                         {val.title}
                                     </h3>
 
-                                    <p className="text-gray-600 leading-relaxed font-medium">
-                                        {val.description}
-                                    </p>
+                                    <div
+                                        className="text-gray-600 leading-relaxed font-medium space-y-2 text-sm sm:text-base"
+                                        dangerouslySetInnerHTML={{ __html: val.description }}
+                                    />
 
                                     {/* Big Number Watermark */}
                                     <div className={`absolute -bottom-4 -right-4 text-9xl font-black opacity-5 ${val.color} select-none`}>
@@ -313,9 +315,10 @@ export default function About({ team }) {
                             <h2 className="text-3xl font-bold tracking-tight text-gray-900 font-serif">
                                 {getLocalized(settings?.about_contact_title, locale, 'Contactez-nous')}
                             </h2>
-                            <p className="mt-6 text-lg leading-8 text-gray-600">
-                                {getLocalized(settings?.about_contact_description, locale, 'Vous avez des questions sur nos programmes ou les admissions ? N\'hésitez pas à nous écrire ou à visiter nos locaux.')}
-                            </p>
+                            <div
+                                className="mt-6 text-lg leading-8 text-gray-600 space-y-4"
+                                dangerouslySetInnerHTML={{ __html: getLocalized(settings?.about_contact_description, locale, 'Vous avez des questions sur nos programmes ou les admissions ? N\'hésitez pas à nous écrire ou à visiter nos locaux.') }}
+                            />
                         </div>
 
                         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">

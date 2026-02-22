@@ -27,9 +27,10 @@ export default function DirectorsWord() {
                             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                                 {title}
                             </h2>
-                            <p className="mt-6 text-lg leading-8 text-gray-600 whitespace-pre-wrap">
-                                {content}
-                            </p>
+                            <div
+                                className="mt-6 text-lg leading-8 text-gray-600 space-y-4"
+                                dangerouslySetInnerHTML={{ __html: content }}
+                            />
 
                             <div className="mt-8 border-l-4 border-violet-600 pl-4 py-1">
                                 <p className="font-semibold text-gray-900">{directorName}</p>
