@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td class="label">Message :</td>
-            <td class="value">{!! $data['message'] !!}</td>
+            <td class="value">{!! nl2br(e($data['message'])) !!}</td>
         </tr>
     </table>
 @endsection
