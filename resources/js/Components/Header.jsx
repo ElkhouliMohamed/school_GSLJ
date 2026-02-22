@@ -111,7 +111,7 @@ export default function Header() {
                             <Link href="/" className="hover:opacity-80 transition-opacity">
                                 {/* Mobile/Tablet Name (< lg) */}
                                 <h1 className="lg:hidden text-sm font-extrabold text-primary uppercase leading-tight">
-                                    GS LES JUMELLES
+                                    GSPB
                                 </h1>
 
                                 {/* Desktop Name (>= lg) */}
@@ -192,7 +192,7 @@ export default function Header() {
                     <div className="flex items-center justify-between mb-6">
                         <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
                             <img className="h-10 w-auto" src={logo} alt="" />
-                            <span className="font-bold text-primary text-sm leading-tight">GS LES JUMELLES</span>
+                            <span className="font-bold text-primary text-sm leading-tight">GSPB</span>
                         </Link>
                         <button
                             type="button"
@@ -205,17 +205,17 @@ export default function Header() {
                     </div>
                     <div className="mt-6 flow-root">
                         <div className="-my-6 divide-y divide-gray-500/10">
-                            <div className="space-y-2 py-6">
+                            <div className="space-y-1 py-6">
                                 {navigation.map((item) => (
                                     item.children ? (
                                         <div key={item.name} className="space-y-1">
                                             <button
                                                 onClick={() => toggleMobileDropdown(item.name)}
-                                                className="-mx-3 flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
+                                                className="-mx-3 flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-primary transition-colors"
                                             >
                                                 <span>{item.name}</span>
                                                 <ChevronDownIcon
-                                                    className={`h-5 w-5 text-primary transition-transform duration-200 ${mobileDropdownOpen[item.name] ? 'rotate-180' : ''}`}
+                                                    className={`h-5 w-5 text-gray-500 transition-transform duration-200 ${mobileDropdownOpen[item.name] ? 'rotate-180' : ''}`}
                                                     aria-hidden="true"
                                                 />
                                             </button>
@@ -225,14 +225,14 @@ export default function Header() {
                                                     : 'max-h-0 opacity-0'
                                                     }`}
                                             >
-                                                <div className="space-y-1 pt-1">
+                                                <div className="space-y-1 pt-1 pb-2">
                                                     {item.children.map((child) => (
                                                         child.download ? (
                                                             <a
                                                                 key={child.name}
                                                                 href={child.href}
                                                                 download
-                                                                className="-mx-3 block w-full rounded-lg px-3 py-3 pl-6 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
+                                                                className="-mx-3 block w-full rounded-lg px-3 py-2.5 pl-8 text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-primary transition-colors"
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                             >
                                                                 {child.name}
@@ -241,7 +241,7 @@ export default function Header() {
                                                             <Link
                                                                 key={child.name}
                                                                 href={child.href}
-                                                                className="-mx-3 block w-full rounded-lg px-3 py-3 pl-6 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
+                                                                className="-mx-3 block w-full rounded-lg px-3 py-2.5 pl-8 text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-primary transition-colors"
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                             >
                                                                 {child.name}
@@ -255,7 +255,7 @@ export default function Header() {
                                         <Link
                                             key={item.name}
                                             href={item.href}
-                                            className="-mx-3 block rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors"
+                                            className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-primary transition-colors"
                                             onClick={() => setMobileMenuOpen(false)}
                                         >
                                             {item.name}
@@ -263,14 +263,13 @@ export default function Header() {
                                     )
                                 ))}
                             </div>
-                            <div className="py-6 border-t border-gray-200 space-y-2">
-
-                                <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="-mx-3 flex items-center gap-2 rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors">
-                                    <PhoneIcon className="h-5 w-5 text-primary" />
+                            <div className="py-6 border-t border-gray-100 space-y-2">
+                                <a href={`tel:${sitePhone.replace(/\s/g, '')}`} className="-mx-3 flex items-center gap-3 rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-primary transition-colors">
+                                    <PhoneIcon className="h-5 w-5 text-gray-400" />
                                     {sitePhone}
                                 </a>
-                                <a href={`mailto:${siteEmail}`} className="-mx-3 flex items-center gap-2 rounded-lg px-3 py-3 text-base font-bold leading-7 text-primary bg-primary/5 hover:bg-primary/10 transition-colors">
-                                    <EnvelopeIcon className="h-5 w-5 text-primary" />
+                                <a href={`mailto:${siteEmail}`} className="-mx-3 flex items-center gap-3 rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-primary transition-colors">
+                                    <EnvelopeIcon className="h-5 w-5 text-gray-400" />
                                     {siteEmail}
                                 </a>
                             </div>

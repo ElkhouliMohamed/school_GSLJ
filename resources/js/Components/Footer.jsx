@@ -208,16 +208,6 @@ export default function Footer() {
                                 ></iframe>
                             </div>
 
-                            <div className="pt-4">
-                                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Liens Rapides</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {['Pronote', 'E-Learning', 'Blog'].map((tag) => (
-                                        <a key={tag} href="#" className="text-xs px-3 py-1 rounded-full bg-gray-800 text-gray-400 hover:bg-violet-600 hover:text-white transition-colors border border-gray-700 hover:border-violet-500">
-                                            {tag}
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
 
                     </div>
