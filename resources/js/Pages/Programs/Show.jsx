@@ -54,7 +54,7 @@ export default function Show({ program, teamMembers }) {
                             <div className="mb-16">
                                 <h2 className="text-3xl font-bold text-gray-900 mb-6">{locale === 'fr' || !locale ? 'À propos de ce programme' : 'About This Program'}</h2>
                                 <div
-                                    className="prose prose-lg text-gray-600 max-w-none"
+                                    className="tinymce-content"
                                     dangerouslySetInnerHTML={{ __html: getLocalized(program.description) }}
                                 />
                             </div>

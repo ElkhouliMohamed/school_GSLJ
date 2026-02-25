@@ -102,7 +102,7 @@ export default function Show({ facility }) {
                                     {locale === 'en' ? 'About This Service' : 'À propos de ce service'}
                                 </h2>
                                 <div
-                                    className="prose prose-lg text-gray-600 max-w-none"
+                                    className="tinymce-content"
                                     dangerouslySetInnerHTML={{ __html: getLocalized(facility.description) }}
                                 />
                             </div>
