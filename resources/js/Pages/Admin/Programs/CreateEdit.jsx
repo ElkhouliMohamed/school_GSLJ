@@ -3,6 +3,7 @@ import { Head, useForm, Link } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import { compressImage } from '@/Utils/imageCompression';
+import { Editor } from '@tinymce/tinymce-react';
 
 export default function CreateEdit({ program = null }) {
     const isEditing = !!program;
@@ -119,16 +120,31 @@ export default function CreateEdit({ program = null }) {
 
                         {/* Description French */}
                         <div className="col-span-full">
-                            <label htmlFor="description_fr" className="block text-sm font-medium leading-6 text-gray-900">
+                            <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
                                 Description (Français)
                             </label>
-                            <textarea
-                                id="description_fr"
-                                rows={5}
-                                value={data.description.fr}
-                                onChange={(e) => setData('description', { ...data.description, fr: e.target.value })}
-                                className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
-                            />
+                            <div className="bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 overflow-hidden">
+                                <Editor
+                                    tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js"
+                                    value={data.description.fr}
+                                    onEditorChange={(content) => setData('description', { ...data.description, fr: content })}
+                                    init={{
+                                        height: 300,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                                        ],
+                                        toolbar: 'undo redo | blocks | ' +
+                                            'bold italic forecolor | alignleft aligncenter ' +
+                                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                                            'removeformat | help',
+                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                        branding: false
+                                    }}
+                                />
+                            </div>
                             {errors['description.fr'] && <p className="mt-2 text-sm text-red-600">{errors['description.fr']}</p>}
                         </div>
 
