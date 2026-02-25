@@ -203,7 +203,7 @@ export default function About({ team }) {
                                     {missionTitle}
                                 </h2>
                                 <div
-                                    className="text-lg leading-8 text-gray-700 space-y-4"
+                                    className="tinymce-content"
                                     dangerouslySetInnerHTML={{ __html: missionContent }}
                                 />
                             </div>
@@ -293,7 +293,7 @@ export default function About({ team }) {
                                     </h3>
 
                                     <div
-                                        className="text-gray-600 leading-relaxed font-medium space-y-2 text-sm sm:text-base"
+                                        className="tinymce-content text-sm sm:text-base"
                                         dangerouslySetInnerHTML={{ __html: val.description }}
                                     />
 
@@ -316,7 +316,7 @@ export default function About({ team }) {
                                 {getLocalized(settings?.about_contact_title, locale, 'Contactez-nous')}
                             </h2>
                             <div
-                                className="mt-6 text-lg leading-8 text-gray-600 space-y-4"
+                                className="mt-6 tinymce-content"
                                 dangerouslySetInnerHTML={{ __html: getLocalized(settings?.about_contact_description, locale, 'Vous avez des questions sur nos programmes ou les admissions ? N\'hésitez pas à nous écrire ou à visiter nos locaux.') }}
                             />
                         </div>
