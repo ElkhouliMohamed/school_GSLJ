@@ -10,10 +10,10 @@
     font-family: 'Figtree', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.75;
-    color: #374151; /* gray-700 */
+    /* No color set here — allows TinyMCE inline color styles to show through */
 }
 
-/* Headings */
+/* Headings — no explicit color so TinyMCE inline colors are respected */
 .tinymce-content h1,
 .tinymce-content h2,
 .tinymce-content h3,
@@ -22,17 +22,64 @@
 .tinymce-content h6 {
     font-weight: 700;
     line-height: 1.25;
-    color: #111827; /* gray-900 */
     margin-top: 1.5em;
     margin-bottom: 0.5em;
 }
 
-.tinymce-content h1 { font-size: 2rem; }
-.tinymce-content h2 { font-size: 1.5rem; }
-.tinymce-content h3 { font-size: 1.25rem; }
-.tinymce-content h4 { font-size: 1.125rem; }
-.tinymce-content h5 { font-size: 1rem; }
-.tinymce-content h6 { font-size: 0.875rem; }
+/* Default colors for elements that don't carry an inline style */
+.tinymce-content p:not([style*="color"]),
+.tinymce-content li:not([style*="color"]),
+.tinymce-content td:not([style*="color"]),
+.tinymce-content th:not([style*="color"]),
+.tinymce-content h1:not([style*="color"]),
+.tinymce-content h2:not([style*="color"]),
+.tinymce-content h3:not([style*="color"]),
+.tinymce-content h4:not([style*="color"]),
+.tinymce-content h5:not([style*="color"]),
+.tinymce-content h6:not([style*="color"]) {
+    color: #374151;
+    /* gray-700 default */
+}
+
+/* Headings default color (when no inline style) */
+.tinymce-content h1:not([style*="color"]),
+.tinymce-content h2:not([style*="color"]),
+.tinymce-content h3:not([style*="color"]),
+.tinymce-content h4:not([style*="color"]),
+.tinymce-content h5:not([style*="color"]),
+.tinymce-content h6:not([style*="color"]) {
+    color: #111827;
+    /* gray-900 */
+}
+
+/* Ensure inline color styles on spans and other inline elements are never overridden */
+.tinymce-content [style*="color"] {
+    color: revert;
+}
+
+.tinymce-content h1 {
+    font-size: 2rem;
+}
+
+.tinymce-content h2 {
+    font-size: 1.5rem;
+}
+
+.tinymce-content h3 {
+    font-size: 1.25rem;
+}
+
+.tinymce-content h4 {
+    font-size: 1.125rem;
+}
+
+.tinymce-content h5 {
+    font-size: 1rem;
+}
+
+.tinymce-content h6 {
+    font-size: 0.875rem;
+}
 
 /* Paragraphs */
 .tinymce-content p {
@@ -42,15 +89,23 @@
 
 /* Bold & Italic */
 .tinymce-content strong,
-.tinymce-content b { font-weight: 700; }
+.tinymce-content b {
+    font-weight: 700;
+}
 
 .tinymce-content em,
-.tinymce-content i { font-style: italic; }
+.tinymce-content i {
+    font-style: italic;
+}
 
-.tinymce-content u { text-decoration: underline; }
+.tinymce-content u {
+    text-decoration: underline;
+}
 
 .tinymce-content s,
-.tinymce-content strike { text-decoration: line-through; }
+.tinymce-content strike {
+    text-decoration: line-through;
+}
 
 /* Lists */
 .tinymce-content ul {
@@ -72,8 +127,13 @@
     margin-bottom: 0.25em;
 }
 
-.tinymce-content ol li { list-style-type: decimal; }
-.tinymce-content ul li { list-style-type: disc; }
+.tinymce-content ol li {
+    list-style-type: decimal;
+}
+
+.tinymce-content ul li {
+    list-style-type: disc;
+}
 
 .tinymce-content ul ul,
 .tinymce-content ol ol,
@@ -103,14 +163,17 @@
     margin-right: 0;
     margin-top: 1em;
     margin-bottom: 1em;
-    color: #6b7280; /* gray-500 */
+    color: #6b7280;
+    /* gray-500 */
     font-style: italic;
 }
 
 /* Code */
 .tinymce-content code {
-    background-color: #f3f4f6; /* gray-100 */
-    color: #dc2626; /* red-600 */
+    background-color: #f3f4f6;
+    /* gray-100 */
+    color: #dc2626;
+    /* red-600 */
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.875em;
     padding: 0.1em 0.4em;
@@ -118,8 +181,10 @@
 }
 
 .tinymce-content pre {
-    background-color: #1f2937; /* gray-800 */
-    color: #f9fafb; /* gray-50 */
+    background-color: #1f2937;
+    /* gray-800 */
+    color: #f9fafb;
+    /* gray-50 */
     padding: 1em 1.25em;
     border-radius: 0.5rem;
     overflow-x: auto;
@@ -147,25 +212,30 @@
 
 .tinymce-content table th,
 .tinymce-content table td {
-    border: 1px solid #e5e7eb; /* gray-200 */
+    border: 1px solid #e5e7eb;
+    /* gray-200 */
     padding: 0.5em 0.75em;
     text-align: left;
 }
 
 .tinymce-content table th {
-    background-color: #f9fafb; /* gray-50 */
+    background-color: #f9fafb;
+    /* gray-50 */
     font-weight: 600;
-    color: #111827; /* gray-900 */
+    color: #111827;
+    /* gray-900 */
 }
 
 .tinymce-content table tr:nth-child(even) td {
-    background-color: #f9fafb; /* gray-50 */
+    background-color: #f9fafb;
+    /* gray-50 */
 }
 
 /* Horizontal rule */
 .tinymce-content hr {
     border: none;
-    border-top: 1px solid #e5e7eb; /* gray-200 */
+    border-top: 1px solid #e5e7eb;
+    /* gray-200 */
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -180,12 +250,24 @@
 }
 
 /* Superscript / Subscript */
-.tinymce-content sup { vertical-align: super; font-size: 0.75em; }
-.tinymce-content sub { vertical-align: sub;   font-size: 0.75em; }
+.tinymce-content sup {
+    vertical-align: super;
+    font-size: 0.75em;
+}
+
+.tinymce-content sub {
+    vertical-align: sub;
+    font-size: 0.75em;
+}
 
 /* First child no top margin */
-.tinymce-content > *:first-child { margin-top: 0; }
-.tinymce-content > *:last-child  { margin-bottom: 0; }
+.tinymce-content>*:first-child {
+    margin-top: 0;
+}
+
+.tinymce-content>*:last-child {
+    margin-bottom: 0;
+}
 
 
 
