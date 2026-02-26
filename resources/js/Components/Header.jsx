@@ -34,7 +34,7 @@ export default function Header() {
     const navigation = [
         { name: 'ACCUEIL', href: '/' },
         { name: 'À PROPOS', href: '/about' },
-        { name: 'INSCRIPTIONS', href: '/admissions' },
+        { name: 'ADMISSIONS', href: '/admissions' },
         {
             name: 'VIE SCOLAIRE',
             children: [
@@ -47,7 +47,7 @@ export default function Header() {
             ]
         },
         {
-            name: 'PÉDAGOGIE',
+            name: 'OFFRES PÉDAGOGIQUES',
             children: programs?.map(program => ({
                 name: getLocalized(program.name),
                 href: `/programs/${program.slug}`

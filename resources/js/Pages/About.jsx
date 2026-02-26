@@ -13,19 +13,25 @@ export default function About({ team }) {
 
     // --- Data for new sections ---
 
+    const historiqueContent = "Fondée dans le but d’offrir une éducation de qualité, notre école est née de la volonté de former des élèves compétents, responsables et ouverts sur le monde.<br/><br/>Depuis sa création, l’établissement s’est engagé à accompagner les enfants à chaque étape de leur parcours scolaire, en mettant l’accent sur la rigueur académique, la discipline et les valeurs humaines.<br/><br/>Au fil des années, notre école a su gagner la confiance des parents grâce à des résultats satisfaisants et un encadrement pédagogique sérieux.";
+
     // Mission Section Data
     const missionTitle = getSetting('about_mission_title', "Notre Mission");
-    const missionContent = getSetting('about_mission_content', "Notre engagement est de nourrir la passion, l'envie et la soif d'apprendre. Nous formons le caractère par les valeurs, et la rigueur par le travail, le développement de la confiance en soi et la curiosité d'aller plus loin sont au cœur de notre projet.\n\nPermettre un épanouissement de l'esprit, par la culture du goût, l'éveil à la curiosité intellectuelle et le développement de tous les potentiels en harmonie avec son milieu.\n\nFormer de futurs performance, futurs gestionnaires pleinement épanouis conscients de leurs responsabilités de meneur d'entreprise dans un environnement changeant de l'industrie.");
+    const missionContent = "Notre mission est de :<br/><ul><li>Assurer une formation académique solide conforme aux programmes officiels</li><li>Favoriser l’épanouissement intellectuel, moral et social de chaque élève</li><li>Développer l’autonomie, la créativité et le sens des responsabilités</li><li>Offrir un cadre d’apprentissage sain, sécurisé et discipliné</li></ul>";
     const missionImage = getSetting('about_mission_image', "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
 
-    // Values Data
-    const valuesTitle = getSetting('about_values_title', "Nos valeurs");
+    // Vision Section Data
+    const visionTitle = "Notre Vision";
+    const visionContent = "Nous aspirons à être :<br/><ul><li>Une école de référence dans la formation de citoyens responsables</li><li>Un établissement reconnu pour l’excellence de son enseignement</li><li>Un cadre éducatif qui prépare les élèves aux défis scolaires, sociaux et professionnels de demain</li></ul><br/>Notre vision est de former des apprenants capables de réussir localement et internationalement.";
 
-    const values = [
+    // Values Data
+    const valuesTitle = getSetting('about_values_title', "Nos Valeurs");
+
+    const coreValues = [
         {
             id: 1,
             title: getSetting('about_value_1_title', "EXCELLENCE"),
-            description: getSetting('about_value_1_description', "À travers nos offres, nous cherchons à développer tant chez nos élèves que chez le personnel l'envie de se dépasser pour mieux réussir. Ne pas se contenter du banal, le dépassement de soi pour que la remise en question permanente accompagne chacun dans l'exercice de toutes ses fonctions."),
+            description: getSetting('about_value_1_description', "TEST TEST TEST"),
             icon: StarIcon,
             color: "text-emerald-700",
             bg: "bg-emerald-50",
@@ -35,7 +41,7 @@ export default function About({ team }) {
             id: 2,
             title: getSetting('about_value_2_title', "RESPECT"),
             description: getSetting('about_value_2_description', "Le respect est essentiel pour créer un environnement propice à l'apprentissage. Au GSLJ, nous garantissons l'acceptation de l'autre avec ses différences non seulement, mais aussi le respect de soi."),
-            icon: HeartIcon, // Changed to Heart or Handshake if available, keeping Star/Heart per original but adjusting logic
+            icon: HeartIcon,
             color: "text-amber-500",
             bg: "bg-amber-50",
             border: "border-amber-200"
@@ -44,12 +50,24 @@ export default function About({ team }) {
             id: 3,
             title: getSetting('about_value_3_title', "EMPATHIE"),
             description: getSetting('about_value_3_description', "L'empathie est la base de toute communauté scolaire. Nous encourageons l'ouverture d'esprit et l'écoute des autres afin de faire une place pour chacun et de construire une culture où la pluralité communique et vit dans des relations urbaines."),
-            icon: UserIcon, // Keeping generic or swapping
+            icon: UserIcon,
             color: "text-rose-600",
             bg: "bg-rose-50",
             border: "border-rose-200"
         },
     ];
+
+    const valuesList = [
+        "Discipline",
+        "Respect",
+        "Travail bien fait",
+        "Responsabilité",
+        "Solidarité",
+        "Excellence",
+        "Intégrité"
+    ];
+
+    const valuesFooter = "Ces valeurs guident le comportement des élèves, des enseignants et de toute la communauté éducative.";
 
     const ContactForm = () => {
         const { data, setData, post, processing, errors, wasSuccessful, reset } = useForm({
@@ -193,6 +211,7 @@ export default function About({ team }) {
                 <DirectorsWord />
 
 
+
                 {/* 2. Notre Mission Section */}
                 <section className="bg-sky-50 py-16 sm:py-24">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -203,7 +222,7 @@ export default function About({ team }) {
                                     {missionTitle}
                                 </h2>
                                 <div
-                                    className="tinymce-content"
+                                    className="tinymce-content prose prose-blue prose-lg"
                                     dangerouslySetInnerHTML={{ __html: missionContent }}
                                 />
                             </div>
@@ -220,6 +239,21 @@ export default function About({ team }) {
                                 {/* Optional decorative element */}
                                 <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-blue-900 rounded-full -z-10"></div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Vision Section */}
+                <section className="bg-white py-16 sm:py-24">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                        <div className="mx-auto max-w-3xl text-center">
+                            <h2 className="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl mb-6 font-serif">
+                                {visionTitle}
+                            </h2>
+                            <div
+                                className="text-lg text-gray-700 leading-relaxed text-left prose prose-blue prose-lg mx-auto"
+                                dangerouslySetInnerHTML={{ __html: visionContent }}
+                            />
                         </div>
                     </div>
                 </section>
@@ -272,11 +306,14 @@ export default function About({ team }) {
                             <h2 className="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl font-serif">
                                 {valuesTitle}
                             </h2>
-                            <div className="w-20 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
+                            <div className="w-20 h-1.5 bg-secondary mx-auto mt-4 rounded-full mb-8"></div>
+                            <p className="text-lg text-gray-600 mb-12">
+                                Notre action éducative repose sur des valeurs fondamentales :
+                            </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {values.map((val, index) => (
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                            {coreValues.map((val, index) => (
                                 <div
                                     key={val.id}
                                     className={`group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 relative overflow-hidden flex flex-col items-start h-full`}
@@ -293,7 +330,7 @@ export default function About({ team }) {
                                     </h3>
 
                                     <div
-                                        className="tinymce-content text-sm sm:text-base"
+                                        className="text-sm sm:text-base text-gray-700 leading-relaxed"
                                         dangerouslySetInnerHTML={{ __html: val.description }}
                                     />
 
@@ -304,73 +341,31 @@ export default function About({ team }) {
                                 </div>
                             ))}
                         </div>
+
+                        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+                            {valuesList.map((val, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white rounded-full px-8 py-4 shadow-md border border-gray-100 text-lg font-semibold text-blue-900 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                >
+                                    {val}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="text-center max-w-2xl mx-auto">
+                            <p className="text-xl text-gray-700 italic font-serif">
+                                "{valuesFooter}"
+                            </p>
+                        </div>
                     </div>
                 </section>
 
 
-                {/* Contact Section */}
+                {/* Contact Section Commented Out
                 <div className="bg-white py-24 sm:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="mx-auto max-w-2xl lg:mx-0">
-                            <h2 className="text-3xl font-bold tracking-tight text-gray-900 font-serif">
-                                {getLocalized(settings?.about_contact_title, locale, 'Contactez-nous')}
-                            </h2>
-                            <div
-                                className="mt-6 tinymce-content"
-                                dangerouslySetInnerHTML={{ __html: getLocalized(settings?.about_contact_description, locale, 'Vous avez des questions sur nos programmes ou les admissions ? N\'hésitez pas à nous écrire ou à visiter nos locaux.') }}
-                            />
-                        </div>
-
-                        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-                            {/* Contact Info */}
-                            <div className="space-y-8">
-                                <div className="flex gap-x-4">
-                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-600">
-                                        <MapPinIcon className="h-6 w-6 text-white" aria-hidden="true" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-base font-semibold leading-7 text-gray-900">Adresse</h3>
-                                        <p className="mt-2 leading-7 text-gray-600 whitespace-pre-wrap">
-                                            {settings?.site_address ? getLocalized(settings.site_address, locale) : 'GSLJ Sénégal'}<br />
-                                            {/* Dakar, Sénégal */}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-x-4">
-                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-600">
-                                        <PhoneIcon className="h-6 w-6 text-white" aria-hidden="true" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-base font-semibold leading-7 text-gray-900">Téléphone</h3>
-                                        <p className="mt-2 leading-7 text-gray-600">
-                                            <a href={`tel:${settings?.site_phone?.value || settings?.contact_phone?.value || '+221 33 000 00 00'}`} className="hover:text-violet-600">
-                                                {settings?.site_phone ? getLocalized(settings.site_phone, locale) : (settings?.contact_phone ? getLocalized(settings.contact_phone, locale) : '+221 33 000 00 00')}
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-x-4">
-                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-600">
-                                        <EnvelopeIcon className="h-6 w-6 text-white" aria-hidden="true" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-base font-semibold leading-7 text-gray-900">Email</h3>
-                                        <p className="mt-2 leading-7 text-gray-600">
-                                            <a href={`mailto:${settings?.site_email?.value || settings?.contact_email?.value || 'info@gslj.sn'}`} className="hover:text-violet-600">
-                                                {settings?.site_email ? getLocalized(settings.site_email, locale) : (settings?.contact_email ? getLocalized(settings.contact_email, locale) : 'info@gslj.sn')}
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Contact Form */}
-                            <div className="bg-white px-6 py-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-xl sm:px-10">
-                                <ContactForm />
-                            </div>
-                        </div>
-                    </div>
+                    ...
                 </div>
+                */}
             </main>
 
             <Footer />

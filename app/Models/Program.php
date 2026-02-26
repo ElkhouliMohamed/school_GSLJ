@@ -18,13 +18,20 @@ class Program extends Model
         'objectives',
         'curriculum',
         'image',
+        'bg_image',
+        'gallery_images',
+        'cta_title',
+        'cta_description',
+        'cta_image',
+        'cta_file',
         'order',
         'is_active'
     ];
 
-    public $translatable = ['name', 'description', 'objectives', 'curriculum'];
+    public $translatable = ['name', 'description', 'objectives', 'curriculum', 'cta_title', 'cta_description'];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'gallery_images' => 'array',
     ];
 }

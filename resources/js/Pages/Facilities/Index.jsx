@@ -157,9 +157,10 @@ export default function Index({ facilities }) {
                                                 {getTypeLabel(facility.type) || facility.type}
                                             </p>
                                             {facility.description && (
-                                                <p className="text-gray-600 text-sm mb-4">
-                                                    {getLocalized(facility.description)}
-                                                </p>
+                                                <div
+                                                    className="text-gray-600 text-sm mb-4 line-clamp-3"
+                                                    dangerouslySetInnerHTML={{ __html: getLocalized(facility.description) }}
+                                                />
                                             )}
                                             <div className="mt-6">
                                                 <a

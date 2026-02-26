@@ -83,9 +83,10 @@ export default function EventsSection({ events }) {
                                         {getLocalized(event.title)}
                                     </h3>
                                     {event.content && (
-                                        <p className="text-sm leading-6 text-gray-600 line-clamp-2 mb-4 flex-1">
-                                            {getLocalized(event.content).replace(/<\/?[^>]+(>|$)/g, "")}
-                                        </p>
+                                        <div
+                                            className="text-sm leading-6 text-gray-600 line-clamp-2 mb-4 flex-1"
+                                            dangerouslySetInnerHTML={{ __html: getLocalized(event.content) }}
+                                        />
                                     )}
 
                                     <div className="mt-auto pt-4">

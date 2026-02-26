@@ -79,9 +79,10 @@ export default function Show({ album, galleries }) {
                         {album.title[locale]}
                     </h1>
                     {album.description?.[locale] && (
-                        <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
-                            {album.description[locale]}
-                        </p>
+                        <div
+                            className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto"
+                            dangerouslySetInnerHTML={{ __html: album.description[locale] }}
+                        />
                     )}
                 </div>
             </div>

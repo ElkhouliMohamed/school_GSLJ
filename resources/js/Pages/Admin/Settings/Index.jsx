@@ -554,6 +554,7 @@ export default function Index({ settings }) {
             description: "Contenu pour la section 'Pourquoi Choisir'.",
             keys: ['why_us_title', 'why_us_description', 'why_us_point_1', 'why_us_point_2', 'why_us_point_3', 'why_us_point_4', 'why_us_cta_text', 'why_us_floating_text', 'why_us_image']
         },
+        /*
         {
             title: "Accueil : Section Événements",
             description: "Titres pour la zone des événements à venir.",
@@ -564,6 +565,7 @@ export default function Index({ settings }) {
             description: "Chiffres clés de réussite.",
             keys: ['stats_title', 'stats_description']
         },
+        */
         {
             title: "Accueil : Section Partenaires",
             description: "Logos ou texte sur les partenaires.",
@@ -587,6 +589,32 @@ export default function Index({ settings }) {
                 'about_value_1_title', 'about_value_1_description',
                 'about_value_2_title', 'about_value_2_description',
                 'about_value_3_title', 'about_value_3_description'
+            ]
+        },
+        {
+            title: "Page Admissions",
+            description: "Gérer tout le contenu de la page des Admissions (hero, étapes, documents, CTA).",
+            keys: [
+                'admissions_hero_title', 'admissions_hero_description', 'admissions_hero_image',
+                'admissions_process_title', 'admissions_process_subtitle', 'admissions_process_description',
+                'admissions_step_1_name', 'admissions_step_1_description',
+                'admissions_step_2_name', 'admissions_step_2_description',
+                'admissions_step_3_name', 'admissions_step_3_description',
+                'admissions_docs_title', 'admissions_docs_description',
+                'admissions_cta_title', 'admissions_cta_description',
+            ]
+        },
+        {
+            title: "Vie Scolaire (Campus)",
+            description: "Gérer le contenu de la page Vie Scolaire : héro, activités, témoignages.",
+            keys: [
+                'campus_hero_title', 'campus_hero_description', 'campus_hero_image',
+                'campus_activities_title', 'campus_activities_subtitle',
+                'campus_activity_1_name', 'campus_activity_1_description',
+                'campus_activity_2_name', 'campus_activity_2_description',
+                'campus_activity_3_name', 'campus_activity_3_description',
+                'campus_activity_4_name', 'campus_activity_4_description',
+                'campus_testimonials_title', 'campus_testimonials_subtitle',
             ]
         },
         {

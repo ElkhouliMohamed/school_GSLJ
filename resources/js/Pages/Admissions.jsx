@@ -1,9 +1,56 @@
 import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, useForm, usePage } from '@inertiajs/react';
+import useSettings from '@/Hooks/useSettings';
 
 export default function Admissions() {
     const { flash, settings } = usePage().props;
+    const { getSetting } = useSettings();
+
+    // --- Dynamic content from settings ---
+    const heroTitle = getSetting('admissions_hero_title', "Rejoignez l'Excellence");
+    const heroDescription = getSetting('admissions_hero_description', "Découvrez notre processus d'admission et faites le premier pas vers un avenir brillant. Nous accueillons des élèves motivés et curieux de la maternelle au lycée.");
+    const heroBgImage = getSetting('admissions_hero_image', 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+
+    const processTitle = getSetting('admissions_process_title', 'Procédure');
+    const processSubtitle = getSetting('admissions_process_subtitle', "Comment s'inscrire ?");
+    const processDescription = getSetting('admissions_process_description', "Notre processus d'admission est conçu pour être simple et transparent.");
+
+    const steps = [
+        {
+            name: getSetting('admissions_step_1_name', '1. Dossier de candidature'),
+            description: getSetting('admissions_step_1_description', "Remplissez le formulaire de pré-inscription en ligne ou retirez un dossier au secrétariat de l'école."),
+            icon: (
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+            ),
+        },
+        {
+            name: getSetting('admissions_step_2_name', '2. Entretien / Test'),
+            description: getSetting('admissions_step_2_description', "Une rencontre avec l'équipe pédagogique et un test de niveau (selon la classe) pour évaluer les acquis."),
+            icon: (
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+            ),
+        },
+        {
+            name: getSetting('admissions_step_3_name', '3. Inscription définitive'),
+            description: getSetting('admissions_step_3_description', "Après validation du dossier, procédez au règlement des frais d'inscription pour réserver la place."),
+            icon: (
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            ),
+        },
+    ];
+
+    const docsTitle = getSetting('admissions_docs_title', 'Documents Requis');
+    const docsDescription = getSetting('admissions_docs_description', "Pour compléter l'inscription, veuillez préparer les documents suivants. Assurez-vous d'avoir les originaux et des copies.");
+
+    const ctaTitle = getSetting('admissions_cta_title', "Prêt à nous rejoindre ?\nCommencez l'inscription aujourd'hui.");
+    const ctaDescription = getSetting('admissions_cta_description', "Contactez notre service d'admission pour toute question ou pour organiser une visite de l'établissement.");
 
     const { data, setData, post, processing, errors, reset } = useForm({
         student_last_name: '',
@@ -24,6 +71,7 @@ export default function Admissions() {
             },
         });
     };
+
     return (
         <MainLayout>
             <Head title="Admissions" />
@@ -31,7 +79,7 @@ export default function Admissions() {
             {/* Hero Section */}
             <div className="relative isolate overflow-hidden bg-violet-950 py-24 sm:py-32">
                 <img
-                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+                    src={heroBgImage}
                     alt="Students studying"
                     className="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-multiply"
                 />
@@ -40,11 +88,11 @@ export default function Admissions() {
                 </div>
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl lg:mx-0">
-                        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif">Rejoignez l'Excellence</h2>
-                        <p className="mt-6 text-lg leading-8 text-violet-100">
-                            Découvrez notre processus d'admission et faites le premier pas vers un avenir brillant.
-                            Nous accueillons des élèves motivés et curieux de la maternelle au lycée.
-                        </p>
+                        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif">{heroTitle}</h2>
+                        <div
+                            className="mt-6 text-lg leading-8 text-violet-100 tinymce-content"
+                            dangerouslySetInnerHTML={{ __html: heroDescription }}
+                        />
                     </div>
                 </div>
             </div>
@@ -53,45 +101,18 @@ export default function Admissions() {
             <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
-                        <h2 className="text-base font-semibold leading-7 text-violet-600">Procédure</h2>
+                        <h2 className="text-base font-semibold leading-7 text-violet-600">{processTitle}</h2>
                         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                            Comment s'inscrire ?
+                            {processSubtitle}
                         </p>
-                        <p className="mt-6 text-lg leading-8 text-gray-600">
-                            Notre processus d'admission est conçu pour être simple et transparent.
-                        </p>
+                        <div
+                            className="mt-6 text-lg leading-8 text-gray-600 tinymce-content"
+                            dangerouslySetInnerHTML={{ __html: processDescription }}
+                        />
                     </div>
                     <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
                         <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-                            {[
-                                {
-                                    name: '1. Dossier de candidature',
-                                    description: 'Remplissez le formulaire de pré-inscription en ligne ou retirez un dossier au secrétariat de l\'école.',
-                                    icon: (
-                                        <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                                        </svg>
-                                    ),
-                                },
-                                {
-                                    name: '2. Entretien / Test',
-                                    description: 'Une rencontre avec l\'équipe pédagogique et un test de niveau (selon la classe) pour évaluer les acquis.',
-                                    icon: (
-                                        <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                                        </svg>
-                                    ),
-                                },
-                                {
-                                    name: '3. Inscription définitive',
-                                    description: 'Après validation du dossier, procédez au règlement des frais d\'inscription pour réserver la place.',
-                                    icon: (
-                                        <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    ),
-                                },
-                            ].map((feature) => (
+                            {steps.map((feature) => (
                                 <div key={feature.name} className="flex flex-col bg-violet-50/50 rounded-2xl p-8 hover:bg-violet-50 transition-colors border border-violet-100">
                                     <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                                         <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-violet-600 shadow-sm">
@@ -100,7 +121,10 @@ export default function Admissions() {
                                         {feature.name}
                                     </dt>
                                     <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
-                                        <p className="flex-auto">{feature.description}</p>
+                                        <div
+                                            className="flex-auto tinymce-content"
+                                            dangerouslySetInnerHTML={{ __html: feature.description }}
+                                        />
                                     </dd>
                                 </div>
                             ))}
@@ -364,10 +388,11 @@ export default function Admissions() {
             <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl lg:mx-0">
-                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-violet-600">Documents Requis</h2>
-                        <p className="mt-6 text-lg leading-8 text-gray-600">
-                            Pour compléter l'inscription, veuillez préparer les documents suivants. Assurez-vous d'avoir les originaux et des copies.
-                        </p>
+                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-violet-600">{docsTitle}</h2>
+                        <div
+                            className="mt-6 text-lg leading-8 text-gray-600 tinymce-content"
+                            dangerouslySetInnerHTML={{ __html: docsDescription }}
+                        />
                     </div>
                     <ul role="list" className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                         <li className="flex flex-col gap-y-4 rounded-2xl bg-violet-50 p-8 shadow-sm hover:shadow-md transition-shadow cursor-default border border-violet-100">
@@ -386,7 +411,6 @@ export default function Admissions() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.499 5.24 50.552 50.552 0 00-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                                 </svg>
-
                             </div>
                             <div>
                                 <h3 className="text-lg font-semibold leading-8 text-gray-900">Dossier Scolaire</h3>
@@ -427,12 +451,12 @@ export default function Admissions() {
                         </svg>
                         <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                                Prêt à nous rejoindre ?<br />
-                                Commencez l'inscription aujourd'hui.
+                                <div dangerouslySetInnerHTML={{ __html: ctaTitle.replace(/\n/g, '<br/>') }} />
                             </h2>
-                            <p className="mt-6 text-lg leading-8 text-gray-300">
-                                Contactez notre service d'admission pour toute question ou pour organiser une visite de l'établissement.
-                            </p>
+                            <div
+                                className="mt-6 text-lg leading-8 text-gray-300 tinymce-content"
+                                dangerouslySetInnerHTML={{ __html: ctaDescription }}
+                            />
                             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 lg:justify-start">
                                 <a
                                     href="/contact"

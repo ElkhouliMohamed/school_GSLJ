@@ -52,9 +52,10 @@ export default function CursusSection() {
                             <h3 className="text-xl font-bold text-primary uppercase mb-2 text-center">
                                 {getLocalized(program.name)}
                             </h3>
-                            <p className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-6 h-10 text-center">
-                                {getLocalized(program.description)}
-                            </p>
+                            <div
+                                className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-6 h-10 text-center overflow-hidden"
+                                dangerouslySetInnerHTML={{ __html: getLocalized(program.description) }}
+                            />
                         </Link>
                     ))}
                 </div>

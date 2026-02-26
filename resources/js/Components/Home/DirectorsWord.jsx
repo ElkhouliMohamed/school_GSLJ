@@ -55,7 +55,7 @@ export default function DirectorsWord() {
                             className="relative w-full max-w-lg rounded-2xl shadow-xl ring-1 ring-gray-900/10 object-cover aspect-[4/5] mx-auto lg:mr-auto"
                         />
                         <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-400 rounded-full z-20 flex items-center justify-center shadow-lg hidden md:flex">
-                            <span className="text-xs font-bold text-center px-2">Excellence<br />depuis 2010</span>
+                            <span className="text-xs font-bold text-center px-2">Excellence<br />depuis 2019</span>
                         </div>
                     </div>
                 </div>

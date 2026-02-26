@@ -5,7 +5,15 @@ import { Phone, Mail, MapPin, ExternalLink, ArrowRight, Facebook, Instagram, You
 
 export default function Footer() {
     const { getSetting } = useSettings();
-    const { url } = usePage();
+    const { url, props } = usePage();
+    const { programs = [], locale = 'fr' } = props;
+
+    // Helper for localized content
+    const getLocalized = (content) => {
+        if (!content) return '';
+        if (typeof content === 'string') return content;
+        return content[locale] || content['fr'] || content['en'] || Object.values(content)[0] || '';
+    };
 
     // Helper to determine active state
     const isActive = (href) => {
@@ -110,11 +118,17 @@ export default function Footer() {
                             <ul className="space-y-3">
                                 <LinkItem href="/">Accueil</LinkItem>
                                 <LinkItem href="/about">Notre Établissement</LinkItem>
-                                <LinkItem href="/programs">Nos Programmes</LinkItem>
+
+                                {/* Dynamically list all programs */}
+                                {programs.map(program => (
+                                    <LinkItem key={program.id} href={`/programs/${program.slug}`}>
+                                        {getLocalized(program.name)}
+                                    </LinkItem>
+                                ))}
+
                                 <LinkItem href="/team">Notre Équipe</LinkItem>
                                 <LinkItem href="/admissions">Admissions</LinkItem>
                                 <LinkItem href="/news">Actualités</LinkItem>
-                                <LinkItem href="/gallery">Galerie</LinkItem>
                                 <LinkItem href="/gallery">Galerie</LinkItem>
                                 <LinkItem href="/contact">Contact</LinkItem>
                                 {getSetting('registration_pdf')?.en && (

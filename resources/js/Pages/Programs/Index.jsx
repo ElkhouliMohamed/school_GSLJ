@@ -111,9 +111,10 @@ export default function Index({ programs }) {
                                                 {program.level.replace('_', ' ')}
                                             </p>
                                             {program.description && (
-                                                <p className="text-gray-600 text-sm mb-4">
-                                                    {getLocalized(program.description)}
-                                                </p>
+                                                <div
+                                                    className="text-gray-600 text-sm mb-4 line-clamp-3"
+                                                    dangerouslySetInnerHTML={{ __html: getLocalized(program.description) }}
+                                                />
                                             )}
                                             <div className="mt-6">
                                                 <a

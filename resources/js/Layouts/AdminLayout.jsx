@@ -22,7 +22,7 @@ const navigation = [
         title: 'Vue d\'ensemble',
         items: [
             { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon },
-            { name: 'Statistiques', href: '/admin/kpi', icon: ChartBarIcon },
+            // { name: 'Statistiques', href: '/admin/kpi', icon: ChartBarIcon },
         ]
     },
     {
@@ -37,7 +37,7 @@ const navigation = [
         title: 'Contenu',
         items: [
             { name: 'Actualités', href: '/admin/news', icon: NewspaperIcon },
-            { name: 'Événements', href: '/admin/events', icon: CalendarIcon },
+            // { name: 'Événements', href: '/admin/events', icon: CalendarIcon },
             { name: 'Galerie', href: '/admin/albums', icon: PhotoIcon },
             { name: 'Paramètres', href: '/admin/settings', icon: Cog6ToothIcon },
         ]

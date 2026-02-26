@@ -68,12 +68,10 @@ export default function Show({ post }) {
 
                     <div className="mt-10 max-w-2xl space-y-4">
                         {/* Render content - preserving newlines using whitespace-pre-wrap */}
-                        <div className="whitespace-pre-wrap font-serif text-lg">
-                            {content}
-                        </div>
-                        <div className="whitespace-pre-wrap font-serif text-lg">
-                            {content}
-                        </div>
+                        <div
+                            className="whitespace-pre-wrap font-serif text-lg"
+                            dangerouslySetInnerHTML={{ __html: content }}
+                        />
                     </div>
 
                     {/* Gallery Section */}

@@ -30,33 +30,36 @@ export default function Index({ posts }) {
                     </div>
                     <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                         {posts.data.map((post) => (
-                            <article key={post.id} className="flex flex-col items-start justify-between">
-                                <div className="relative w-full">
+                            <article key={post.id} className="flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                                {/* Image Container */}
+                                <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2] overflow-hidden bg-gray-100 shrink-0">
                                     <img
                                         src={post.image || 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3600&q=80'}
                                         alt=""
-                                        className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                                     />
-                                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/10" />
                                 </div>
-                                <div className="max-w-xl">
-                                    <div className="mt-8 flex items-center gap-x-4 text-xs">
-                                        <time dateTime={post.published_at} className="text-gray-500">
-                                            <CalendarDaysIcon className="h-4 w-4 inline mr-1" />
+
+                                {/* Text Container */}
+                                <div className="flex flex-col flex-1 p-6 sm:p-8">
+                                    <div className="flex items-center gap-x-4 text-xs mb-4">
+                                        <time dateTime={post.published_at} className="text-gray-500 font-medium">
+                                            <CalendarDaysIcon className="h-4 w-4 inline mr-1 text-primary" />
                                             {new Date(post.published_at).toLocaleDateString()}
                                         </time>
                                     </div>
-                                    <div className="group relative">
-                                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                    <div className="group relative flex-1 flex flex-col">
+                                        <h3 className="text-xl font-bold leading-tight text-gray-900 group-hover:text-primary transition-colors mb-4 line-clamp-2">
                                             <Link href={route('news.show', post.slug)}>
                                                 <span className="absolute inset-0" />
                                                 {getLocalized(post.title)}
                                             </Link>
                                         </h3>
-                                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-                                            {/* Truncate content or show summary if available */}
-                                            {getLocalized(post.content)?.substring(0, 150)}...
-                                        </p>
+                                        <div
+                                            className="line-clamp-3 text-sm leading-6 text-gray-600 flex-1"
+                                            dangerouslySetInnerHTML={{ __html: getLocalized(post.content) }}
+                                        />
                                     </div>
                                 </div>
                             </article>
