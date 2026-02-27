@@ -5,22 +5,25 @@
 
     <p>Bonjour,</p>
 
-    <p>Merci d'avoir soumis une demande d'admission pour <strong>{{ $data['student_first_name'] }}
-            {{ $data['student_last_name'] }}</strong>.</p>
+    <p>Votre demande d'admission pour <strong>{{ $data['student_first_name'] }} {{ $data['student_last_name'] }}</strong> a
+        bien été reçue.</p>
 
-    <p>Votre demande est en attente, nous vous contacterons bientôt.</p>
+    <p>Notre équipe vous contactera très prochainement pour la suite du processus.</p>
 
     <div style="background-color: #f9fafb; padding: 20px; border-radius: 6px; margin: 20px 0;">
         <p style="margin: 0 0 10px 0;"><strong>Détails de la demande :</strong></p>
         <ul style="margin: 0; padding-left: 20px;">
             <li>Classe demandée : {{ $data['requested_class'] }}</li>
-            <li>Parent : {{ $data['parent_name'] }}</li>
+            <li>Parent / Tuteur : {{ $data['parent_name'] }}</li>
             <li>Téléphone : {{ $data['phone'] }}</li>
         </ul>
     </div>
 
+    <p>Merci de votre confiance.</p>
+
     <p style="margin-top: 30px;">
         Cordialement,<br>
-        <strong>{{ config('app.name') }}</strong>
+        <strong>L'Administration</strong><br>
+        Groupe Scolaire Privé Bilingue Les Jumelles
     </p>
 @endsection

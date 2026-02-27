@@ -82,14 +82,14 @@ export default function Header() {
                                 className={`hover:opacity-80 transition-opacity ${locale === 'fr' ? 'opacity-100' : 'opacity-50'}`}
                                 title="Français"
                             >
-                                Fr
+                                FR
                             </Link>
                             <Link
                                 href="/language/en"
                                 className={`hover:opacity-80 transition-opacity ${locale === 'en' ? 'opacity-100' : 'opacity-50'}`}
                                 title="English"
                             >
-                                En
+                                EN
                             </Link>
                         </div>
                     </div>
