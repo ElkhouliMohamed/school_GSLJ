@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import useSettings from '@/Hooks/useSettings';
-import { Phone, Mail, MapPin, ExternalLink, ArrowRight, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, ArrowRight, Facebook, Instagram, Youtube, Twitter, ChevronDown } from 'lucide-react';
 
 export default function Footer() {
     const { getSetting } = useSettings();
     const { url, props } = usePage();
     const { programs = [], locale = 'fr' } = props;
+    const [programsOpen, setProgramsOpen] = useState(false);
 
     // Helper for localized content
     const getLocalized = (content) => {
@@ -119,12 +120,33 @@ export default function Footer() {
                                 <LinkItem href="/">Accueil</LinkItem>
                                 <LinkItem href="/about">Notre Établissement</LinkItem>
 
-                                {/* Dynamically list all programs */}
-                                {programs.map(program => (
-                                    <LinkItem key={program.id} href={`/programs/${program.slug}`}>
-                                        {getLocalized(program.name)}
-                                    </LinkItem>
-                                ))}
+                                {/* Programmes dropdown */}
+                                {programs.length > 0 && (
+                                    <li>
+                                        <button
+                                            onClick={() => setProgramsOpen(o => !o)}
+                                            className="group flex items-center gap-2 text-sm transition-all duration-300 text-gray-400 hover:text-white w-full text-left"
+                                        >
+                                            <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 text-primary transition-opacity" />
+                                            Programmes Pédagogiques
+                                            <ChevronDown className={`w-3 h-3 ml-auto transition-transform duration-200 ${programsOpen ? 'rotate-180' : ''}`} />
+                                        </button>
+                                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${programsOpen ? 'max-h-60 mt-2' : 'max-h-0'}`}>
+                                            <ul className="pl-4 space-y-2 border-l border-gray-700">
+                                                {programs.map(program => (
+                                                    <li key={program.id}>
+                                                        <Link
+                                                            href={`/programs/${program.slug}`}
+                                                            className="text-xs text-gray-500 hover:text-white transition-colors block py-0.5"
+                                                        >
+                                                            {getLocalized(program.name)}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </li>
+                                )}
 
                                 <LinkItem href="/team">Notre Équipe</LinkItem>
                                 <LinkItem href="/admissions">Admissions</LinkItem>
