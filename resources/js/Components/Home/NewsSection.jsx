@@ -32,9 +32,10 @@ export default function NewsSection({ news }) {
                         {getLocalized(title, "NOS DERNIÈRES ACTUALITÉS")}
                     </h2>
                     <div className="h-1 w-20 bg-yellow-400 mx-auto rounded-full mb-6"></div>
-                    <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
-                        {subtitle}
-                    </p>
+                    <div
+                        className="text-sm font-semibold uppercase tracking-wider text-gray-500 tinymce-content"
+                        dangerouslySetInnerHTML={{ __html: subtitle }}
+                    />
                 </div>
 
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">

@@ -22,9 +22,10 @@ export default function PartnersSection({ partners }) {
                         {title}
                     </h2>
                     {settings?.partners_description?.[locale] && (
-                        <p className="mt-4 text-lg leading-8 text-gray-600">
-                            {settings.partners_description[locale]}
-                        </p>
+                        <div
+                            className="mt-4 text-lg leading-8 text-gray-600 tinymce-content"
+                            dangerouslySetInnerHTML={{ __html: settings.partners_description[locale] }}
+                        />
                     )}
                 </div>
 

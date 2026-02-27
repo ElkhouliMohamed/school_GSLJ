@@ -28,9 +28,10 @@ export default function InfoSection() {
                         className="text-lg opacity-90 mb-6 leading-relaxed whitespace-pre-line"
                         dangerouslySetInnerHTML={{ __html: description }}
                     />
-                    <p className="text-base opacity-80 mb-8 italic">
-                        {motto}
-                    </p>
+                    <div
+                        className="text-base opacity-80 mb-8 italic tinymce-content"
+                        dangerouslySetInnerHTML={{ __html: motto }}
+                    />
                 </div>
 
                 {/* Image/Graphic Content */}
