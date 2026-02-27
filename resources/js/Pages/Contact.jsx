@@ -53,7 +53,12 @@ export default function Contact({ flash }) {
 
     return (
         <div className="bg-white min-h-screen flex flex-col font-sans">
-            <Head title="Contact - Groupe Scolaire GSLJ" />
+            <Head>
+                <title>Contact - Groupe Scolaire Privé Bilingue Les Jumelles</title>
+                <meta name="description" content="Contactez le Groupe Scolaire Privé Bilingue Les Jumelles à Dakar. Formulaire de contact, adresse, téléphone et email de notre équipe." />
+                <meta property="og:title" content="Contact - GSPB Les Jumelles" />
+                <meta property="og:description" content="Contactez le Groupe Scolaire Privé Bilingue Les Jumelles à Dakar." />
+            </Head>
             <Header />
 
             <div className="relative isolate bg-white">

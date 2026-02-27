@@ -38,7 +38,12 @@ export default function CampusLife() {
 
     return (
         <MainLayout>
-            <Head title="Vie Étudiante" />
+            <Head>
+                <title>Vie Scolaire - Groupe Scolaire Privé Bilingue Les Jumelles</title>
+                <meta name="description" content="Découvrez la vie scolaire au GSPB Les Jumelles : sports, arts, clubs scientifiques, médiathèque et activités culturelles pour l'épanouissement de chaque élève." />
+                <meta property="og:title" content="Vie Scolaire - GSPB Les Jumelles" />
+                <meta property="og:description" content="Sports, arts, clubs scientifiques au Groupe Scolaire Privé Bilingue Les Jumelles." />
+            </Head>
 
             {/* Hero Section */}
             <div className="bg-white">

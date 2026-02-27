@@ -74,7 +74,12 @@ export default function Admissions() {
 
     return (
         <MainLayout>
-            <Head title="Admissions" />
+            <Head>
+                <title>Admissions - Groupe Scolaire Privé Bilingue Les Jumelles</title>
+                <meta name="description" content="Rejoignez l'excellence au Groupe Scolaire Privé Bilingue Les Jumelles. Découvrez notre procédure d'admission et pré-inscrivez votre enfant de la maternelle au lycée à Dakar." />
+                <meta property="og:title" content="Admissions - GSPB Les Jumelles" />
+                <meta property="og:description" content="Pré-inscrivez votre enfant au Groupe Scolaire Privé Bilingue Les Jumelles à Dakar." />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative isolate overflow-hidden bg-violet-950 py-24 sm:py-32">
