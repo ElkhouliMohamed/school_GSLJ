@@ -4,7 +4,8 @@ import useSettings from '@/Hooks/useSettings';
 export default function InfoSection() {
     const { getSetting } = useSettings();
     const title = getSetting('info_title', "Notre <br /> Établissement");
-    const image = getSetting('info_image', "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
+    const imageRaw = getSetting('info_image');
+    const image = imageRaw || "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
     const description = getSetting('info_description', "Situé à Dakar depuis 2019, le Groupe Scolaire Privé Bilingue LES JUMELLES dispense un enseignement d'excellence conforme aux programmes français, de la maternelle à la terminale.\nPartenaire de l'AEFE, nous accueillons plus de 2500 élèves de toutes nationalités dans un cadre exceptionnel propice à l'épanouissement et à la réussite.");
     const motto = getSetting('info_motto', "Excellence, Partage et Engagement sont les valeurs qui nous animent chaque jour.");
     const ctaText = getSetting('info_cta_text', "Découvrir l'établissement");
