@@ -1,94 +1,64 @@
-# Base stage - shared dependencies
-FROM php:8.2-fpm AS base
+# ─────────────────────────────────────────
+# Stage 1 – Node: build frontend assets
+# ─────────────────────────────────────────
+FROM node:20-alpine AS frontend
 
-# Install system dependencies
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# ─────────────────────────────────────────
+# Stage 2 – PHP-FPM: production app image
+# ─────────────────────────────────────────
+FROM php:8.2-fpm AS app
+
+# System dependencies
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    netcat-openbsd \
-    wget \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    git curl libpng-dev libonig-dev libxml2-dev \
+    libzip-dev zip unzip nginx supervisor default-mysql-client \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip gd opcache
 
-# Configure PHP for production
+# PHP tuning
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 64M/' "$PHP_INI_DIR/php.ini" \
     && sed -i 's/post_max_size = 8M/post_max_size = 64M/' "$PHP_INI_DIR/php.ini" \
     && sed -i 's/memory_limit = 128M/memory_limit = 512M/' "$PHP_INI_DIR/php.ini"
 
-# Get Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www
 
-# Builder stage - install Node.js and build assets
-FROM base AS builder
+# Install PHP dependencies (cached layer)
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 
-# Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy package files
-COPY package*.json ./
-
-# Install Node dependencies
-RUN npm ci --only=production
-
-# Copy application files
+# Copy application source
 COPY . .
 
-# Install Composer dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev --prefer-dist
+# Copy pre-built frontend from stage 1
+COPY --from=frontend /app/public/build ./public/build
 
-# Build frontend assets
-RUN npm run build
+# Finalize autoload only — artisan bootstrapping happens at runtime in entrypoint.sh
+RUN composer dump-autoload --optimize
 
-# Production stage
-FROM base AS production
-
-# Copy application files from builder
-COPY --from=builder --chown=www-data:www-data /var/www /var/www
-
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
+# Permissions
+RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Copy entrypoint script
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Config files
+COPY docker/nginx.conf /etc/nginx/sites-enabled/default
+COPY docker/supervisord.conf /etc/supervisord.conf
 
-# Expose port
-EXPOSE 9000
+# Entrypoint
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["php-fpm"]
+EXPOSE 80
 
-# Development stage (for local development)
-FROM base AS development
-
-# Install Node.js for dev
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy entrypoint script
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
-# Expose port
-EXPOSE 9000
-
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["php-fpm"]
+ENTRYPOINT ["/entrypoint.sh"]

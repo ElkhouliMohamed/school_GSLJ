@@ -1,99 +1,52 @@
 #!/bin/bash
-
-# Exit on fail
 set -e
 
-# Check if .env exists, if not copy from .env.production, .env.docker or .env.example
-if [ ! -f .env ]; then
-    if [ -f .env.production ]; then
-        echo "Creating .env from .env.production..."
-        cp .env.production .env
-    elif [ -f .env.docker ]; then
-        echo "Creating .env from .env.docker..."
-        cp .env.docker .env
-    elif [ -f .env.example ]; then
-        echo "Creating .env from .env.example..."
-        cp .env.example .env
-    fi
-fi
+echo "──────────────────────────────────────────"
+echo " 🚀  School App – Docker Entrypoint"
+echo "──────────────────────────────────────────"
 
-# Install composer dependencies if missing (dev mode only)
-if [ ! -f "vendor/autoload.php" ]; then
-    echo "Installing composer dependencies..."
-    if [ "$APP_ENV" = "production" ]; then
-        composer install --no-interaction --optimize-autoloader --no-dev
-    else
-        composer install --no-interaction --optimize-autoloader
-    fi
-fi
+cd /var/www
 
-# Generate APP_KEY if it's missing or default
-if grep -q "APP_KEY=$" .env || grep -q "APP_KEY=base64:..." .env; then
-    echo "Generating APP_KEY..."
-    php artisan key:generate
-fi
+# Clear any stale bootstrap cache from the build stage
+echo "▶ Clearing stale cache..."
+php artisan optimize:clear --quiet
 
-# Link storage
-if [ ! -d public/storage ]; then
-    echo "Linking storage..."
-    php artisan storage:link
-fi
-
-# Wait for MySQL
-echo "Waiting for MySQL to be ready..."
-until nc -z -v -w30 db 3306
-do
-  echo "Waiting for database connection..."
-  sleep 5
+# Wait for DB (extra safety beyond healthcheck)
+echo "▶ Waiting for database connection..."
+until php artisan db:show --json > /dev/null 2>&1; do
+    echo "  ⏳ Database not ready yet, retrying in 3s..."
+    sleep 3
 done
+echo "  ✅ Database connected!"
 
-# Run migrations only if DB_AUTO_MIGRATE is set to true
-if [ "${DB_AUTO_MIGRATE:-false}" = "true" ]; then
-    echo "Running migrations..."
-    php artisan migrate --force
+# Run migrations
+echo "▶ Running migrations..."
+php artisan migrate --force
 
-    # Run seeders only in development or if explicitly enabled
-    if [ "$APP_ENV" != "production" ] || [ "${DB_AUTO_SEED:-false}" = "true" ]; then
-        echo "Running seeders..."
-        php artisan db:seed --force
-    fi
+# Seed only on first boot (flag stored in storage)
+SEED_FLAG="/var/www/storage/app/.seeded"
+if [ ! -f "$SEED_FLAG" ]; then
+    echo "▶ Seeding database (first boot)..."
+    php artisan db:seed --force
+    touch "$SEED_FLAG"
+    echo "  ✅ Seeding complete."
 else
-    echo "Skipping migrations (set DB_AUTO_MIGRATE=true to enable)"
+    echo "▶ Skipping seeders (already seeded on first boot)."
 fi
 
-# Clear and optimize cache for production
-if [ "$APP_ENV" = "production" ]; then
-    echo "Optimizing for production..."
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
-else
-    echo "Clearing cache for development..."
-    php artisan optimize:clear
-fi
+# Clear & cache config for production
+echo "▶ Optimizing Laravel..."
+php artisan optimize
 
-# Build frontend assets (only in development mode)
-if [ "$APP_ENV" != "production" ]; then
-    echo "Building frontend assets..."
-    if [ -f "package.json" ]; then
-        if [ ! -d "node_modules" ]; then
-            npm install
-        fi
-        npm run build
-    fi
-fi
+# Create storage symlink
+echo "▶ Linking storage..."
+php artisan storage:link || true
 
-# Set proper permissions
-echo "Setting proper permissions..."
+# Fix permissions
 chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Fix permissions for public storage
-if [ -d "public/storage" ]; then
-    chown -R www-data:www-data /var/www/public/storage
-    chmod -R 775 /var/www/public/storage
-fi
+echo "──────────────────────────────────────────"
+echo " ✅  Setup complete – starting supervisord"
+echo "──────────────────────────────────────────"
 
-# Start the main process
-echo "Starting PHP-FPM..."
-exec "$@"
+exec /usr/bin/supervisord -c /etc/supervisord.conf

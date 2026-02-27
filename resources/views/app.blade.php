@@ -13,33 +13,31 @@
     <meta name="keywords"
         content="école bilingue Dakar, groupe scolaire Sénégal, Les Jumelles, GSPB, enseignement français Sénégal, maternelle lycée Dakar, Yeumbeul Comico">
 
-    <!-- Favicon and App Icons -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
     <link rel="apple-touch-icon" href="/logo.svg">
 
     <!-- Canonical -->
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <!-- Open Graph / Social -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Groupe Scolaire Privé Bilingue Les Jumelles">
     <meta property="og:locale" content="{{ str_replace('-', '_', app()->getLocale()) }}">
     <meta property="og:image" content="{{ asset('logo.svg') }}">
-    <meta property="og:image:type" content="image/svg+xml">
     <meta property="og:image:alt" content="Groupe Scolaire Privé Bilingue LES JUMELLES Logo">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@LesjumellesSn">
     <meta name="twitter:image" content="{{ asset('logo.svg') }}">
-    <meta name="twitter:image:alt" content="Groupe Scolaire Privé Bilingue LES JUMELLES Logo">
 
-    <!-- Schema.org Structured Data -->
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "School",
+        "@@context": "https://schema.org",
+        "@@type": "School",
         "name": "Groupe Scolaire Privé Bilingue Les Jumelles",
         "alternateName": "GSPB Les Jumelles",
         "url": "{{ config('app.url') }}",
@@ -61,17 +59,17 @@
     <!-- Scripts -->
     @routes
     @viteReactRefresh
-
     @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
     @inertiaHead
 
+    <!-- Theme CSS Variables -->
     <style>
         :root {
             --theme-color:
-                {{ $themeColor ?? '#7c3aed' }}
+                <?php echo $themeColor ?? '#7c3aed'; ?>
             ;
             --theme-color-rgb:
-                {{ $themeColorRgb ?? '124, 58, 237' }}
+                <?php echo $themeColorRgb ?? '124, 58, 237'; ?>
             ;
         }
     </style>

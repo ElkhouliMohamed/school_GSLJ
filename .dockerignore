@@ -1,15 +1,51 @@
+# Git
 .git
-.env
-.env.docker
-node_modules
-vendor
-public/storage
-storage/*.key
-.idea
-.vscode
-tests
-*.md
-phpunit.xml
-.editorconfig
-.gitattributes
 .gitignore
+.gitattributes
+
+# Node / frontend dev
+node_modules
+npm-debug.log*
+
+# Laravel dev files
+.env
+.env.*
+!.env.docker
+
+# Tests
+tests
+phpunit.xml
+.phpunit.result.cache
+
+# Dev tools
+.editorconfig
+.prettierrc
+.eslintrc*
+*.md
+!README.md
+
+# Docker config (already copied where needed)
+docker-compose*.yml
+Dockerfile*
+
+# IDE
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel cache (generated at runtime)
+bootstrap/cache/*.php
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Already built assets (stage 1 handles building)
+public/build

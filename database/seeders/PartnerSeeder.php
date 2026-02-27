@@ -9,29 +9,29 @@ class PartnerSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear existing partners to avoid duplicates if re-seeding without migrating:fresh
-        // Partner::truncate(); // Optional, use with caution
-
-        Partner::create([
-            'name' => [
-                'en' => 'Association of Parents (APE)',
-                'fr' => 'Association des Parents d\'Éleves (APE)',
+        $partners = [
+            [
+                'name' => ['en' => 'Association of Parents (APE)', 'fr' => 'Association des Parents d\'Élèves (APE)'],
+                'logo' => '/images/gslj/partners/APE.jpg',
+                'url' => null,
+                'order' => 1,
+                'is_active' => true,
             ],
-            'logo' => '/images/gslj/partners/APE.jpg',
-            'url' => null,
-            'order' => 1,
-            'is_active' => true,
-        ]);
-
-        Partner::create([
-            'name' => [
-                'en' => 'Ministry of Education',
-                'fr' => 'Ministère de l\'Éducation',
+            [
+                'name' => ['en' => 'Ministry of Education', 'fr' => 'Ministère de l\'Éducation'],
+                'logo' => '/images/gslj/partners/Ministry.jpg',
+                'url' => 'https://education.sn',
+                'order' => 2,
+                'is_active' => true,
             ],
-            'logo' => '/images/gslj/partners/Ministry.jpg',
-            'url' => 'https://education.sn',
-            'order' => 2,
-            'is_active' => true,
-        ]);
+        ];
+
+        foreach ($partners as $partner) {
+            // Use 'order' as the unique key (Partners have no slug)
+            Partner::updateOrCreate(
+                ['order' => $partner['order']],
+                $partner
+            );
+        }
     }
 }
