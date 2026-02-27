@@ -74,7 +74,7 @@ class SettingSeeder extends Seeder
             'partners_description' => ['en' => 'We collaborate with leading educational institutions.', 'fr' => 'Nous collaborons avec les meilleures institutions éducatives.'],
 
             // About Page
-            'about_title' => ['en' => 'About Les Jumelles', 'fr' => 'À Propos des Jumelles'],
+            'about_title' => ['en' => 'About Les Jumelles', 'fr' => 'Historique'],
             'about_content' => [
                 'en' => 'Founded with a vision of educational excellence, Groupe Scolaire Les Jumelles has been a pillar of quality bilingual education in Yeumbeul, Dakar. We believe in a holistic approach to education, balancing academic rigor with character development.',
                 'fr' => 'Fondé avec une vision d\'excellence éducative, le Groupe Scolaire Les Jumelles est un pilier de l\'éducation bilingue de qualité à Yeumbeul, Dakar. Nous croyons en une approche holistique de l\'éducation, équilibrant la rigueur académique avec le développement du caractère.'
