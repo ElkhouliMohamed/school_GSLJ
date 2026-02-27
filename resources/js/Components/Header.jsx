@@ -43,11 +43,11 @@ export default function Header() {
                         name: getLocalized(facility.name),
                         href: `/facilities/${facility.slug}`
                     })) || []),
-                ...(getSetting('rules_pdf') ? [{ name: 'Règlement Intérieur', href: getSetting('rules_pdf'), download: true }] : [])
+                ...(getSetting('reglement_interieur_content') ? [{ name: 'Règlement Intérieur', href: '/reglement-interieur' }] : [])
             ]
         },
         {
-            name: 'OFFRES PÉDAGOGIQUES',
+            name: 'PROGRAMMES PÉDAGOGIQUES',
             children: programs?.map(program => ({
                 name: getLocalized(program.name),
                 href: `/programs/${program.slug}`
@@ -82,14 +82,14 @@ export default function Header() {
                                 className={`hover:opacity-80 transition-opacity ${locale === 'fr' ? 'opacity-100' : 'opacity-50'}`}
                                 title="Français"
                             >
-                                🇫🇷
+                                Fr
                             </Link>
                             <Link
                                 href="/language/en"
                                 className={`hover:opacity-80 transition-opacity ${locale === 'en' ? 'opacity-100' : 'opacity-50'}`}
                                 title="English"
                             >
-                                en
+                                En
                             </Link>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ export default function Header() {
                             <Link href="/" className="hover:opacity-80 transition-opacity">
                                 {/* Mobile/Tablet Name (< lg) */}
                                 <h1 className="lg:hidden text-sm font-extrabold text-primary uppercase leading-tight">
-                                    GSPB
+                                    GSPB LES JUMELLES
                                 </h1>
 
                                 {/* Desktop Name (>= lg) */}

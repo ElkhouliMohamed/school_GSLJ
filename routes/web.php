@@ -64,6 +64,18 @@ Route::get('/team/{slug}', [\App\Http\Controllers\TeamController::class, 'show']
 
 
 
+Route::get('/reglement-interieur', function () {
+    $settings = \App\Models\Setting::whereIn('key', ['reglement_interieur_content', 'rules_pdf'])->get()->keyBy('key');
+
+    $content = $settings->has('reglement_interieur_content') ? $settings['reglement_interieur_content']->getTranslations('value') : '';
+    $pdf = $settings->has('rules_pdf') ? $settings['rules_pdf']->getTranslations('value') : '';
+
+    return Inertia::render('ReglementInterieur', [
+        'content' => $content,
+        'pdf' => $pdf,
+    ]);
+})->name('reglement.interieur');
+
 
 Route::get('/about', function () {
     $team = \App\Models\TeamMember::where('is_active', true)->orderBy('order')->get();

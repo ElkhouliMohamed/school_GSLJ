@@ -50,8 +50,16 @@ class SettingsSeeder extends Seeder
             ],
             [
                 'key' => 'rules_pdf',
-                'value' => ['en' => '', 'fr' => ''],
+                'value' => ['en' => '/storage/settings/reglement.pdf', 'fr' => '/storage/settings/reglement.pdf'],
                 'type' => 'file',
+            ],
+            [
+                'key' => 'reglement_interieur_content',
+                'value' => [
+                    'en' => "REGLEMENT INTERIEUR DES ELEVES<br>PREAMBULE<br>L’école sénégalaise est laïque, nationale et démocratique. Tous les élèves y sont soumis à la même réglementation qui ne prend pas en compte leurs opinions idéologiques et religieuses.<br>C’est un cadre d’épanouissement qu’on doit préserver dans l’intérêt de tous. C’est pourquoi la conduite vis-à-vis d’autrui, comme du patrimoine scolaire doit être exemplaire...<br><br>CHAPITRE I : HORAIRES – ASSIDUITE ET PONCTUALITE<br>Article 1 : Les cours se déroulent globalement...<br>Article 2 : En cas de retard...",
+                    'fr' => "REGLEMENT INTERIEUR DES ELEVES\nPREAMBULE\nL’école sénégalaise est laïque, nationale et démocratique. Tous les élèves y sont soumis à la même réglementation\nqui ne prend pas en compte leurs opinions idéologiques et religieuses.\nC’est un cadre d’épanouissement qu’on doit préserver dans l’intérêt de tous. C’est pourquoi la conduite vis-à-vis\nd’autrui, comme du patrimoine scolaire doit être exemplaire. Le présent règlement intérieur, est le résumé du\ncontrat qui lie tout élève à l’établissement. L’inscription dans l’établissement est la preuve de son acceptation. Par\nconséquent, son respect scrupuleux est une obligation.\nTout manquement aux dispositions du présent règlement constitue une rupture du contrat et entraîne les sanctions\ndéveloppées dans le chapitre prévu à cet effet.\nPar ailleurs, son respect sans faille demeure la meilleure garantie pour un bon épanouissement, et partant, pour une\nbonne réussite scolaire.\nCHAPITRE I : HORAIRES – ASSIDUITE ET PONCTUALITE\nArticle 1 : Les cours se déroulent globalement, sauf exceptions mentionnées sur l’emploi du temps, de 8h à 16h, du\nlundi au vendredi sauf le vendredi où les cours s’arrêtent à 13H30.\nLe portail est ouvert le matin à 7H30 et fermé à 8H15.\nPour permettre aux élèves qui ont cours aux autres heures, la porte est ouverte 5 minutes avant chaque heure et\nfermée 5 minutes après.\nArticle 2 : En cas de retard du professeur, les élèves sont tenus de l’attendre dans leur salle pendant 15 minutes\navant la décision de la surveillance."
+                ],
+                'type' => 'textarea',
             ],
 
             // Home - Why Choose Us

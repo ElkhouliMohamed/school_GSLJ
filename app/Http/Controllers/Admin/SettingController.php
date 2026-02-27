@@ -119,6 +119,8 @@ class SettingController extends Controller
             // Documents
             'registration_pdf' => ['type' => 'file', 'label' => 'Modalités d\'inscription (PDF)'],
             'rules_pdf' => ['type' => 'file', 'label' => 'Règlement Intérieur (PDF)'],
+            'reglement_interieur_content' => ['type' => 'textarea', 'label' => 'Règlement Intérieur - Contenu'],
+            'reglement_hero_image' => ['type' => 'image', 'label' => 'Règlement Intérieur - Image de fond (Hero)'],
 
             // Admissions Page
             'admissions_hero_title' => ['type' => 'text', 'label' => 'Admissions: Hero Title'],

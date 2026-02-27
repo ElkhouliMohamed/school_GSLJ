@@ -517,7 +517,12 @@ export default function Index({ settings }) {
         {
             title: "Documents",
             description: "Télécharger des documents publics (PDF, etc.).",
-            keys: ['registration_pdf', 'rules_pdf']
+            keys: ['registration_pdf']
+        },
+        {
+            title: "Règlement Intérieur",
+            description: "Gérer le texte et le PDF du règlement intérieur.",
+            keys: ['reglement_hero_image', 'reglement_interieur_content', 'rules_pdf']
         },
         {
             title: "Configuration Mail",

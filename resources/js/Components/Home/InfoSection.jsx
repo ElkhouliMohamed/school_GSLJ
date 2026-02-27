@@ -23,9 +23,10 @@ export default function InfoSection() {
                         <span dangerouslySetInnerHTML={{ __html: title.replace(/\n/g, '<br />') }} />
                     </h2>
                     <div className="h-1 w-24 bg-white mb-8 mx-auto md:mx-0" />
-                    <div className="text-lg opacity-90 mb-6 leading-relaxed whitespace-pre-line">
-                        {description}
-                    </div>
+                    <div
+                        className="text-lg opacity-90 mb-6 leading-relaxed whitespace-pre-line"
+                        dangerouslySetInnerHTML={{ __html: description }}
+                    />
                     <p className="text-base opacity-80 mb-8 italic">
                         {motto}
                     </p>

@@ -30,9 +30,7 @@ export default function WhyChooseUsSection() {
                         <span dangerouslySetInnerHTML={{ __html: title.replace(/\n/g, '<br />') }} />
                     </h2>
                     <div className="space-y-6 text-lg opacity-90">
-                        <p>
-                            {description}
-                        </p>
+                        <div dangerouslySetInnerHTML={{ __html: description }} />
                         <ul className="space-y-4 font-semibold">
                             {points.map((point, index) => (
                                 <li key={index} className="flex items-center gap-3">
