@@ -29,7 +29,7 @@ export default function InfoSection() {
                         dangerouslySetInnerHTML={{ __html: description }}
                     />
                     <div
-                        className="text-xl font-semibold mb-8 italic tinymce-content text-white"
+                        className="text-xl font-semibold mb-8 italic tinymce-content !text-white [&_*]:!text-white"
                         dangerouslySetInnerHTML={{ __html: motto }}
                     />
                 </div>
