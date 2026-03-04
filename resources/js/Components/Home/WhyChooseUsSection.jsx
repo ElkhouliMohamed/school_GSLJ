@@ -43,7 +43,7 @@ export default function WhyChooseUsSection() {
                     <div className="mt-10">
                         <Link
                             href="/admissions"
-                            className="inline-block bg-white text-secondary font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-primary hover:text-white transition-all shadow-lg"
+                            className="inline-block bg-white text-secondary font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-primary hover:!text-white transition-all shadow-lg"
                         >
                             {ctaText}
                         </Link>

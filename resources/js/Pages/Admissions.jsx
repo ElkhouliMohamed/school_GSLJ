@@ -95,7 +95,7 @@ export default function Admissions() {
                     <div className="mx-auto max-w-2xl lg:mx-0">
                         <h2 className="text-4xl font-bold tracking-tight text-white !text-white sm:text-6xl font-serif">{heroTitle}</h2>
                         <div
-                            className="mt-6 text-xl leading-8 !text-white [&_*]:!text-white tinymce-content"
+                            className="mt-6 text-xl leading-8 !text-white [&_*:not(a)]:!text-white tinymce-content"
                             dangerouslySetInnerHTML={{ __html: heroDescription }}
                         />
                     </div>
