@@ -47,7 +47,7 @@ export default function Header() {
             ]
         },
         {
-            name: 'PROGRAMMES PÉDAGOGIQUES',
+            name: 'PROGRAMME PÉDAGOGIQUE',
             children: programs?.map(program => ({
                 name: getLocalized(program.name),
                 href: `/programs/${program.slug}`

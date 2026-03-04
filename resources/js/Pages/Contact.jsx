@@ -79,10 +79,10 @@ export default function Contact({ flash }) {
                                         <span className="sr-only">Adresse</span>
                                         <BuildingOffice2Icon className="h-7 w-6 text-yellow-600" aria-hidden="true" />
                                     </dt>
-                                    <dd className="whitespace-pre-wrap">
-                                        {settings?.site_address ? getLocalized(settings.site_address, locale) : 'GSLJ Sénégal'}<br />
-                                        {/* Dakar, Sénégal */}
-                                    </dd>
+                                    <dd
+                                        className="whitespace-pre-wrap tinymce-content"
+                                        dangerouslySetInnerHTML={{ __html: settings?.site_address ? getLocalized(settings.site_address, locale) : 'GSLJ Sénégal' }}
+                                    />
                                 </div>
                                 <div className="flex gap-x-4">
                                     <dt className="flex-none">

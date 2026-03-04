@@ -95,7 +95,7 @@ export default function Admissions() {
                     <div className="mx-auto max-w-2xl lg:mx-0">
                         <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif">{heroTitle}</h2>
                         <div
-                            className="mt-6 text-lg leading-8 text-violet-100 tinymce-content"
+                            className="mt-6 text-xl leading-8 text-white tinymce-content"
                             dangerouslySetInnerHTML={{ __html: heroDescription }}
                         />
                     </div>
@@ -106,7 +106,7 @@ export default function Admissions() {
             <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
-                        <h2 className="text-base font-semibold leading-7 text-violet-600">{processTitle}</h2>
+                        <h2 className="text-xl font-semibold leading-7 text-violet-600">{processTitle}</h2>
                         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                             {processSubtitle}
                         </p>
@@ -142,7 +142,7 @@ export default function Admissions() {
             <div className="bg-gray-50 py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl lg:text-center">
-                        <h2 className="text-base font-semibold leading-7 text-violet-600">Admission - Pré-inscription</h2>
+                        <h2 className="text-xl font-semibold leading-7 text-violet-600">Admission - Pré-inscription</h2>
                         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                             Remplissez le formulaire ci-dessous
                         </p>
@@ -394,10 +394,6 @@ export default function Admissions() {
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl lg:mx-0">
                         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-violet-600">{docsTitle}</h2>
-                        <div
-                            className="mt-6 text-lg leading-8 text-gray-600 tinymce-content"
-                            dangerouslySetInnerHTML={{ __html: docsDescription }}
-                        />
                     </div>
                     <ul role="list" className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                         <li className="flex flex-col gap-y-4 rounded-2xl bg-violet-50 p-8 shadow-sm hover:shadow-md transition-shadow cursor-default border border-violet-100">
