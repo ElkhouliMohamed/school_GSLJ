@@ -64,7 +64,7 @@ export default function NewsSection({ news }) {
                                 <div className="mt-auto pt-4 w-full flex justify-center">
                                     <Link
                                         href={`/news/${post.slug || post.id}`}
-                                        className="relative z-10 rounded-full bg-primary px-6 py-2 text-xs font-bold text-white shadow-sm hover:bg-violet-700 uppercase tracking-widest transition-colors duration-200"
+                                        className="relative z-10 rounded-full bg-primary px-6 py-2 text-xs font-bold text-white shadow-sm hover:bg-violet-700 hover:text-white uppercase tracking-widest transition-colors duration-200"
                                     >
                                         Lire la suite
                                     </Link>
