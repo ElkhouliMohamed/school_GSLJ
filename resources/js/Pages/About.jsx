@@ -57,17 +57,10 @@ export default function About({ team }) {
         },
     ];
 
-    const valuesList = [
-        "Discipline",
-        "Respect",
-        "Travail bien fait",
-        "Responsabilité",
-        "Solidarité",
-        "Excellence",
-        "Intégrité"
-    ];
+    const rawValuesList = getSetting('about_values_list', "Discipline\nRespect\nTravail bien fait\nResponsabilité\nSolidarité\nExcellence\nIntégrité");
+    const valuesList = rawValuesList.split('\n').map(v => v.trim()).filter(Boolean);
 
-    const valuesFooter = "Ces valeurs guident le comportement des élèves, des enseignants et de toute la communauté éducative.";
+    const valuesFooter = getSetting('about_values_footer', "Ces valeurs guident le comportement des élèves, des enseignants et de toute la communauté éducative.");
 
     const ContactForm = () => {
         const { data, setData, post, processing, errors, wasSuccessful, reset } = useForm({

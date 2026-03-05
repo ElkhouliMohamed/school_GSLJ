@@ -591,6 +591,7 @@ export default function Index({ settings }) {
             description: "Gérer les valeurs affichées sur la page À Propos.",
             keys: [
                 'about_values_title',
+                'about_values_list', 'about_values_footer',
                 'about_value_1_title', 'about_value_1_description',
                 'about_value_2_title', 'about_value_2_description',
                 'about_value_3_title', 'about_value_3_description'

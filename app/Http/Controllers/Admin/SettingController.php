@@ -110,6 +110,8 @@ class SettingController extends Controller
 
             // About Page - Values
             'about_values_title' => ['type' => 'text', 'label' => 'Values Section Title'],
+            'about_values_list' => ['type' => 'textarea', 'label' => 'List of Values (One per line)'],
+            'about_values_footer' => ['type' => 'textarea', 'label' => 'Values Footer Text'],
             'about_value_1_title' => ['type' => 'text', 'label' => 'Value 1 Title (Excellence)'],
             'about_value_1_description' => ['type' => 'textarea', 'label' => 'Value 1 Description'],
             'about_value_2_title' => ['type' => 'text', 'label' => 'Value 2 Title (Respect)'],
