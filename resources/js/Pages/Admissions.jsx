@@ -450,12 +450,12 @@ export default function Admissions() {
                                 </radialGradient>
                             </defs>
                         </svg>
-                        <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+                        <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 <div dangerouslySetInnerHTML={{ __html: ctaTitle.replace(/\n/g, '<br/>') }} />
                             </h2>
                             <div
-                                className="mt-6 text-lg leading-8 text-gray-300 tinymce-content"
+                                className="mt-6 text-lg leading-8 !text-gray-300 [&_*:not(a)]:!text-gray-300 tinymce-content"
                                 dangerouslySetInnerHTML={{ __html: ctaDescription }}
                             />
                             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 lg:justify-start">
