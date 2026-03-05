@@ -58,7 +58,18 @@ export default function About({ team }) {
     ];
 
     const rawValuesList = getSetting('about_values_list', "Discipline\nRespect\nTravail bien fait\nResponsabilité\nSolidarité\nExcellence\nIntégrité");
-    const valuesList = rawValuesList.split('\n').map(v => v.trim()).filter(Boolean);
+
+    const cleanHtmlTags = (str) => {
+        let cleaned = str.replace(/<\/p>|<\/li>|<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '');
+        if (typeof document !== 'undefined') {
+            const txt = document.createElement("textarea");
+            txt.innerHTML = cleaned;
+            return txt.value;
+        }
+        return cleaned.replace(/&[a-zA-Z]+;/g, '');
+    };
+
+    const valuesList = cleanHtmlTags(rawValuesList).split('\n').map(v => v.trim()).filter(Boolean);
 
     const valuesFooter = getSetting('about_values_footer', "Ces valeurs guident le comportement des élèves, des enseignants et de toute la communauté éducative.");
 
