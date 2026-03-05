@@ -45,10 +45,6 @@ export default function InfoSection() {
                             height="500"
                             loading="lazy"
                         />
-                        {/* Circle Overlay Text - optional aesthetic touch */}
-                        <div className="absolute top-10 right-10 w-24 h-24 bg-primary rounded-full flex items-center justify-center text-center p-2 shadow-lg animate-pulse">
-                            <span className="text-xs font-bold uppercase">{new Date().getFullYear() - 2019} ans d'histoire</span>
-                        </div>
                     </div>
                 </div>
             </div>
