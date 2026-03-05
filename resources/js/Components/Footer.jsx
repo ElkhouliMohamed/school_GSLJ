@@ -232,7 +232,7 @@ export default function Footer() {
 
                             <div className="rounded-xl overflow-hidden border-2 border-gray-700 shadow-2xl hover:border-primary transition-colors duration-300">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4536.049468704533!2d-17.347689314842334!3d14.774519389691868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec10b12f1541b2f%3A0x631624bfe63aeec!2sGroup%20Private%20School%20Bilingual%20Les%20Jumelles!5e1!3m2!1sar!2sma!4v1770277870795!5m2!1sar!2sma"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4536.049468704533!2d-17.347689314842334!3d14.774519389691868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec10b12f1541b2f%3A0x631624bfe63aeec!2sGroup%20Private%20School%20Bilingual%20Les%20Jumelles!5e1!3m2!1sfr!2sfr!4v1770277870795!5m2!1sfr!2sfr"
                                     width="100%"
                                     height="180"
                                     style={{ border: 0, filter: 'grayscale(0.8) contrast(1.2)' }}

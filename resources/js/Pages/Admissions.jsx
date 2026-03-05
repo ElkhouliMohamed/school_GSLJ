@@ -46,9 +46,6 @@ export default function Admissions() {
         },
     ];
 
-    const docsTitle = getSetting('admissions_docs_title', 'Documents Requis');
-    const docsDescription = getSetting('admissions_docs_description', "Pour compléter l'inscription, veuillez préparer les documents suivants. Assurez-vous d'avoir les originaux et des copies.");
-
     const ctaTitle = getSetting('admissions_cta_title', "Prêt à nous rejoindre ?\nCommencez l'inscription aujourd'hui.");
     const ctaDescription = getSetting('admissions_cta_description', "Contactez notre service d'admission pour toute question ou pour organiser une visite de l'établissement.");
 
@@ -386,50 +383,6 @@ export default function Admissions() {
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-
-            {/* Requirements Section */}
-            <div className="bg-white py-24 sm:py-32">
-                <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div className="mx-auto max-w-2xl lg:mx-0">
-                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-violet-600">{docsTitle}</h2>
-                    </div>
-                    <ul role="list" className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-                        <li className="flex flex-col gap-y-4 rounded-2xl bg-violet-50 p-8 shadow-sm hover:shadow-md transition-shadow cursor-default border border-violet-100">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-violet-600 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="text-lg font-semibold leading-8 text-gray-900">Identité</h3>
-                                <p className="leading-7 text-gray-600">Copie de l'acte de naissance et photos d'identité récentes de l'élève.</p>
-                            </div>
-                        </li>
-                        <li className="flex flex-col gap-y-4 rounded-2xl bg-violet-50 p-8 shadow-sm hover:shadow-md transition-shadow cursor-default border border-violet-100">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-violet-600 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.499 5.24 50.552 50.552 0 00-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="text-lg font-semibold leading-8 text-gray-900">Dossier Scolaire</h3>
-                                <p className="leading-7 text-gray-600">Bulletins de notes des années précédentes et certificat de scolarité (exeat).</p>
-                            </div>
-                        </li>
-                        <li className="flex flex-col gap-y-4 rounded-2xl bg-violet-50 p-8 shadow-sm hover:shadow-md transition-shadow cursor-default border border-violet-100">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-violet-600 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="text-lg font-semibold leading-8 text-gray-900">Santé</h3>
-                                <p className="leading-7 text-gray-600">Carnet de vaccination à jour et fiche médicale remplie lors de l'inscription.</p>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
 
