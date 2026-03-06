@@ -9,7 +9,7 @@ cd /var/www
 
 # Clear any stale bootstrap cache from the build stage
 echo "▶ Clearing stale cache..."
-php artisan optimize:clear --quiet
+rm -f bootstrap/cache/*.php
 
 # Wait for DB (extra safety beyond healthcheck)
 echo "▶ Waiting for database connection..."

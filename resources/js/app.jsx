@@ -27,7 +27,7 @@ function injectThemeColor(settings) {
 }
 
 createInertiaApp({
-    title: (title) => `${title} - School Name`,
+    title: (title) => `${title} - Les Jumelles`,
     resolve: (name) => {
         const pages = import.meta.glob('./Pages/**/*.jsx');
         const pattern = `Pages/${name}.jsx`;
