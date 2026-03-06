@@ -317,7 +317,7 @@ class SettingController extends Controller
                             $value = '/storage/' . $storedPath;
                         }
 
-                    } catch (\Exception $e) {
+                    } catch (\Throwable $e) {
                         // Fallback on error
                         \Illuminate\Support\Facades\Log::error("WebP conversion failed: " . $e->getMessage());
                         $storedPath = $file->store('settings', 'public');
