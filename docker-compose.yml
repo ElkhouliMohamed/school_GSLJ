@@ -1,5 +1,4 @@
 services:
-  # ── MySQL Database ──────────────────────────────────────────
   db:
     image: mysql:8.0
     container_name: school_db
@@ -12,14 +11,13 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-root_secret}" ]
+      test: ["CMD","mysqladmin","ping","-h","localhost","-u","root","-p${DB_ROOT_PASSWORD:-root_secret}"]
       interval: 10s
       timeout: 5s
       retries: 10
     networks:
       - school_net
 
-  # ── PHP / Nginx App ─────────────────────────────────────────
   app:
     build:
       context: .
@@ -27,13 +25,13 @@ services:
       target: app
     container_name: school_app
     restart: unless-stopped
-    env_file: .env.docker
+    env_file:
+      - .env.docker
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - storage_data:/var/www/storage/app/public
-      - ./storage/app/public:/var/www/storage/app/public # Optional: syncs uploaded files to host for dev
     ports:
       - "${APP_PORT:-8080}:80"
     networks:
@@ -41,8 +39,10 @@ services:
 
 volumes:
   db_data:
-  storage_data:
+    external: true
+    name: gspb-website-kcak6r_db_data
 
+  storage_data:
 
 networks:
   school_net:
