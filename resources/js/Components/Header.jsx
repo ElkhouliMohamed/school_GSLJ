@@ -98,9 +98,9 @@ export default function Header() {
 
             {/* Main Header Area - Logo & Name & Navigation */}
             <div className="bg-white border-b border-gray-100 py-2">
-                <div className="container mx-auto flex w-full items-center justify-between px-4 lg:px-8 gap-4">
+                <div className="container mx-auto flex w-full items-center justify-between px-2 sm:px-4 lg:px-6 xl:px-8 gap-2 sm:gap-4">
                     {/* Logo & Name Container */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                         {/* Logo - Reduced Size */}
                         <Link href="/" className="shrink-0">
                             <img className="h-10 sm:h-14 w-auto object-contain hover:scale-105 transition-transform" src={logo} alt={siteName} />
@@ -110,27 +110,32 @@ export default function Header() {
                         <div className="flex flex-col justify-center">
                             <Link href="/" className="hover:opacity-80 transition-opacity">
                                 {/* Mobile/Tablet Name (< lg) */}
-                                <h1 className="lg:hidden text-sm font-extrabold text-primary uppercase leading-tight">
+                                <h1 className="lg:hidden text-xs sm:text-sm font-extrabold text-primary uppercase leading-tight">
                                     GSPB LES JUMELLES
                                 </h1>
 
                                 {/* Desktop Name (>= lg) */}
-                                <h1 className="hidden lg:block text-xs sm:text-sm md:text-base font-extrabold text-primary uppercase leading-tight">
+                                <h1 className="hidden lg:block text-[9px] xl:text-xs font-extrabold text-primary uppercase leading-tight">
                                     Groupe Scolaire Privé Bilingue <br />
-                                    <span className="text-secondary text-base sm:text-lg md:text-xl">LES JUMELLES</span>
+                                    <span className="text-secondary text-sm xl:text-base">LES JUMELLES</span>
                                 </h1>
                             </Link>
                         </div>
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-x-1" aria-label="Global">
+                    <nav className="hidden lg:flex items-center gap-x-0.5 xl:gap-x-1" aria-label="Global">
                         {navigation.map((item) => (
                             <div key={item.name} className="relative group">
                                 {item.children ? (
                                     <>
-                                        <button className="flex items-center gap-1 text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-2 py-2 uppercase tracking-wide">
-                                            {item.name}
+                                        <button className="flex items-center gap-0.5 text-[10px] xl:text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-1 xl:px-2 py-2 uppercase tracking-tight xl:tracking-wide whitespace-nowrap">
+                                            {item.name === 'PROGRAMME PÉDAGOGIQUE' ? (
+                                                <span className="xl:inline hidden">PROGRAMME PÉDAGOGIQUE</span>
+                                            ) : item.name}
+                                            {item.name === 'PROGRAMME PÉDAGOGIQUE' && (
+                                                <span className="xl:hidden inline">PROGRAMMES</span>
+                                            )}
                                             <svg className="h-3 w-3 flex-none text-gray-400 group-hover:text-secondary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                             </svg>
@@ -161,7 +166,7 @@ export default function Header() {
                                         </div>
                                     </>
                                 ) : (
-                                    <Link key={item.name} href={item.href} className="flex items-center text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-2 py-2 uppercase tracking-wide">
+                                    <Link key={item.name} href={item.href} className="flex items-center text-[10px] xl:text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-1 xl:px-2 py-2 uppercase tracking-tight xl:tracking-wide whitespace-nowrap">
                                         {item.name}
                                     </Link>
                                 )}
