@@ -8,6 +8,7 @@ export default function Header() {
     const { settings, locale, auth, facilities, programs } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileDropdownOpen, setMobileDropdownOpen] = useState({});
+    const [desktopHover, setDesktopHover] = useState(null);
     const { getSetting } = useSettings();
 
     const toggleMobileDropdown = (itemName) => {
@@ -126,42 +127,60 @@ export default function Header() {
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center gap-x-0.5 xl:gap-x-1" aria-label="Global">
                         {navigation.map((item) => (
-                            <div key={item.name} className="relative group">
+                            <div
+                                key={item.name}
+                                className="relative group"
+                                onMouseEnter={() => setDesktopHover(item.name)}
+                                onMouseLeave={() => setDesktopHover(null)}
+                            >
                                 {item.children ? (
                                     <>
-                                        <button className="flex items-center gap-0.5 text-[10px] xl:text-[11px] font-bold text-gray-700 hover:text-primary transition-colors px-1 xl:px-2 py-2 uppercase tracking-tight xl:tracking-wide whitespace-nowrap">
+                                        <button
+                                            className={`flex items-center gap-0.5 text-[10px] xl:text-[11px] font-bold transition-colors px-1 xl:px-2 py-4 uppercase tracking-tight xl:tracking-wide whitespace-nowrap ${desktopHover === item.name ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+                                            onClick={(e) => {
+                                                // On touch laptops/iPads, standard click toggles state
+                                                if (window.innerWidth <= 1024 || ('ontouchstart' in window) || navigator.maxTouchPoints > 0) {
+                                                    e.preventDefault();
+                                                    setDesktopHover(desktopHover === item.name ? null : item.name);
+                                                }
+                                            }}
+                                            aria-expanded={desktopHover === item.name ? "true" : "false"}
+                                            aria-haspopup="true"
+                                        >
                                             {item.name === 'PROGRAMME PÉDAGOGIQUE' ? (
                                                 <span className="xl:inline hidden">PROGRAMME PÉDAGOGIQUE</span>
                                             ) : item.name}
                                             {item.name === 'PROGRAMME PÉDAGOGIQUE' && (
                                                 <span className="xl:hidden inline">PROGRAMMES</span>
                                             )}
-                                            <svg className="h-3 w-3 flex-none text-gray-400 group-hover:text-secondary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <svg className={`h-3 w-3 flex-none transition-transform duration-200 ${desktopHover === item.name ? 'text-secondary rotate-180' : 'text-gray-400 group-hover:text-secondary'}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                             </svg>
                                         </button>
-                                        <div className="absolute top-full right-0 z-20 w-48 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
-                                            <div className="py-1">
-                                                {item.children.map((child) => (
-                                                    child.download ? (
-                                                        <a
-                                                            key={child.name}
-                                                            href={child.href}
-                                                            download
-                                                            className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
-                                                        >
-                                                            {child.name}
-                                                        </a>
-                                                    ) : (
-                                                        <Link
-                                                            key={child.name}
-                                                            href={child.href}
-                                                            className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
-                                                        >
-                                                            {child.name}
-                                                        </Link>
-                                                    )
-                                                ))}
+                                        <div className={`absolute top-full left-0 z-20 w-56 pt-2 transition-all duration-200 origin-top-left ${desktopHover === item.name ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none translate-y-1'}`}>
+                                            <div className="overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                                                <div className="py-1">
+                                                    {item.children.map((child) => (
+                                                        child.download ? (
+                                                            <a
+                                                                key={child.name}
+                                                                href={child.href}
+                                                                download
+                                                                className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
+                                                            >
+                                                                {child.name}
+                                                            </a>
+                                                        ) : (
+                                                            <Link
+                                                                key={child.name}
+                                                                href={child.href}
+                                                                className="block px-4 py-2 text-xs text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors"
+                                                            >
+                                                                {child.name}
+                                                            </Link>
+                                                        )
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </>
@@ -175,7 +194,7 @@ export default function Header() {
                     </nav>
 
                     {/* Mobile Menu Trigger */}
-                    <div className="flex lg:hidden">
+                    < div className="flex lg:hidden" >
                         <button
                             type="button"
                             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -282,6 +301,6 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     );
 }
