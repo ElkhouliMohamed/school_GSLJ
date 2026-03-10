@@ -10,7 +10,7 @@ services:
       MYSQL_USER: ${DB_USERNAME:-school_user}
       MYSQL_PASSWORD: ${DB_PASSWORD:-school_pass}
     volumes:
-      - gspb-website-kcak6r_db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-root_secret}" ]
       interval: 10s
