@@ -46,7 +46,7 @@ services:
     container_name: school-db-prod
     restart: always
     env_file:
-      - .env
+      - .env.docker
     environment:
       - MYSQL_DATABASE=${DB_DATABASE:-laravel}
       - MYSQL_USER=${DB_USERNAME:-laravel}
@@ -54,12 +54,10 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
     volumes:
       - dbdata:/var/lib/mysql
-      # Ignore missing my.cnf error by safely mapping it if needed, or omit if you aren't sure it exists
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
     networks:
       - school-network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-psecret" ]
       interval: 10s
       timeout: 5s
       retries: 5
