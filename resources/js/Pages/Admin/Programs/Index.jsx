@@ -16,14 +16,16 @@ export default function Index({ programs }) {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route('admin.programs.destroy', id));
-                Swal.fire(
-                    'Deleted!',
-                    'Program has been deleted.',
-                    'success'
-                )
+                router.delete(route('admin.programs.destroy', id), {
+                    preserveScroll: true,
+                    onSuccess: () => Swal.fire('Deleted!', 'Program has been deleted.', 'success'),
+                    onError: (errors) => {
+                        console.error(errors);
+                        Swal.fire('Error!', 'Failed to delete program.', 'error');
+                    }
+                });
             }
-        })
+        });
     };
 
     return (

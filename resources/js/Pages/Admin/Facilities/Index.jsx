@@ -16,10 +16,16 @@ export default function Index({ facilities }) {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route('admin.facilities.destroy', id));
-                Swal.fire('Deleted!', 'Facility has been deleted.', 'success')
+                router.delete(route('admin.facilities.destroy', id), {
+                    preserveScroll: true,
+                    onSuccess: () => Swal.fire('Deleted!', 'Facility has been deleted.', 'success'),
+                    onError: (errors) => {
+                        const errorMessages = Object.values(errors).flat().join('\n');
+                        Swal.fire('Error!', errorMessages || 'Failed to delete Facility.', 'error');
+                    }
+                });
             }
-        })
+        });
     };
 
     const typeLabels = {

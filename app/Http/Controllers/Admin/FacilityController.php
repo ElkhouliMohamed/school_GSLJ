@@ -26,7 +26,7 @@ class FacilityController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name.en' => 'required|string',
+            'name.en' => 'nullable|string',
             'name.fr' => 'required|string',
             'type' => 'required|string',
             'description.en' => 'nullable|string',
@@ -38,7 +38,12 @@ class FacilityController extends Controller
         ]);
 
         $data = $request->only(['name', 'type', 'description', 'details', 'icon', 'order', 'is_active']);
-        $data['slug'] = Str::slug($request->input('name.en'));
+
+        if (empty($data['name']['en'])) {
+            $data['name']['en'] = $request->input('name.fr');
+        }
+
+        $data['slug'] = Str::slug($data['name']['en']);
         $data['order'] = $request->input('order', 0);
         $data['is_active'] = $request->boolean('is_active');
 
@@ -67,7 +72,7 @@ class FacilityController extends Controller
     public function update(Request $request, Facility $facility)
     {
         $validated = $request->validate([
-            'name.en' => 'required|string',
+            'name.en' => 'nullable|string',
             'name.fr' => 'required|string',
             'type' => 'required|string',
             'description.en' => 'nullable|string',
@@ -79,6 +84,11 @@ class FacilityController extends Controller
         ]);
 
         $data = $request->only(['name', 'type', 'description', 'details', 'icon', 'order', 'is_active']);
+
+        if (empty($data['name']['en'])) {
+            $data['name']['en'] = $request->input('name.fr');
+        }
+
         $data['order'] = $request->input('order', 0);
         $data['is_active'] = $request->boolean('is_active');
 
